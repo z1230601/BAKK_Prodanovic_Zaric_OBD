@@ -5,18 +5,9 @@
  *      Author: zlatan
  */
 
-#include "Main.h"
 #include <iostream>
 
-namespace main {
-
-Main::Main() {
-	// TODO Auto-generated constructor stub
-
+int main(int argc, char** argv){
+	std::cout << "Hello!" << std::endl;
 }
 
-Main::~Main() {
-	// TODO Auto-generated destructor stub
-}
-
-} /* namespace main */
