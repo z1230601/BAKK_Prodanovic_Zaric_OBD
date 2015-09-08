@@ -1,0 +1,13 @@
+vhci_hcd:
+ *  git clone git://git.code.sf.net/p/usb-vhci/vhci_hcd
+ *  make
+ *  sudo make install
+ *  insmod usb-vhci-hcd.ko
+ *  insmod usb-vhci-iocifc.ko
+
+libusb_vhci (userspace tools):
+ *  (clone didnt work had to download 0.7 tar.gz)
+ *  git clone git://git.code.sf.net/p/usb-vhci/libusb_vhci
+ *  ./configure
+ *  make
+ *  sudo make install
