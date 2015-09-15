@@ -1,0 +1,1 @@
+g++ -Wl,-rpath=/usr/local/lib/ -L/usr/local/lib -I/usr/local/include  -o usbemulation Main.cpp -l:/usr/local/lib/libusb_vhci.so

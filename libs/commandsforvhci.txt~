@@ -11,5 +11,3 @@ libusb_vhci (userspace tools):
  *  ./configure
  *  make
  *  sudo make install
- *  # Because the library when installed is not loaded by ld you have to:
- *  sudo ldconfig -v
