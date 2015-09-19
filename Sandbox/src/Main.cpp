@@ -32,15 +32,10 @@ int main(int argc, char* argv[]) {
 		}
 		uart->send(command + "\r\n");
 		sleep(1);
-		std::cout << "recieveing" << std::endl;
-		std::string output;
-		int i = 0;
-		while((output = uart->readData()) != ""){
-			std::cout << "i: " << i <<std::endl << output << std::endl;
-			i++;
-		}
-
+		std::string output = uart->readData();
+		std::cout << "Received : \n" << output << std::endl;
 	}
+
 	delete uart;
 }
 
