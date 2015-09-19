@@ -6,7 +6,9 @@ project(SandBox)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 add_subdirectory(src)
 
-add_executable(SandBox src/Main.cpp)
+add_executable(SandBox 
+      src/Main.cpp
+      src/uart.cpp)
 
 include_directories(/usr/local/include/)
 link_directories(/usr/local/lib)
