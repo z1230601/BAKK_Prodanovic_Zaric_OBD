@@ -13,13 +13,38 @@
 #include <string.h>
 #include <termios.h>
 #include <errno.h>
+#include <pthread.h>
+
 #include "uart.h"
 
-int main(int argc, char* argv[]) {
 
-	Uart* uart = new Uart(std::string(argv[1]));
+Uart* uart;
+pthread_mutex_t devicelock;
+
+void* readResponses(void* args){
+	bool outputWasEmpty = false;
+	while(true){
+		pthread_mutex_lock(&devicelock);
+		std::string output = uart->readData();
+		pthread_mutex_unlock(&devicelock);
+		if(!output.empty()){
+			std::cout << output << std::endl;
+		}
+
+		sched_yield();
+	}
+	return 0;
+}
+
+int main(int argc, char* argv[]) {
+	uart = new Uart(std::string(argv[1]));
 	uart->openDevice();
 	uart->setInterfaceAttrib(Uart::BR38400, 1);
+	pthread_mutex_init(&devicelock, NULL);
+	pthread_t thread1;
+	pthread_attr_t attr;
+	int i = 0;
+	pthread_create(&thread1, NULL, readResponses, NULL);
 
 	std::string command;
 	while (true) {
@@ -30,10 +55,9 @@ int main(int argc, char* argv[]) {
 		if(strcmp(command.c_str(), "exit") == 0){
 			break;
 		}
-		uart->send(command + "\r\n");
-		sleep(1);
-		std::string output = uart->readData();
-		std::cout << "Received : \n" << output << std::endl;
+		pthread_mutex_lock(&devicelock);
+		uart->send(command + "\r\n\r\n");
+		pthread_mutex_unlock(&devicelock);
 	}
 
 	delete uart;
