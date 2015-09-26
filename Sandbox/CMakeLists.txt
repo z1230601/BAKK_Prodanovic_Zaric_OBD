@@ -20,6 +20,9 @@ add_library(libusb_vhci src/Main.cpp)
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS thread system REQUIRED)
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
+find_package(libusb-1.0 REQUIRED)
+
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(/usr/local/include/)
 link_directories(/usr/local/lib)
@@ -29,4 +32,5 @@ link_directories(/usr/local/lib)
 target_link_libraries (SandBox 
          libusb_vhci.so 
          ${CMAKE_THREAD_LIBS_INIT}
-         ${Boost_LIBRARIES})
+         ${Boost_LIBRARIES}
+         ${LIBUSB_1_LIBRARIES})
