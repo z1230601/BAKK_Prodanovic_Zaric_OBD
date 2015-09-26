@@ -44,7 +44,11 @@ int main(int argc, char* argv[]) {
 			break;
 		}
 		comm->sendCommand(command);
-		sleep(0.2);
-		std::cout << comm->getResponse() << std::endl;
+		while(!comm->isResponseReady()){
+			sleep(0.2);
+		}
+
+		std::pair<std::string, std::string> response = comm->getTopResponse();
+		std::cout << response.first << "->" <<response.second << std::endl;
 	}
 }
