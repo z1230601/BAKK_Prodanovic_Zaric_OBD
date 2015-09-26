@@ -41,16 +41,11 @@ void SerialCommunication::readInputStream(){
 		device_lock_.unlock();
 
 		if(!output.empty()){
-			reading_stream_lock_.lock();
+			boost::lock_guard<boost::mutex> lock(reading_stream_lock_);
 			reading_stream_ << output ;
-			reading_stream_lock_.unlock();
-		}
-
-		if(tick % INTERPRETATION_PERIOD_IN_TICKS == 0){
-//			interpretResponses();
-			reading_stream_lock_.lock();
-			std::cout << reading_stream_.str() << std::endl;
-			reading_stream_lock_.unlock();
+			if (output.find(">") != std::string::npos) {
+				interpretResponses();
+			}
 		}
 
 		tick++;
@@ -81,46 +76,28 @@ bool SerialCommunication::isResponseReady(){
 }
 
 void SerialCommunication::interpretResponses() {
-	boost::lock_guard<boost::mutex> lock(reading_stream_lock_);
-	if(reading_stream_.str().empty())
-		return;
+//	std::cout << "Reading stream before is: \n" << reading_stream_.str()
+//			<< "END" << std::endl;
+	std::string read_data;
+	std::string first;
+	while (first != ">") {
+		std::getline(reading_stream_, read_data, '\n');
+		if (read_data.empty() || read_data == "\n") {
+			continue;
+		}
+		if (first.empty()) {
+			first = read_data;
+			std::cout << "first: " << first << std::endl;
+		} else {
+			boost::lock_guard<boost::mutex> lock(response_queue_lock_);
+			response_queue_.push_back(std::make_pair(first, read_data));
+			first = "";
+		}
+		read_data = "";
+	}
+	reading_stream_.str(std::string());
+	reading_stream_.clear();
 
-	std::cout << "Reading stream is: \n" << reading_stream_.str()
-			<< "END" << std::endl;
-//	std::stringstream reading_stream_working_cpy(reading_stream_.str());
-//	std::string read_data;
-//	std::string first;
-//	std::string second;
-//	bool response_queue_altered = false;
-//	bool last_run_completed_pair = false;
-//	while (!reading_stream_working_cpy.eof()) {
-//		std::getline(reading_stream_working_cpy, read_data, '\n');
-//		if(read_data == "\n" && last_run_completed_pair){
-//			std::cout << "pair: "<<first << "   " << second << std::endl;
-//			response_queue_.push_back(std::make_pair(first, second));
-//			last_run_completed_pair = false;
-//		}
-//		if (read_data.empty() || read_data == "\n") {
-//			continue;
-//		}
-//		if (first.empty()) {
-//			first = read_data;
-//			std::cout << "first: " << first << std::endl;
-//		} else {
-//			boost::lock_guard<boost::mutex> lock(response_queue_lock_);
-//			second = read_data;
-//			first = "";
-//			response_queue_altered = true;
-//			last_run_completed_pair = true;
-//
-//		}
-//		read_data = "";
-//	}
-//
-//	if (response_queue_altered) {
-//		reading_stream_.str( std::string() );
-//		if(!first.empty())
-//			reading_stream_ << first;
-//	}
-
+//	std::cout << "Reading stream after is: \n" << reading_stream_.str()
+//				<< "END" << std::endl;
 }
