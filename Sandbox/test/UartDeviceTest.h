@@ -3,7 +3,8 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestCase.h>
-#include <UartDevice.h>
+
+class UartDevice;
 
 class UartDeviceTest: public CppUnit::TestCase{
 	CPPUNIT_TEST_SUITE( UartDeviceTest );
