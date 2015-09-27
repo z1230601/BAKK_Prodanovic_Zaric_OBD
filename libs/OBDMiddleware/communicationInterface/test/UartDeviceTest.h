@@ -3,13 +3,15 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestCase.h>
-#include <UartDevice.h>
+
+class UartDevice;
 
 class UartDeviceTest: public CppUnit::TestCase{
 	CPPUNIT_TEST_SUITE( UartDeviceTest );
-	CPPUNIT_TEST( testSomething );
-//	CPPUNIT_TEST( testAddition );
+	CPPUNIT_TEST( testRead );
+//	CPPUNIT_TEST( testAnotherthing );
 	CPPUNIT_TEST_SUITE_END();
+
 
 //	static CppUnit::TestSuite *suite();
 private:
@@ -17,6 +19,7 @@ private:
 public:
 	  void setUp();
 	  void tearDown();
-	  void testSomething();
-}
+	  void testRead();
+};
+CPPUNIT_TEST_SUITE_REGISTRATION(UartDeviceTest);
 #endif /* UARTDEVICETEST_H_ */

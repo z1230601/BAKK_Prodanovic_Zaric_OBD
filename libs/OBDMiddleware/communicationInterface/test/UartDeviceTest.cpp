@@ -12,10 +12,9 @@ void UartDeviceTest::tearDown()
 //	delete test_device_;
 }
 
-void UartDeviceTest::testSomething(){
+void UartDeviceTest::testRead(){
 	/*
 	 * Code test here!
 	 * */
-
 	CPPUNIT_ASSERT(false);
 }
