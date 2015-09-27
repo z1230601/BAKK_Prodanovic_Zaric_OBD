@@ -1,4 +1,4 @@
-#include "uart.h"
+#include "UartDevice.h"
 
 #include <termios.h>
 #include <unistd.h>
@@ -7,48 +7,48 @@
 #include <sstream>
 #include <iostream>
 
-Uart::Uart(string portName)
+UartDevice::UartDevice(string portName)
 {
     _portName = portName;
-    _currentBaudRate = Uart::BR115200;
+    _currentBaudRate = UartDevice::BR115200;
     _device = 0;
 
 }
-Uart::~Uart()
+UartDevice::~UartDevice()
 {
     if ( _device >= 0)
         close( _device );
 }
 
-int Uart::openDevice()
+int UartDevice::openDevice()
 {
     _device = open ( _portName.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
     return _device;
 }
 
-void Uart::send(string data)
+void UartDevice::send(string data)
 {
     if ( _device >= 0 )
         write ( _device , data.c_str(), data.size()+1);
 }
 
-void Uart::send(int data)
+void UartDevice::send(int data)
 {
     write ( _device , &data, 1);
 }
 
-void Uart::closeDevice()
+void UartDevice::closeDevice()
 {
     if ( _device >= 0)
         close( _device );
     _device = 0;
 }
-bool Uart::isDeviceOpen()
+bool UartDevice::isDeviceOpen()
 {
     return _device >= 0;
 }
 
-string Uart::readData()
+string UartDevice::readData()
 {
     if ( _device < 0 )
         return "Err.";
@@ -69,55 +69,55 @@ string Uart::readData()
         return "";
 }
 
-int Uart::uartBaudRate2int( Uart::baud_rate baudrate)
+int UartDevice::uartBaudRate2int( UartDevice::baud_rate baudrate)
 {
     switch( baudrate )
     {
-     case Uart::BR57600 :
+     case UartDevice::BR57600 :
         return B57600;
         break;
-    case Uart:: BR115200:
+    case UartDevice:: BR115200:
         return B115200;
         break;
-    case Uart::BR230400 :
+    case UartDevice::BR230400 :
         return B230400;
         break;
-    case Uart::BR460800 :
+    case UartDevice::BR460800 :
         return B460800;
         break;
-    case Uart::BR38400:
+    case UartDevice::BR38400:
     	return B38400;
-    case Uart::BR500000 :
+    case UartDevice::BR500000 :
         return B500000;
         break;
-    case Uart::BR576000 :
+    case UartDevice::BR576000 :
         return B576000;
         break;
-    case Uart::BR921600 :
+    case UartDevice::BR921600 :
         return B921600;
         break;
-    case Uart::BR1000000 :
+    case UartDevice::BR1000000 :
         return B1000000;
         break;
-    case Uart::BR1152000 :
+    case UartDevice::BR1152000 :
         return B1152000;
         break;
-    case Uart::BR1500000 :
+    case UartDevice::BR1500000 :
         return B1500000;
         break;
-    case Uart::BR2000000 :
+    case UartDevice::BR2000000 :
         return B2000000;
         break;
-    case Uart::BR2500000 :
+    case UartDevice::BR2500000 :
         return B2500000;
         break;
-    case Uart::BR3000000 :
+    case UartDevice::BR3000000 :
         return B3000000;
         break;
-    case Uart::BR3500000 :
+    case UartDevice::BR3500000 :
         return B3500000;
         break;
-    case Uart::BR4000000 :
+    case UartDevice::BR4000000 :
         return B4000000;
         break;
     default :
@@ -126,7 +126,7 @@ int Uart::uartBaudRate2int( Uart::baud_rate baudrate)
     }
 }
 
-int Uart::setInterfaceAttrib ( Uart::baud_rate speed, int parity )
+int UartDevice::setInterfaceAttrib ( UartDevice::baud_rate speed, int parity )
 {
     struct termios tty;
     memset (&tty, 0, sizeof tty);
@@ -165,7 +165,7 @@ int Uart::setInterfaceAttrib ( Uart::baud_rate speed, int parity )
 }
 
 
-void Uart::setBlocking ( int should_block )
+void UartDevice::setBlocking ( int should_block )
 {
     struct termios tty;
     memset (&tty, 0, sizeof tty);

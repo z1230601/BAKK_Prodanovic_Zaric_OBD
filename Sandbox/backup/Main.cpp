@@ -18,7 +18,7 @@
 #include "uart.h"
 
 
-Uart* uart;
+UartDevice* uart;
 pthread_mutex_t devicelock;
 
 void* readResponses(void* args){
@@ -37,9 +37,9 @@ void* readResponses(void* args){
 }
 
 int main(int argc, char* argv[]) {
-	uart = new Uart(std::string(argv[1]));
+	uart = new UartDevice(std::string(argv[1]));
 	uart->openDevice();
-	uart->setInterfaceAttrib(Uart::BR38400, 1);
+	uart->setInterfaceAttrib(UartDevice::BR38400, 1);
 	pthread_mutex_init(&devicelock, NULL);
 	pthread_t thread1;
 	pthread_attr_t attr;

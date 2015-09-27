@@ -16,7 +16,6 @@
 #include <pthread.h>
 #include <stdexcept>
 
-#include "uart.h"
 #include "SerialCommunication.h"
 
 int main(int argc, char* argv[]) {

@@ -10,9 +10,9 @@
 #include <boost/thread/lock_guard.hpp>
 
 SerialCommunication::SerialCommunication(std::string devicePath, std::string baudrate){
-	serial_device_ = new Uart(devicePath);
+	serial_device_ = new UartDevice(devicePath);
 	serial_device_ ->openDevice();
-	serial_device_ -> setInterfaceAttrib(Uart::BR38400, 1);
+	serial_device_ -> setInterfaceAttrib(UartDevice::BR38400, 1);
 	startReadingThread();
 }
 
@@ -36,9 +36,11 @@ void SerialCommunication::startReadingThread(){
 void SerialCommunication::readInputStream(){
 	unsigned int tick = 0;
 	while(true){
-		device_lock_.lock();
-		std::string output = serial_device_->readData();
-		device_lock_.unlock();
+		std::string output = "";
+		if(serial_device_->isDeviceOpen()){
+			boost::lock_guard<boost::mutex> lock(device_lock_);
+			output = serial_device_->readData();
+		}
 
 		if(!output.empty()){
 			boost::lock_guard<boost::mutex> lock(reading_stream_lock_);
@@ -76,8 +78,6 @@ bool SerialCommunication::isResponseReady(){
 }
 
 void SerialCommunication::interpretResponses() {
-//	std::cout << "Reading stream before is: \n" << reading_stream_.str()
-//			<< "END" << std::endl;
 	std::string read_data;
 	std::string first;
 	while (first != ">") {
@@ -97,7 +97,4 @@ void SerialCommunication::interpretResponses() {
 	}
 	reading_stream_.str(std::string());
 	reading_stream_.clear();
-
-//	std::cout << "Reading stream after is: \n" << reading_stream_.str()
-//				<< "END" << std::endl;
 }

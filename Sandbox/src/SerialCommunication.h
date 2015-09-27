@@ -5,7 +5,7 @@
  *      Author: zlatan
  */
 
-#include "uart.h"
+#include "UartDevice.h"
 #include <list>
 #include <sstream>
 #include <boost/thread.hpp>
@@ -27,7 +27,7 @@ public:
 	bool isResponseReady();
 
 private:
-	Uart* serial_device_;
+	UartDevice* serial_device_;
 	boost::mutex device_lock_;
 
 	std::list<std::pair<std::string,std::string>> response_queue_;
