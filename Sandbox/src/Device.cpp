@@ -1,6 +1,7 @@
 #include "Device.h"
 
-Device::Device(std::string manufacturer, std::string product, unsigned int productID, unsigned int vendorID ) {
+Device::Device(std::string manufacturer, std::string product,
+		unsigned int productID, unsigned int vendorID) {
 	setManufacturer(manufacturer);
 	setProdcut(product);
 	setProductId(productID);
@@ -10,3 +11,4 @@ Device::Device(std::string manufacturer, std::string product, unsigned int produ
 Device::~Device() {
 
 }
+

@@ -1,7 +1,10 @@
 #ifndef DEVICEDETECTOR_H_
 #define DEVICEDETECTOR_H_
 
+#include "Device.h"
+#include <vector>
 #include <libusb-1.0/libusb.h>
+#include <map>
 
 enum ErrorHandling {
 	INIT, DEVICELIST, DEVICEDESCRIPTOR, OPENDEVICE, MANUFACTURER, PRODUCT
@@ -9,17 +12,26 @@ enum ErrorHandling {
 
 class DeviceDetector {
 public:
+	DeviceDetector();
+	~DeviceDetector();
 	std::vector<Device> detectDevices();
+	unsigned int getDeviceListSize() const { return device_list.size(); }
 
 private:
-	libusb_device **devices;
-	libusb_device_handle *device_handle;
-	libusb_context *context = NULL;
-	libusb_device_descriptor desc;
-	int device_counter = 0;
-	char manufacturer[256], product[256];
+	std::vector<Device> device_list;
 
 	void handleError(int errorValue, ErrorHandling what);
+	Device getDeviceIfPossible(libusb_device* dev);
+
+	std::map<ErrorHandling, std::string> error_messages_
+	{
+		std::make_pair (ErrorHandling::INIT, "Initialization Error"),
+		std::make_pair (ErrorHandling::DEVICELIST, "Error getting Devices"),
+		std::make_pair (ErrorHandling::DEVICEDESCRIPTOR, "Failed to get Device Descriptor"),
+		std::make_pair (ErrorHandling::OPENDEVICE, "Failed to open Device"),
+		std::make_pair (ErrorHandling::MANUFACTURER, "Manufacturer not found"),
+		std::make_pair (ErrorHandling::PRODUCT, "Product not found")
+	};
 };
 
 #endif /* DEVICEDETECTOR_H_ */

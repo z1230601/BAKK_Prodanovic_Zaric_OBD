@@ -2,9 +2,17 @@
 #include <iostream>
 #include <stdexcept>
 
-std::vector<Device> DeviceDetector::detectDevices() {
+DeviceDetector::DeviceDetector() {
+	detectDevices();
+}
 
-	std::vector<Device> device_list;
+DeviceDetector::~DeviceDetector() {
+}
+
+std::vector<Device> DeviceDetector::detectDevices() {
+	libusb_device **devices;
+	libusb_context *context = NULL;
+	int device_counter = 0;
 
 	handleError(libusb_init(&context), ErrorHandling::INIT);
 
@@ -13,18 +21,9 @@ std::vector<Device> DeviceDetector::detectDevices() {
 	handleError((device_counter = libusb_get_device_list(context, &devices)),
 			ErrorHandling::DEVICELIST);
 
-	std::cout << device_counter << " Devices in list" << std::endl;
-
-	for (int i = 1; i < device_counter; i++) {
-		handleError(libusb_get_device_descriptor(devices[i], &desc),
-				ErrorHandling::DEVICEDESCRIPTOR);
-		handleError(libusb_open(devices[i], &device_handle),
-				ErrorHandling::OPENDEVICE);
-		handleError(libusb_get_string_descriptor_ascii(device_handle, desc.iManufacturer, (unsigned char*) manufacturer, sizeof(manufacturer)),
-				ErrorHandling::MANUFACTURER);
-		handleError(libusb_get_string_descriptor_ascii(device_handle, desc.iProduct, (unsigned char*) product, sizeof(product)),
-				ErrorHandling::PRODUCT);
-		device_list.push_back(Device(manufacturer, product, desc.idProduct, desc.idVendor));
+	for (int i = 0; i < device_counter; i++) {
+			device_list.push_back(getDeviceIfPossible(devices[i]));
+			std::cout << device_list.at(i);
 	}
 
 	libusb_free_device_list(devices, 1); //free the list, unref the devices in it
@@ -32,34 +31,41 @@ std::vector<Device> DeviceDetector::detectDevices() {
 	return device_list;
 }
 
+Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
+	libusb_device_handle *device_handle;
+	libusb_device_descriptor desc;
+	char manufacturer[256], product[256];
+	handleError(libusb_get_device_descriptor(dev, &desc),
+			ErrorHandling::DEVICEDESCRIPTOR);
+	handleError(libusb_open(dev, &device_handle),
+			ErrorHandling::OPENDEVICE);
+	try {
+		handleError(
+				libusb_get_string_descriptor_ascii(device_handle,
+						desc.iManufacturer, (unsigned char*) manufacturer,
+						sizeof(manufacturer)), ErrorHandling::MANUFACTURER);
+	} catch (std::runtime_error &err) {
+		manufacturer[0] = '\0';
+	}
+
+	try {
+		handleError(
+				libusb_get_string_descriptor_ascii(device_handle, desc.iProduct,
+						(unsigned char*) product, sizeof(product)),
+				ErrorHandling::PRODUCT);
+	} catch (std::runtime_error &err) {
+		product[0] = '\0';
+	}
+	libusb_close(device_handle);
+	return Device(manufacturer, product, desc.idProduct, desc.idVendor);
+}
+
 void DeviceDetector::handleError(int errorValue, ErrorHandling what) {
-	switch (what) {
-	case ErrorHandling::INIT:
-		if (errorValue < 0) {
-			throw std::runtime_error("Initialization Error");
-		}
-		break;
-	case ErrorHandling::DEVICELIST:
-		if (errorValue < 0) {
-			throw std::runtime_error("Error getting Devices");
-		}
-		break;
-	case ErrorHandling::DEVICEDESCRIPTOR:
-		if (errorValue < 0) {
-			throw std::runtime_error("Failed to get Device Descriptor");
-		}
-		break;
-	case ErrorHandling::OPENDEVICE:
-		if (errorValue < 0) {
-			throw std::runtime_error("Failed to open Device");
-		}
-		break;
-	case ErrorHandling::MANUFACTURER:
-	case ErrorHandling::PRODUCT:
-		if (errorValue < 0) {
-			libusb_close(device_handle);
-			throw std::runtime_error("Manufacturer or product not found");
-		}
-		break;
+	std::string message = "";
+	if (errorValue < 0) {
+		message = error_messages_.at(what);
+	}
+	if(!message.empty()){
+		throw std::runtime_error(message);
 	}
 }

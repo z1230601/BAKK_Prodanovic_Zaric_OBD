@@ -1,7 +1,8 @@
 #ifndef DEVICE_H_
 #define DEVICE_H_
 
-#include <string.h>
+#include <string>
+#include <iostream>
 
 class Device {
 public:
@@ -13,7 +14,7 @@ public:
 	std::string getManufacturerIdx() const { return manufacturer_; }
 
 	void setProduct(char* product) { product_ = std::string(product); }
-	void setProdcut (std::string product) { product_ = product }
+	void setProdcut (std::string product) { product_ = product; }
 	std::string getProduct() const { return product_; }
 
 	void setProductId(unsigned int productId) {	product_ID_ = productId; }
@@ -21,6 +22,14 @@ public:
 
 	void setVendorId(unsigned int vendorId) { vendor_ID_ = vendorId; }
 	unsigned int getVendorId() const { return vendor_ID_; }
+
+	friend std::ostream& operator<<(std::ostream& stream, const Device& dev) {
+		stream << "ProductID: " << dev.product_ID_
+				<< " ||| VendorID: " << dev.vendor_ID_
+				<< " ||| Manufacturer: " << dev.manufacturer_
+				<< " ||| Product: " << dev.product_ << std::endl;
+		return stream;
+	}
 
 private:
 	std::string manufacturer_;
