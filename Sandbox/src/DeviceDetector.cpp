@@ -1,6 +1,7 @@
 #include "DeviceDetector.h"
 #include <iostream>
 #include <stdexcept>
+#include <boost/filesystem.hpp>
 
 DeviceDetector::DeviceDetector() {
 	detectDevices();
@@ -56,8 +57,28 @@ Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
 	} catch (std::runtime_error &err) {
 		product[0] = '\0';
 	}
+
+	unsigned int bus = libusb_get_bus_number(dev);
+	unsigned int port = libusb_get_port_number(dev);
+
+	std::string path = "/\\";//getTTYPath(bus, port);
+
+	std::cout << path << bus << " - " << port << "/\\" <<std::endl;
+
 	libusb_close(device_handle);
-	return Device(manufacturer, product, desc.idProduct, desc.idVendor);
+	return Device(manufacturer, product, desc.idProduct, desc.idVendor, bus, port, path);
+}
+
+std::string DeviceDetector::getTTYPath(unsigned int bus, unsigned int port) {
+	 std::cout << "ENTERED getTTYPath: Bus - Port: " << bus << " - "   << port << std::endl;
+
+	std::string path = "";
+	if(bus == 0 || port == 0)
+		return path;
+
+	boost::filesystem::path system_path(std::string("/sys/bus/usb/devices/" + bus + '-' + port + '/'));
+
+	return path;
 }
 
 void DeviceDetector::handleError(int errorValue, ErrorHandling what) {

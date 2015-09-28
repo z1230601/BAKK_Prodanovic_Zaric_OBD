@@ -26,13 +26,22 @@ int main(int argc, char* argv[]) {
 	}
 	SerialCommunication* comm;
 
+ 	DeviceDetector* deviceList;
+	try {
+		deviceList = new DeviceDetector();
+	} catch (std::runtime_error &err) {
+		std::cout << "caught exception with: " << err.what() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << "caught general exception: " << e.what() << std::endl;
+	}
+
 	try {
 		comm = new SerialCommunication(argv[1], argv[2]);
-	} catch (std::runtime_error e) {
-		std::cout << "SerialCommunication couldn't be initialized\n";
+	} catch (std::runtime_error &e) {
+		std::cout << "SerialCommunication couldn't be initialized" << e.what() << std::endl;
 		return -1;
-	} catch (std::exception e) {
-		std::cout << e.what();
+	} catch (std::exception &e) {
+		std::cout << "SerialCommunication threw exception" << e.what() << std::endl;
 	}
 
 	std::string command;
@@ -42,16 +51,6 @@ int main(int argc, char* argv[]) {
 		std::cout << "Command got: " << command << std::endl;
 		if (strcmp(command.c_str(), "exit") == 0) {
 			break;
-		} else if (strcmp(command.c_str(), "detect") == 0) {
-			DeviceDetector* deviceList;
-			try{
-				deviceList = new DeviceDetector();
-				std::cout << "Found Devices: " << deviceList->getDeviceListSize() << std::endl;
-			}catch(std::runtime_error &err){
-				std::cout << "caught exception with: " << err.what() << std::endl;
-			}catch(std::exception &e){
-				std::cout << "caught generell execption: " << e.what() << std::endl;
-			}
 		} else {
 			comm->sendCommand(command);
 			while (!comm->isResponseReady()) {

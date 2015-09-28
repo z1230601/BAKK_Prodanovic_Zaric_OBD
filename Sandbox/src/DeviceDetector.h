@@ -16,6 +16,7 @@ public:
 	~DeviceDetector();
 	std::vector<Device> detectDevices();
 	unsigned int getDeviceListSize() const { return device_list.size(); }
+	std::string getTTYPath(unsigned int bus, unsigned int port);
 
 private:
 	std::vector<Device> device_list;
