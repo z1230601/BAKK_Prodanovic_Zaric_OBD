@@ -9,24 +9,14 @@
 #include <string>
 #include <stdio.h>
 #include <fcntl.h>
-#include <algorithm>
+#include <map>
 
 typedef std::string string;
 
 class UartDevice
 {
 public:
-	std::vector<int> validBaudrates {B38400,B57600,B115200,B230400,B460800,
-		B500000, B576000,B921600,B1000000,B1152000,B1500000,B2000000,B2500000,B3000000, B3500000, B4000000}
-
-	static int getBaudRateFromString(string baudrate){
-    	int baud_rate = std::stoi(baudrate);
-    	if(std::find(validBaudrates.begin(), validBaudrates.end(), baud_rate) != validBaudrates.end()) {
-    	    return baud_rate;
-    	} else {
-    		return B38400;
-    	}
-    }
+	int getBaudRateFromString(string baudrate);
 
     UartDevice( string portName );
     ~UartDevice();
@@ -47,6 +37,25 @@ private:
     string _portName;
     int _device;
     int _currentBaudRate;
+
+	std::map<int, int> validBaudrates{
+		{38400,B38400},
+		{57600,B57600},
+		{115200,B115200},
+		{230400,B230400},
+		{460800,B460800},
+		{500000,B500000},
+		{500000,B500000},
+		{921600,B921600},
+		{1000000,B1000000},
+		{1152000,B1152000},
+		{1500000,B1500000},
+		{2000000,B2000000},
+		{2500000,B2500000},
+		{3000000,B3000000},
+		{3500000,B3500000},
+		{4000000,B4000000}
+	};
 };
 
 #endif // UART_DEVICE_H

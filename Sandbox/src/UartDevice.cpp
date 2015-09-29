@@ -124,4 +124,11 @@ void UartDevice::setBlocking ( int should_block )
     if (tcsetattr (_device, TCSANOW, &tty) != 0)
         return;
 }
-
+int UartDevice::getBaudRateFromString(string baudrate){
+    	int baud_rate = std::stoi(baudrate);
+    	if(validBaudrates.find(baud_rate) != validBaudrates.end()) {
+    	    return validBaudrates.at(baud_rate);
+    	} else {
+    		return B38400;
+    	}
+    }

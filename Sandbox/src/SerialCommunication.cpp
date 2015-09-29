@@ -12,7 +12,7 @@
 SerialCommunication::SerialCommunication(std::string devicePath, std::string baudrate){
 	serial_device_ = new UartDevice(devicePath);
 	serial_device_ ->openDevice();
-	serial_device_ -> setInterfaceAttrib(UartDevice::getBaudRateFromString(baudrate), 1);
+	serial_device_ -> setInterfaceAttrib(serial_device_->getBaudRateFromString(baudrate), 1);
 	startReadingThread();
 }
 
