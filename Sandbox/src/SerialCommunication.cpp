@@ -87,7 +87,6 @@ void SerialCommunication::interpretResponses() {
 		}
 		if (first.empty()) {
 			first = read_data;
-			std::cout << "first: " << first << std::endl;
 		} else {
 			boost::lock_guard<boost::mutex> lock(response_queue_lock_);
 			response_queue_.push_back(std::make_pair(first, read_data));

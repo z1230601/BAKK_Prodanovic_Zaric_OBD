@@ -3,12 +3,13 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Device {
 public:
 	Device(std::string manufacturer, std::string product,
 			unsigned int productID, unsigned int vendorID,
-			unsigned int busnumber, unsigned int portnumber,
+			unsigned int busnumber, std::vector<int> portnumber,
 			std::string ttypath);
 	~Device();
 
@@ -33,8 +34,10 @@ public:
 	void setBusNumber(unsigned int busNumber) { bus_number_ = busNumber; }
 	unsigned int getBusNumber() const { return bus_number_; }
 
-	void setPortNumber(unsigned int portNumber) { port_number_ = portNumber; }
-	unsigned int getPortNumber() const { return port_number_; }
+	void setPortNumber(std::vector<int> portNumber) { port_number_ = portNumber; }
+	std::vector<int> getPortNumber() const { return port_number_; }
+
+	std::string getPortNumberAsString() const;
 
 	friend std::ostream& operator<<(std::ostream& stream, const Device& dev) {
 		stream << "VendorID: " << dev.vendor_ID_
@@ -42,7 +45,7 @@ public:
 				<< " ||| Manufacturer: " << dev.manufacturer_
 				<< " ||| Product: " << dev.product_
 				<< " ||| Bus: " << dev.bus_number_
-				<< " ||| Port: " << dev.port_number_
+				<< " ||| Port: " << dev.getPortNumberAsString()
 				<< " ||| Path: " << dev.serial_device_path_ << std::endl;
 		return stream;
 	}
@@ -55,7 +58,7 @@ private:
 	unsigned int product_ID_;
 	unsigned int vendor_ID_;
 	unsigned int bus_number_;
-	unsigned int port_number_;
+	std::vector<int> port_number_;
 };
 
 #endif /* DEVICE_H_ */

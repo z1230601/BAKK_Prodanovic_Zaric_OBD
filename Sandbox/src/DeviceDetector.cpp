@@ -59,18 +59,38 @@ Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
 	}
 
 	unsigned int bus = libusb_get_bus_number(dev);
-	unsigned int port = libusb_get_port_number(dev);
-
+	std::vector<int> port = getPortsFromSystem(dev);
 	std::string path = getTTYPath(bus, port);
 
 	libusb_close(device_handle);
 	return Device(manufacturer, product, desc.idProduct, desc.idVendor, bus, port, path);
 }
 
-std::string DeviceDetector::getTTYPath(unsigned int bus, unsigned int port) {
+std::vector<int> DeviceDetector::getPortsFromSystem(libusb_device* dev) {
+	unsigned char ports[7] { 0 };
+	libusb_get_port_numbers(dev, ports, 7);
+	std::vector<int> ret;
+	for(int i = 0; i < 7; i++){
+		if(ports[i] == 0){
+			break;
+		}else{
+			ret.push_back(ports[i]);
+		}
+	}
+	return ret;
+}
+
+std::string DeviceDetector::getTTYPath(unsigned int bus, std::vector<int> port) {
 	std::string tty_path = "";
-	std::string deviceID = std::to_string(bus) + "-" + std::to_string(port);
-	if(bus == 0 || port == 0)
+	std::string port_as_string = "";
+	for(unsigned int i = 0; i < port.size(); i++){
+		port_as_string += std::to_string(port.at(i)) + ".";
+	}
+	port_as_string = port_as_string.substr(0, port_as_string.length()-1);
+	std::cout << "Port is: " << port_as_string << std::endl;
+
+	std::string deviceID = std::to_string(bus) + "-" + port_as_string;
+	if(bus == 0 || port_as_string == "0" || port_as_string.empty())
 		return tty_path;
 
 	tty_path = "/sys/bus/usb/devices/";
