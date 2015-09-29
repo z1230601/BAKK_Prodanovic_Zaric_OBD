@@ -1,6 +1,7 @@
 #include "DeviceDetector.h"
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include <boost/filesystem.hpp>
 
 DeviceDetector::DeviceDetector() {
@@ -61,22 +62,40 @@ Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
 	unsigned int bus = libusb_get_bus_number(dev);
 	unsigned int port = libusb_get_port_number(dev);
 
-	std::string path = "/\\";//getTTYPath(bus, port);
+	std::string path = getTTYPath(bus, port);
 
-	std::cout << path << bus << " - " << port << "/\\" <<std::endl;
+	std::cout << path << std::endl;
 
 	libusb_close(device_handle);
 	return Device(manufacturer, product, desc.idProduct, desc.idVendor, bus, port, path);
 }
 
 std::string DeviceDetector::getTTYPath(unsigned int bus, unsigned int port) {
-	 std::cout << "ENTERED getTTYPath: Bus - Port: " << bus << " - "   << port << std::endl;
-
 	std::string path = "";
+	std::string deviceID = std::to_string(bus) + "-" + std::to_string(port);
 	if(bus == 0 || port == 0)
 		return path;
 
-	boost::filesystem::path system_path(std::string("/sys/bus/usb/devices/" + bus + '-' + port + '/'));
+	path = "/sys/bus/usb/devices/";
+	path +=  deviceID + "/";
+
+	boost::filesystem::path system_path(path);
+
+	if(boost::filesystem::exists(system_path) && boost::filesystem::is_directory(system_path)) {
+
+		std::cout << system_path << " is a directory containing:" << std::endl;
+
+		typedef std::vector<boost::filesystem::path> vec;		// store paths,
+		vec v;                                					// so we can sort them later
+
+		std::copy(boost::filesystem::directory_iterator(system_path),
+				boost::filesystem::directory_iterator(), std::back_inserter(v));
+		sort(v.begin(), v.end());						// sort, since directory iteration
+														// is not ordered on some file systems
+		for (vec::const_iterator it (v.begin()); it != v.end(); ++it) {
+			std::cout << "   " << *it << std::endl;
+		}
+	}
 
 	return path;
 }
