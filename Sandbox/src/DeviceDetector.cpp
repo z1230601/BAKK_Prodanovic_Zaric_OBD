@@ -87,7 +87,6 @@ std::string DeviceDetector::getTTYPath(unsigned int bus, std::vector<int> port) 
 		port_as_string += std::to_string(port.at(i)) + ".";
 	}
 	port_as_string = port_as_string.substr(0, port_as_string.length()-1);
-	std::cout << "Port is: " << port_as_string << std::endl;
 
 	std::string deviceID = std::to_string(bus) + "-" + port_as_string;
 	if(bus == 0 || port_as_string == "0" || port_as_string.empty())

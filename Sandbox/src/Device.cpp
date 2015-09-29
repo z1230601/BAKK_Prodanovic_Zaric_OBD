@@ -22,6 +22,5 @@ std::string Device::getPortNumberAsString() const{
 		port_as_string += std::to_string(port_number_.at(i)) + ".";
 	}
 	port_as_string = port_as_string.substr(0, port_as_string.length()-1);
-	std::cout << "Port is: " << port_as_string << std::endl;
 	return port_as_string;
 }
