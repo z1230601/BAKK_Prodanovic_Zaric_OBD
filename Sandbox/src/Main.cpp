@@ -20,7 +20,7 @@
 #include "DeviceDetector.h"
 
 int main(int argc, char* argv[]) {
-	if (argc != 3) {
+	if (argc != 2) {
 		std::cout << "Not enough arguments!\n" << std::endl;
 		return -1;
 	}
@@ -35,8 +35,18 @@ int main(int argc, char* argv[]) {
 		std::cout << "caught general exception: " << e.what() << std::endl;
 	}
 
+	std::cout << "Please choose option and press ENTER\n";
+	for(unsigned int i = 0; i < deviceList->getDeviceList().size(); i++){
+		std::cout << "Option " << i << ":       "  << deviceList->getDeviceList().at(i) << std::endl;
+	}
+	int option_chosen;
+	std::string chosen;
+	std::getline(std::cin, chosen);
+	option_chosen = std::stoi(chosen);
+	Device dev = deviceList->getDeviceList().at(option_chosen);
+
 	try {
-		comm = new SerialCommunication(argv[1], argv[2]);
+		comm = new SerialCommunication(dev.getSerialDevicePath(), argv[1]);
 	} catch (std::runtime_error &e) {
 		std::cout << "SerialCommunication couldn't be initialized" << e.what() << std::endl;
 		return -1;

@@ -24,7 +24,6 @@ public:
 	void setSerialDevicePath(std::string serialDevicePath) { serial_device_path_ = serialDevicePath; }
 	std::string getSerialDevicePath() const { return serial_device_path_; }
 
-
 	void setProductId(unsigned int productId) {	product_ID_ = productId; }
 	unsigned int getProductId() const {	return product_ID_; }
 
@@ -41,7 +40,10 @@ public:
 		stream << "VendorID: " << dev.vendor_ID_
 				<< " ||| ProductID: " << dev.product_ID_
 				<< " ||| Manufacturer: " << dev.manufacturer_
-				<< " ||| Product: " << dev.product_ << std::endl;
+				<< " ||| Product: " << dev.product_
+				<< " ||| Bus: " << dev.bus_number_
+				<< " ||| Port: " << dev.port_number_
+				<< " ||| Path: " << dev.serial_device_path_ << std::endl;
 		return stream;
 	}
 

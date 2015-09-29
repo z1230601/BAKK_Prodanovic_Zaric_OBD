@@ -21,6 +21,14 @@ public:
 	unsigned int getDeviceListSize() const { return device_list.size(); }
 	std::string getTTYPath(unsigned int bus, unsigned int port);
 
+	std::vector<Device> getDeviceList() const {
+		return device_list;
+	}
+
+	void setDeviceList(std::vector<Device> deviceList) {
+		device_list = deviceList;
+	}
+
 private:
 	std::vector<Device> device_list;
 
