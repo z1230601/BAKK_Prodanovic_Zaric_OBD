@@ -10,7 +10,7 @@
 UartDevice::UartDevice(string portName)
 {
     _portName = portName;
-    _currentBaudRate = UartDevice::BR115200;
+    _currentBaudRate = B38400;
     _device = 0;
 
 }
@@ -69,65 +69,9 @@ string UartDevice::readData()
         return "";
 }
 
-int UartDevice::uartBaudRate2int( UartDevice::baud_rate baudrate)
+int UartDevice::setInterfaceAttrib ( int speed, int parity )
 {
-    switch( baudrate )
-    {
-     case UartDevice::BR57600 :
-        return B57600;
-        break;
-    case UartDevice:: BR115200:
-        return B115200;
-        break;
-    case UartDevice::BR230400 :
-        return B230400;
-        break;
-    case UartDevice::BR460800 :
-        return B460800;
-        break;
-    case UartDevice::BR38400:
-    	return B38400;
-    case UartDevice::BR500000 :
-        return B500000;
-        break;
-    case UartDevice::BR576000 :
-        return B576000;
-        break;
-    case UartDevice::BR921600 :
-        return B921600;
-        break;
-    case UartDevice::BR1000000 :
-        return B1000000;
-        break;
-    case UartDevice::BR1152000 :
-        return B1152000;
-        break;
-    case UartDevice::BR1500000 :
-        return B1500000;
-        break;
-    case UartDevice::BR2000000 :
-        return B2000000;
-        break;
-    case UartDevice::BR2500000 :
-        return B2500000;
-        break;
-    case UartDevice::BR3000000 :
-        return B3000000;
-        break;
-    case UartDevice::BR3500000 :
-        return B3500000;
-        break;
-    case UartDevice::BR4000000 :
-        return B4000000;
-        break;
-    default :
-        return B115200;
-        break;
-    }
-}
-
-int UartDevice::setInterfaceAttrib ( UartDevice::baud_rate speed, int parity )
-{
+	_currentBaudRate = speed;
     struct termios tty;
     memset (&tty, 0, sizeof tty);
     if (tcgetattr (_device, &tty) != 0)
@@ -135,8 +79,8 @@ int UartDevice::setInterfaceAttrib ( UartDevice::baud_rate speed, int parity )
         return -1;
     }
 
-    cfsetospeed ( &tty, uartBaudRate2int(speed) );
-    cfsetispeed ( &tty, uartBaudRate2int(speed) );
+    cfsetospeed ( &tty, speed);
+    cfsetispeed ( &tty, speed);
 
     tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;     // 8-bit chars
     // disable IGNBRK for mismatched speed tests; otherwise receive break
