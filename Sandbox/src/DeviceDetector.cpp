@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <boost/filesystem.hpp>
 
 DeviceDetector::DeviceDetector() {
 	detectDevices();
@@ -71,33 +70,37 @@ Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
 }
 
 std::string DeviceDetector::getTTYPath(unsigned int bus, unsigned int port) {
-	std::string path = "";
+	std::string tty_path = "";
 	std::string deviceID = std::to_string(bus) + "-" + std::to_string(port);
 	if(bus == 0 || port == 0)
-		return path;
+		return tty_path;
 
-	path = "/sys/bus/usb/devices/";
-	path +=  deviceID + "/";
+	tty_path = "/sys/bus/usb/devices/";
+	tty_path +=  deviceID + "/";
 
-	boost::filesystem::path system_path(path);
+	path system_path(tty_path);
 
-	if(boost::filesystem::exists(system_path) && boost::filesystem::is_directory(system_path)) {
+	path subdirectory = getPathBeginningWith(system_path, std::string(deviceID + ":"));
+	std::cout << subdirectory << std::endl;
+	return tty_path;
+}
 
-		std::cout << system_path << " is a directory containing:" << std::endl;
-
+path DeviceDetector::getPathBeginningWith(path search_path, std::string beginning_sequence){
+	if(boost::filesystem::exists(search_path) && boost::filesystem::is_directory(search_path)) {
 		typedef std::vector<boost::filesystem::path> vec;		// store paths,
 		vec v;                                					// so we can sort them later
 
-		std::copy(boost::filesystem::directory_iterator(system_path),
+		std::copy(boost::filesystem::directory_iterator(search_path),
 				boost::filesystem::directory_iterator(), std::back_inserter(v));
 		sort(v.begin(), v.end());						// sort, since directory iteration
 														// is not ordered on some file systems
 		for (vec::const_iterator it (v.begin()); it != v.end(); ++it) {
-			std::cout << "   " << *it << std::endl;
+			if((*it).filename().string().compare(0, beginning_sequence.length(), beginning_sequence) == 0){
+				return *it;
+			}
 		}
 	}
-
-	return path;
+	return search_path;
 }
 
 void DeviceDetector::handleError(int errorValue, ErrorHandling what) {

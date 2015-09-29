@@ -11,7 +11,7 @@ add_subdirectory(test)
 
 # Find requried external libraries
 find_package(Threads REQUIRED)
-find_package(Boost COMPONENTS thread system REQUIRED)
+find_package(Boost COMPONENTS thread system filesystem REQUIRED)
 
 #reset CMAKE MOdule path for special find scripts
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)

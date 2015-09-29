@@ -4,7 +4,10 @@
 #include "Device.h"
 #include <vector>
 #include <libusb-1.0/libusb.h>
+#include <boost/filesystem.hpp>
 #include <map>
+
+typedef boost::filesystem::path path;
 
 enum ErrorHandling {
 	INIT, DEVICELIST, DEVICEDESCRIPTOR, OPENDEVICE, MANUFACTURER, PRODUCT
@@ -23,7 +26,7 @@ private:
 
 	void handleError(int errorValue, ErrorHandling what);
 	Device getDeviceIfPossible(libusb_device* dev);
-
+	path getPathBeginningWith(path search_path, std::string beginning_sequence);
 	std::map<ErrorHandling, std::string> error_messages_
 	{
 		std::make_pair (ErrorHandling::INIT, "Initialization Error"),
