@@ -24,7 +24,7 @@ std::vector<Device> DeviceDetector::detectDevices() {
 
 	for (int i = 0; i < device_counter; i++) {
 			device_list.push_back(getDeviceIfPossible(devices[i]));
-			std::cout << device_list.at(i);
+//			std::cout << device_list.at(i);
 	}
 
 	libusb_free_device_list(devices, 1); //free the list, unref the devices in it
@@ -63,8 +63,6 @@ Device DeviceDetector::getDeviceIfPossible(libusb_device* dev){
 
 	std::string path = getTTYPath(bus, port);
 
-	std::cout << path << std::endl;
-
 	libusb_close(device_handle);
 	return Device(manufacturer, product, desc.idProduct, desc.idVendor, bus, port, path);
 }
@@ -81,8 +79,15 @@ std::string DeviceDetector::getTTYPath(unsigned int bus, unsigned int port) {
 	path system_path(tty_path);
 
 	path subdirectory = getPathBeginningWith(system_path, std::string(deviceID + ":"));
-	std::cout << subdirectory << std::endl;
-	return tty_path;
+	if(subdirectory == system_path) {
+		return "";
+	}
+
+	path tty = getPathBeginningWith(subdirectory, "ttyUSB");
+	if(tty == subdirectory) {
+		return "";
+	}
+	return "/dev/" + tty.filename().string();
 }
 
 path DeviceDetector::getPathBeginningWith(path search_path, std::string beginning_sequence){
