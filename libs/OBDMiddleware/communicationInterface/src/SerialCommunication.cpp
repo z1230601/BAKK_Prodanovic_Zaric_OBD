@@ -12,7 +12,7 @@
 SerialCommunication::SerialCommunication(std::string devicePath, std::string baudrate){
 	serial_device_ = new UartDevice(devicePath);
 	serial_device_ ->openDevice();
-	serial_device_ -> setInterfaceAttrib(UartDevice::BR38400, 1);
+	serial_device_ -> setInterfaceAttrib(serial_device_->getBaudRateFromString(baudrate), 1);
 	startReadingThread();
 }
 
@@ -87,7 +87,6 @@ void SerialCommunication::interpretResponses() {
 		}
 		if (first.empty()) {
 			first = read_data;
-			std::cout << "first: " << first << std::endl;
 		} else {
 			boost::lock_guard<boost::mutex> lock(response_queue_lock_);
 			response_queue_.push_back(std::make_pair(first, read_data));

@@ -38,6 +38,7 @@ add_library(serial-communication-dev STATIC ${EXECS})
 
 set(SRC_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/build/libserial-communication-dev.a)
 
+message(status ${SRC_LIBRARY})
 # link the libraries to the executable (most of them found by cmake modules)
 target_link_libraries (serial-communication-dev 
          ${CMAKE_THREAD_LIBS_INIT}
@@ -61,7 +62,6 @@ target_link_libraries(CommunicationTester
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
                       ${CPPUNIT_LIBRARIES}
                       ${CMAKE_DL_LIBS}
-                      ${SRC_LIBRARY}
                       )
 
 message(STATUS " test to be added: " ${UnitTests_SRCS})
