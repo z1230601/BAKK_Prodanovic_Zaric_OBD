@@ -10,7 +10,7 @@
 UartDevice::UartDevice(string portName)
 {
     _portName = portName;
-    _currentBaudRate = UartDevice::BR115200;
+    _currentBaudRate = B38400;
     _device = 0;
 
 }
@@ -69,49 +69,9 @@ string UartDevice::readData()
         return "";
 }
 
-int UartDevice::uartBaudRate2int( UartDevice::baud_rate baudrate)
+int UartDevice::setInterfaceAttrib ( int speed, int parity )
 {
-    switch( baudrate )
-    {
-    case UartDevice::BR38400:
-       	return B38400;
-    case UartDevice::BR57600 :
-        return B57600;
-    case UartDevice:: BR115200:
-        return B115200;
-    case UartDevice::BR230400 :
-        return B230400;
-    case UartDevice::BR460800 :
-        return B460800;
-    case UartDevice::BR500000 :
-        return B500000;
-    case UartDevice::BR576000 :
-        return B576000;
-    case UartDevice::BR921600 :
-        return B921600;
-    case UartDevice::BR1000000 :
-        return B1000000;
-    case UartDevice::BR1152000 :
-        return B1152000;
-    case UartDevice::BR1500000 :
-        return B1500000;
-    case UartDevice::BR2000000 :
-        return B2000000;
-    case UartDevice::BR2500000 :
-        return B2500000;
-    case UartDevice::BR3000000 :
-        return B3000000;
-    case UartDevice::BR3500000 :
-        return B3500000;
-    case UartDevice::BR4000000 :
-        return B4000000;
-    default :
-        return B115200;
-    }
-}
-
-int UartDevice::setInterfaceAttrib (int speed, int parity )
-{
+	_currentBaudRate = speed;
     struct termios tty;
     memset (&tty, 0, sizeof tty);
     if (tcgetattr (_device, &tty) != 0)
@@ -164,4 +124,11 @@ void UartDevice::setBlocking ( int should_block )
     if (tcsetattr (_device, TCSANOW, &tty) != 0)
         return;
 }
-
+int UartDevice::getBaudRateFromString(string baudrate){
+    	int baud_rate = std::stoi(baudrate);
+    	if(validBaudrates.find(baud_rate) != validBaudrates.end()) {
+    	    return validBaudrates.at(baud_rate);
+    	} else {
+    		return B38400;
+    	}
+    }
