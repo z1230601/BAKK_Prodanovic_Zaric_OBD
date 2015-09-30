@@ -18,7 +18,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
 find_package(libusb-1.0 REQUIRED)
 find_package(CppUnit REQUIRED)
-
+find_package(libusb_vhci REQUIRED)
 
 # find all cpp files in src dir and set internal Cmake variable EXECS
 FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
@@ -30,14 +30,15 @@ add_executable(SandBox
                  ${EXECS})
 
 #Make also shared library out of found cpps and set internal CMAKE VAR
-add_library(SandBoxLib SHARED ${EXECS})
-set(SRC_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/build/libSandBoxLib.so)
+#add_library(SandBoxLib SHARED ${EXECS})
+#set(SRC_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/build/libSandBoxLib.so)
 
 # link the libraries to the executable (most of them found by cmake modules)
 target_link_libraries (SandBox 
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
-         ${LIBUSB_1_LIBRARIES})
+         ${LIBUSB_1_LIBRARIES}
+         ${LIBUSB_VHCI_LIBRARIES})
 
 ##Testing        ##############################################################
 include(CTest)

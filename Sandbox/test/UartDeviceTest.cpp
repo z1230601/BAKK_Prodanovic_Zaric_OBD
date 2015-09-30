@@ -1,6 +1,5 @@
 
 #include "UartDeviceTest.h"
-#include "../src/UartDevice.h"
 
 void UartDeviceTest::setUp()
 {
