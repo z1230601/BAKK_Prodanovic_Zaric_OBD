@@ -216,5 +216,12 @@ uint8_t* USBRequestHandler::getStringDescriptorDataFromString(const std::string 
 }
 
 void USBRequestHandler::handleStatusRequest(usb::urb* req){
+	uint8_t* response = req->get_buffer();
+	if(req->get_wLength() == 2){
+		response[0]=0;
+		response[1]=0;
+	}
 
+	req->set_buffer_actual(2);
+	req->ack();
 }
