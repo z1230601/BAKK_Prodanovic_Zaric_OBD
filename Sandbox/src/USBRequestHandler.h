@@ -25,12 +25,16 @@ private:
 	static void handleConfigurationRequest(usb::urb* req);
 	static void handleInterfaceRequest(usb::urb* req);
 	static void handleDescriptorRequest(usb::urb* req);
+	static void handleStatusRequest(usb::urb* req);
+	static void justAck(usb::urb* req);
 	static void handleFail(usb::urb* req,unsigned int r, unsigned int rt);
 
 public:
 	void handleUSBRequest(usb::urb* usb_request_to_process_);
 	~USBRequestHandler();
 	static USBRequestHandler* getInstance();
+
+	static uint8_t* getStringDescriptorDataFromString(std::string to_convert);
 };
 
 

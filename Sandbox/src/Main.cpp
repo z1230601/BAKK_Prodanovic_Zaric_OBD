@@ -27,6 +27,10 @@ void signal_work_enqueued(void* arg, usb::vhci::hcd& from) throw()
 
 void process_urb(usb::urb* urb)
 {
+	std::cout << "Enter process." << std::endl;
+	if(urb->is_bulk()){
+		std::cout << "bulk enter" << std::endl;
+	}
 	if(!urb->is_control())
 	{
 		std::cout << "not CONTROL" << std::endl;
@@ -39,19 +43,6 @@ void process_urb(usb::urb* urb)
 		return;
 	}
 	USBRequestHandler::getInstance()->handleUSBRequest(urb);
-}
-
-void handler(int sig) {
-  void *array[10];
-  size_t size;
-
-  // get void*'s for all entries on the stack
-  size = backtrace(array, 10);
-
-  // print out all the frames to stderr
-  //fprintf(stderr, "Error: signal %d:\n", sig);
-  backtrace_symbols_fd(array, size, STDERR_FILENO);
-  //exit(1);
 }
 
 int main()
@@ -149,7 +140,6 @@ int main()
 	}
 	}catch(std::invalid_argument e){
 		std::cout << e.what() << std::endl;
-		handler(0);
 	}
 
 	pthread_mutex_destroy(&has_work_mutex);

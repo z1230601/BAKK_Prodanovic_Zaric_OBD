@@ -32,49 +32,67 @@ const uint8_t dev_desc[] = {
 	0,      // device class: per interface
 	0,      // device sub class
 	0,      // device protocol
-	64,     // max packet size
+	8,     // max packet size
 	0x03,   // vendor id
 	0x04,   //  "
 	0x01,   // product id
 	0x60,   //  "
-	0x38,   // bcd device release number
-	0x11,   //  "
-	0,      // manufacturer string
-	1,      // product string
-	0,      // serial number string
+	0x00,   // bcd device release number
+	0x06,   //  "
+	1,      // manufacturer string
+	2,      // product string
+	3,      // serial number string
 	1       // number of configurations
 };
 
 const uint8_t conf_desc[] = {
 	9,      // descriptor length
 	2,      // type: configuration descriptor
-	18,     // total descriptor length (configuration+interface)
+	32,     // total descriptor length (configuration+interface)
 	0,      //  "
 	1,      // number of interfaces
 	1,      // configuration index
 	0,      // configuration string
-	0x80,   // attributes: none
-	0,      // max power
+	0xa0,   // attributes: none
+	45,      // max power
 
 	9,      // descriptor length
 	4,      // type: interface
 	0,      // interface number
 	0,      // alternate setting
-	0,      // number of endpoints
+	2,      // number of endpoints
 	0xFF,      // interface class
 	0xFF,      // interface sub class
 	0xFF,      // interface protocol
-	0       // interface string
+	2,       // interface string
+	// endpoint 1 in
+	7,      //bLength
+	5,      //desriptor type
+	0x81,    //ep in
+	2,         // attributes
+	0x40,    //maxpacketsize
+	0x00,    //"
+	0,      // intervall
+	//endpoint 2 out
+	7,      //bLength
+	5,      //desriptor type
+	0x2,    //ep in
+	2,         // attributes
+	0x40,    //maxpacketsize
+	0x00,    //"
+	0      // intervall
 };
 
-const uint8_t str0_desc[] = {
+
+const uint8_t selectable_languages[] = {
 	4,      // descriptor length
 	3,      // type: string
-	0x09,   // lang id: english (us)
+	0x07,   // lang id: english (us)
 	0x04    //  "
 };
 
-const uint8_t* str1_desc =
-	reinterpret_cast<const uint8_t*>("\x1a\x03H\0e\0l\0l\0o\0 \0W\0o\0r\0l\0d\0!");
+const std::string string_id1 = "FTDI";
+const std::string string_id2 = "FT232R USB UART";
+const std::string string_id3 = "A7030PE3";
 
 #endif /* USBEMULATIONCONSTANTS_H_ */
