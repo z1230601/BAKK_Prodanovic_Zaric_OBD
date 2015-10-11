@@ -29,7 +29,8 @@ void process_urb(usb::urb* urb)
 {
 	std::cout << "Enter process." << std::endl;
 	if(urb->is_bulk()){
-		std::cout << "bulk enter" << std::endl;
+		USBRequestHandler::getInstance()->handleBulkRequest(urb);
+		return;
 	}
 	if(!urb->is_control())
 	{
