@@ -40,6 +40,7 @@ private:
 	static void handleBulkOutRequest(usb::urb* req);
 public:
 	static EmulatedDevice* device_representation_;
+	static EmulatedDevice* getDevice();
 	void handleUSBRequest(usb::urb* usb_request_to_process_);
 	void handleBulkRequest(usb::urb* usb_request_to_process_);
 

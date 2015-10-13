@@ -200,3 +200,7 @@ void USBRequestHandler::handleBulkOutRequest(usb::urb* usb_request_to_process){
 	//Use Emulated Device here!
 	device_representation_->setRecievedData(usb_request_to_process->get_buffer(), usb_request_to_process->get_buffer_length());
 }
+
+EmulatedDevice* USBRequestHandler::getDevice() {
+	return device_representation_;
+}
