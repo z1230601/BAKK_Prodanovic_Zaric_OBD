@@ -27,7 +27,7 @@ void signal_work_enqueued(void* arg, usb::vhci::hcd& from) throw()
 
 void process_urb(usb::urb* urb)
 {
-	std::cout << "Enter process." << std::endl;
+//	std::cout << "Enter process." << std::endl;
 	if(urb->is_bulk()){
 		USBRequestHandler::getInstance()->handleBulkRequest(urb);
 		return;
@@ -124,10 +124,10 @@ int main()
 			}
 			else if(usb::vhci::process_urb_work* puw = dynamic_cast<usb::vhci::process_urb_work*>(work))
 			{
-				std::cout << "got process urb work" << std::endl;
+//				std::cout << "got process urb work" << std::endl;
 				process_urb(puw->get_urb());
 			}
-			else if(usb::vhci::cancel_urb_work* cuw = dynamic_cast<usb::vhci::cancel_urb_work*>(work))
+			else if(dynamic_cast<usb::vhci::cancel_urb_work*>(work))//usb::vhci::cancel_urb_work* cuw = dynamic_cast<usb::vhci::cancel_urb_work*>(work))
 			{
 				std::cout << "got cancel urb work" << std::endl;
 			}

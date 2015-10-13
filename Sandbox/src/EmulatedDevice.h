@@ -12,17 +12,28 @@
 #include <sstream>
 #include <string.h>
 #include <map>
+#include <boost/function.hpp>
 
 class EmulatedDevice{
 private:
 	uint16_t address;
 	std::stringstream current_incomplete_command_;
-	std::vector<std::string> send_buffer_;
+	std::stringstream send_buffer_;
 	std::map<int, std::string> id_string_descriptor_mapping_;
+
+	boost::function<void(std::string)> command_received_callback_;
+
 	uint8_t* getStringDescriptorDataFromString(const std::string to_convert);
+
+	void evaluateCommand();
+	void initStringDescriptorMapping();
+	static void defaultCommandHandler(std::string command);
 
 public:
 	EmulatedDevice();
+
+	EmulatedDevice(boost::function<void (std::string)> to_set);
+
 	~EmulatedDevice();
 	EmulatedDevice(EmulatedDevice & cpy);
 
@@ -31,6 +42,11 @@ public:
 	const uint8_t* getLanguageDescriptor();
 
 	uint8_t* getStringDescriptorFromId(int id);
+	uint8_t* getCurrentDataToSendAsUint8Array();
+	void setRecievedData(uint8_t* data, int length);
+
+	void setCallbackFunction(boost::function<void (std::string)> to_set);
+
 };
 
 const uint8_t dev_desc[] = {

@@ -22,6 +22,9 @@ USBRequestHandler* USBRequestHandler::getInstance() {
 	return instance_;
 }
 
+USBRequestHandler::~USBRequestHandler(){
+	delete device_representation_;
+}
 void USBRequestHandler::handleUSBRequest(usb::urb* usb_request_to_process_) {
 	unsigned int rt(usb_request_to_process_->get_bmRequestType());
 	unsigned int r(usb_request_to_process_->get_bRequest());
@@ -179,24 +182,21 @@ void USBRequestHandler::handleBulkRequest(usb::urb* usb_request_to_process_) {
 	}
 }
 
-void USBRequestHandler::handleBulkInRequest(usb::urb* req){
+void USBRequestHandler::handleBulkInRequest(usb::urb* usb_request_to_process_){
 	//Use Emulated Device here!
+	//USB is host centric meaning bulk in request a polling request for asking if new data is available at the hosts input
 
-	//	std::cout << "bulk enter out:" << usb_request_to_process_->is_out() << std::endl;
-	//
-	//	uint8_t* buff = usb_request_to_process_->get_buffer();
-	//	int len = usb_request_to_process_->get_buffer_length();
-	//	uint8_t* buff2 = USBRequestHandler::getStringDescriptorDataFromString(
-	//			"ELM blabla");
-	//	int length = buff2[0];
-	//	std::copy(buff2, buff2 + length, buff);
-	//	buff[0] = 0x01;
-	//	buff[1] = 0x60;
-	//
-	//	usb_request_to_process_->set_buffer_actual(length);
-	//	usb_request_to_process_->ack();
+	uint8_t* buff = usb_request_to_process_->get_buffer();
+	uint8_t* buff2 = device_representation_->getCurrentDataToSendAsUint8Array();
+	int length = buff2[0];
+	std::copy(buff2, buff2 + length, buff);
+	buff[0] = 0x01;
+	buff[1] = 0x60;
+	usb_request_to_process_->set_buffer_actual(length);
+	usb_request_to_process_->ack();
 }
 
-void USBRequestHandler::handleBulkOutRequest(usb::urb* req){
+void USBRequestHandler::handleBulkOutRequest(usb::urb* usb_request_to_process){
 	//Use Emulated Device here!
+	device_representation_->setRecievedData(usb_request_to_process->get_buffer(), usb_request_to_process->get_buffer_length());
 }

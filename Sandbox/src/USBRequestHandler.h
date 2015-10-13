@@ -16,7 +16,6 @@
 class USBRequestHandler{
 private:
 	static USBRequestHandler* instance_;
-	static EmulatedDevice* device_representation_;
 
 	std::map<unsigned int, boost::function<void (usb::urb*)> > handlerMap;
 	USBRequestHandler();
@@ -40,6 +39,7 @@ private:
 	static void handleBulkInRequest(usb::urb* req);
 	static void handleBulkOutRequest(usb::urb* req);
 public:
+	static EmulatedDevice* device_representation_;
 	void handleUSBRequest(usb::urb* usb_request_to_process_);
 	void handleBulkRequest(usb::urb* usb_request_to_process_);
 
