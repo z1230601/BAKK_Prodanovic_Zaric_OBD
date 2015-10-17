@@ -1,9 +1,8 @@
 #include "USBEmulationSupervisor.h"
 
 int main() {
-	USBEmulation sup;
+	USBEmulationSupervisor sup;
 	sup.run();
-
 	return 0;
 }
 
