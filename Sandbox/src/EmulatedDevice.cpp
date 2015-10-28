@@ -115,12 +115,6 @@ void EmulatedDevice::evaluateCommand(){
 	current_incomplete_command_.clear();
 }
 
-void EmulatedDevice::setCallbackFunction(void (*to_set)(std::string &)){
-	std::cout << "Setting callback function\n";
-	command_received_callback_ = to_set;
-	std::cout << "Set callback function\n";
-}
-
 
 void EmulatedDevice::defaultCommandHandler(std::string command){
 	USBRequestHandler::getDevice()->addAnswerToQueue("Callback not initialized...");

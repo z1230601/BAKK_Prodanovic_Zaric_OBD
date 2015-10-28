@@ -46,7 +46,6 @@ public:
 	uint8_t* getCurrentDataToSendAsUint8Array();
 	void setRecievedData(uint8_t* data, int length);
 
-	void setCallbackFunction(void (*to_set)(std::string &));
 	void addAnswerToQueue(std::string data);
 };
 

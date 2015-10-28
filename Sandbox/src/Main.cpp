@@ -16,7 +16,6 @@ void testHandler(std::string &command){
 int main() {
 	USBEmulationSupervisor sup;
 	USBRequestHandler::initCallback(&testHandler);
-//	USBRequestHandler::getDevice()->setCallbackFunction(&testHandler);
 	sup.run();
 
 	return 0;
