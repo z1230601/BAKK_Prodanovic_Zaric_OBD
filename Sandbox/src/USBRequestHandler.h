@@ -24,6 +24,7 @@ private:
 	void setUpHandlerMap();
 	static void copyIntoBufferAndAcknowledgeRequest(const uint8_t* to_copy, usb::urb* usb_request_to_process_, int descriptor_length_index = 0);
 	//handlers
+	static void (*device_handler_)(std::string &);
 
 	static void handleAddressRequest(usb::urb* req);
 	static void handleConfigurationRequest(usb::urb* req);
@@ -41,6 +42,8 @@ private:
 public:
 	static EmulatedDevice* device_representation_;
 	static EmulatedDevice* getDevice();
+	static void initCallback(void (*to_set)(std::string &));
+
 	void handleUSBRequest(usb::urb* usb_request_to_process_);
 	void handleBulkRequest(usb::urb* usb_request_to_process_);
 

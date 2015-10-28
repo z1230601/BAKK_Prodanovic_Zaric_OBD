@@ -14,6 +14,7 @@
 
 USBRequestHandler* USBRequestHandler::instance_;
 EmulatedDevice* USBRequestHandler::device_representation_;
+void (*USBRequestHandler::device_handler_)(std::string &);
 
 USBRequestHandler* USBRequestHandler::getInstance() {
 	if (instance_ == NULL) {
@@ -40,8 +41,16 @@ void USBRequestHandler::handleUSBRequest(usb::urb* usb_request_to_process_) {
 	}
 }
 
+void USBRequestHandler::initCallback(void (*to_set)(std::string &)){
+	device_handler_ = to_set;
+}
+
 USBRequestHandler::USBRequestHandler() {
-	device_representation_ = new EmulatedDevice();
+	if(device_handler_ == NULL){
+		device_representation_ = new EmulatedDevice();
+	}else{
+		device_representation_ = new EmulatedDevice(device_handler_);
+	}
 	setUpHandlerMap();
 }
 

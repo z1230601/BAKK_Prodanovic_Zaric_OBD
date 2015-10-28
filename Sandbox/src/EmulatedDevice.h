@@ -21,18 +21,19 @@ private:
 	std::stringstream send_buffer_;
 	std::map<int, std::string> id_string_descriptor_mapping_;
 
-	boost::function<void(std::string)> command_received_callback_;
+	boost::function<void (std::string)> command_received_callback_;
 
 	uint8_t* getStringDescriptorDataFromString(const std::string to_convert);
 
 	void evaluateCommand();
 	void initStringDescriptorMapping();
-	static void defaultCommandHandler(std::string command);
+	void defaultCommandHandler(std::string command);
 
 public:
 	EmulatedDevice();
 
-	EmulatedDevice(boost::function<void (std::string)> to_set);
+	EmulatedDevice(boost::function<void (std::string)> const &to_set);
+	EmulatedDevice(void (*to_set)(std::string &));
 
 	~EmulatedDevice();
 	EmulatedDevice(EmulatedDevice & cpy);
@@ -45,8 +46,8 @@ public:
 	uint8_t* getCurrentDataToSendAsUint8Array();
 	void setRecievedData(uint8_t* data, int length);
 
-	void setCallbackFunction(boost::function<void (std::string)> to_set);
-
+	void setCallbackFunction(void (*to_set)(std::string &));
+	void addAnswerToQueue(std::string data);
 };
 
 const uint8_t dev_desc[] = {
