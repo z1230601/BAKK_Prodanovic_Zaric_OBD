@@ -26,7 +26,28 @@ USBRequestHandler* USBRequestHandler::getInstance() {
 USBRequestHandler::~USBRequestHandler(){
 	delete device_representation_;
 }
+void printRequest(usb::urb* usb_request){
+
+	std::cout << "handle: " << usb_request->get_handle() <<  std::endl
+			<< "type: " << usb_request->get_type() << std::endl
+			<< "buffer_length: " << usb_request->get_buffer_length() << std::endl
+			<< "buffer: " << usb_request->get_buffer()<< std::endl
+			<< "iso_packet_count: " << usb_request->get_iso_packet_count() << std::endl
+			<< "buffer_actual: " << usb_request->get_buffer_actual() << std::endl
+			<< "status: " << usb_request->get_status() << std::endl
+			<< "error_count: " << usb_request->get_iso_error_count() << std::endl
+			<< "flags: " << usb_request->get_flags() << std::endl
+			<< "interval: " << usb_request->get_interval() << std::endl
+			<< "device address: " << usb_request->get_device_address() << std::endl
+			<< "endpoint address: " << usb_request->get_endpoint_address() << std::endl
+			<< "bmRequestType: " << usb_request->get_bmRequestType() << std::endl
+			<< "bRequest: " << usb_request->get_bRequest() << std::endl
+			<< "wValue: " << usb_request->get_wValue() << std::endl
+			<< "wIndex: " << usb_request->get_wIndex() << std::endl
+			<< "wLength: " << usb_request->get_wLength() << std::endl;
+}
 void USBRequestHandler::handleUSBRequest(usb::urb* usb_request_to_process_) {
+//	printRequest(usb_request_to_process_);
 	unsigned int rt(usb_request_to_process_->get_bmRequestType());
 	unsigned int r(usb_request_to_process_->get_bRequest());
 
@@ -207,6 +228,7 @@ void USBRequestHandler::handleBulkInRequest(usb::urb* usb_request_to_process_){
 
 void USBRequestHandler::handleBulkOutRequest(usb::urb* usb_request_to_process){
 	//Use Emulated Device here!
+//	usb_request_to_process->ack();
 	device_representation_->setRecievedData(usb_request_to_process->get_buffer(), usb_request_to_process->get_buffer_length());
 }
 

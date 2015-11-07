@@ -80,10 +80,12 @@ uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
 }
 
 void EmulatedDevice::setRecievedData(uint8_t* data, int length){
+
 	uint8_t string_data[length];
 	std::copy(data, data + length, string_data);
 	std::string input(reinterpret_cast<char*>(string_data));
-
+	std::cout << "Length = " << length <<  std::endl;
+	std::cout << input << std::endl;
 	if(length == 1 && string_data[0] == 0x0d){
 		evaluateCommand();
 	}else{
