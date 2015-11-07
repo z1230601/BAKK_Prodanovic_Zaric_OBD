@@ -1,0 +1,105 @@
+Start testing: Nov 07 15:01 CET
+----------------------------------------------------------
+1/3 Testing: TestMain
+1/3 Test: TestMain
+Command: "/home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface/CommunicationTester" "TestMain"
+Directory: /home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface
+"TestMain" start time: Nov 07 15:01 CET
+Output:
+----------------------------------------------------------
+...Test BULK IN
+Handle in
+lenght 2 buff: NOT NULL
+ACK!!
+.Test BULK IN fail
+Handle in
+.Test BULK OUT
+Handle out
+Handle out
+Handle out
+Handle out
+atz
+Enter testcallback with : atz
+.
+
+
+OK (6 tests)
+
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"TestMain" end time: Nov 07 15:01 CET
+"TestMain" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: USBRequestHandlerTest
+2/3 Test: USBRequestHandlerTest
+Command: "/home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface/CommunicationTester" "USBRequestHandlerTest"
+Directory: /home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface
+"USBRequestHandlerTest" start time: Nov 07 15:01 CET
+Output:
+----------------------------------------------------------
+...Test BULK IN
+Handle in
+lenght 2 buff: NOT NULL
+ACK!!
+.Test BULK IN fail
+Handle in
+.Test BULK OUT
+Handle out
+Handle out
+Handle out
+Handle out
+atz
+Enter testcallback with : atz
+.
+
+
+OK (6 tests)
+
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"USBRequestHandlerTest" end time: Nov 07 15:01 CET
+"USBRequestHandlerTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: UartDeviceTest
+3/3 Test: UartDeviceTest
+Command: "/home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface/CommunicationTester" "UartDeviceTest"
+Directory: /home/zlatan/development/bakk/libs/OBDMiddleware/communicationInterface
+"UartDeviceTest" start time: Nov 07 15:01 CET
+Output:
+----------------------------------------------------------
+...Test BULK IN
+Handle in
+lenght 2 buff: NOT NULL
+ACK!!
+.Test BULK IN fail
+Handle in
+.Test BULK OUT
+Handle out
+Handle out
+Handle out
+Handle out
+atz
+Enter testcallback with : atz
+.
+
+
+OK (6 tests)
+
+
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"UartDeviceTest" end time: Nov 07 15:01 CET
+"UartDeviceTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 07 15:01 CET

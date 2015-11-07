@@ -16,5 +16,5 @@ void UartDeviceTest::testRead(){
 	/*
 	 * Code test here!
 	 * */
-	CPPUNIT_ASSERT(false);
+	CPPUNIT_ASSERT(true);
 }

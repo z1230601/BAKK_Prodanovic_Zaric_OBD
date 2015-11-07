@@ -21,6 +21,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
 find_package(libusb-1.0 REQUIRED)
 find_package(CppUnit REQUIRED)
+find_package(libusb_vhci REQUIRED)
 
 
 # find all cpp files in src dir and set internal Cmake variable EXECS
@@ -43,8 +44,16 @@ message(status ${SRC_LIBRARY})
 target_link_libraries (serial-communication-dev 
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
-         ${LIBUSB_1_LIBRARIES})
+         ${LIBUSB_1_LIBRARIES}
+         ${LIBUSB_VHCI_LIBRARIES})
 
+
+###### Install & Packaging #####
+SET(INSTALL_DIR "/usr/share/lib/")
+INSTALL(FILES
+   SRC_LIBRARY
+   DESTINATION ${INSTALL_DIR}
+)
 
 ##Testing        ##############################################################
 include(CTest)
@@ -62,6 +71,9 @@ target_link_libraries(CommunicationTester
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
                       ${CPPUNIT_LIBRARIES}
                       ${CMAKE_DL_LIBS}
+                      ${LIBUSB_1_LIBRARIES}
+                      ${LIBUSB_VHCI_LIBRARIES}
+                      serial-communication-dev
                       )
 
 message(STATUS " test to be added: " ${UnitTests_SRCS})
