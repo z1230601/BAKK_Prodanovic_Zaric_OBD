@@ -1,5 +1,6 @@
 #include "DBInserterTest.h"
 #include "../src/DBInserter.h"
+#include <cstdlib>
 
 void DBInserterTest::setUp()
 {
@@ -12,6 +13,7 @@ void DBInserterTest::tearDown()
 }
 
 void DBInserterTest::testInsert(){
-	CPPUNIT_ASSERT(true);
-	//CPPUNIT_FAIL("just4fun");
+	system("gnome-terminal");
+	system("sudo mysql -p");
+
 }

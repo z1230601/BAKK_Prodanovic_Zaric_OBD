@@ -1,7 +1,7 @@
 #ifndef DBINSERTER_H_
 #define DBINSERTER_H_
 
-#include <string.h>
+#include <string>
 
 class DBInserter {
 private:
@@ -11,6 +11,5 @@ public:
 	DBInserter(std::string db_name_);
 	~DBInserter();
 };
-
 
 #endif /* DBINSERTER_H_ */

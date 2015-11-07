@@ -1,6 +1,3 @@
-#ifndef DBINSERTER_CPP_
-#define DBINSERTER_CPP_
-
 #include "DBInserter.h"
 
 DBInserter::DBInserter(std::string db_name_) {
@@ -10,7 +7,3 @@ DBInserter::DBInserter(std::string db_name_) {
 DBInserter::~DBInserter() {
 
 }
-
-
-
-#endif /* DBINSERTER_CPP_ */
