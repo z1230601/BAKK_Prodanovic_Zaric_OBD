@@ -23,9 +23,11 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
 find_package(CppUnit REQUIRED)
 find_package(Xml++ REQUIRED)
+find_package(MySQLConnectorCPP REQUIRED)
 
 
 include_directories(${LibXML++_INCLUDE_DIRS})
+include_directories(${MYSQLCONNECTORCPP_INCLUDE_DIRS})
 # find all cpp files in src dir and set internal Cmake variable EXECS
 FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 list(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
@@ -41,7 +43,8 @@ message(status ${SRC_LIBRARY})
 target_link_libraries (database-connection-manager-dev
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
-         ${LibXML++_LIBRARIES})
+         ${LibXML++_LIBRARIES}
+         ${MYSQLCONNECTORCPP_LIBRARIES})
 
 ##Testing        ##############################################################
 include(CTest)

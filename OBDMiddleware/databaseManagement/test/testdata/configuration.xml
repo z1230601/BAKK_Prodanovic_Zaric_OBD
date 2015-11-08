@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Database>
-	<address>127.0.1.1</address>
+<!DOCTYPE database SYSTEM "database.dtd">
+
+<database>
+	<address>127.0.0.1</address>
 	<user>obd</user>
-	<password>123</password>
-</Database>
+	<password></password>
+</database>
