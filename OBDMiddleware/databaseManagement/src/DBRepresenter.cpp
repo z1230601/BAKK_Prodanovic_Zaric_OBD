@@ -1,5 +1,7 @@
 #include "DBRepresenter.h"
 #include <iostream>
+#include <exception>
+#include "Converter.h"
 
 DBRepresenter::DBRepresenter() {
 	valid_construction_ = true;
@@ -20,25 +22,29 @@ bool DBRepresenter::isValid() {
 }
 
 void DBRepresenter::connectToDatabase() {
+	checkIfValid();
 	try {
 		if (connection_ == NULL) {
 			connection_ = driver_->connect(host_address_, username_, password_);
+			connection_->setSchema(dbname_);
 		} else if (connection_->isClosed()) {
 			delete connection_;
 			connection_ = driver_->connect(host_address_, username_, password_);
+			connection_->setSchema(dbname_);
 		}
 	} catch (sql::SQLException &exp) {
-		std::cout << "Connection couldn't be initializede due to: "
+		std::cout << "Connection couldn't be initialized due to: "
 				<< exp.what() << std::endl;
 	}
 }
 
 void DBRepresenter::closeConnection(){
-	connection_->close();
+	if(connection_ != NULL){
+		connection_->close();
+	}
 }
 
 bool DBRepresenter::isConnected() {
-
 	return connection_ != NULL && !connection_->isClosed();
 }
 
@@ -68,7 +74,7 @@ bool DBRepresenter::parseConfigurationFile(std::string configurationFile) {
 		}
 	}
 
-	return !host_address_.empty() && !username_.empty();
+	return !host_address_.empty() && !username_.empty() && !dbname_.empty();
 }
 
 void DBRepresenter::parseNode(xmlpp::Node* node) {
@@ -80,11 +86,15 @@ void DBRepresenter::parseNode(xmlpp::Node* node) {
 	}
 	if (node->get_name().compare(USER_TAG) == 0) {
 		username_ = getTextFromNode(node);
-		std::cout << "user: " << username_ << std::endl;
+		std::cout << "Username: " << username_ << std::endl;
 	}
 	if (node->get_name().compare(PASSWORD_TAG) == 0) {
 		password_ = getTextFromNode(node);
-		std::cout << "pass: " << password_ << std::endl;
+		std::cout << "Password: " << password_ << std::endl;
+	}
+	if (node->get_name().compare(DBNAME_TAG) == 0) {
+		dbname_ = getTextFromNode(node);
+		std::cout << "DB name: " << dbname_ << std::endl;
 	}
 }
 
@@ -99,12 +109,43 @@ std::string DBRepresenter::getTextFromNode(xmlpp::Node* node) {
 }
 
 
-std::vector<std::string> DBRepresenter::executeSQLStatement(std::string statement){
+std::vector<std::vector<std::string>> DBRepresenter::executeSQLStatement(std::string statement){
+	checkIfValid();
+	std::vector<std::vector<std::string>> result;
+
 	sql::Statement* statement_;
-	if(!connection_->isClosed()) {
+	sql::ResultSet* result_;
+	if (!connection_->isClosed()) {
 		statement_ = connection_->createStatement();
+		result_ = statement_->executeQuery(statement);
+		//add header
+		result.push_back(getResultRowAsVector(result_, true));
+
+		while (result_->next()) {
+			result.push_back(getResultRowAsVector(result_));
+		};
 
 	}
-	std::vector<std::string> result;
+
 	return result;
+}
+
+
+std::vector<std::string> DBRepresenter::getResultRowAsVector(sql::ResultSet* row, bool header){
+	std::vector<std::string> row_vector;
+	for (unsigned int i = 1; i <= row->getMetaData()->getColumnCount();
+			i++) {
+		if(!header){
+			row_vector.push_back(Converter::convertDBEntryToCString(i, row));
+		}else{
+			row_vector.push_back(row->getMetaData()->getColumnName(i));
+		}
+	}
+	return row_vector;
+}
+
+void DBRepresenter::checkIfValid() {
+	if (!valid_construction_) {
+		throw std::runtime_error("DBRepresenter not validly initialized");
+	}
 }

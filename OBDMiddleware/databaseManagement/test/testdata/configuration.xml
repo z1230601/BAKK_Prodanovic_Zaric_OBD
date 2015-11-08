@@ -5,4 +5,5 @@
 	<address>127.0.0.1</address>
 	<user>obd</user>
 	<password></password>
+	<dbname>testdb</dbname>
 </database>

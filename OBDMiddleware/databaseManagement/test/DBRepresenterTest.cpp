@@ -50,22 +50,23 @@ void DBRepresenterTest::testDoubleConnect() {
 | phpmyadmin         |
 +--------------------+*/
 void DBRepresenterTest::testExecuteSQLStatement(){
-	std::string statement = "show databases;";
+	std::string statement = "SELECT * from testdata";
 	representer_under_test_->connectToDatabase();
 	CPPUNIT_ASSERT(representer_under_test_->isConnected());
-	std::vector<std::string> result = representer_under_test_->executeSQLStatement(statement);
+	std::vector< std::vector<std::string>> result = representer_under_test_->executeSQLStatement(statement);
 	representer_under_test_->closeConnection();
 	CPPUNIT_ASSERT(!representer_under_test_->isConnected());
-	std::vector<std::string> expected;
-	expected.push_back("Database");
-	expected.push_back("information_schema");
-	expected.push_back("OBD_TroubleCodes");
-	expected.push_back("mysql");
-	expected.push_back("performance_schema");
-	expected.push_back("phpmyadmin");
+	std::vector<std::vector<std::string>> expected;
+	expected.push_back(std::vector<std::string>{"ID","Name"});
+	expected.push_back(std::vector<std::string>{"1","Adolf"});
+	expected.push_back(std::vector<std::string>{"2","Borat"});
+	expected.push_back(std::vector<std::string>{"3","Caesar"});
 
 	CPPUNIT_ASSERT(result.size() == expected.size());
 	for(unsigned int i=0; i < expected.size(); i++){
-		CPPUNIT_ASSERT_EQUAL(expected.at(i), result.at(i));
+		CPPUNIT_ASSERT(expected.at(i).size() == result.at(i).size());
+		for(unsigned int j=0; j < expected.at(i).size();j++){
+			CPPUNIT_ASSERT_EQUAL(expected.at(i).at(j), result.at(i).at(j));
+		}
 	}
 }

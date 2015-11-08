@@ -11,10 +11,13 @@
 
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
+#include <cppconn/statement.h>
+#include <cppconn/resultset.h>
 
 #define ADDRESS_TAG "address"
 #define USER_TAG "user"
 #define PASSWORD_TAG "password"
+#define DBNAME_TAG "dbname"
 
 class DBRepresenter {
 public:
@@ -29,7 +32,7 @@ public:
 	void connectToDatabase();
 	void closeConnection();
 
-	std::vector<std::string> executeSQLStatement(std::string statement);
+	std::vector<std::vector<std::string>> executeSQLStatement(std::string statement);
 
 	std::string getHostAddress() const;
 	std::string getPassword() const;
@@ -41,10 +44,13 @@ private:
 	bool parseConfigurationFile(std::string);
 	std::string getTextFromNode(xmlpp::Node*);
 	void parseNode(xmlpp::Node*);
+	void checkIfValid();
+	std::vector<std::string> getResultRowAsVector(sql::ResultSet* row, bool header = false);
 
 	std::string host_address_;
 	std::string username_;
 	std::string password_;
+	std::string dbname_;
 
 	sql::mysql::MySQL_Driver* driver_;
 	sql::Connection* connection_;
