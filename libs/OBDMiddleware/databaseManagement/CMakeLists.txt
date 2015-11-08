@@ -17,11 +17,15 @@ include_directories(includes)
 find_package(Threads REQUIRED)
 find_package(Boost COMPONENTS thread system REQUIRED)
 
+
 #reset CMAKE Module path for special find scripts
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
 find_package(CppUnit REQUIRED)
+find_package(Xml++ REQUIRED)
 
+
+include_directories(${LibXML++_INCLUDE_DIRS})
 # find all cpp files in src dir and set internal Cmake variable EXECS
 FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 list(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
@@ -36,7 +40,8 @@ message(status ${SRC_LIBRARY})
 # link the libraries to the executable (most of them found by cmake modules)
 target_link_libraries (database-connection-manager-dev
          ${CMAKE_THREAD_LIBS_INIT}
-         ${Boost_LIBRARIES})
+         ${Boost_LIBRARIES}
+         ${LibXML++_LIBRARIES})
 
 ##Testing        ##############################################################
 include(CTest)
