@@ -63,7 +63,18 @@ target_link_libraries(DatabaseTester
                       ${CPPUNIT_LIBRARIES}
                       ${CMAKE_DL_LIBS}
                       database-connection-manager-dev
+
                       )
+
+#ADD_DEPENDENCIES(DatabaseTester SetupTestDb)
+
+MESSAGE("PATH TO SQL: ${DatabaseManagement_SOURCE_DIR}/test/testdata/testdb.sql")
+ADD_CUSTOM_COMMAND(TARGET DatabaseTester
+     PRE_BUILD
+     COMMAND ${DatabaseManagement_SOURCE_DIR}/test/testdata//setupDatabases.sh "${DatabaseManagement_SOURCE_DIR}/test/testdata/testdb.sql"
+     WORKING_DIR ${DatabaseManagement_SOURCE_DIR}
+     VERBATIM
+)
 
 message(STATUS " test to be added: " ${UnitTests_SRCS})
 FOREACH(test ${UnitTests_SRCS})
