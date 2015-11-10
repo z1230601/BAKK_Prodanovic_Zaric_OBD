@@ -124,7 +124,6 @@ std::vector<std::vector<std::string>> DBRepresenter::executeSQLStatement(std::st
 		while (result_->next()) {
 			result.push_back(getResultRowAsVector(result_));
 		};
-
 	}
 
 	return result;
