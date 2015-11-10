@@ -26,6 +26,7 @@ public:
 	void testConnectMultipleTimes();
 	void testDoubleConnect();
 	void testExecuteSQLStatement();
+	void testCreateTableForExecuteSQLStatement();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (DBRepresenterTest);
 #endif /* DBREPRESENTERTEST_H_ */

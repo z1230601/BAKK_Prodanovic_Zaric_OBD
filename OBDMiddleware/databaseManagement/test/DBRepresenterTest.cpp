@@ -41,15 +41,7 @@ void DBRepresenterTest::testDoubleConnect() {
 	CPPUNIT_ASSERT_NO_THROW(representer_under_test_->connectToDatabase());
 }
 
-/*Database           |
-+--------------------+
-| information_schema |
-| OBD_TroubleCodes   |
-| mysql              |
-| performance_schema |
-| phpmyadmin         |
-+--------------------+*/
-void DBRepresenterTest::testExecuteSQLStatement(){
+void DBRepresenterTest::testExecuteSQLStatement() {
 	std::string statement = "SELECT * from testdata";
 	representer_under_test_->connectToDatabase();
 	CPPUNIT_ASSERT(representer_under_test_->isConnected());
@@ -70,3 +62,33 @@ void DBRepresenterTest::testExecuteSQLStatement(){
 		}
 	}
 }
+
+namespace {
+  bool searchForStringInResult(std::vector<std::vector<std::string>> results, std::string search_string) {
+	for (unsigned int i = 0; i < results.size(); i++) {
+		for (unsigned int j = 0; j < results.at(i).size(); j++) {
+			if (results.at(i).at(j) == search_string) {
+				return true;
+			}
+		}
+	}
+	return false;
+  }
+}
+
+void DBRepresenterTest::testCreateTableForExecuteSQLStatement() {
+	std::string create_statement = "create table if not exists `newtable` (`ID` int(10) unsigned NOT NULL)";
+	representer_under_test_->connectToDatabase();
+	CPPUNIT_ASSERT(representer_under_test_->isConnected());
+	std::vector<std::vector<std::string>> result = representer_under_test_->executeSQLStatement(create_statement);
+	std::string expected = "newtable";
+	CPPUNIT_ASSERT(::searchForStringInResult(result, expected));
+
+	std::string drop_statement = "drop table if exists newtable";
+	CPPUNIT_ASSERT(representer_under_test_->isConnected());
+	representer_under_test_->executeSQLStatement(drop_statement);
+	representer_under_test_->closeConnection();
+	CPPUNIT_ASSERT(!representer_under_test_->isConnected());
+	CPPUNIT_ASSERT(! ::searchForStringInResult(result, expected));
+}
+
