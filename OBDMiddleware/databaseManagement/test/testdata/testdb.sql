@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `testdata` (
 --
 -- Daten für Tabelle `testdata`
 --
-
+DELETE FROM testdata;
 REPLACE INTO `testdata` (`ID`, `Name`) VALUES
 (1, 'Adolf'),
 (2, 'Borat'),

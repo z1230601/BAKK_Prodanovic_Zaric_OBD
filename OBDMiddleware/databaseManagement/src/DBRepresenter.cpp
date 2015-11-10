@@ -33,7 +33,7 @@ void DBRepresenter::connectToDatabase() {
 			connection_->setSchema(dbname_);
 		}
 	} catch (sql::SQLException &exp) {
-		std::cout << "Connection couldn't be initialized due to: "
+		std::cerr << "Connection couldn't be initialized due to: "
 				<< exp.what() << std::endl;
 	}
 }
@@ -82,19 +82,15 @@ void DBRepresenter::parseNode(xmlpp::Node* node) {
 		host_address_.append("tcp://");
 		host_address_.append(getTextFromNode(node));
 		host_address_.append(":3306");
-		std::cout << "Host Address: " << host_address_ << std::endl;
 	}
 	if (node->get_name().compare(USER_TAG) == 0) {
 		username_ = getTextFromNode(node);
-		std::cout << "Username: " << username_ << std::endl;
 	}
 	if (node->get_name().compare(PASSWORD_TAG) == 0) {
 		password_ = getTextFromNode(node);
-		std::cout << "Password: " << password_ << std::endl;
 	}
 	if (node->get_name().compare(DBNAME_TAG) == 0) {
 		dbname_ = getTextFromNode(node);
-		std::cout << "DB name: " << dbname_ << std::endl;
 	}
 }
 
@@ -109,7 +105,7 @@ std::string DBRepresenter::getTextFromNode(xmlpp::Node* node) {
 }
 
 
-std::vector<std::vector<std::string>> DBRepresenter::executeSQLStatement(std::string statement){
+SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	checkIfValid();
 	std::vector<std::vector<std::string>> result;
 
@@ -147,4 +143,10 @@ void DBRepresenter::checkIfValid() {
 	if (!valid_construction_) {
 		throw std::runtime_error("DBRepresenter not validly initialized");
 	}
+}
+
+
+SQLTable DBRepresenter::readData(std::string table, std::vector<std::string> columns, std::string condition){
+	SQLTable ret;
+	return ret;
 }

@@ -19,6 +19,8 @@
 #define PASSWORD_TAG "password"
 #define DBNAME_TAG "dbname"
 
+typedef std::vector<std::vector<std::string>> SQLTable;
+
 class DBRepresenter {
 public:
 	DBRepresenter();
@@ -32,7 +34,8 @@ public:
 	void connectToDatabase();
 	void closeConnection();
 
-	std::vector<std::vector<std::string>> executeSQLStatement(std::string statement);
+	SQLTable executeSQLStatement(std::string statement);
+	SQLTable readData(std::string table, std::vector<std::string> columns, std::string condition);
 
 	std::string getHostAddress() const;
 	std::string getPassword() const;
