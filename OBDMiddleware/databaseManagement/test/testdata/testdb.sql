@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `testdata` (
 -- Daten für Tabelle `testdata`
 --
 
-INSERT INTO `testdata` (`ID`, `Name`) VALUES
+REPLACE INTO `testdata` (`ID`, `Name`) VALUES
 (1, 'Adolf'),
 (2, 'Borat'),
 (3, 'Caesar');
