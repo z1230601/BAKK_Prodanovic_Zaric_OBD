@@ -2,6 +2,7 @@
 #include <iostream>
 #include <exception>
 #include "Converter.h"
+#include <boost/algorithm/string/join.hpp>
 
 DBRepresenter::DBRepresenter() {
 	valid_construction_ = true;
@@ -107,10 +108,11 @@ std::string DBRepresenter::getTextFromNode(xmlpp::Node* node) {
 
 SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	checkIfValid();
-	std::vector<std::vector<std::string>> result;
+	SQLTable result;
 
 	sql::Statement* statement_;
 	sql::ResultSet* result_;
+
 	if (!connection_->isClosed()) {
 		statement_ = connection_->createStatement();
 		result_ = statement_->executeQuery(statement);
@@ -125,11 +127,33 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	return result;
 }
 
+SQLTable DBRepresenter::readData(std::string table, std::vector<std::string> columns, std::string condition){
+	checkIfValid();
+	SQLTable ret;
+
+	sql::ResultSet* result_;
+	sql::PreparedStatement* prep_statement_;
+	std::string columns_as_string_ = boost::algorithm::join(columns, ", ");
+
+	if (!connection_->isClosed()) {
+		prep_statement_ = connection_->prepareStatement("SELECT " + columns_as_string_ + " FROM " + table + " WHERE " + condition);
+
+		result_ = prep_statement_->executeQuery();
+
+		ret.push_back(getResultRowAsVector(result_, true));
+
+		while (result_->next()) {
+			ret.push_back(getResultRowAsVector(result_));
+		};
+	}
+
+	return ret;
+}
+
 
 std::vector<std::string> DBRepresenter::getResultRowAsVector(sql::ResultSet* row, bool header){
 	std::vector<std::string> row_vector;
-	for (unsigned int i = 1; i <= row->getMetaData()->getColumnCount();
-			i++) {
+	for (unsigned int i = 1; i <= row->getMetaData()->getColumnCount(); i++) {
 		if(!header){
 			row_vector.push_back(Converter::convertDBEntryToCString(i, row));
 		}else{
@@ -143,10 +167,4 @@ void DBRepresenter::checkIfValid() {
 	if (!valid_construction_) {
 		throw std::runtime_error("DBRepresenter not validly initialized");
 	}
-}
-
-
-SQLTable DBRepresenter::readData(std::string table, std::vector<std::string> columns, std::string condition){
-	SQLTable ret;
-	return ret;
 }
