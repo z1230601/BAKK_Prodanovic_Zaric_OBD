@@ -36,7 +36,6 @@ public:
 	void closeConnection();
 
 	SQLTable executeSQLStatement(std::string statement);
-	SQLTable readData(std::string table, std::vector<std::string> columns, std::string condition);
 
 	std::string getHostAddress() const;
 	std::string getPassword() const;

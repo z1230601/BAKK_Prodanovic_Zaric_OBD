@@ -13,10 +13,7 @@ class DBRepresenterTest: public CppUnit::TestCase {
 	CPPUNIT_TEST (testConnectMultipleTimes);
 	CPPUNIT_TEST(testDoubleConnect);
 	CPPUNIT_TEST(testExecuteSQLStatement);
-	CPPUNIT_TEST(testReadData);
 	CPPUNIT_TEST_SUITE_END();
-
-	//	static CppUnit::TestSuite *suite();
 private:
 	DBRepresenter* representer_under_test_;
 public:
@@ -28,7 +25,6 @@ public:
 	void testDoubleConnect();
 	void testExecuteSQLStatement();
 	void testCreateTableForExecuteSQLStatement();
-	void testReadData();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (DBRepresenterTest);
 #endif /* DBREPRESENTERTEST_H_ */

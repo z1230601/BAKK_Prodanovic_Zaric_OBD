@@ -2,7 +2,6 @@
 #include <iostream>
 #include <exception>
 #include "Converter.h"
-#include <boost/algorithm/string/join.hpp>
 
 DBRepresenter::DBRepresenter() {
 	valid_construction_ = true;
@@ -15,7 +14,14 @@ DBRepresenter::DBRepresenter(std::string configurationFile) {
 }
 
 DBRepresenter::~DBRepresenter() {
+	if(connection_ != NULL && !connection_->isClosed())
+		closeConnection();
 
+	if(connection_ != NULL)
+		delete connection_;
+
+	if(driver_ != NULL)
+		delete driver_;
 }
 
 bool DBRepresenter::isValid() {
@@ -124,15 +130,11 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 		};
 	}
 
+	delete statement_;
+	delete result_;
+
 	return result;
 }
-
-SQLTable DBRepresenter::readData(std::string table, std::vector<std::string> columns, std::string condition){
-	std::string columns_as_string_ = boost::algorithm::join(columns, ", ");
-	std::string query = "SELECT " + columns_as_string_ + " FROM " + table + " WHERE " + condition;
-	return executeSQLStatement(query);
-}
-
 
 std::vector<std::string> DBRepresenter::getResultRowAsVector(sql::ResultSet* row, bool header){
 	std::vector<std::string> row_vector;

@@ -6,6 +6,7 @@
 void DBRepresenterTest::setUp() {
 	representer_under_test_ = new DBRepresenter("../test/testdata/configuration.xml");
 }
+
 void DBRepresenterTest::tearDown() {
 	delete representer_under_test_;
 }
@@ -90,31 +91,4 @@ void DBRepresenterTest::testCreateTableForExecuteSQLStatement() {
 	representer_under_test_->closeConnection();
 	CPPUNIT_ASSERT(!representer_under_test_->isConnected());
 	CPPUNIT_ASSERT(! ::searchForStringInResult(result, expected));
-}
-
-
-void DBRepresenterTest::testReadData(){
-	representer_under_test_->connectToDatabase();
-	CPPUNIT_ASSERT(representer_under_test_->isConnected());
-
-	std::string fromTable = "testdata";
-	std::vector<std::string> columns{"ID","Name"};
-	std::string condition = "ID IS NOT NULL";
-
-	SQLTable result = representer_under_test_->readData(fromTable, columns, condition);
-//	CPPUNIT_ASSERT_EQUAL((size_t) 4, result.size());
-	CPPUNIT_ASSERT_EQUAL(columns.size(), result.at(0).size());
-	std::vector<std::vector<std::string>> expected;
-	expected.push_back(std::vector<std::string>{"ID","Name"});
-	expected.push_back(std::vector<std::string> { "1", "Adolf" });
-	expected.push_back(std::vector<std::string> { "2", "Borat" });
-	expected.push_back(std::vector<std::string> { "3", "Caesar" });
-
-	CPPUNIT_ASSERT_EQUAL(expected.size(), result.size());
-	for (unsigned int i = 0; i < expected.size(); i++) {
-		CPPUNIT_ASSERT_EQUAL(expected.at(i).size(), result.at(i).size());
-		for (unsigned int j = 0; j < expected.at(i).size(); j++) {
-			CPPUNIT_ASSERT_EQUAL(expected.at(i).at(j), result.at(i).at(j));
-		}
-	}
 }
