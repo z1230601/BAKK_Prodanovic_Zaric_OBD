@@ -128,26 +128,9 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 }
 
 SQLTable DBRepresenter::readData(std::string table, std::vector<std::string> columns, std::string condition){
-	checkIfValid();
-	SQLTable ret;
-
-	sql::ResultSet* result_;
-	sql::PreparedStatement* prep_statement_;
 	std::string columns_as_string_ = boost::algorithm::join(columns, ", ");
-
-	if (!connection_->isClosed()) {
-		prep_statement_ = connection_->prepareStatement("SELECT " + columns_as_string_ + " FROM " + table + " WHERE " + condition);
-
-		result_ = prep_statement_->executeQuery();
-
-		ret.push_back(getResultRowAsVector(result_, true));
-
-		while (result_->next()) {
-			ret.push_back(getResultRowAsVector(result_));
-		};
-	}
-
-	return ret;
+	std::string query = "SELECT " + columns_as_string_ + " FROM " + table + " WHERE " + condition;
+	return executeSQLStatement(query);
 }
 
 
