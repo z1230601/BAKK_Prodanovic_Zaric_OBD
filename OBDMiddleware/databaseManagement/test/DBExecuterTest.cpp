@@ -1,8 +1,13 @@
 #include "DBExecuterTest.h"
 #include "../src/DBExecuter.h"
+#include "MockDBRepresenter.h"
+
+using std::string;
+using std::vector;
 
 void DBExecuterTest::setUp() {
-	executer_under_test_ = new DBExecuter("../test/testdata/configuration.xml");
+//	executer_under_test_ = new DBExecuter("../test/testdata/configuration.xml");
+	executer_under_test_ = new DBExecuter(new MockDBRepresenter());
 }
 
 void DBExecuterTest::tearDown() {
@@ -57,4 +62,12 @@ void DBExecuterTest::testReadDataSelectOnlyID(){
 			CPPUNIT_ASSERT_EQUAL(expected.at(i).at(j), result.at(i).at(j));
 		}
 	}
+}
+
+void DBExecuterTest::testSimpleInsert(){
+	std::string to_table = "testdata";
+	vector<string> columns{"ID", "Name"};
+	SQLTable data{{"3", "Hänsel"},{"4", "Gretl"}};
+
+	CPPUNIT_ASSERT(executer_under_test_->insertData(to_table, columns, data));
 }

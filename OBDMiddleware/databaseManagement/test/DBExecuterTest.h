@@ -11,6 +11,7 @@ class DBExecuterTest : public CppUnit::TestCase {
 	CPPUNIT_TEST(testInit);
 	CPPUNIT_TEST(testReadData);
 	CPPUNIT_TEST(testReadDataSelectOnlyID);
+	CPPUNIT_TEST(testSimpleInsert);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -19,6 +20,7 @@ public:
 	void testInit();
 	void testReadData();
 	void testReadDataSelectOnlyID();
+	void testSimpleInsert();
 
 private:
 	DBExecuter* executer_under_test_;

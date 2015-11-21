@@ -69,15 +69,17 @@ target_link_libraries(DatabaseTester
 #ADD_DEPENDENCIES(DatabaseTester SetupTestDb)
 
 MESSAGE("PATH TO SQL: ${DatabaseManagement_SOURCE_DIR}/test/testdata/testdb.sql")
+SET(TESTDBSETUP_PATH ${DatabaseManagement_SOURCE_DIR}/test/testdata/testdb.sql)
 ADD_CUSTOM_COMMAND(TARGET DatabaseTester
      PRE_BUILD
-     COMMAND ${DatabaseManagement_SOURCE_DIR}/test/testdata//setupDatabases.sh "${DatabaseManagement_SOURCE_DIR}/test/testdata/testdb.sql"
+     COMMAND ${DatabaseManagement_SOURCE_DIR}/test/testdata//setupDatabases.sh "${TESTDBSETUP_PATH}"
      WORKING_DIR ${DatabaseManagement_SOURCE_DIR}
      VERBATIM
 )
 
-message(STATUS " test to be added: " ${UnitTests_SRCS})
-FOREACH(test ${UnitTests_SRCS})
+FILE(GLOB Tests_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/test/*Test.cpp)
+message(STATUS " test to be added: " ${Tests_SRCS})
+FOREACH(test ${Tests_SRCS})
         GET_FILENAME_COMPONENT(TestName ${test} NAME_WE)
         ADD_TEST(${TestName} DatabaseTester ${TestName})
 ENDFOREACH(test)
