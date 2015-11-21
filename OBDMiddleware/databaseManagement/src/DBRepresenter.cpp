@@ -117,21 +117,27 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	SQLTable result;
 
 	sql::Statement* statement_;
-	sql::ResultSet* result_;
 
 	if (!connection_->isClosed()) {
 		statement_ = connection_->createStatement();
-		result_ = statement_->executeQuery(statement);
-		//add header
-		result.push_back(getResultRowAsVector(result_, true));
+		if (statement.find("SELECT") != std::string::npos) {
+			sql::ResultSet* result_;
 
-		while (result_->next()) {
-			result.push_back(getResultRowAsVector(result_));
-		};
+			result_ = statement_->executeQuery(statement);
+			//add header
+			result.push_back(getResultRowAsVector(result_, true));
+
+			while (result_->next()) {
+				result.push_back(getResultRowAsVector(result_));
+			}
+
+			delete result_;
+		} else {
+			statement_->execute(statement);
+		}
 	}
 
 	delete statement_;
-	delete result_;
 
 	return result;
 }

@@ -17,6 +17,8 @@ class DBExecuterTest : public CppUnit::TestCase {
 public:
 	void setUp();
 	void tearDown();
+	void setUpDatabase();
+
 	void testInit();
 	void testReadData();
 	void testReadDataSelectOnlyID();

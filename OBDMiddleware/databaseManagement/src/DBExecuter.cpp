@@ -38,12 +38,11 @@ bool DBExecuter::insertData(string table, vector<string> columns,
 		std::string data_values_ = getValuesFromInput(data);
 		std::string query = "INSERT INTO " + table + " (" + columns_as_string_
 				+ ") VALUES " + data_values_;
-		std::cout << "----------" << query << "----------" << std::endl;
-		SQLTable ret = database_->executeSQLStatement(query);
+		database_->executeSQLStatement(query);
 		database_->closeConnection();
 		return true;
 	} catch (sql::SQLException &err) {
-		std::cerr << err.what() << std::endl;
+		std::cout << "Caught exception: " << err.what() << std::endl;
 		return false;
 	}
 	return true;
