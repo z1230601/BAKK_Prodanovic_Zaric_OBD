@@ -67,6 +67,10 @@ std::string DBRepresenter::getUsername() const {
 	return username_;
 }
 
+std::string DBRepresenter::getDatabaseName() const {
+	return dbname_;
+}
+
 bool DBRepresenter::parseConfigurationFile(std::string configurationFile) {
 	xmlpp::DomParser parser;
 	parser.set_validate();
@@ -125,11 +129,7 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 
 			result_ = statement_->executeQuery(statement);
 			//add header
-			result.push_back(getResultRowAsVector(result_, true));
-
-			while (result_->next()) {
-				result.push_back(getResultRowAsVector(result_));
-			}
+			result = convertToReadableFormat(result_);
 
 			delete result_;
 		} else {
@@ -140,6 +140,18 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	delete statement_;
 
 	return result;
+}
+
+SQLTable DBRepresenter::convertToReadableFormat(sql::ResultSet* result) {
+	SQLTable converted;
+
+	converted.push_back(getResultRowAsVector(result, true));
+
+	while (result->next()) {
+		converted.push_back(getResultRowAsVector(result));
+	}
+
+	return converted;
 }
 
 std::vector<std::string> DBRepresenter::getResultRowAsVector(sql::ResultSet* row, bool header){

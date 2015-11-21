@@ -36,10 +36,13 @@ public:
 	void closeConnection();
 
 	SQLTable executeSQLStatement(std::string statement);
+	static SQLTable convertToReadableFormat(sql::ResultSet* result);
 
 	std::string getHostAddress() const;
 	std::string getPassword() const;
 	std::string getUsername() const;
+	std::string getDatabaseName() const;
+
 
 private:
 	bool valid_construction_ = false;
@@ -48,7 +51,7 @@ private:
 	std::string getTextFromNode(xmlpp::Node*);
 	void parseNode(xmlpp::Node*);
 	void checkIfValid();
-	std::vector<std::string> getResultRowAsVector(sql::ResultSet* row, bool header = false);
+	static std::vector<std::string> getResultRowAsVector(sql::ResultSet* row, bool header = false);
 
 	std::string host_address_;
 	std::string username_;

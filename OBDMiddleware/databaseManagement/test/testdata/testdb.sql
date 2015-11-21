@@ -28,7 +28,7 @@ USE testdb;
 --
 
 CREATE TABLE IF NOT EXISTS `testdata` (
-  `ID` int(10) unsigned NOT NULL,
+  `ID` int NOT NULL UNIQUE,
   `Name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
