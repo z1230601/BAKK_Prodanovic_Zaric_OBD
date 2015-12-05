@@ -1,23 +1,33 @@
-#include "USBEmulationSupervisor.h"
-#include "USBRequestHandler.h"
-#include "boost/function.hpp"
+//#include <QtGui>
+//
+//int main(int argv, char **args) {
+//	QApplication app(argv, args);
+//
+//	QTextEdit *textEdit = new QTextEdit;
+//	QPushButton *quitButton = new QPushButton("&Quit");
+//
+//	QObject::connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+//
+//	QVBoxLayout *layout = new QVBoxLayout;
+//	layout->addWidget(textEdit);
+//	layout->addWidget(quitButton);
+//
+//	QWidget window;
+//	window.setLayout(layout);
+//
+//	window.show();
+//
+//	return app.exec();
+//}
 
-void testHandler(std::string &command){
-	std::cout << "TestHandle: " << command << std::endl;
-	if(command == "atz"){
-		USBRequestHandler::getDevice()->addAnswerToQueue("ELM327 v1.4");
-	}
+#include <QApplication>
+#include <QTextEdit>
 
-	if(command == "something"){
-		USBRequestHandler::getDevice()->addAnswerToQueue("ANSWER");
-	}
+int main(int argv, char **args) {
+	QApplication app(argv, args);
+
+	QTextEdit textEdit;
+	textEdit.show();
+
+	return app.exec();
 }
-
-int main() {
-	USBEmulationSupervisor sup;
-	USBRequestHandler::initCallback(&testHandler);
-	sup.run();
-
-	return 0;
-}
-
