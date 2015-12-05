@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>OBDCU</class>
+ <widget class="QMainWindow" name="OBDCU">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>OBDCU</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -43,9 +43,39 @@
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>190</y>
+      <x>70</x>
+      <y>170</y>
       <width>78</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QMdiArea" name="mdiArea">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>50</y>
+      <width>361</width>
+      <height>301</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QDial" name="dial">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>80</y>
+      <width>50</width>
+      <height>64</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QFontComboBox" name="fontComboBox">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>240</y>
+      <width>229</width>
       <height>27</height>
      </rect>
     </property>
@@ -60,6 +90,12 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOBDCU">
+    <property name="title">
+     <string>FIle</string>
+    </property>
+   </widget>
+   <addaction name="menuOBDCU"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

@@ -7,6 +7,7 @@ TARGET = src
 INCLUDEPATH += .
 
 QT += gui widgets
+RESOURCES += ./style/qdarkstyle/style.qrc
 
 # Input
 FORMS += OBDCUMainWindow.ui
