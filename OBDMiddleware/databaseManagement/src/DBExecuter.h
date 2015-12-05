@@ -2,8 +2,6 @@
 #define DBEXECUTER_H_
 
 #include "DBRepresenter.h"
-using std::string;
-using std::vector;
 
 class DBExecuter {
 public:
@@ -15,7 +13,8 @@ public:
 	DBRepresenter* getDatabase();
 	void setDatabase(DBRepresenter* database);
 	SQLTable readData(std::string table, std::vector<std::string> columns, std::string condition);
-	bool insertData(string to_table, vector<string> columns, SQLTable data);
+	bool insertData(std::string to_table, std::vector<std::string> columns, SQLTable data);
+	void deleteData(std::string table, std::vector<std::string> columns, std::vector<std::string> condition);
 	std::string getValuesFromInput(SQLTable data);
 
 

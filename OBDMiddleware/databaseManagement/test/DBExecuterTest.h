@@ -3,6 +3,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestCase.h>
+#include "../src/DBRepresenter.h"
 
 class DBExecuter;
 
@@ -12,15 +13,22 @@ class DBExecuterTest : public CppUnit::TestCase {
 	CPPUNIT_TEST(testReadData);
 	CPPUNIT_TEST(testReadDataSelectOnlyID);
 	CPPUNIT_TEST(testSimpleInsert);
+	CPPUNIT_TEST(testInsertExistingID);
+	CPPUNIT_TEST(testDeleteEntry);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void setUp();
 	void tearDown();
+	void setUpDatabase();
 	void testInit();
+	void assertSQLTable(SQLTable expected, SQLTable actual);
+
 	void testReadData();
 	void testReadDataSelectOnlyID();
 	void testSimpleInsert();
+	void testInsertExistingID();
+	void testDeleteEntry();
 
 private:
 	DBExecuter* executer_under_test_;

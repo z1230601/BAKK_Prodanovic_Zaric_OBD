@@ -67,6 +67,10 @@ std::string DBRepresenter::getUsername() const {
 	return username_;
 }
 
+std::string DBRepresenter::getDatabaseName() const {
+	return dbname_;
+}
+
 bool DBRepresenter::parseConfigurationFile(std::string configurationFile) {
 	xmlpp::DomParser parser;
 	parser.set_validate();
@@ -117,23 +121,37 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	SQLTable result;
 
 	sql::Statement* statement_;
-	sql::ResultSet* result_;
 
 	if (!connection_->isClosed()) {
 		statement_ = connection_->createStatement();
-		result_ = statement_->executeQuery(statement);
-		//add header
-		result.push_back(getResultRowAsVector(result_, true));
+		if (statement.find("SELECT") != std::string::npos) {
+			sql::ResultSet* result_;
 
-		while (result_->next()) {
-			result.push_back(getResultRowAsVector(result_));
-		};
+			result_ = statement_->executeQuery(statement);
+			//add header
+			result = convertToReadableFormat(result_);
+
+			delete result_;
+		} else {
+			statement_->execute(statement);
+		}
 	}
 
 	delete statement_;
-	delete result_;
 
 	return result;
+}
+
+SQLTable DBRepresenter::convertToReadableFormat(sql::ResultSet* result) {
+	SQLTable converted;
+
+	converted.push_back(getResultRowAsVector(result, true));
+
+	while (result->next()) {
+		converted.push_back(getResultRowAsVector(result));
+	}
+
+	return converted;
 }
 
 std::vector<std::string> DBRepresenter::getResultRowAsVector(sql::ResultSet* row, bool header){
