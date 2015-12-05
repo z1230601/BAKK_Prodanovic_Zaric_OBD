@@ -54,7 +54,13 @@ INSTALL(FILES
    SRC_LIBRARY
    DESTINATION ${INSTALL_DIR}
 )
+
 ##Packaging      ##############################################################
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "David Doria") #required
+SET(CPACK_PACKAGE_VERSION )
+INCLUDE(CPack)
+
 
 ##Testing        ##############################################################
 include(CTest)
