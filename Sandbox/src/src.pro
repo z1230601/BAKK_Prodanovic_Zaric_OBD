@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = src
+TARGET = Sandbox
 INCLUDEPATH += .
 
 QT += gui widgets
