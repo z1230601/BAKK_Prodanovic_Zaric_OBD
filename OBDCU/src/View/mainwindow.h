@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "stackedtabwrapper.h"
+
 #include <QWidget>
 #include <vector>
 
@@ -18,7 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    std::vector<std::pair<std::string, QWidget*> > viewMap_;
+    std::vector<StackedTabWrapper*> viewList_;
 
     void setupContentWindows();
     void initMap();

@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     databasewidget.cpp \
     sensorwidget.cpp \
     actionsidebar.cpp \
-    stackedtabwrapper.cpp
+    stackedtabwrapper.cpp \
+    errorpage.cpp \
+    abstractobdwidget.cpp
 
 HEADERS  += mainwindow.h \
     homewidget.h \
@@ -33,7 +35,9 @@ HEADERS  += mainwindow.h \
     databasewidget.h \
     sensorwidget.h \
     actionsidebar.h \
-    stackedtabwrapper.h
+    stackedtabwrapper.h \
+    errorpage.h \
+    abstractobdwidget.h
 
 FORMS    += mainwindow.ui \
     homewidget.ui \
@@ -44,4 +48,5 @@ FORMS    += mainwindow.ui \
     databasewidget.ui \
     sensorwidget.ui \
     actionsidebar.ui \
-    stackedtabwrapper.ui
+    stackedtabwrapper.ui \
+    errorpage.ui

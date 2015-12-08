@@ -2,16 +2,27 @@
 #include "ui_stackedtabwrapper.h"
 #include "actionsidebar.h"
 
+#include "homewidget.h"
+#include "dtcwidget.h"
+#include "emulationwidget.h"
+#include "sensorwidget.h"
+#include "databasewidget.h"
+#include "settingswidget.h"
+#include "communicationswidget.h"
+#include "errorpage.h"
+
 #include <QEventTransition>
 
 #include <iostream>
 
-StackedTabWrapper::StackedTabWrapper(QWidget *parent) :
+StackedTabWrapper::StackedTabWrapper(QString widgetId, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::StackedTabWrapper)
+    ui(new Ui::StackedTabWrapper),
+    tabName_(widgetId)
 {
     ui->setupUi(this);
-//    ui->actionWidget->stackUnder(ui->mainWidget);
+    tabContentWidget_ = createWidget(widgetId);
+    tabContentWidget_->createActionSideBar(ui->actionWidget);
     setupStateMachine();
 }
 
@@ -53,4 +64,31 @@ void StackedTabWrapper::setupStateMachine(){
     stateMachine.addState(expanded);
     stateMachine.setInitialState(folded);
     stateMachine.start();
+}
+
+QString StackedTabWrapper::getTabName() const{
+    return tabName_;
+}
+
+AbstractOBDWidget* StackedTabWrapper::createWidget(QString widgetId){
+    if(widgetId.compare("HOME") == 0){
+        return (new HomeWidget(ui->mainWidget));
+    }
+//    else if(widgetId.compare("DTC") == 0){
+//        return new DTCWidget(ui->mainWidget);
+//    }else if(widgetId.compare("EMULATION") == 0){
+//        return new EmulationWidget(ui->mainWidget);
+//    }else if(widgetId.compare("SENSOR") == 0){
+//        return new SensorWidget(ui->mainWidget);
+//    }else if(widgetId.compare("DATABASE") == 0){
+//        return new DatabaseWidget(ui->mainWidget);
+//    }else if(widgetId.compare("SETTINGS") == 0){
+//        return new SettingsWidget(ui->mainWidget);
+//    }else if(widgetId.compare("OBD LOG") == 0){
+//        return new CommunicationsWidget(ui->mainWidget);
+//    }
+    else{
+        return NULL; // new ErrorPage(ui->mainWidget);
+    }
+    return NULL;
 }

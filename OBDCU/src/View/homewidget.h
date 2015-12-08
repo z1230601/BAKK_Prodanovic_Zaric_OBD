@@ -3,24 +3,26 @@
 
 #include <QWidget>
 
+#include "abstractobdwidget.h"
+
 namespace Ui {
 class HomeWidget;
 }
 
-class HomeWidget : public QWidget
+class HomeWidget : public AbstractOBDWidget
 {
-    Q_OBJECT
 
 public:
     explicit HomeWidget(QWidget *parent = 0);
     ~HomeWidget();
 
-
+    QWidget* createActionSideBar(QWidget* parent = 0);
 protected:
     void openActionArea();
 
 private:
     Ui::HomeWidget *ui;
+
 };
 
 #endif // HOMEWIDGET_H

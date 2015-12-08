@@ -26,7 +26,7 @@
     <string>Menu</string>
    </property>
   </widget>
-  <widget class="ActionSideBar" name="actionWidget" native="true">
+  <widget class="QWidget" name="actionWidget" native="true">
    <property name="geometry">
     <rect>
      <x>9</x>
@@ -42,7 +42,7 @@
     </sizepolicy>
    </property>
   </widget>
-  <widget class="HomeWidget" name="mainWidget" native="true">
+  <widget class="QWidget" name="mainWidget" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -59,20 +59,6 @@
    </property>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ActionSideBar</class>
-   <extends>QWidget</extends>
-   <header>actionsidebar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>HomeWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">homewidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

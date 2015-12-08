@@ -1,6 +1,8 @@
 #ifndef STACKEDTABWRAPPER_H
 #define STACKEDTABWRAPPER_H
 
+#include <abstractobdwidget.h>
+
 #include <QWidget>
 #include <QStateMachine>
 
@@ -13,19 +15,20 @@ class StackedTabWrapper : public QWidget
     Q_OBJECT
 
 public:
-    explicit StackedTabWrapper( QWidget *parent = 0);
+    explicit StackedTabWrapper(QString widgetId, QWidget *parent = 0);
     ~StackedTabWrapper();
 
-
+    QString getTabName() const;
 private:
     Ui::StackedTabWrapper *ui;
 
-    QWidget* mainWidget_;
-    QWidget* actionMenu_;
+    QString tabName_;
     QStateMachine stateMachine;
 
     void setupStateMachine();
 
+    AbstractOBDWidget* createWidget(QString widgetId);
+    AbstractOBDWidget* tabContentWidget_;
 
 };
 
