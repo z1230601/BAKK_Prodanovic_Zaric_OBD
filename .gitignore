@@ -32,3 +32,5 @@ Makefile
 cmake_install.cmake
 build/
 *.*~
+build-
+build-*
