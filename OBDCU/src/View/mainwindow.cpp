@@ -7,6 +7,7 @@
 #include "databasewidget.h"
 #include "settingswidget.h"
 #include "communicationswidget.h"
+#include "stackedtabwrapper.h"
 
 #include <QTabWidget>
 #include <QWidget>
@@ -39,7 +40,7 @@ void MainWindow::setupContentWindows(){
 }
 
 void MainWindow::initMap(){
-    viewMap_.push_back(make_pair("HOME",      new HomeWidget          (ui->tabWidget)));
+    viewMap_.push_back(make_pair("HOME",      new StackedTabWrapper(ui->tabWidget)));
     viewMap_.push_back(make_pair("DTC",       new DTCWidget           (ui->tabWidget)));
     viewMap_.push_back(make_pair("EMULATION", new EmulationWidget     (ui->tabWidget)));
     viewMap_.push_back(make_pair("SENSOR",    new SensorWidget        (ui->tabWidget)));

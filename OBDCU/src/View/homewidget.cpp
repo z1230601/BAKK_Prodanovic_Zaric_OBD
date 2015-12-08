@@ -12,11 +12,3 @@ HomeWidget::~HomeWidget()
 {
     delete ui;
 }
-
-void HomeWidget::on_toolButton_clicked()
-{
-    openActionArea();
-}
-
-void HomeWidget::openActionArea(){
-}

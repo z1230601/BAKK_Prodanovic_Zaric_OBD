@@ -15,8 +15,6 @@ public:
     explicit HomeWidget(QWidget *parent = 0);
     ~HomeWidget();
 
-private slots:
-    void on_toolButton_clicked();
 
 protected:
     void openActionArea();

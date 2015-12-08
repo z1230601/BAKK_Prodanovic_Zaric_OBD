@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     communicationswidget.cpp \
     databasewidget.cpp \
     sensorwidget.cpp \
-    actionsidebar.cpp
+    actionsidebar.cpp \
+    stackedtabwrapper.cpp
 
 HEADERS  += mainwindow.h \
     homewidget.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     communicationswidget.h \
     databasewidget.h \
     sensorwidget.h \
-    actionsidebar.h
+    actionsidebar.h \
+    stackedtabwrapper.h
 
 FORMS    += mainwindow.ui \
     homewidget.ui \
@@ -41,4 +43,5 @@ FORMS    += mainwindow.ui \
     communicationswidget.ui \
     databasewidget.ui \
     sensorwidget.ui \
-    actionsidebar.ui
+    actionsidebar.ui \
+    stackedtabwrapper.ui
