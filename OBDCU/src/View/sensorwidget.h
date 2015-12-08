@@ -2,12 +2,13 @@
 #define SENSORWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class SensorWidget;
 }
 
-class SensorWidget : public QWidget
+class SensorWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

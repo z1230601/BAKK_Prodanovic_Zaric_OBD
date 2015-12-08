@@ -2,7 +2,7 @@
 #include "ui_errorpage.h"
 
 ErrorPage::ErrorPage(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::ErrorPage)
 {
     ui->setupUi(this);

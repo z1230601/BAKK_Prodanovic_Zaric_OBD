@@ -49,7 +49,7 @@ void StackedTabWrapper::setupStateMachine() {
     expanded->assignProperty(ui->actionWidget, "visible", true);
     expanded->assignProperty(ui->actionWidget, "geometry", QRectF(10, 40, width()/5, height()));
     expanded->assignProperty(ui->actionWidget, "autoFillBackground", true);
-    expanded->connect(expanded, SIGNAL(entered()), ui->actionWidget, SLOT(raise()));
+    expanded->connect(expanded, SIGNAL(finished()), ui->actionWidget, SLOT(raise()));
 
     QAbstractTransition* tFoldToExpand = folded->addTransition(ui->swBtn, SIGNAL(clicked()), expanded);
     QSequentialAnimationGroup* animationFoldToExpand = new QSequentialAnimationGroup;
@@ -80,22 +80,19 @@ QString StackedTabWrapper::getTabName() const{
 AbstractOBDWidget* StackedTabWrapper::createWidget(QString widgetId){
     if(widgetId.compare("HOME") == 0){
         return (new HomeWidget(ui->mainWidget));
+    }else if(widgetId.compare("DTC") == 0){
+        return new DTCWidget(ui->mainWidget);
+    }else if(widgetId.compare("EMULATION") == 0){
+        return new EmulationWidget(ui->mainWidget);
+    }else if(widgetId.compare("SENSOR") == 0){
+        return new SensorWidget(ui->mainWidget);
+    }else if(widgetId.compare("DATABASE") == 0){
+        return new DatabaseWidget(ui->mainWidget);
+    }else if(widgetId.compare("SETTINGS") == 0){
+        return new SettingsWidget(ui->mainWidget);
+    }else if(widgetId.compare("OBD LOG") == 0){
+        return new CommunicationsWidget(ui->mainWidget);
+    }else{
+        return new ErrorPage(ui->mainWidget);
     }
-//    else if(widgetId.compare("DTC") == 0){
-//        return new DTCWidget(ui->mainWidget);
-//    }else if(widgetId.compare("EMULATION") == 0){
-//        return new EmulationWidget(ui->mainWidget);
-//    }else if(widgetId.compare("SENSOR") == 0){
-//        return new SensorWidget(ui->mainWidget);
-//    }else if(widgetId.compare("DATABASE") == 0){
-//        return new DatabaseWidget(ui->mainWidget);
-//    }else if(widgetId.compare("SETTINGS") == 0){
-//        return new SettingsWidget(ui->mainWidget);
-//    }else if(widgetId.compare("OBD LOG") == 0){
-//        return new CommunicationsWidget(ui->mainWidget);
-//    }
-    else{
-        return NULL; // new ErrorPage(ui->mainWidget);
-    }
-    return NULL;
 }

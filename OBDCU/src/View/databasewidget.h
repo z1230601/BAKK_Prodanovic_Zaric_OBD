@@ -2,12 +2,13 @@
 #define DATABASEWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class DatabaseWidget;
 }
 
-class DatabaseWidget : public QWidget
+class DatabaseWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

@@ -18,12 +18,25 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>85</width>
-     <height>27</height>
+     <width>41</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Menu</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="pictures.qrc">
+     <normaloff>:/res/menu_image.png</normaloff>:/res/menu_image.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QWidget" name="actionWidget" native="true">
@@ -59,6 +72,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="pictures.qrc"/>
+ </resources>
  <connections/>
 </ui>

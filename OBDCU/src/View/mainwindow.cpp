@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     initMap();
     setupContentWindows();
+
 }
 
 MainWindow::~MainWindow()
@@ -32,10 +33,10 @@ void MainWindow::setupContentWindows(){
 
 void MainWindow::initMap(){
     viewList_.push_back(new StackedTabWrapper("HOME",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("DTC",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("EMULATION",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("SENSOR",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("DATABASE",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("SETTINGS",ui->tabWidget));
-//    viewList_.push_back(new StackedTabWrapper("OBD LOG",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("DTC",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("EMULATION",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("SENSOR",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("DATABASE",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("SETTINGS",ui->tabWidget));
+    viewList_.push_back(new StackedTabWrapper("OBD LOG",ui->tabWidget));
 }

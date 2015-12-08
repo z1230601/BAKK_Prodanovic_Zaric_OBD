@@ -50,3 +50,6 @@ FORMS    += mainwindow.ui \
     actionsidebar.ui \
     stackedtabwrapper.ui \
     errorpage.ui
+
+RESOURCES += \
+    pictures.qrc

@@ -9,7 +9,6 @@ AbstractOBDWidget::AbstractOBDWidget(QWidget* parent):
 }
 
 QWidget* AbstractOBDWidget::createActionSideBar(QWidget* parent){
-    std::cout << "Enter creating SideBar\n";
     sidebar_ = new ActionSideBar(parent);
     return sidebar_;
 }

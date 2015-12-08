@@ -2,7 +2,7 @@
 #include "ui_dtcwidget.h"
 
 DTCWidget::DTCWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::DTCWidget)
 {
     ui->setupUi(this);

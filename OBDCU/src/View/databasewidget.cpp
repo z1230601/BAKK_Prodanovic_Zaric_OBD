@@ -2,7 +2,7 @@
 #include "ui_databasewidget.h"
 
 DatabaseWidget::DatabaseWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::DatabaseWidget)
 {
     ui->setupUi(this);

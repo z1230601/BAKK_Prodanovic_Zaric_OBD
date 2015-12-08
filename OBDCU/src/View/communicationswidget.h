@@ -2,12 +2,13 @@
 #define COMMUNICATIONSWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class CommunicationsWidget;
 }
 
-class CommunicationsWidget : public QWidget
+class CommunicationsWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

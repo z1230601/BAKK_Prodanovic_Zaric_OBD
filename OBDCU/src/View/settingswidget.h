@@ -2,12 +2,13 @@
 #define SETTINGSWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class SettingsWidget;
 }
 
-class SettingsWidget : public QWidget
+class SettingsWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

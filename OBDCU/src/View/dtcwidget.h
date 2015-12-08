@@ -2,12 +2,13 @@
 #define DTCWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class DTCWidget;
 }
 
-class DTCWidget : public QWidget
+class DTCWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

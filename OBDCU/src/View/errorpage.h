@@ -2,12 +2,13 @@
 #define ERRORPAGE_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class ErrorPage;
 }
 
-class ErrorPage : public QWidget
+class ErrorPage : public AbstractOBDWidget
 {
     Q_OBJECT
 

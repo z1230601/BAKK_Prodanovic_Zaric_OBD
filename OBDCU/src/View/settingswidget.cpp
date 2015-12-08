@@ -2,7 +2,7 @@
 #include "ui_settingswidget.h"
 
 SettingsWidget::SettingsWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::SettingsWidget)
 {
     ui->setupUi(this);

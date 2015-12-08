@@ -2,7 +2,7 @@
 #include "ui_communicationswidget.h"
 
 CommunicationsWidget::CommunicationsWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::CommunicationsWidget)
 {
     ui->setupUi(this);

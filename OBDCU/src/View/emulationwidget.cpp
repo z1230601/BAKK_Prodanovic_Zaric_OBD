@@ -2,7 +2,7 @@
 #include "ui_emulationwidget.h"
 
 EmulationWidget::EmulationWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::EmulationWidget)
 {
     ui->setupUi(this);

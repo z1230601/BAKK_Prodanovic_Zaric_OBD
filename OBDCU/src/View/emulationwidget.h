@@ -2,12 +2,13 @@
 #define EMULATIONWIDGET_H
 
 #include <QWidget>
+#include "abstractobdwidget.h"
 
 namespace Ui {
 class EmulationWidget;
 }
 
-class EmulationWidget : public QWidget
+class EmulationWidget : public AbstractOBDWidget
 {
     Q_OBJECT
 

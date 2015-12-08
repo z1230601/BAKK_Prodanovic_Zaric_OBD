@@ -2,7 +2,7 @@
 #include "ui_sensorwidget.h"
 
 SensorWidget::SensorWidget(QWidget *parent) :
-    QWidget(parent),
+    AbstractOBDWidget(parent),
     ui(new Ui::SensorWidget)
 {
     ui->setupUi(this);
