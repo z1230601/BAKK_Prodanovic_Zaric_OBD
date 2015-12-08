@@ -29,8 +29,8 @@
   <widget class="ActionSideBar" name="actionWidget" native="true">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>42</y>
+     <x>10</x>
+     <y>40</y>
      <width>191</width>
      <height>569</height>
     </rect>
