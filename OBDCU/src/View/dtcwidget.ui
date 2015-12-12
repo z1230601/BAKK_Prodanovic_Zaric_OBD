@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>763</width>
-    <height>639</height>
+    <height>687</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,10 +26,10 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="DTCSearchBox"/>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="DTCSearchButton">
         <property name="text">
          <string>Search</string>
         </property>
@@ -38,7 +38,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QListView" name="listView"/>
+     <widget class="QListView" name="DTCList"/>
     </item>
    </layout>
   </widget>
@@ -55,12 +55,12 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="text">
-       <string>pending</string>
+       <string>Pending</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QListView" name="listView_2"/>
+     <widget class="QListView" name="pendingDTCList"/>
     </item>
    </layout>
   </widget>
@@ -68,7 +68,7 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>360</y>
+     <y>350</y>
      <width>360</width>
      <height>260</height>
     </rect>
@@ -77,34 +77,34 @@
     <item>
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>temprary</string>
+       <string>Permanent</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QListView" name="listView_3"/>
+     <widget class="QListView" name="permanentDTCList"/>
     </item>
    </layout>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget_4">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>290</x>
      <y>170</y>
-     <width>41</width>
+     <width>87</width>
      <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="addToPendingButtoon">
       <property name="text">
        <string>&gt;&gt;</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="removeFromPendingButton">
       <property name="text">
        <string>&lt;&lt;</string>
       </property>
@@ -115,22 +115,22 @@
   <widget class="QWidget" name="verticalLayoutWidget_5">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>290</x>
      <y>430</y>
-     <width>41</width>
+     <width>87</width>
      <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="addToPermanentButton">
       <property name="text">
        <string>&gt;&gt;</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="removeFromPermanentButton">
       <property name="text">
        <string>&lt;&lt;</string>
       </property>
@@ -138,12 +138,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>verticalLayoutWidget_2</zorder>
-  <zorder>verticalLayoutWidget_3</zorder>
-  <zorder>verticalLayoutWidget_4</zorder>
-  <zorder>verticalLayoutWidget_5</zorder>
-  <zorder>label_2</zorder>
  </widget>
  <resources/>
  <connections/>
