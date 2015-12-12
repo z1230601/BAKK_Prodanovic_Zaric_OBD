@@ -53,7 +53,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="pendingLabel">
       <property name="text">
        <string>Pending</string>
       </property>
