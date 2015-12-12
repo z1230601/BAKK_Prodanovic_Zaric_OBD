@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>827</width>
-    <height>620</height>
+    <width>850</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="pictures.qrc">
+    <iconset resource="resources.qrc">
      <normaloff>:/res/menu_image.png</normaloff>:/res/menu_image.png</iconset>
    </property>
    <property name="iconSize">
@@ -47,8 +47,8 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>191</width>
-     <height>569</height>
+     <width>200</width>
+     <height>700</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -63,8 +63,8 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>801</width>
-     <height>569</height>
+     <width>800</width>
+     <height>700</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -76,7 +76,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="pictures.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

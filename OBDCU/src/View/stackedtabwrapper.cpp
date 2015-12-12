@@ -24,6 +24,7 @@ StackedTabWrapper::StackedTabWrapper(QString widgetId, QWidget *parent) :
     tabName_(widgetId)
 {
     ui->setupUi(this);
+//    QRect size = tabContentWidget_->geometry();
     tabContentWidget_ = createWidget(widgetId);
     tabContentWidget_->createActionSideBar(ui->actionWidget);
     setupStateMachine();
