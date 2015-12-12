@@ -33,8 +33,7 @@ QPushButton:disabled
     padding-bottom: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    /*border-radius: 2px;*/
-    color: #454545;
+    color: silver;
 }
 
 QPushButton:focus {
@@ -42,6 +41,7 @@ QPushButton:focus {
     color: white;
 }
 QPushButton:checked{
+    color: silver;
     background-color: #4A4949;
     border-color: #6A6969;
 }
@@ -53,10 +53,12 @@ QComboBox:hover,QPushButton:hover,QAbstractSpinBox:hover,QLineEdit:hover,QTextEd
 }
 QPushButton:pressed
 {
+    color: silver;
     background-color: #484846;
 }
 
 QPushButton::menu-indicator  {
+    color: silver;
     subcontrol-origin: padding;
     subcontrol-position: bottom right;
     left: 8px;
@@ -242,7 +244,7 @@ QToolTip
 
 QWidget
 {
-    color: sliver;
+    color: silver;
     background-color: #302F2F;
     selection-background-color:#3d8ec9;
     selection-color: black;
@@ -893,6 +895,7 @@ QAbstractSpinBox::down-arrow:hover
 
 QLabel
 {
+    color: #bbb;
     border: 0px solid black;
 }
 
