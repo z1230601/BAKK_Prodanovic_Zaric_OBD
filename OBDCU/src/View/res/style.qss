@@ -66,6 +66,7 @@ QTabWidget:focus, QCheckBox:focus, QRadioButton:focus, QSlider:focus
 {
     border: none;
 }
+
 QTabWidget{
     border: 1px transparent black;
 }
@@ -300,7 +301,7 @@ QCheckBox::indicator:unchecked:hover,
 QGroupBox::indicator:unchecked,
 QGroupBox::indicator:unchecked:hover
 {
-    image: url(:(/res/rc/checkbox_unchecked.png);
+    image: url(:/res/rc/checkbox_unchecked.png);
 }
 
 QCheckBox::indicator:unchecked:focus,
