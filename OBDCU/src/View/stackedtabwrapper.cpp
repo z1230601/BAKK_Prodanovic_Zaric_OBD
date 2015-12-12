@@ -49,7 +49,7 @@ void StackedTabWrapper::setupStateMachine() {
     expanded->assignProperty(ui->actionWidget, "visible", true);
     expanded->assignProperty(ui->actionWidget, "geometry", QRectF(10, 40, width()/5, height()));
     expanded->assignProperty(ui->actionWidget, "autoFillBackground", true);
-    expanded->connect(expanded, SIGNAL(finished()), ui->actionWidget, SLOT(raise()));
+    expanded->connect(expanded, SIGNAL(entered()), ui->actionWidget, SLOT(raise()));
 
     QAbstractTransition* tFoldToExpand = folded->addTransition(ui->swBtn, SIGNAL(clicked()), expanded);
     QSequentialAnimationGroup* animationFoldToExpand = new QSequentialAnimationGroup;

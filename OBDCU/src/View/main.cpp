@@ -2,6 +2,9 @@
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
+#include <iostream>
+#include <QDir>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -9,17 +12,18 @@ int main(int argc, char *argv[])
 
     w.show();
 
-//    QFile f("./res/qdarkstyle/style.qss");
-//    if (!f.exists())
-//    {
-//        printf("Unable to set stylesheet, file not found\n");
-//    }
-//    else
-//    {
-//        f.open(QFile::ReadOnly | QFile::Text);
-//        QTextStream ts(&f);
-//        a.setStyleSheet(ts.readAll());
-//    }
+    std::cout << QDir::currentPath().toStdString() << std::endl;
+    QFile f(":res/style.qss");
+    if (!f.exists())
+    {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else
+    {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        a.setStyleSheet(ts.readAll());
+    }
 
     return a.exec();
 }

@@ -52,4 +52,6 @@ FORMS    += mainwindow.ui \
     errorpage.ui
 
 RESOURCES += \
-    pictures.qrc
+    resources.qrc
+
+OTHER_FILES +=

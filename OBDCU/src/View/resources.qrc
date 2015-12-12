@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/menu_image.png</file>
+        <file>res/style.qss</file>
+        <file>res/rc/Vsepartoolbar.png</file>
+        <file>res/rc/Vmovetoolbar.png</file>
+        <file>res/rc/up_arrow_disabled.png</file>
+        <file>res/rc/up_arrow.png</file>
+        <file>res/rc/undock.png</file>
+        <file>res/rc/transparent.png</file>
+        <file>res/rc/stylesheet-vline.png</file>
+        <file>res/rc/stylesheet-branch-more.png</file>
+        <file>res/rc/stylesheet-branch-end.png</file>
+        <file>res/rc/sizegrip.png</file>
+        <file>res/rc/right_arrow_disabled.png</file>
+        <file>res/rc/right_arrow.png</file>
+        <file>res/rc/radio_unchecked_focus.png</file>
+        <file>res/rc/radio_unchecked_disabled.png</file>
+        <file>res/rc/radio_unchecked.png</file>
+        <file>res/rc/radio_checked_focus.png</file>
+        <file>res/rc/radio_checked_disabled.png</file>
+        <file>res/rc/radio_checked.png</file>
+        <file>res/rc/left_arrow_disabled.png</file>
+        <file>res/rc/left_arrow.png</file>
+        <file>res/rc/Hsepartoolbar.png</file>
+        <file>res/rc/Hmovetoolbar.png</file>
+        <file>res/rc/down_arrow_disabled.png</file>
+        <file>res/rc/down_arrow.png</file>
+        <file>res/rc/close-pressed.png</file>
+        <file>res/rc/close-hover.png</file>
+        <file>res/rc/close.png</file>
+        <file>res/rc/checkbox_unchecked_focus.png</file>
+        <file>res/rc/checkbox_unchecked_disabled.png</file>
+        <file>res/rc/checkbox_unchecked.png</file>
+        <file>res/rc/checkbox_indeterminate_focus.png</file>
+        <file>res/rc/checkbox_indeterminate_disabled.png</file>
+        <file>res/rc/checkbox_indeterminate.png</file>
+        <file>res/rc/checkbox_checked_focus.png</file>
+        <file>res/rc/checkbox_checked_disabled.png</file>
+        <file>res/rc/checkbox_checked.png</file>
+        <file>res/rc/branch_open-on.png</file>
+        <file>res/rc/branch_open.png</file>
+        <file>res/rc/branch_closed-on.png</file>
+        <file>res/rc/branch_closed.png</file>
+    </qresource>
+</RCC>
