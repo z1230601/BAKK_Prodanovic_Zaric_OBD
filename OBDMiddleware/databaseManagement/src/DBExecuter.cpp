@@ -2,6 +2,8 @@
 #include <boost/algorithm/string/join.hpp>
 
 DBExecuter::DBExecuter() {
+	//TODO: Mayba so:
+//	database_ = new DBRepresenter(DBConfigurator::getInstance->getDefaultDatabaseConfigurationFilePath());
 }
 
 DBExecuter::DBExecuter(std::string configuration) {

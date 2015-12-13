@@ -1,0 +1,5 @@
+<!ELEMENT database (address, user, password, dbname)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT user (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT dbname (#PCDATA)>

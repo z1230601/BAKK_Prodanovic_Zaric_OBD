@@ -4,6 +4,7 @@
 #include "Converter.h"
 
 DBRepresenter::DBRepresenter() {
+	//TODO: NOT really nice, is it?
 	valid_construction_ = true;
 }
 

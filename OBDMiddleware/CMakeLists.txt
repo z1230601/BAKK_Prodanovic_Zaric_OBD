@@ -16,6 +16,7 @@ MESSAGE("Building Middleware with version: " ${middleware_VESION_STRING})
 # add sub-parts
 ADD_SUBDIRECTORY(communicationInterface)
 ADD_SUBDIRECTORY(databaseManagement)
+ADD_SUBDIRECTORY(obdBase)
 
 ##Packaging      ##############################################################
 SET(CPACK_GENERATOR "DEB")
