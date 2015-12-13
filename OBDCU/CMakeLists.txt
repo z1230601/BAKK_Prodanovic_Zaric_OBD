@@ -1,11 +1,47 @@
-cmake_minimum_required(VERSION 2.6)
-project(OBDCU)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+PROJECT(OBDCU)
 
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory build)
+IF(NOT DEFINED Middleware_SOURCE_PATH)
+   SET(Middleware_SOURCE_PATH "/usr/lib/")
+ENDIF(NOT DEFINED Middleware_SOURCE_PATH)
 
-set(CMAKE_CXX_FLAGS "-g -Wall")
-add_subdirectory(src)
+IF(DEFINED Middleware_BASE_PATH)
+   INCLUDE_DIRECTORIES("${Middleware_BASE_PATH}/middleware_includes")
+   FILE(GLOB_RECURSE middleware_dynamic_libraries ${Middleware_BASE_PATH}/*.so)
+   FILE(GLOB_RECURSE middleware_static_libraries ${Middleware_BASE_PATH}/*.a)
+ELSE(DEFINED Middleware_BASE_PATH)
+   IF(EXISTS "/usr/includes/OBDMiddleware/")
+     INCLUDE_DIRECTORIES("/usr/includes/OBDMiddleware/")
+     SET(middleware_dynamic_libraries "/usr/lib/libdatabase-connection-manager-dev.so")
+     SET(middleware_static_libraries "/usr/lib/libserial-communication-dev.a")
+   ELSE(EXISTS "/usr/includes/OBDMiddleware/")
+     MESSAGE(FATAL_ERROR "No middleware libraries found or specified. Please Specify under Middleware_BASE_PATH for compiled linking or else install the libraries and make sure the are under /usr/lib/ and /usr/include/OBDMiddleware")
+   ENDIF(EXISTS "/usr/includes/OBDMiddleware/")
+ENDIF(DEFINED Middleware_BASE_PATH)
 
-add_executable(OBDCU src/Main.cpp)
+#libdatabase-connection-manager-dev.so  libserial-communication-dev.a
 
-target_link_libraries(OBDCU View) #Model Controller)
+SET(CMAKE_CXX_FLAGS "-g -Wall")
+
+LIST(APPEND OBDCU_EXECUTABLES "src/Main.cpp")
+LIST(APPEND OBDCU_INCLUDES "")
+
+ADD_SUBDIRECTORY(src)
+
+MESSAGE("SOURCES ${OBDCU_EXECUTABLES}")
+MESSAGE("INCLUDES ${OBDCU_INCLUDES}")
+
+ADD_EXECUTABLE(OBDCU ${OBDCU_EXECUTABLES})
+
+#ADD_CUSTOM_COMMAND(TARGET OBDCU
+#  PRE_BUILD
+#  COMMAND mkdir -p includes
+#  COMMAND ln -s -f ${OBDCU_INCLUDES} includes/.
+#  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/"
+#)
+
+TARGET_LINK_LIBRARIES(OBDCU
+  View
+  ${middleware_dynamic_libraries}
+  ${middleware_static_libraries}
+) #Model Controller)

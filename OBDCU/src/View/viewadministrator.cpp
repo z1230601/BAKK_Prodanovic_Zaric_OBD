@@ -1,3 +1,5 @@
+#include "viewadministrator.h"
+
 #include "mainwindow.h"
 #include <QApplication>
 #include <QFile>
@@ -5,12 +7,26 @@
 #include <iostream>
 #include <QDir>
 
-int main(int argc, char *argv[])
+ViewAdministrator* ViewAdministrator::instance_;
+
+ViewAdministrator::ViewAdministrator()
 {
-    for(int i=0; i < argc; i++){
-        std::cout << "arg " << i << ": " << argv[i] << std::endl;
+}
+
+ViewAdministrator::~ViewAdministrator(){
+
+}
+
+ViewAdministrator* ViewAdministrator::getInstance(){
+    if(instance_ == NULL){
+        instance_ = new ViewAdministrator();
     }
-    QApplication a(argc, argv);
+
+    return instance_;
+}
+
+int ViewAdministrator::startView(int argc, char** argv){
+    QApplication a(argc,argv);
     MainWindow w;
 
     w.show();

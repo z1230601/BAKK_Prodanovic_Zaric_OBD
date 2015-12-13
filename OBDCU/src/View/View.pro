@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     actionsidebar.cpp \
     stackedtabwrapper.cpp \
     errorpage.cpp \
-    abstractobdwidget.cpp
+    abstractobdwidget.cpp \
+    viewadministrator.cpp
 
 HEADERS  += mainwindow.h \
     homewidget.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     actionsidebar.h \
     stackedtabwrapper.h \
     errorpage.h \
-    abstractobdwidget.h
+    abstractobdwidget.h \
+    viewadministrator.h
 
 FORMS    += mainwindow.ui \
     homewidget.ui \

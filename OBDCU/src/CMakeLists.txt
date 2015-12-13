@@ -1,4 +1,7 @@
-add_subdirectory(Controller)
-add_subdirectory(Model)
-add_subdirectory(View)
+ADD_SUBDIRECTORY(Controller)
+ADD_SUBDIRECTORY(Model)
+ADD_SUBDIRECTORY(View)
 
+INCLUDE_DIRECTORIES(Controller)
+INCLUDE_DIRECTORIES(Model)
+INCLUDE_DIRECTORIES(View)

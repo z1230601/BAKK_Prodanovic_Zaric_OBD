@@ -15,7 +15,7 @@ public:
 	virtual ~MainController();
 	static MainController* getInstance();
 
-	void initDatabase(std::string &configuration_path);
+	void initDatabase();//void initDatabase(std::string &configuration_path);
 
 private:
 	static MainController* instance_;

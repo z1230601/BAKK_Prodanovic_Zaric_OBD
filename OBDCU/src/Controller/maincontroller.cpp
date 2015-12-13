@@ -6,13 +6,13 @@
  */
 
 #include "maincontroller.h"
-#include "databaseManagement/DBExecuter.h"
+//#include "databaseManagement/DBExecuter.h"
 
 MainController* MainController::instance_;
 
 MainController* MainController::getInstance(){
 	if(instance_ == NULL){
-		this instance_ = new MainController();
+		instance_ = new MainController();
 	}
 
 	return instance_;
@@ -24,7 +24,8 @@ MainController::MainController() {
 MainController::~MainController() {
 }
 
-void MainController::initDatabase(std::string &configuration_path){
-	db_= new DBExecuter(configuration_path);
+//void MainController::initDatabase(std::string &configuration_path){
+void MainController::initDatabase(){
+//	db_= new DBExecuter(configuration_path);
 }
 
