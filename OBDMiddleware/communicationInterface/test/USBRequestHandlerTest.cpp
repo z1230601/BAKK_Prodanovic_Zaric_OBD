@@ -94,7 +94,7 @@ void USBRequestHandlerTest::testBulkOutRequest() {
 }
 
 void USBRequestHandlerTest::testDescriptorRequest(){
-	usb::urb* request = new usb::urb(false, usb::urb_type_control, 0, NULL,
-					false, 0, NULL, true, 0, USB_VHCI_STATUS_PENDING, 0, 0x0, 0, 0,
-					0x02, 0x0, 0x0, 0x0, 0x0, 0);
+//	usb::urb* request = new usb::urb(false, usb::urb_type_control, 0, NULL,
+//					false, 0, NULL, true, 0, USB_VHCI_STATUS_PENDING, 0, 0x0, 0, 0,
+//					0x02, 0x0, 0x0, 0x0, 0x0, 0);
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>802</width>
-    <height>495</height>
+    <width>800</width>
+    <height>630</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,10 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
      <item>
       <widget class="QListView" name="DTCList"/>
      </item>
@@ -23,15 +26,24 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMinimumSize</enum>
+         </property>
          <item>
           <widget class="QLineEdit" name="DTCSearchBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="searchBtn">
            <property name="text">
             <string>Search</string>
            </property>

@@ -28,13 +28,20 @@ int UartDevice::openDevice()
 
 void UartDevice::send(string data)
 {
-    if ( _device >= 0 )
-        write ( _device , data.c_str(), data.size()+1);
+	if (_device >= 0) {
+		size_t result = write(_device, data.c_str(), data.size() + 1);
+		if (result != data.size() + 1) {
+			//TODO: log something or so
+		}
+	}
 }
 
 void UartDevice::send(int data)
 {
-    write ( _device , &data, 1);
+    size_t result = write ( _device , &data, 1);
+    if(result != 1){
+    	//TODO: add log or something
+    }
 }
 
 void UartDevice::closeDevice()

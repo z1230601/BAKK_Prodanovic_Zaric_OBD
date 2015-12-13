@@ -120,7 +120,7 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	checkIfValid();
 	SQLTable result;
 
-	sql::Statement* statement_;
+	sql::Statement* statement_ = NULL;
 
 	if (!connection_->isClosed()) {
 		statement_ = connection_->createStatement();
@@ -137,7 +137,9 @@ SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 		}
 	}
 
-	delete statement_;
+	if(statement_ != NULL){
+		delete statement_;
+	}
 
 	return result;
 }

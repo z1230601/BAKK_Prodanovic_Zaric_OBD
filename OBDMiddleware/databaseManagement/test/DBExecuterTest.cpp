@@ -12,7 +12,8 @@ void DBExecuterTest::tearDown() {
 }
 
 void DBExecuterTest::setUpDatabase() {
-	system("../test/testdata/setupDatabases.sh ../test/testdata/testdb.sql");
+	int setup = system("../test/testdata/setupDatabases.sh ../test/testdata/testdb.sql");
+	CPPUNIT_ASSERT(setup == 0);
 }
 
 void DBExecuterTest::testInit() {
