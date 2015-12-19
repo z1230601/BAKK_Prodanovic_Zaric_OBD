@@ -1,10 +1,3 @@
-/*
- * Configuration.h
- *
- *  Created on: Dec 13, 2015
- *      Author: zlatan
- */
-
 #ifndef CONFIGURATION_H_
 #define CONFIGURATION_H_
 
