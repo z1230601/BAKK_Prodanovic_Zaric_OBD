@@ -71,3 +71,20 @@ void DiagnosticTroubleCodeTest::testConversion() {
 			dtc_under_test_->getDescription());
 }
 
+void DiagnosticTroubleCodeTest::testHexConversion(){
+	unsigned int hexvalue = 0x143A; // = P143A
+	unsigned int expectedCodeClassId = 1;
+	unsigned int expectedSourceClassId = 4;
+	unsigned int expectedFaultId = 0x3A;
+
+	dtc_under_test_->fromElmHexValue(hexvalue);
+	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
+	CPPUNIT_ASSERT_EQUAL(expectedCodeClassId,
+			dtc_under_test_->getCodeClassID());
+	CPPUNIT_ASSERT_EQUAL(expectedSourceClassId,
+			dtc_under_test_->getSourceClassID());
+	CPPUNIT_ASSERT_EQUAL(expectedFaultId, dtc_under_test_->getFaultID());
+
+	unsigned int actualHex = dtc_under_test_->toElmHexValue();
+	CPPUNIT_ASSERT_EQUAL(hexvalue, actualHex);
+}

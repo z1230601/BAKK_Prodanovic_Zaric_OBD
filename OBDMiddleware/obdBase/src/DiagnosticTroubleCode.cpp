@@ -8,6 +8,7 @@ DiagnosticTroubleCode::DiagnosticTroubleCode() :
 		description_(""),
 		code_class_ID_(-1),
 		source_class_ID_(-1),
+		fault_ID_(-1),
 		valid_construction_(false) {
 
 }
@@ -17,6 +18,7 @@ DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int code_id,
 		description_(description),
 		code_class_ID_(code_id),
 		source_class_ID_(source_id)
+		//TODO: fault_ID_();
 		 {
 
 	if (!parseClasses(true)) {
@@ -44,6 +46,29 @@ DiagnosticTroubleCode::~DiagnosticTroubleCode() {
 	// TODO Auto-generated destructor stub
 }
 
+bool DiagnosticTroubleCode::parseClasses(bool idMode) {
+	if (idMode) {
+		code_class_ = getStringFromIdDB("CodeClass", std::vector<std::string> { "Property" }, "ID = \"" + std::to_string(code_class_ID_) + "\"");
+		source_class_ = getStringFromIdDB("Source", std::vector<std::string> { "Name" },
+				"ID = \"" + std::to_string(source_class_ID_) + "\"");
+
+		if(source_class_.empty() || code_class_.empty()){
+			return false;
+		}
+	} else {
+		code_class_ID_ = getIdFromStringDB("CodeClass", std::vector<std::string> { "ID" },
+				"Property = \"" + code_class_ + "\"");
+
+		source_class_ID_ = getIdFromStringDB("Source", std::vector<std::string> { "ID" },
+				"Name = \"" + source_class_ + "\"");
+		if(code_class_ID_ == (unsigned int) -1 ||
+				source_class_ID_ == (unsigned int) -1){
+			return false;
+		}
+	}
+	return true;
+}
+
 std::string DiagnosticTroubleCode::getStringFromIdDB(std::string tablename,
 		std::vector<std::string> columnnames, std::string condition) {
 	DBExecuter exec(Configuration::getInstance()->getDatabaseConfigFilePath());
@@ -67,27 +92,14 @@ unsigned int DiagnosticTroubleCode::getIdFromStringDB(std::string tablename,
 		return -1;
 	}
 }
-bool DiagnosticTroubleCode::parseClasses(bool idMode) {
-	if (idMode) {
-		code_class_ = getStringFromIdDB("CodeClass", std::vector<std::string> { "Property" }, "ID = \"" + std::to_string(code_class_ID_) + "\"");
-		source_class_ = getStringFromIdDB("Source", std::vector<std::string> { "Name" },
-				"ID = \"" + std::to_string(source_class_ID_) + "\"");
 
-		if(source_class_.empty() || code_class_.empty()){
-			return false;
-		}
-	} else {
-		code_class_ID_ = getIdFromStringDB("CodeClass", std::vector<std::string> { "ID" },
-				"Property = \"" + code_class_ + "\"");
-
-		source_class_ID_ = getIdFromStringDB("Source", std::vector<std::string> { "ID" },
-				"Name = \"" + source_class_ + "\"");
-		if(code_class_ID_ == (unsigned int) -1 ||
-				source_class_ID_ == (unsigned int) -1){
-			return false;
-		}
+unsigned int DiagnosticTroubleCode::idsFromHexValue(unsigned int hexvalue, unsigned int id_position) {
+	unsigned int bitmask = 0xF << (id_position * (HEX_LENGTH));
+	if(id_position <= 1) {
+		bitmask |= 0xF;
+		id_position = 0;
 	}
-	return true;
+	return ((hexvalue & bitmask) >> (id_position * (HEX_LENGTH)));
 }
 
 // GETTER
@@ -114,4 +126,20 @@ unsigned int DiagnosticTroubleCode::getCodeClassID() {
 
 unsigned int DiagnosticTroubleCode::getSourceClassID() {
 	return source_class_ID_;
+}
+
+unsigned int DiagnosticTroubleCode::getFaultID() {
+	return fault_ID_;
+}
+
+void DiagnosticTroubleCode::fromElmHexValue(int hexvalue) {
+	code_class_ID_ = idsFromHexValue(hexvalue, 3);
+	source_class_ID_ = idsFromHexValue(hexvalue, 2);
+	fault_ID_ = idsFromHexValue(hexvalue, 1);
+
+	valid_construction_ = true;
+}
+
+unsigned int DiagnosticTroubleCode::toElmHexValue() {
+	return (((code_class_ID_ << (3*HEX_LENGTH)) | (source_class_ID_ << (2*HEX_LENGTH))) | fault_ID_);
 }
