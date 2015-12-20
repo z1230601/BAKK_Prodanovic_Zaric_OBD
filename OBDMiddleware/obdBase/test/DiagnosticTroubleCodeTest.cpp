@@ -17,13 +17,15 @@ void DiagnosticTroubleCodeTest::tearDown() {
 void DiagnosticTroubleCodeTest::testConstruction() {
 	CPPUNIT_ASSERT(!dtc_under_test_->isValidlyConstructed());
 
+	unsigned int expectedAssemblyId = 0;
+	std::string expectedAssembly = "Powertrain";
 	std::string expectedCodeClass = "Generic";
 	std::string expectedSourceClass = "Fuel & Air Metering";
 	std::string expectedDescription = "some long long description";
 	unsigned int expectedCodeClassID = 0;
 	unsigned int expectedSourceClassID = 1;
 
-	dtc_under_test_ = new DiagnosticTroubleCode(expectedCodeClassID,
+	dtc_under_test_ = new DiagnosticTroubleCode(expectedAssemblyId, expectedCodeClassID,
 			expectedSourceClassID, expectedDescription);
 	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
 	CPPUNIT_ASSERT_EQUAL(expectedCodeClassID,
@@ -33,7 +35,7 @@ void DiagnosticTroubleCodeTest::testConstruction() {
 	CPPUNIT_ASSERT_EQUAL(expectedDescription,
 			dtc_under_test_->getDescription());
 
-	dtc_under_test_ = new DiagnosticTroubleCode(expectedCodeClass,
+	dtc_under_test_ = new DiagnosticTroubleCode(expectedAssemblyId, expectedCodeClass,
 			expectedSourceClass, expectedDescription);
 	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
 	CPPUNIT_ASSERT_EQUAL(expectedCodeClass, dtc_under_test_->getCodeClass());
@@ -41,16 +43,20 @@ void DiagnosticTroubleCodeTest::testConstruction() {
 			dtc_under_test_->getSourceClass());
 	CPPUNIT_ASSERT_EQUAL(expectedDescription,
 			dtc_under_test_->getDescription());
+
+	CPPUNIT_ASSERT_EQUAL(expectedAssembly, dtc_under_test_->getAssemblyName());
 }
 
 void DiagnosticTroubleCodeTest::testConversion() {
+	unsigned int expectedAssemblyId = 1;
+	std::string expectedAssembly = "Chassis";
 	std::string expectedCodeClass = "Generic";
 	std::string expectedSourceClass = "Fuel & Air Metering";
 	std::string expectedDescription = "some long long description";
 	unsigned int expectedCodeClassID = 0;
 	unsigned int expectedSourceClassID = 1;
 
-	dtc_under_test_ = new DiagnosticTroubleCode(expectedCodeClassID,
+	dtc_under_test_ = new DiagnosticTroubleCode(expectedAssemblyId, expectedCodeClassID,
 			expectedSourceClassID, expectedDescription);
 
 	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
@@ -60,7 +66,9 @@ void DiagnosticTroubleCodeTest::testConversion() {
 	CPPUNIT_ASSERT_EQUAL(expectedDescription,
 			dtc_under_test_->getDescription());
 
-	dtc_under_test_ = new DiagnosticTroubleCode(expectedCodeClass,
+	CPPUNIT_ASSERT_EQUAL(expectedAssembly, dtc_under_test_->getAssemblyName());
+
+	dtc_under_test_ = new DiagnosticTroubleCode(expectedAssemblyId, expectedCodeClass,
 			expectedSourceClass, expectedDescription);
 	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
 	CPPUNIT_ASSERT_EQUAL(expectedCodeClassID,
@@ -69,10 +77,13 @@ void DiagnosticTroubleCodeTest::testConversion() {
 			dtc_under_test_->getSourceClassID());
 	CPPUNIT_ASSERT_EQUAL(expectedDescription,
 			dtc_under_test_->getDescription());
+
+	CPPUNIT_ASSERT_EQUAL(expectedAssembly, dtc_under_test_->getAssemblyName());
 }
 
-void DiagnosticTroubleCodeTest::testHexConversion(){
+void DiagnosticTroubleCodeTest::testHexConversionSimple(){
 	unsigned int hexvalue = 0x143A; // = P143A
+	unsigned int expectedAssembly = 0;
 	unsigned int expectedCodeClassId = 1;
 	unsigned int expectedSourceClassId = 4;
 	unsigned int expectedFaultId = 0x3A;
@@ -85,6 +96,31 @@ void DiagnosticTroubleCodeTest::testHexConversion(){
 			dtc_under_test_->getSourceClassID());
 	CPPUNIT_ASSERT_EQUAL(expectedFaultId, dtc_under_test_->getFaultID());
 
+	CPPUNIT_ASSERT_EQUAL(expectedAssembly, dtc_under_test_->getAssemblyAreaID());
+
 	unsigned int actualHex = dtc_under_test_->toElmHexValue();
 	CPPUNIT_ASSERT_EQUAL(hexvalue, actualHex);
+}
+
+void DiagnosticTroubleCodeTest::testHexConversionDifferentCodes() {
+	unsigned int hexvalue = 0x57C4; // = C17C4
+	unsigned int expectedAssembly = 1;
+	unsigned int expectedCodeClassId = 1;
+	unsigned int expectedSourceClassId = 7;
+	unsigned int expectedFaultId = 0xC4;
+
+	dtc_under_test_->fromElmHexValue(hexvalue);
+	CPPUNIT_ASSERT(dtc_under_test_->isValidlyConstructed());
+	unsigned int actualHex = dtc_under_test_->toElmHexValue();
+	CPPUNIT_ASSERT_EQUAL(expectedCodeClassId,
+			dtc_under_test_->getCodeClassID());
+	CPPUNIT_ASSERT_EQUAL(expectedSourceClassId,
+			dtc_under_test_->getSourceClassID());
+	CPPUNIT_ASSERT_EQUAL(expectedFaultId, dtc_under_test_->getFaultID());
+
+	CPPUNIT_ASSERT_EQUAL(expectedAssembly,
+			dtc_under_test_->getAssemblyAreaID());
+
+	CPPUNIT_ASSERT_EQUAL(hexvalue, actualHex);
+
 }

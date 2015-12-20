@@ -3,6 +3,7 @@
 #include "Configuration.h"
 
 DiagnosticTroubleCode::DiagnosticTroubleCode() :
+		assembly_area_(0),
 		code_class_(""),
 		source_class_(""),
 		description_(""),
@@ -13,8 +14,9 @@ DiagnosticTroubleCode::DiagnosticTroubleCode() :
 
 }
 
-DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int code_id,
+DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id,
 		unsigned int source_id, std::string &description) :
+		assembly_area_(assembly_id),
 		description_(description),
 		code_class_ID_(code_id),
 		source_class_ID_(source_id)
@@ -28,8 +30,9 @@ DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int code_id,
 	valid_construction_ = true;
 }
 
-DiagnosticTroubleCode::DiagnosticTroubleCode(std::string &codeclass,
+DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass,
 		std::string &sourceclass, std::string &description) :
+		assembly_area_(assembly_id),
 		code_class_(codeclass),
 		source_class_(sourceclass),
 		description_(description)
@@ -133,7 +136,10 @@ unsigned int DiagnosticTroubleCode::getFaultID() {
 }
 
 void DiagnosticTroubleCode::fromElmHexValue(int hexvalue) {
-	code_class_ID_ = idsFromHexValue(hexvalue, 3);
+	unsigned int byte1 = idsFromHexValue(hexvalue, 3);
+	assembly_area_ = byte1 >> HEX_LENGTH/2;
+	code_class_ID_ = byte1 & 0x3;
+//	code_class_ID_ = idsFromHexValue(hexvalue, 3);
 	source_class_ID_ = idsFromHexValue(hexvalue, 2);
 	fault_ID_ = idsFromHexValue(hexvalue, 1);
 
@@ -141,5 +147,29 @@ void DiagnosticTroubleCode::fromElmHexValue(int hexvalue) {
 }
 
 unsigned int DiagnosticTroubleCode::toElmHexValue() {
-	return (((code_class_ID_ << (3*HEX_LENGTH)) | (source_class_ID_ << (2*HEX_LENGTH))) | fault_ID_);
+	return (((((assembly_area_ << HEX_LENGTH/2)
+			   | code_class_ID_) << (3*HEX_LENGTH))
+			   | (source_class_ID_ << (2*HEX_LENGTH)))
+			   | fault_ID_);
+}
+
+void DiagnosticTroubleCode::setAssemblyID(unsigned int id){
+	if(id < 4){
+		assembly_area_ = id;
+	}
+}
+
+std::string DiagnosticTroubleCode::getAssemblyName(){
+	if(assmebly_table_.find(assembly_area_) != assmebly_table_.end()){
+		return assmebly_table_.at(assembly_area_);
+	}
+	return "UNKNOWN";
+}
+
+std::string DiagnosticTroubleCode::getTableName(){
+	return getAssemblyName();
+}
+
+unsigned int DiagnosticTroubleCode::getAssemblyAreaID(){
+	return assembly_area_;
 }

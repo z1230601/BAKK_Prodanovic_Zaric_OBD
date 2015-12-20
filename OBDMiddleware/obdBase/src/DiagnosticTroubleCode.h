@@ -5,9 +5,18 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 class DiagnosticTroubleCode {
 private:
+	std::map<unsigned int, std::string> assmebly_table_{
+		{0,"Powertrain"},
+		{1,"Chassis"},
+		{2,"Body"},
+		{3,"Network"},
+	};
+
+	unsigned int assembly_area_;
 	std::string code_class_;
 	std::string source_class_;
 	std::string description_;
@@ -22,17 +31,23 @@ private:
 	unsigned int idsFromHexValue(unsigned int hexvalue, unsigned int id_position);
 public:
 	DiagnosticTroubleCode();
-	DiagnosticTroubleCode(unsigned int code_id, unsigned int source_id, std::string &description);
-	DiagnosticTroubleCode(std::string &codeclass, std::string &sourceclass, std::string &description);
+	DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id, unsigned int source_id, std::string &description);
+	DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass, std::string &sourceclass, std::string &description);
 	virtual ~DiagnosticTroubleCode();
 
 	bool isValidlyConstructed();
 	std::string getCodeClass();
 	std::string getSourceClass();
 	std::string getDescription();
+	std::string getAssemblyName();
+	std::string getTableName();
+
+	unsigned int getAssemblyAreaID();
 	unsigned int getCodeClassID();
 	unsigned int getSourceClassID();
 	unsigned int getFaultID();
+
+	void setAssemblyID(unsigned int id);
 
 	void fromElmHexValue(int hexvalue);
 	unsigned int toElmHexValue();

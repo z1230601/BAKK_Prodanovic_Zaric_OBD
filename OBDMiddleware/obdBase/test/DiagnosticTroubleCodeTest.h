@@ -11,7 +11,8 @@ class DiagnosticTroubleCodeTest : public CppUnit::TestCase{
 //	CPPUNIT_TEST ();
 	CPPUNIT_TEST(testConstruction);
 	CPPUNIT_TEST(testConversion);
-	CPPUNIT_TEST(testHexConversion);
+	CPPUNIT_TEST(testHexConversionSimple);
+	CPPUNIT_TEST(testHexConversionDifferentCodes);
 	CPPUNIT_TEST_SUITE_END();
 private:
 		DiagnosticTroubleCode* dtc_under_test_;
@@ -21,7 +22,8 @@ public:
 	void tearDown();
 	void testConstruction();
 	void testConversion();
-	void testHexConversion();
+	void testHexConversionSimple();
+	void testHexConversionDifferentCodes();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (DiagnosticTroubleCodeTest);
 #endif /* DIAGNOSTICTROUBLECODETEST_H_ */
