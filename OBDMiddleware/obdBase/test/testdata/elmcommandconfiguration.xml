@@ -63,115 +63,651 @@
 		<group>"OBD"</group>
 	</command>
 	<command>
-<version>1.0</version> <elmcommand>"BI"</elmcommand> <description>"Bypass the Initialization sequence" </description>  <group>"OBD"</group>
-<version>1.2</version> <elmcommand>"BRD hh"</elmcommand> <description>"try Baud rate Divisor hh" </description>  <group>"General"</group>
-<version>1.2</version> <elmcommand>"BRT hh"</elmcommand> <description>"set Baud Rate handshake Timeout" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"CAF0"</elmcommand> <description>"CAN Automatic Formatting Off" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CAF1"</elmcommand> <description>"CAN Automatic Formatting On" </description>  <group>"CAN"</group>
-<version>1.4</version> <elmcommand>"CEA"</elmcommand> <description>"turn off CAN Extended Addressing" </description>  <group>"CAN"</group>
-<version>1.4</version> <elmcommand>"CEA"</elmcommand> <description>"hh use CAN Extended Address hh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CF hh hh hh hh"</elmcommand> <description>"set the ID Filter to hhhhhhhh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CF hhh"</elmcommand> <description>"set the ID Filter to hhh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CFC0"</elmcommand> <description>"CAN Flow Control Off" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CFC1"</elmcommand> <description>"CAN Flow Control On" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CM hh hh hh hh"</elmcommand> <description>"set the ID Mask to hhhhhhhh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CM hhh"</elmcommand> <description>"set the ID Mask to hhh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CP hh"</elmcommand> <description>"set CAN Priority (only for 29 bit)" </description>  <group>"CAN"</group>
-<version>1.4b</version> <elmcommand>"CRA"</elmcommand> <description>"reset CAN Receive Address filters" </description>  <group>"CAN"</group>
-<version>1.3</version> <elmcommand>"CRA hhh"</elmcommand> <description>"set CAN Receive Address to hhh" </description>  <group>"CAN"</group>
-<version>1.3</version> <elmcommand>"CRA hhhhhhhh"</elmcommand> <description>"set CAN Receive Address to hhhhhhhh" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CS"</elmcommand> <description>"show the CAN Status" </description>  <group>"CAN"</group>
-<version>1.4b</version> <elmcommand>"CSM0"</elmcommand> <description>"CAN Silent Mode Off" </description>  <group>"CAN"</group>
-<version>1.4b</version> <elmcommand>"CSM1"</elmcommand> <description>"CAN Silent Mode On" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"CV dddd"</elmcommand> <description>"Calibrate the Voltage to dd.dd volts Volts
-<version>1.4</version> <elmcommand>"CV 0000"</elmcommand> <description>"Restore CV value to factory setting Volts
-<version>1.0</version> <elmcommand>"D"</elmcommand> <description>"set all to Defaults" </description>  <group>"General"</group>
-<version>1.3</version> <elmcommand>"D0"</elmcommand>display of the DLC Off" </description>  <group>"CAN"</group>
-<version>1.3</version> <elmcommand>"D1"</elmcommand> <description>"display of the DLC On" </description>  <group>"CAN"</group>
-<version>1.2</version> <elmcommand>"DM1"</elmcommand> <description>"(J1939) Monitor for DM1 messages" </description>  <group>"J1939"</group>
-<version>1.0</version> <elmcommand>"DP"</elmcommand> <description>"Describe the current Protocol" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"DPN"</elmcommand> <description>"Describe the Protocol by Number" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"E0"</elmcommand> <description>"Echo Off" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"E1"</elmcommand> <description>"Echo On" </description>  <group>"General"</group>
-<version>1.1</version> <elmcommand>"FC"</elmcommand> <description>"SD [1-5 bytes] Flow Control Set Data to [...]" </description>  <group>"CAN"</group>
-<version>1.1</version> <elmcommand>"FC SH hh hh hh hh"</elmcommand> <description>"Flow Control Set the Header to hhhhhhhh" </description>  <group>"CAN"</group>
-<version>1.1</version> <elmcommand>"FC SH hhh"</elmcommand> <description>"Flow Control Set the Header to hhh" </description>  <group>"CAN"</group>
-<version>1.1</version> <elmcommand>"FC SM h"</elmcommand> <description>"Flow Control Set the Mode to h" </description>  <group>"CAN"</group>
-<version>1.3a</version> <elmcommand>"FE"</elmcommand> <description>"Forget Events" </description>  <group>"General"</group>
-<version>1.4</version> <elmcommand>"FI"</elmcommand> <description>"perform a Fast Initiation" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"H0"</elmcommand> <description>"Headers Off" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"H1"</elmcommand> <description>"Headers On" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"I"</elmcommand> <description>"Print the ID" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"IB"</elmcommand> <description>"10 set the ISO Baud rate to 10400" </description>  <group>"ISO"</group>
-<version>1.4</version> <elmcommand>"IB"</elmcommand> <description>"48 set the ISO Baud rate to 4800" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"IB"</elmcommand> <description>"96 set the ISO Baud rate to 9600" </description>  <group>"ISO"</group>
-<version>1.2</version> <elmcommand>"IFR H"</elmcommand> <description>"IFR value from Header" </description>  <group>"J1850"</group>
-<version>1.2</version> <elmcommand>"IFR S"</elmcommand> <description>"IFR value from Source" </description>  <group>"J1850"</group>
-<version>1.2</version> <elmcommand>"IFR0"</elmcommand> <description>"IFRs Off" </description>  <group>"J1850"</group>
-<version>1.2</version> <elmcommand>"IFR1"</elmcommand> <description>"IFRs Auto" </description>  <group>"J1850"</group>
-<version>1.2</version> <elmcommand>"IFR2"</elmcommand> <description>"IFRs On" </description>  <group>"J1850"</group>
-<version>1.4</version> <elmcommand>"IGN"</elmcommand> <description>"read the IgnMon input level Other
-<version>1.2</version> <elmcommand>"IIA hh"</elmcommand> <description>"set the ISO (slow) Init Address to hh" </description>  <group>"ISO"</group>
-<version>1.3</version> <elmcommand>"JE"</elmcommand> <description>"use J1939 Elm data format" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"JHF0"</elmcommand> <description>"J1939 Header Formatting Off" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"JHF1"</elmcommand> <description>"J1939 Header Formatting On" </description>  <group>"J1939"</group>
-<version>1.3</version> <elmcommand>"JS"</elmcommand> <description>"use J1939 SAE data format" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"JTM1"</elmcommand> <description>"set the J1939 Timer Multiplier to 1x" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"JTM5"</elmcommand> <description>"set the J1939 Timer Multiplier to 5x" </description>  <group>"J1939"</group>
-<version>1.3</version> <elmcommand>"KW"</elmcommand> <description>"display the Key Words" </description>  <group>"ISO"</group>
-<version>1.2</version> <elmcommand>"KW0"</elmcommand> <description>"Key Word checking Off" </description>  <group>"ISO"</group>
-<version>1.2</version> <elmcommand>"KW1"</elmcommand> <description>"Key Word checking On" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"L0"</elmcommand> <description>"Linefeeds Off" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"L1"</elmcommand> <description>"Linefeeds On" </description>  <group>"General"</group>
-<version>1.4</version> <elmcommand>"LP"</elmcommand> <description>"go to Low Power mode" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"M0"</elmcommand> <description>"Memory Off" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"M1"</elmcommand> <description>"Memory On" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"MA"</elmcommand> <description>"Monitor All" </description>  <group>"OBD"</group>
-<version>1.2</version> <elmcommand>"MP hhhh"</elmcommand> <description>"(J1939) Monitor for PGN hhhh" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"MP hhhh n"</elmcommand> <description>"(J1939) Monitor for PGN hhhh, get n messages" </description>  <group>"J1939"</group>
-<version>1.3</version> <elmcommand>"MP hhhhhh"</elmcommand> <description>"(J1939) Monitor for PGN hhhhhh" </description>  <group>"J1939"</group>
-<version>1.4b</version> <elmcommand>"MP hhhhhh n"</elmcommand> <description>"(J1939) Monitor for PGN hhhhhh, get n messages" </description>  <group>"J1939"</group>
-<version>1.0</version> <elmcommand>"MR hh"</elmcommand> <description>"Monitor for Receiver = hh" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"MT hh"</elmcommand> <description>"Monitor for Transmitter = hh" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"NL"</elmcommand> <description>"Normal Length (7 byte) messages" </description>  <group>"OBD"</group>
-<version>1.4</version> <elmcommand>"PB"</elmcommand> <description>"xx yy set Protocol B options and baud rate" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"PC"</elmcommand> <description>"Protocol Close" </description>  <group>"OBD"</group>
-<version>1.1</version> <elmcommand>"PP FF OFF"</elmcommand> <description>"all Prog Parameters Off" </description>  <group>"PPs"</group>
-<version>1.1</version> <elmcommand>"PP FF ON"</elmcommand> <description>"all Prog Parameters On" </description>  <group>"PPs"</group>
-<version>1.1</version> <elmcommand>"PP xx OFF"</elmcommand> <description>"disable Prog Parameter xx" </description>  <group>"PPs"</group>
-<version>1.1</version> <elmcommand>"PP xx ON"</elmcommand> <description>"enable Prog Parameter xx" </description>  <group>"PPs"</group>
-<version>1.1</version> <elmcommand>"PP xx SV yy"</elmcommand> <description>"for PP xx, Set the Value to yy" </description>  <group>"PPs"</group>
-<version>1.1</version> <elmcommand>"PPS"</elmcommand> <description>"print a PP Summary" </description>  <group>"PPs"</group>
-<version>1.0</version> <elmcommand>"R0"</elmcommand> <description>"Responses Off" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"R1"</elmcommand> <description>"Responses On" </description>  <group>"OBD"</group>
-<version>1.3</version> <elmcommand>"RA hh"</elmcommand> <description>"set the Receive Address to hh" </description>  <group>"OBD"</group>
-<version>1.4</version> <elmcommand>"RD"</elmcommand> <description>"Read the stored Data" </description>  <group>"General"</group>
-<version>1.3</version> <elmcommand>"RTR"</elmcommand> <description>"send an RTR message" </description>  <group>"CAN"</group>
-<version>1.0</version> <elmcommand>"RV"</elmcommand> <description>"Read the Voltage Volts
-<version>1.3</version> <elmcommand>"S0"</elmcommand> <description>"printing of Spaces Off" </description>  <group>"OBD"</group>
-<version>1.3</version> <elmcommand>"S1"</elmcommand> <description>"printing of Spaces On" </description>  <group>"OBD"</group>
-<version>1.4</version> <elmcommand>"SD hh"</elmcommand> <description>"Store Data byte hh" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"SH xx yy zz"</elmcommand> <description>"Set Header" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"SH yzz"</elmcommand> <description>"Set Header" </description>  <group>"OBD"</group>
-<version>1.4</version> <elmcommand>"SI"</elmcommand> <description>"perform a Slow Initiation" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"SP Ah"</elmcommand> <description>"Set Protocol to Auto, h and save it" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"SP h"</elmcommand> <description>"Set Protocol to h and save it" </description>  <group>"OBD"</group>
-<version>1.3</version> <elmcommand>"SP 00"</elmcommand> <description>"Set Protocol to Auto and save it" </description>  <group>"OBD"</group>
-<version>1.2</version> <elmcommand>"SR hh"</elmcommand> <description>"Set the Receive address to hh" </description>  <group>"OBD"</group>
-<version>1.4</version> <elmcommand>"SS"</elmcommand> <description>"set Standard Search order (J1978)" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"ST hh"</elmcommand> <description>"Set Timeout to hh x 4 msec" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"SW hh"</elmcommand> <description>"Set Wakeup interval to hh x 20 msec" </description>  <group>"ISO"</group>
-<version>1.4</version> <elmcommand>"TA hh"</elmcommand> <description>"set Tester Address to hh" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"TP Ah"</elmcommand> <description>"Try Protocol h with Auto search" </description>  <group>"OBD"</group>
-<version>1.0</version> <elmcommand>"TP h"</elmcommand> <description>"Try Protocol h" </description>  <group>"OBD"</group>
-<version>1.3</version> <elmcommand>"V0"</elmcommand> <description>"use of Variable DLC Off" </description>  <group>"CAN"</group>
-<version>1.3</version> <elmcommand>"V1"</elmcommand> <description>"use of Variable DLC On" </description>  <group>"CAN"</group>
-<version>1.2</version> <elmcommand>"WM [1-6 bytes]"</elmcommand> <description>"Set the Wakeup Message" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"WM xxyyzzaa"</elmcommand> <description>"set the Wakeup Message to xxyyzzaa" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"WM xxyyzzaabb"</elmcommand> <description>"set the Wakeup Message to xxyyzzaabb" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"WM xxyyzzaabbcc"</elmcommand> <description>"set the Wakeup Message to xxyyzzaabbcc" </description>  <group>"ISO"</group>
-<version>1.0</version> <elmcommand>"WS"</elmcommand> <description>"Warm Start" </description>  <group>"General"</group>
-<version>1.0</version> <elmcommand>"Z"</elmcommand> <description>"reset all" </description>  <group>"General"</group>	
+		<version>1.0</version>
+		<elmcommand>"BI"</elmcommand>
+		<description>"Bypass the Initialization sequence"</description> 
+		<group>"OBD"</group>
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"BRD hh"</elmcommand>
+		<description>"try Baud rate Divisor hh"</description> 
+		<group>"General"</group>
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"BRT hh"</elmcommand>
+		<description>"set Baud Rate handshake Timeout"</description>
+		<group>"General"</group>
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CAF0"</elmcommand>
+		<description>"CAN Automatic Formatting Off"</description>
+		<group>"CAN"</group>
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CAF1"</elmcommand>
+		<description>"CAN Automatic Formatting On"</description>
+		<group>"CAN"</group>
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"CEA"</elmcommand>
+		<description>"turn off CAN Extended Addressing"</description>
+		<group>"CAN"</group>
+	</command>
+	<command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"CEA"</elmcommand> 
+		<description>"hh use CAN Extended Address hh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CF hh hh hh hh"</elmcommand> 
+		<description>"set the ID Filter to hhhhhhhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CF hhh"</elmcommand> 
+		<description>"set the ID Filter to hhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CFC0"</elmcommand> 
+		<description>"CAN Flow Control Off"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CFC1"</elmcommand> 
+		<description>"CAN Flow Control On"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CM hh hh hh hh"</elmcommand> 
+		<description>"set the ID Mask to hhhhhhhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CM hhh"</elmcommand> 
+		<description>"set the ID Mask to hhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CP hh"</elmcommand> 
+		<description>"set CAN Priority (only for 29 bit)"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"CRA"</elmcommand> 
+		<description>"reset CAN Receive Address filters"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"CRA hhh"</elmcommand> 
+		<description>"set CAN Receive Address to hhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"CRA hhhhhhhh"</elmcommand> 
+		<description>"set CAN Receive Address to hhhhhhhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CS"</elmcommand> 
+		<description>"show the CAN Status"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"CSM0"</elmcommand> 
+		<description>"CAN Silent Mode Off"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"CSM1"</elmcommand> 
+		<description>"CAN Silent Mode On"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"CV dddd"</elmcommand> 
+		<description>"Calibrate the Voltage to dd.dd volts Volts
+	<command>
+		<version>1.4</version>
+		<elmcommand>"CV 0000"</elmcommand> 
+		<description>"Restore CV value to factory setting Volts
+	<command>
+		<version>1.0</version>
+		<elmcommand>"D"</elmcommand> 
+		<description>"set all to Defaults"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"D0"</elmcommand>display of the DLC Off"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"D1"</elmcommand> 
+		<description>"display of the DLC On"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"DM1"</elmcommand> 
+		<description>"(J1939) Monitor for DM1 messages"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"DP"</elmcommand> 
+		<description>"Describe the current Protocol"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"DPN"</elmcommand> 
+		<description>"Describe the Protocol by Number"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"E0"</elmcommand> 
+		<description>"Echo Off"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"E1"</elmcommand> 
+		<description>"Echo On"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"FC"</elmcommand> 
+		<description>"SD [1-5 bytes] Flow Control Set Data to [...]"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"FC SH hh hh hh hh"</elmcommand> 
+		<description>"Flow Control Set the Header to hhhhhhhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"FC SH hhh"</elmcommand> 
+		<description>"Flow Control Set the Header to hhh"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"FC SM h"</elmcommand> 
+		<description>"Flow Control Set the Mode to h"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.3a</version>
+		<elmcommand>"FE"</elmcommand> 
+		<description>"Forget Events"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"FI"</elmcommand> 
+		<description>"perform a Fast Initiation"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"H0"</elmcommand> 
+		<description>"Headers Off"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"H1"</elmcommand> 
+		<description>"Headers On"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"I"</elmcommand> 
+		<description>"Print the ID"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"IB"</elmcommand> 
+		<description>"10 set the ISO Baud rate to 10400"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"IB"</elmcommand> 
+		<description>"48 set the ISO Baud rate to 4800"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"IB"</elmcommand> 
+		<description>"96 set the ISO Baud rate to 9600"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IFR H"</elmcommand> 
+		<description>"IFR value from Header"</description> 
+		<group>"J1850"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IFR S"</elmcommand> 
+		<description>"IFR value from Source"</description> 
+		<group>"J1850"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IFR0"</elmcommand> 
+		<description>"IFRs Off"</description> 
+		<group>"J1850"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IFR1"</elmcommand> 
+		<description>"IFRs Auto"</description> 
+		<group>"J1850"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IFR2"</elmcommand> 
+		<description>"IFRs On"</description> 
+		<group>"J1850"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"IGN"</elmcommand> 
+		<description>"read the IgnMon input level Other
+	<command>
+		<version>1.2</version>
+		<elmcommand>"IIA hh"</elmcommand> 
+		<description>"set the ISO (slow) Init Address to hh"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"JE"</elmcommand> 
+		<description>"use J1939 Elm data format"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"JHF0"</elmcommand> 
+		<description>"J1939 Header Formatting Off"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"JHF1"</elmcommand> 
+		<description>"J1939 Header Formatting On"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"JS"</elmcommand> 
+		<description>"use J1939 SAE data format"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"JTM1"</elmcommand> 
+		<description>"set the J1939 Timer Multiplier to 1x"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"JTM5"</elmcommand> 
+		<description>"set the J1939 Timer Multiplier to 5x"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"KW"</elmcommand> 
+		<description>"display the Key Words"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"KW0"</elmcommand> 
+		<description>"Key Word checking Off"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"KW1"</elmcommand> 
+		<description>"Key Word checking On"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"L0"</elmcommand> 
+		<description>"Linefeeds Off"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"L1"</elmcommand> 
+		<description>"Linefeeds On"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"LP"</elmcommand> 
+		<description>"go to Low Power mode"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"M0"</elmcommand> 
+		<description>"Memory Off"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"M1"</elmcommand> 
+		<description>"Memory On"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"MA"</elmcommand> 
+		<description>"Monitor All"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"MP hhhh"</elmcommand> 
+		<description>"(J1939) Monitor for PGN hhhh"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"MP hhhh n"</elmcommand> 
+		<description>"(J1939) Monitor for PGN hhhh, get n messages"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"MP hhhhhh"</elmcommand> 
+		<description>"(J1939) Monitor for PGN hhhhhh"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.4b</version>
+		<elmcommand>"MP hhhhhh n"</elmcommand> 
+		<description>"(J1939) Monitor for PGN hhhhhh, get n messages"</description> 
+		<group>"J1939"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"MR hh"</elmcommand> 
+		<description>"Monitor for Receiver = hh"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"MT hh"</elmcommand> 
+		<description>"Monitor for Transmitter = hh"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"NL"</elmcommand> 
+		<description>"Normal Length (7 byte) messages"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"PB"</elmcommand> 
+		<description>"xx yy set Protocol B options and baud rate"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"PC"</elmcommand> 
+		<description>"Protocol Close"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PP FF OFF"</elmcommand> 
+		<description>"all Prog Parameters Off"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PP FF ON"</elmcommand> 
+		<description>"all Prog Parameters On"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PP xx OFF"</elmcommand> 
+		<description>"disable Prog Parameter xx"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PP xx ON"</elmcommand> 
+		<description>"enable Prog Parameter xx"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PP xx SV yy"</elmcommand> 
+		<description>"for PP xx, Set the Value to yy"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<elmcommand>"PPS"</elmcommand> 
+		<description>"print a PP Summary"</description> 
+		<group>"PPs"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"R0"</elmcommand> 
+		<description>"Responses Off"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"R1"</elmcommand> 
+		<description>"Responses On"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"RA hh"</elmcommand> 
+		<description>"set the Receive Address to hh"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"RD"</elmcommand> 
+		<description>"Read the stored Data"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"RTR"</elmcommand> 
+		<description>"send an RTR message"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"RV"</elmcommand> 
+		<description>"Read the Voltage Volts
+	<command>
+		<version>1.3</version>
+		<elmcommand>"S0"</elmcommand> 
+		<description>"printing of Spaces Off"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"S1"</elmcommand> 
+		<description>"printing of Spaces On"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"SD hh"</elmcommand> 
+		<description>"Store Data byte hh"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"SH xx yy zz"</elmcommand> 
+		<description>"Set Header"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"SH yzz"</elmcommand> 
+		<description>"Set Header"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"SI"</elmcommand> 
+		<description>"perform a Slow Initiation"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"SP Ah"</elmcommand> 
+		<description>"Set Protocol to Auto, h and save it"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"SP h"</elmcommand> 
+		<description>"Set Protocol to h and save it"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"SP 00"</elmcommand> 
+		<description>"Set Protocol to Auto and save it"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"SR hh"</elmcommand> 
+		<description>"Set the Receive address to hh"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"SS"</elmcommand> 
+		<description>"set Standard Search order (J1978)"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"ST hh"</elmcommand> 
+		<description>"Set Timeout to hh x 4 msec"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"SW hh"</elmcommand> 
+		<description>"Set Wakeup interval to hh x 20 msec"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<elmcommand>"TA hh"</elmcommand> 
+		<description>"set Tester Address to hh"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"TP Ah"</elmcommand> 
+		<description>"Try Protocol h with Auto search"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"TP h"</elmcommand> 
+		<description>"Try Protocol h"</description> 
+		<group>"OBD"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"V0"</elmcommand> 
+		<description>"use of Variable DLC Off"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.3</version>
+		<elmcommand>"V1"</elmcommand> 
+		<description>"use of Variable DLC On"</description> 
+		<group>"CAN"</group> 
+	</command>
+	<command>
+		<version>1.2</version>
+		<elmcommand>"WM [1-6 bytes]"</elmcommand> 
+		<description>"Set the Wakeup Message"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"WM xxyyzzaa"</elmcommand> 
+		<description>"set the Wakeup Message to xxyyzzaa"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"WM xxyyzzaabb"</elmcommand> 
+		<description>"set the Wakeup Message to xxyyzzaabb"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"WM xxyyzzaabbcc"</elmcommand> 
+		<description>"set the Wakeup Message to xxyyzzaabbcc"</description> 
+		<group>"ISO"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"WS"</elmcommand> 
+		<description>"Warm Start"</description> 
+		<group>"General"</group> 
+	</command>
+	<command>
+		<version>1.0</version>
+		<elmcommand>"Z"</elmcommand> 
+		<description>"reset all"</description> 
+		<group>"General"</group> 
+	</command>	
 </commands>
    
 
