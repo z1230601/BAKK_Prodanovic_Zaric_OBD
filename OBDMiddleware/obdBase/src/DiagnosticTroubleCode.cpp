@@ -15,12 +15,12 @@ DiagnosticTroubleCode::DiagnosticTroubleCode() :
 }
 
 DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id,
-		unsigned int source_id, std::string &description) :
+		unsigned int source_id, unsigned int fault_id, std::string &description) :
 		assembly_area_(assembly_id),
 		description_(description),
 		code_class_ID_(code_id),
-		source_class_ID_(source_id)
-		//TODO: fault_ID_();
+		source_class_ID_(source_id),
+		fault_ID_(fault_id)
 		 {
 
 	if (!parseClasses(true)) {
@@ -31,11 +31,12 @@ DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int assembly_id, unsigned 
 }
 
 DiagnosticTroubleCode::DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass,
-		std::string &sourceclass, std::string &description) :
+		std::string &sourceclass, unsigned int fault_id, std::string &description) :
 		assembly_area_(assembly_id),
 		code_class_(codeclass),
 		source_class_(sourceclass),
-		description_(description)
+		description_(description),
+		fault_ID_(fault_id)
 		{
 
 	if (!parseClasses(false)) {
@@ -139,7 +140,6 @@ void DiagnosticTroubleCode::fromElmHexValue(int hexvalue) {
 	unsigned int byte1 = idsFromHexValue(hexvalue, 3);
 	assembly_area_ = byte1 >> HEX_LENGTH/2;
 	code_class_ID_ = byte1 & 0x3;
-//	code_class_ID_ = idsFromHexValue(hexvalue, 3);
 	source_class_ID_ = idsFromHexValue(hexvalue, 2);
 	fault_ID_ = idsFromHexValue(hexvalue, 1);
 

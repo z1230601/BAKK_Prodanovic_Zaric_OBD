@@ -31,8 +31,8 @@ private:
 	unsigned int idsFromHexValue(unsigned int hexvalue, unsigned int id_position);
 public:
 	DiagnosticTroubleCode();
-	DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id, unsigned int source_id, std::string &description);
-	DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass, std::string &sourceclass, std::string &description);
+	DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id, unsigned int source_id, unsigned int fault_id, std::string &description);
+	DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass, std::string &sourceclass, unsigned int fault_id, std::string &description);
 	virtual ~DiagnosticTroubleCode();
 
 	bool isValidlyConstructed();

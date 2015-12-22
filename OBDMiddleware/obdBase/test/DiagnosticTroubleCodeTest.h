@@ -8,14 +8,13 @@ class DiagnosticTroubleCode;
 
 class DiagnosticTroubleCodeTest : public CppUnit::TestCase{
 	CPPUNIT_TEST_SUITE (DiagnosticTroubleCodeTest);
-//	CPPUNIT_TEST ();
 	CPPUNIT_TEST(testConstruction);
 	CPPUNIT_TEST(testConversion);
 	CPPUNIT_TEST(testHexConversionSimple);
 	CPPUNIT_TEST(testHexConversionDifferentCodes);
 	CPPUNIT_TEST_SUITE_END();
 private:
-		DiagnosticTroubleCode* dtc_under_test_;
+	DiagnosticTroubleCode* dtc_under_test_;
 
 public:
 	void setUp();
