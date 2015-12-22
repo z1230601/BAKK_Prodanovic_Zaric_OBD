@@ -160,8 +160,8 @@ void DiagnosticTroubleCode::setAssemblyID(unsigned int id){
 }
 
 std::string DiagnosticTroubleCode::getAssemblyName(){
-	if(assmebly_table_.find(assembly_area_) != assmebly_table_.end()){
-		return assmebly_table_.at(assembly_area_);
+	if(assembly_table_.find(assembly_area_) != assembly_table_.end()){
+		return assembly_table_.at(assembly_area_);
 	}
 	return "UNKNOWN";
 }

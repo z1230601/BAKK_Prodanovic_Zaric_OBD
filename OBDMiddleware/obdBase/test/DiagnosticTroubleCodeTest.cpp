@@ -95,7 +95,6 @@ void DiagnosticTroubleCodeTest::testHexConversionSimple(){
 	CPPUNIT_ASSERT_EQUAL(expectedSourceClassId,
 			dtc_under_test_->getSourceClassID());
 	CPPUNIT_ASSERT_EQUAL(expectedFaultId, dtc_under_test_->getFaultID());
-
 	CPPUNIT_ASSERT_EQUAL(expectedAssembly, dtc_under_test_->getAssemblyAreaID());
 
 	unsigned int actualHex = dtc_under_test_->toElmHexValue();

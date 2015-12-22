@@ -9,7 +9,7 @@
 
 class DiagnosticTroubleCode {
 private:
-	std::map<unsigned int, std::string> assmebly_table_{
+	std::map<unsigned int, std::string> assembly_table_{
 		{0,"Powertrain"},
 		{1,"Chassis"},
 		{2,"Body"},
