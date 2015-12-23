@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 
 ValueElmCommand::ValueElmCommand()
 {
@@ -19,18 +20,18 @@ ValueElmCommand::ValueElmCommand(float minReqElmVersion, std::string command,
 {
     std::string valueChecked = valueStringCheckAndAlter(value);
     unsigned int bitcount = getBitCount(valueformat);
-    std::cout << "BitCount: " << bitcount << std::endl;
     value_ = new dynamic_bitset<>(bitcount);
+
+    //off by one
+    bitcount--;
     for(auto sign : valueChecked){
         char val = isdigit(sign) ? sign - 48: sign - 55;
-        value_->push_back(((val & 0x8) >> 3) == 1);
-        value_->push_back(((val & 0x4) >> 2) == 1);
-        value_->push_back(((val & 0x2) >> 1) == 1);
-        value_->push_back((val & 0x1) == 1);
-
+        std::cout << sign << " entwickelt sich zu " << (int) val << std::endl;
+        (*value_)[bitcount--]   = ((((val & 0x8) >> 3) & 0x1) == 1);
+        (*value_)[bitcount--] = ((((val & 0x4) >> 2) & 0x1) == 1);
+        (*value_)[bitcount--] = ((((val & 0x2) >> 1) & 0x1) == 1);
+        (*value_)[bitcount--] = ((val & 0x1) == 1);
     }
-    std::cout << "Value as bitset: " << value_ << std::endl;
-
 }
 
 uint8_t* ValueElmCommand::getCommandAsByteArray()
@@ -47,10 +48,9 @@ uint8_t* ValueElmCommand::getCommandAsByteArray()
 
 std::string ValueElmCommand::getValueAsString()
 {
-    std::string rep;
-    boost::to_string(*value_, rep);
-    std::cout << "Bitset: " << rep << " " << value_ << std::endl;
-    return "";
+    std::stringstream res;
+    res << std::hex << std::uppercase << value_->to_ulong();
+    return res.str();
 }
 
 std::string ValueElmCommand::valueStringCheckAndAlter(std::string value)
