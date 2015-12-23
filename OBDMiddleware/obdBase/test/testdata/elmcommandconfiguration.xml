@@ -16,7 +16,8 @@
 	</command>
 	<command>
 		<version>1.3</version>
-		<elmcommand>"@3 cccccccccccc"</elmcommand>
+		<elmcommand>"@3"</elmcommand>
+		<valueformat>"cccccccccccc"</valueformat>
 		<description>"store the device identifier"</description> 
 		<group>"General"</group>
 	</command>
@@ -70,13 +71,15 @@
 	</command>
 	<command>
 		<version>1.2</version>
-		<elmcommand>"BRD hh"</elmcommand>
+		<elmcommand>"BRD"</elmcommand>
+		<valueformat>"hh"</valueformat>
 		<description>"try Baud rate Divisor hh"</description> 
 		<group>"General"</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<elmcommand>"BRT hh"</elmcommand>
+		<elmcommand>"BRT"</elmcommand>
+		<valueformat>"hh"</valueformat>
 		<description>"set Baud Rate handshake Timeout"</description>
 		<group>"General"</group>
 	</command>
@@ -102,18 +105,21 @@
 	<command>
 		<version>1.4</version>
 		<elmcommand>"CEA"</elmcommand> 
-		<description>"hh use CAN Extended Address hh"</description> 
+		<valueformat>"hh"</valueformat>
+		<description>"use CAN Extended Address hh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CF hh hh hh hh"</elmcommand> 
+		<elmcommand>"CF"</elmcommand> 
+		<valueformat>"hh hh hh hh"</valueformat>
 		<description>"set the ID Filter to hhhhhhhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CF hhh"</elmcommand> 
+		<elmcommand>"CF"</elmcommand> 
+		<valueformat>"hhh"</valueformat>
 		<description>"set the ID Filter to hhh"</description> 
 		<group>"CAN"</group> 
 	</command>
@@ -131,19 +137,22 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CM hh hh hh hh"</elmcommand> 
+		<elmcommand>"CM"</elmcommand> 
+		<valueformat>"hh hh hh hh"</valueformat>
 		<description>"set the ID Mask to hhhhhhhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CM hhh"</elmcommand> 
+		<elmcommand>"CM"</elmcommand> 
+		<valueformat>"hhh"</valueformat>
 		<description>"set the ID Mask to hhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CP hh"</elmcommand> 
+		<elmcommand>"CP"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"set CAN Priority (only for 29 bit)"</description> 
 		<group>"CAN"</group> 
 	</command>
@@ -155,13 +164,15 @@
 	</command>
 	<command>
 		<version>1.3</version>
-		<elmcommand>"CRA hhh"</elmcommand> 
+		<elmcommand>"CRA"</elmcommand> 
+		<valueformat>"hhh"</valueformat>
 		<description>"set CAN Receive Address to hhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<elmcommand>"CRA hhhhhhhh"</elmcommand> 
+		<elmcommand>"CRA"</elmcommand> 
+		<valueformat>"hhhhhhhh"</valueformat>
 		<description>"set CAN Receive Address to hhhhhhhh"</description> 
 		<group>"CAN"</group> 
 	</command>
@@ -185,7 +196,8 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"CV dddd"</elmcommand> 
+		<elmcommand>"CV"</elmcommand>
+		<valueformat>"dddd"</valueformat> 
 		<description>"Calibrate the Voltage to dd.dd volts Volts
 	<command>
 		<version>1.4</version>
@@ -240,25 +252,29 @@
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"FC"</elmcommand> 
-		<description>"SD [1-5 bytes] Flow Control Set Data to [...]"</description> 
+		<elmcommand>"FC SD"</elmcommand> 
+		<valueformat>"hh hh hh hh hh"</valueformat>
+		<description>"Flow Control Set Data to [...]"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"FC SH hh hh hh hh"</elmcommand> 
+		<elmcommand>"FC SH"</elmcommand>
+		<valueformat>"hh hh hh hh"</valueformat> 
 		<description>"Flow Control Set the Header to hhhhhhhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"FC SH hhh"</elmcommand> 
+		<elmcommand>"FC SH"</elmcommand> 
+		<valueformat>"hhh"</valueformat>
 		<description>"Flow Control Set the Header to hhh"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"FC SM h"</elmcommand> 
+		<elmcommand>"FC SM"</elmcommand>
+		<valueformat>"h"</valueformat> 
 		<description>"Flow Control Set the Mode to h"</description> 
 		<group>"CAN"</group> 
 	</command>
@@ -294,20 +310,20 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"IB"</elmcommand> 
-		<description>"10 set the ISO Baud rate to 10400"</description> 
+		<elmcommand>"IB 10"</elmcommand> 
+		<description>"set the ISO Baud rate to 10400"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<elmcommand>"IB"</elmcommand> 
-		<description>"48 set the ISO Baud rate to 4800"</description> 
+		<elmcommand>"IB 48"</elmcommand> 
+		<description>"set the ISO Baud rate to 4800"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"IB"</elmcommand> 
-		<description>"96 set the ISO Baud rate to 9600"</description> 
+		<elmcommand>"IB 96"</elmcommand> 
+		<description>"set the ISO Baud rate to 9600"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
@@ -346,7 +362,8 @@
 		<description>"read the IgnMon input level Other
 	<command>
 		<version>1.2</version>
-		<elmcommand>"IIA hh"</elmcommand> 
+		<elmcommand>"IIA"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"set the ISO (slow) Init Address to hh"</description> 
 		<group>"ISO"</group> 
 	</command>
@@ -443,24 +460,28 @@
 	<command>
 		<version>1.2</version>
 		<elmcommand>"MP hhhh"</elmcommand> 
+		<valueformat>"hhhh"</valueformat>
 		<description>"(J1939) Monitor for PGN hhhh"</description> 
 		<group>"J1939"</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<elmcommand>"MP hhhh n"</elmcommand> 
+		<elmcommand>"MP"</elmcommand>
+		<valueformat>"hhhh n"</valueformat> 
 		<description>"(J1939) Monitor for PGN hhhh, get n messages"</description> 
 		<group>"J1939"</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<elmcommand>"MP hhhhhh"</elmcommand> 
+		<elmcommand>"MP"</elmcommand>
+		<valueformat>"hhhhhh"</valueformat> 
 		<description>"(J1939) Monitor for PGN hhhhhh"</description> 
 		<group>"J1939"</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<elmcommand>"MP hhhhhh n"</elmcommand> 
+		<elmcommand>"MP"</elmcommand> 
+		<valueformat>"hhhhhh n"</valueformat>
 		<description>"(J1939) Monitor for PGN hhhhhh, get n messages"</description> 
 		<group>"J1939"</group> 
 	</command>
@@ -472,7 +493,8 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"MT hh"</elmcommand> 
+		<elmcommand>"MT"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"Monitor for Transmitter = hh"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -485,7 +507,8 @@
 	<command>
 		<version>1.4</version>
 		<elmcommand>"PB"</elmcommand> 
-		<description>"xx yy set Protocol B options and baud rate"</description> 
+		<valueformat>"xx yy"</valueformat>
+		<description>"set Protocol B options and baud rate"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
@@ -508,19 +531,22 @@
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"PP xx OFF"</elmcommand> 
+		<elmcommand>"PP _ OFF"</elmcommand>
+		<valueformat>"xx"</valueformat> 
 		<description>"disable Prog Parameter xx"</description> 
 		<group>"PPs"</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"PP xx ON"</elmcommand> 
+		<elmcommand>"PP _ ON"</elmcommand>
+		<valueformat>"xx"</valueformat> 
 		<description>"enable Prog Parameter xx"</description> 
 		<group>"PPs"</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<elmcommand>"PP xx SV yy"</elmcommand> 
+		<elmcommand>"PP _ SV _"</elmcommand> 
+		<valueformat>"_ xx _ yy"</valueformat>
 		<description>"for PP xx, Set the Value to yy"</description> 
 		<group>"PPs"</group> 
 	</command>
@@ -544,7 +570,8 @@
 	</command>
 	<command>
 		<version>1.3</version>
-		<elmcommand>"RA hh"</elmcommand> 
+		<elmcommand>"RA"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"set the Receive Address to hh"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -578,19 +605,22 @@
 	</command>
 	<command>
 		<version>1.4</version>
-		<elmcommand>"SD hh"</elmcommand> 
+		<elmcommand>"SD"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"Store Data byte hh"</description> 
 		<group>"General"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"SH xx yy zz"</elmcommand> 
+		<elmcommand>"SH"</elmcommand>
+		<valueformat>"xx yy zz"</valueformat>
 		<description>"Set Header"</description> 
 		<group>"OBD"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"SH yzz"</elmcommand> 
+		<elmcommand>"SH"</elmcommand>
+		<valueformat>"yzz"</valueformat> 
 		<description>"Set Header"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -602,13 +632,15 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"SP Ah"</elmcommand> 
+		<elmcommand>"SP A"</elmcommand>
+		<valueformat>"h"</valueformat> 
 		<description>"Set Protocol to Auto, h and save it"</description> 
 		<group>"OBD"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"SP h"</elmcommand> 
+		<elmcommand>"SP"</elmcommand>
+		<valueformat>"h"</valueformat> 
 		<description>"Set Protocol to h and save it"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -620,7 +652,8 @@
 	</command>
 	<command>
 		<version>1.2</version>
-		<elmcommand>"SR hh"</elmcommand> 
+		<elmcommand>"SR"</elmcommand>
+		<valueformat>"hh"</valueformat> 
 		<description>"Set the Receive address to hh"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -632,31 +665,36 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"ST hh"</elmcommand> 
+		<elmcommand>"ST"</elmcommand>
+		<valueformat>"hh"</valueformat> 
 		<description>"Set Timeout to hh x 4 msec"</description> 
 		<group>"OBD"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"SW hh"</elmcommand> 
+		<elmcommand>"SW"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"Set Wakeup interval to hh x 20 msec"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<elmcommand>"TA hh"</elmcommand> 
+		<elmcommand>"TA"</elmcommand> 
+		<valueformat>"hh"</valueformat>
 		<description>"set Tester Address to hh"</description> 
 		<group>"OBD"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"TP Ah"</elmcommand> 
+		<elmcommand>"TP A"</elmcommand>
+		<valueformat>"h"</valueformat> 
 		<description>"Try Protocol h with Auto search"</description> 
 		<group>"OBD"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"TP h"</elmcommand> 
+		<elmcommand>"TP"</elmcommand>
+		<valueformat>"h"</valueformat> 
 		<description>"Try Protocol h"</description> 
 		<group>"OBD"</group> 
 	</command>
@@ -674,25 +712,29 @@
 	</command>
 	<command>
 		<version>1.2</version>
-		<elmcommand>"WM [1-6 bytes]"</elmcommand> 
+		<elmcommand>"WM"</elmcommand>
+		<valueformat>"hh hh hh hh hh hh"</valueformat> 
 		<description>"Set the Wakeup Message"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"WM xxyyzzaa"</elmcommand> 
+		<elmcommand>"WM"</elmcommand>
+		<valueformat>"xxyyzzaa"</valueformat> 
 		<description>"set the Wakeup Message to xxyyzzaa"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"WM xxyyzzaabb"</elmcommand> 
+		<elmcommand>"WM"</elmcommand>
+		<valueformat>"xxyyzzaabb"</valueformat> 
 		<description>"set the Wakeup Message to xxyyzzaabb"</description> 
 		<group>"ISO"</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<elmcommand>"WM xxyyzzaabbcc"</elmcommand> 
+		<elmcommand>"WM"</elmcommand>
+		<valueformat>"xxyyzzaabbcc"</valueformat> 
 		<description>"set the Wakeup Message to xxyyzzaabbcc"</description> 
 		<group>"ISO"</group> 
 	</command>
