@@ -26,7 +26,6 @@ ValueElmCommand::ValueElmCommand(float minReqElmVersion, std::string command,
     bitcount--;
     for(auto sign : valueChecked){
         char val = isdigit(sign) ? sign - 48: sign - 55;
-        std::cout << sign << " entwickelt sich zu " << (int) val << std::endl;
         (*value_)[bitcount--]   = ((((val & 0x8) >> 3) & 0x1) == 1);
         (*value_)[bitcount--] = ((((val & 0x4) >> 2) & 0x1) == 1);
         (*value_)[bitcount--] = ((((val & 0x2) >> 1) & 0x1) == 1);
@@ -36,7 +35,7 @@ ValueElmCommand::ValueElmCommand(float minReqElmVersion, std::string command,
 
 uint8_t* ValueElmCommand::getCommandAsByteArray()
 {
-    //TODO: see value types int or byte or hex etc..
+	//TODO: see value types int or byte or hex etc..
 //	uint8_t* temp_array = (uint8_t*) malloc(
 //			command_.size() + values_.size() * sizeof(unsigned int)
 //					+ values_.size() * sizeof(char));
