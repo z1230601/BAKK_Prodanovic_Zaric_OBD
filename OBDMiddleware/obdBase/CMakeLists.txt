@@ -39,6 +39,7 @@ SET(LIBRARY_NAME "lib${OBDBase_target_name}.so")
 TARGET_LINK_LIBRARIES(${OBDBase_target_name}
   ${database_library_location}
   ${LibXML++_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 MESSAGE("Adding dependcies to ${OBDBase_target_name}: " ${Database_target_name})

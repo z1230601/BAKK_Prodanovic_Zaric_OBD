@@ -7,7 +7,7 @@
 class ValueElmCommand;
 
 class ValueElmCommandTest: public CppUnit::TestCase {
-	CPPUNIT_TEST_SUITE (SimpleElmCommandTest);
+	CPPUNIT_TEST_SUITE (ValueElmCommandTest);
 	CPPUNIT_TEST(testCommandWithValues);
 //	CPPUNIT_TEST(testCommandConversionToSerial);
 	CPPUNIT_TEST_SUITE_END();

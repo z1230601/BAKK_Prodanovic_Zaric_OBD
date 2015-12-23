@@ -1,5 +1,5 @@
 <?xml version="<version>1.0</version>" encoding="UTF-8"?>
-<!DOCTYPE database SYSTEM "database.dtd">
+<!DOCTYPE commands SYSTEM "elmcommand.dtd">
 
 <commands>
 	<command>
