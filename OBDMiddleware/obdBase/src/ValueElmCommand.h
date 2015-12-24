@@ -10,10 +10,10 @@
 using boost::dynamic_bitset;
 class ValueElmCommand : public BaseElmCommand {
 private:
-	dynamic_bitset<>* value_;
+	std::string value_;
+	std::string value_format_;
 
-	std::string valueStringCheckAndAlter(std::string valueFormat);
-	unsigned int getBitCount(std::string valueFormat);
+	unsigned int getBitCountFromFormat(std::string valueFormat);
 public:
 	ValueElmCommand();
 	ValueElmCommand(float minReqElmVersion, std::string command,
@@ -24,6 +24,8 @@ public:
 	uint8_t* getCommandAsByteArray();
 
 	std::string getValueAsString();
+	bool valueStringCheckValid(std::string value);
+	bool checkValueToFormat(std::string value);
 };
 
 #endif /* VALUEELMCOMMAND_H_ */
