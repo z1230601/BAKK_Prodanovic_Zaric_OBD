@@ -1,5 +1,5 @@
-#ifndef VALUEELMCOMMAND_H_
-#define VALUEELMCOMMAND_H_
+#ifndef ELMCOMMAND_H_
+#define ELMCOMMAND_H_
 
 #include <vector>
 #include <string>
@@ -12,40 +12,38 @@ typedef struct
 
 } CommandType;
 
-class ValueElmCommand
+class ElmCommand
 {
     private:
+        float min_req_version_;
+
         CommandType base_command_;
         CommandType sub_command_;
 
-        float min_req_version_;
         std::string description_;
         std::string group_;
 
-
         unsigned int getBitCountFromFormat(std::string valueFormat);
+
     public:
-        ValueElmCommand();
-        ValueElmCommand(float minReqElmVersion, std::string base_command,
+        ElmCommand();
+        ElmCommand(float minReqElmVersion, std::string base_command,
                 std::string description, std::string group,
                 std::string base_value_format = "", std::string sub_command = "", std::string sub_value_format = "");
-        virtual ~ValueElmCommand();
+        virtual ~ElmCommand();
 
-        std::string getValueAsString();
-        bool valueStringCheckValid(std::string value);
+        bool isValidValue(std::string value);
         bool checkValueToFormat(std::string value);
 
         float getMinimumRequiredElmVersion();
-        std::string getCommand();
         std::string getDescription();
         std::string getGroup();
 
         std::string getCompleteCommandAsString();
 
-        void setMinimumRequiredElmVersion(float version);
-        void setCommand(std::string command);
-        void setDescription(std::string description);
-        void setGroup(std::string group);
+        void setBaseValue(std::string value);
+        void setSubValue(std::string subvalue);
+
 };
 
-#endif /* VALUEELMCOMMAND_H_ */
+#endif /* ELMCOMMAND_H_ */
