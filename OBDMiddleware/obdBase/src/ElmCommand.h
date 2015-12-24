@@ -24,7 +24,7 @@ class ElmCommand
         std::string group_;
 
         unsigned int getBitCountFromFormat(std::string valueFormat);
-
+        bool checkFormatValue(std::string &value, std::string &format);
     public:
         ElmCommand();
         ElmCommand(float minReqElmVersion, std::string base_command,
@@ -33,7 +33,8 @@ class ElmCommand
         virtual ~ElmCommand();
 
         bool isValidValue(std::string value);
-        bool checkValueToFormat(std::string value);
+        bool checkBaseValueToFormat(std::string value);
+        bool checkSubValueToFormat(std::string value);
 
         float getMinimumRequiredElmVersion();
         std::string getDescription();

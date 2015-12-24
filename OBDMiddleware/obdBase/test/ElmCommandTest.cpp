@@ -113,4 +113,20 @@ void ElmCommandTest::testCommandWithEightDigitValue()
 
 void ElmCommandTest::testInvalidValueString() {
     CPPUNIT_ASSERT(!command_for_test_->isValidValue("z"));
+    CPPUNIT_ASSERT(command_for_test_ -> isValidValue("123456789aBcDEF"));
+    CPPUNIT_ASSERT(!command_for_test_ -> isValidValue("1234Q56789aBcDEF"));
+}
+
+void ElmCommandTest::testFormatValueCheck(){
+    command_for_test_ = new ElmCommand(1.0, "@1",
+                "display the device description", "General", "hhhhhh n", "SV", "cccccccccc");
+
+    //not fail check
+    CPPUNIT_ASSERT(command_for_test_->checkBaseValueToFormat("FEDCBA 9"));
+    CPPUNIT_ASSERT(command_for_test_->checkSubValueToFormat("HELLOWORLD"));
+
+    //fail check
+    CPPUNIT_ASSERT(!command_for_test_->checkBaseValueToFormat("FE CBA"));
+    CPPUNIT_ASSERT(!command_for_test_->checkSubValueToFormat("hello world!"));
+    CPPUNIT_ASSERT(!command_for_test_->checkBaseValueToFormat("hello world!"));
 }

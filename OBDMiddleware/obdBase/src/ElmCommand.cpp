@@ -33,10 +33,7 @@ ElmCommand::ElmCommand(float minReqElmVersion,
 bool ElmCommand::isValidValue(std::string value) {
 //    std::transform(value.begin(), value.end(), value.begin(), ::toupper);
     auto newend = std::remove_if(value.begin(), value.end(),
-            [](const char & a)->bool
-            {
-                return !(isxdigit(a));
-            });
+            [](const char & a)->bool{return !(isxdigit(a));});
     return newend == value.end();
 }
 
@@ -55,20 +52,27 @@ unsigned int ElmCommand::getBitCountFromFormat(std::string valueFormat) {
 
     return count;
 }
-
-bool ElmCommand::checkValueToFormat(std::string value) {
-    bool length = value.length() == base_command_.value_format_.length();
-    bool charplacement = true;
-    for(unsigned int i = 0; i < value.length(); i++) {
-        if(!((value[i] >= 0x21 && value[i] <= 0x5f && base_command_.value_format_[i] == 'c')
-                || (isxdigit(value[i]) && base_command_.value_format_[i] != ' ')
-                || (value[i] == ' ' && base_command_.value_format_[i] == ' ')))
-        {
-            charplacement = false;
-            break;
+bool ElmCommand::checkFormatValue(std::string &value, std::string &format){
+    bool length = value.length() == format.length();
+        bool charplacement = true;
+        for(unsigned int i = 0; i < value.length(); i++) {
+            if(!((value[i] >= 0x21 && value[i] <= 0x5f && format[i] == 'c')
+                    || (isxdigit(value[i]) && format[i] != ' ')
+                    || (value[i] == ' ' && format[i] == ' ')))
+            {
+                charplacement = false;
+                break;
+            }
         }
-    }
-    return length && charplacement;
+        return length && charplacement;
+}
+
+bool ElmCommand::checkBaseValueToFormat(std::string value) {
+    return checkFormatValue(value, base_command_.value_format_);
+}
+
+bool ElmCommand::checkSubValueToFormat(std::string value){
+    return checkFormatValue(value, sub_command_.value_format_);
 }
 
 float ElmCommand::getMinimumRequiredElmVersion() {

@@ -14,6 +14,7 @@ class ElmCommandTest: public CppUnit::TestCase {
 	CPPUNIT_TEST(testCommandWithThreeDigitValue);
 	CPPUNIT_TEST(testCommandWithEightDigitValue);
 	CPPUNIT_TEST(testInvalidValueString);
+	CPPUNIT_TEST(testFormatValueCheck);
 	CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -28,6 +29,7 @@ public:
 	void testCommandWithThreeDigitValue();
 	void testCommandWithEightDigitValue();
 	void testInvalidValueString();
+	void testFormatValueCheck();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(ElmCommandTest);
