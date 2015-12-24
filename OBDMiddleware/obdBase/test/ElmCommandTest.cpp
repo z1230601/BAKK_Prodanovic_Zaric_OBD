@@ -148,15 +148,37 @@ void ElmCommandTest::testValueWrappedWithCommands() {
     command_for_test_->setBaseValue(expectedBaseValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
-                command_for_test_->getMinimumRequiredElmVersion());
+            command_for_test_->getMinimumRequiredElmVersion());
     CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue + " " + expectedSubCommand,
-                command_for_test_->getCompleteCommandAsString());
+            command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
-                command_for_test_->getDescription());
+            command_for_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
-
 }
 
 void ElmCommandTest::testCommandAndSubcommandWithValues() {
+    float expectedMinimumRequiredElmVersion = 1.1;
+    std::string expectedBaseCommand = "PP";
+    std::string expectedBaseValue = "1F";
+    std::string expectedDescription = "for PP xx, Set the Value to yy";
+    std::string expectedGroup = "PPs";
+    std::string expectedBaseFormat = "xx";
+    std::string expectedSubCommand = "SV";
+    std::string expectedSubValue = "F1";
+    std::string expectedSubFormat = "yy";
 
+    command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
+            expectedBaseCommand, expectedDescription, expectedGroup,
+            expectedBaseFormat, expectedSubCommand, expectedSubFormat);
+    command_for_test_->setBaseValue(expectedBaseValue);
+    command_for_test_->setSubValue(expectedSubValue);
+
+    CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
+            command_for_test_->getMinimumRequiredElmVersion());
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue + " "
+            + expectedSubCommand + " " + expectedSubValue,
+            command_for_test_->getCompleteCommandAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedDescription,
+            command_for_test_->getDescription());
+    CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
 }
