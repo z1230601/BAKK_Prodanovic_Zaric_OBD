@@ -12,13 +12,13 @@ void ElmCommandTest::tearDown() {
 
 void ElmCommandTest::testCommandWithoutValue() {
     float expectedMinimumRequiredElmVersion = 1.0;
-    std::string expectedCommand = "@1";
+    std::string expectedBaseCommand = "@1";
     std::string expectedDescription = "display the device description";
     std::string expectedGroup = "General";
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
             command_for_test_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedCommand, command_for_test_->getCompleteCommandAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand, command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             command_for_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
@@ -26,20 +26,20 @@ void ElmCommandTest::testCommandWithoutValue() {
 
 void ElmCommandTest::testCommandWithOneValue() {
     float expectedMinimumRequiredElmVersion = 1.1;
-    std::string expectedCommand = "FC SM";
+    std::string expectedBaseCommand = "FC SM";
     std::string expectedBaseValue = "A";
     std::string expectedDescription = "Flow Control Set the Mode to h";
     std::string expectedGroup = "CAN";
     std::string expectedBaseValueFormat = "h";
 
     command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
-            expectedCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
+            expectedBaseCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
 
     command_for_test_->setBaseValue(expectedBaseValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
             command_for_test_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedCommand + " " + expectedBaseValue, command_for_test_->getCompleteCommandAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue, command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             command_for_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
@@ -48,19 +48,19 @@ void ElmCommandTest::testCommandWithOneValue() {
 void ElmCommandTest::testCommandWithTwoDigitValue()
 {
     float expectedMinimumRequiredElmVersion = 1.2;
-    std::string expectedCommand = "BRD";
+    std::string expectedBaseCommand = "BRD";
     std::string expectedBaseValue = "12";
     std::string expectedDescription = "try Baud rate Divisor hh";
     std::string expectedGroup = "General";
     std::string expectedBaseValueFormat = "hh";
 
     command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
-            expectedCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
+            expectedBaseCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
     command_for_test_->setBaseValue(expectedBaseValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
             command_for_test_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedCommand + " " + expectedBaseValue, command_for_test_->getCompleteCommandAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue, command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             command_for_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
@@ -69,19 +69,19 @@ void ElmCommandTest::testCommandWithTwoDigitValue()
 void ElmCommandTest::testCommandWithThreeDigitValue()
 {
     float expectedMinimumRequiredElmVersion = 1.1;
-    std::string expectedCommand = "FC SH";
+    std::string expectedBaseCommand = "FC SH";
     std::string expectedBaseValue = "ABC";
     std::string expectedDescription = "Flow Control Set the Header to hhh";
     std::string expectedGroup = "CAN";
     std::string expectedBaseValueFormat = "hhh";
 
     command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
-            expectedCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
+            expectedBaseCommand, expectedDescription, expectedGroup, expectedBaseValueFormat);
     command_for_test_->setBaseValue(expectedBaseValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
             command_for_test_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedCommand + " " + expectedBaseValue,
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue,
             command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             command_for_test_->getDescription());
@@ -91,20 +91,20 @@ void ElmCommandTest::testCommandWithThreeDigitValue()
 void ElmCommandTest::testCommandWithEightDigitValue()
 {
     float expectedMinimumRequiredElmVersion = 1.1;
-    std::string expectedCommand = "FC SH";
+    std::string expectedBaseCommand = "FC SH";
     std::string expectedBaseValue = "12345678";
     std::string expectedDescription = "Flow Control Set the Header to hhhhhhhh";
     std::string expectedGroup = "CAN";
     std::string expectedBaseFormat = "hhhhhhhh";
 
     command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
-            expectedCommand, expectedDescription, expectedGroup,
+            expectedBaseCommand, expectedDescription, expectedGroup,
             expectedBaseFormat);
     command_for_test_->setBaseValue(expectedBaseValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
             command_for_test_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedCommand + " " + expectedBaseValue,
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue,
             command_for_test_->getCompleteCommandAsString());
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             command_for_test_->getDescription());
@@ -129,4 +129,32 @@ void ElmCommandTest::testFormatValueCheck(){
     CPPUNIT_ASSERT(!command_for_test_->checkBaseValueToFormat("FE CBA"));
     CPPUNIT_ASSERT(!command_for_test_->checkSubValueToFormat("hello world!"));
     CPPUNIT_ASSERT(!command_for_test_->checkBaseValueToFormat("hello world!"));
+}
+
+void ElmCommandTest::testValueWrappedWithCommands() {
+    float expectedMinimumRequiredElmVersion = 1.1;
+    std::string expectedBaseCommand = "PP";
+    std::string expectedBaseValue = "1F";
+    std::string expectedDescription = "disable Prog Parameter xx";
+    std::string expectedGroup = "PPs";
+    std::string expectedBaseFormat = "xx";
+    std::string expectedSubCommand = "OFF";
+
+    command_for_test_ = new ElmCommand(expectedMinimumRequiredElmVersion,
+            expectedBaseCommand, expectedDescription, expectedGroup,
+            expectedBaseFormat, expectedSubCommand);
+    command_for_test_->setBaseValue(expectedBaseValue);
+
+    CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
+                command_for_test_->getMinimumRequiredElmVersion());
+    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand + " " + expectedBaseValue + " " + expectedSubCommand,
+                command_for_test_->getCompleteCommandAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedDescription,
+                command_for_test_->getDescription());
+    CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
+
+}
+
+void ElmCommandTest::testCommandAndSubcommandWithValues() {
+
 }
