@@ -31,10 +31,17 @@ ElmCommand::ElmCommand(float minReqElmVersion,
 }
 
 bool ElmCommand::isValidValue(std::string value) {
-//    std::transform(value.begin(), value.end(), value.begin(), ::toupper);
-    auto newend = std::remove_if(value.begin(), value.end(),
+    auto hexend = std::remove_if(value.begin(), value.end(),
             [](const char & a)->bool{return !(isxdigit(a));});
-    return newend == value.end();
+    bool is_hex = hexend == value.end();
+
+    auto printableend = std::remove_if(value.begin(), value.end(),
+                [](const char & a)->bool{return !(a >= 0x21 && a <= 0x5f);});
+    bool is_printable = printableend == value.end();
+
+    std::cout << "Value: " << value << " Hex: " << is_hex << " Printable: " << is_printable << std::endl;
+
+    return is_hex || is_printable;
 }
 
 unsigned int ElmCommand::getBitCountFromFormat(std::string valueFormat) {
@@ -99,9 +106,13 @@ std::string ElmCommand::getCompleteCommandAsString() {
 }
 
 void ElmCommand::setBaseValue(std::string value) {
-    base_command_.value_ = value;
+    if(checkBaseValueToFormat(value) && isValidValue(value)) {
+        base_command_.value_ = value;
+    }
 }
 
 void ElmCommand::setSubValue(std::string subvalue) {
-    sub_command_.value_ = subvalue;
+    if(checkSubValueToFormat(subvalue) && isValidValue(subvalue)) {
+        sub_command_.value_ = subvalue;
+    }
 }

@@ -112,9 +112,9 @@ void ElmCommandTest::testCommandWithEightDigitValue()
 }
 
 void ElmCommandTest::testInvalidValueString() {
-    CPPUNIT_ASSERT(!command_for_test_->isValidValue("z"));
-    CPPUNIT_ASSERT(command_for_test_ -> isValidValue("123456789aBcDEF"));
-    CPPUNIT_ASSERT(!command_for_test_ -> isValidValue("1234Q56789aBcDEF"));
+    CPPUNIT_ASSERT(command_for_test_->isValidValue("AB12CD34"));
+    CPPUNIT_ASSERT(!command_for_test_->isValidValue("ABCZlatan"));
+    CPPUNIT_ASSERT(!command_for_test_->isValidValue("123 456"));
 }
 
 void ElmCommandTest::testFormatValueCheck(){
