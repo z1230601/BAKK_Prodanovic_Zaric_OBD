@@ -8,6 +8,7 @@ class ValueElmCommand;
 
 class ValueElmCommandTest: public CppUnit::TestCase {
 	CPPUNIT_TEST_SUITE (ValueElmCommandTest);
+	CPPUNIT_TEST(testCommandWithoutValue);
 	CPPUNIT_TEST(testCommandWithOneValue);
 	CPPUNIT_TEST(testCommandWithTwoValues);
 	CPPUNIT_TEST(testCommandWithThreeValues);
@@ -20,6 +21,7 @@ private:
 public:
 	void setUp();
 	void tearDown();
+	void testCommandWithoutValue();
 	void testCommandWithOneValue();
 	void testCommandWithTwoValues();
 	void testCommandWithThreeValues();
