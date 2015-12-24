@@ -2,11 +2,28 @@
 #include "../src/ValueElmCommand.h"
 
 void ValueElmCommandTest::setUp() {
-
+    command_for_test_ = new ValueElmCommand();
 }
 
 void ValueElmCommandTest::tearDown() {
 	delete command_for_test_;
+}
+
+void ValueElmCommandTest::testCommandWithoutValue() {
+    float expectedMinimumRequiredElmVersion = 1.0;
+    std::string expectedCommand = "@1";
+    std::string expectedDescription = "display the device description";
+    std::string expectedGroup = "General";
+
+    command_for_test_ = new ValueElmCommand(expectedMinimumRequiredElmVersion,
+            expectedCommand, expectedDescription, expectedGroup);
+
+    CPPUNIT_ASSERT_EQUAL(expectedMinimumRequiredElmVersion,
+            command_for_test_->getMinimumRequiredElmVersion());
+    CPPUNIT_ASSERT_EQUAL(expectedCommand, command_for_test_->getCommand());
+    CPPUNIT_ASSERT_EQUAL(expectedDescription,
+            command_for_test_->getDescription());
+    CPPUNIT_ASSERT_EQUAL(expectedGroup, command_for_test_->getGroup());
 }
 
 void ValueElmCommandTest::testCommandWithOneValue() {
