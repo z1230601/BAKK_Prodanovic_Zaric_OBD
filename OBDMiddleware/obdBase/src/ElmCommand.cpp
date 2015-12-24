@@ -31,15 +31,15 @@ ElmCommand::ElmCommand(float minReqElmVersion,
 }
 
 bool ElmCommand::isValidValue(std::string value) {
+    std::string value_printable(value);
+
     auto hexend = std::remove_if(value.begin(), value.end(),
-            [](const char & a)->bool{return !(isxdigit(a));});
+            [](const char & a)->bool{return !(isxdigit(a) || isspace(a));});
     bool is_hex = hexend == value.end();
 
-    auto printableend = std::remove_if(value.begin(), value.end(),
+    auto printableend = std::remove_if(value_printable.begin(), value_printable.end(),
                 [](const char & a)->bool{return !(a >= 0x21 && a <= 0x5f);});
-    bool is_printable = printableend == value.end();
-
-    std::cout << "Value: " << value << " Hex: " << is_hex << " Printable: " << is_printable << std::endl;
+    bool is_printable = printableend == value_printable.end();
 
     return is_hex || is_printable;
 }
