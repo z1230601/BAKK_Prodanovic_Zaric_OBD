@@ -15,7 +15,7 @@ void ElmCommandXMLHandlerTest::setUp()
     command_child = command_node->add_child("version");
     command_child->add_child_text("1.0");
 
-    command_child = command_node->add_child("elmcommand");
+    command_child = command_node->add_child("basecommand");
     command_child->add_child_text("@1");
 
     command_child = command_node->add_child("description");
@@ -24,8 +24,30 @@ void ElmCommandXMLHandlerTest::setUp()
     command_child = command_node->add_child("group");
     command_child->add_child_text("General");
 
-    command_child = command_node->add_child("valueformat");
+    command_child = command_node->add_child("basevalueformat");
     command_child->add_child_text("");
+
+    command_child = command_node->add_child("subcommand");
+    command_child->add_child_text("");
+
+    command_child = command_node->add_child("subvalueformat");
+    command_child->add_child_text("");
+
+    //---------------------------------------------------------------
+
+    command_node = root->add_child("command");
+    command_child = command_node->add_child("version");
+    command_child->add_child_text("1.1");
+
+    command_child = command_node->add_child("basecommand");
+    command_child->add_child_text("@2");
+
+    command_child = command_node->add_child("description");
+    command_child->add_child_text("display the device description2");
+
+    command_child = command_node->add_child("group");
+    command_child->add_child_text("General");
+
 }
 
 void ElmCommandXMLHandlerTest::tearDown()
@@ -34,30 +56,40 @@ void ElmCommandXMLHandlerTest::tearDown()
     delete tested_handler_;
 }
 
-void ElmCommandXMLHandlerTest::testHandle()
+
+void ElmCommandXMLHandlerTest::iterateChildren(const xmlpp::Node* parent)
 {
-    float expectedMinVersion = 1.0;
-    std::string expectedBaseCommand = "@1";
-    std::string expectedDescription = "display the device description";
-    std::string expectedGroup = "General";
-    std::string expectedBaseValueFormat = "";
-    std::string expectedSubCommand = "";
-    std::string expectedSubValueFormat = "";
-
-    const xmlpp::Node* currentNode = doc_->get_root_node();
-
-    xmlpp::Node::NodeList children = currentNode->get_children();
+    xmlpp::Node::NodeList children = parent->get_children();
     for(xmlpp::Node::NodeList::iterator it = children.begin();
             it != children.end(); ++it)
     {
         tested_handler_->handleNode(*it);
+        iterateChildren(*it);
     }
+}
 
-    CPPUNIT_ASSERT_EQUAL(expectedMinVersion, tested_handler_->getMinimumRequiredElmVersion());
-    CPPUNIT_ASSERT_EQUAL(expectedBaseCommand, tested_handler_->getBaseCommand());
-    CPPUNIT_ASSERT_EQUAL(expectedDescription, tested_handler_->getDescription());
-    CPPUNIT_ASSERT_EQUAL(expectedGroup, tested_handler_->getGroup());
-    CPPUNIT_ASSERT_EQUAL(expectedBaseValueFormat, tested_handler_->getBaseValueFormat());
-    CPPUNIT_ASSERT_EQUAL(expectedSubCommand,tested_handler_->getSubCommand());
-    CPPUNIT_ASSERT_EQUAL(expectedSubValueFormat,tested_handler_->getSubValueFormat());
+
+void ElmCommandXMLHandlerTest::testHandle()
+{
+    std::vector<ElmCommandInput> expectedElmCommands;
+    expectedElmCommands.push_back(
+            ElmCommandInput(1.0, "@1", "display the device description",
+                    "General", "", "", ""));
+    expectedElmCommands.push_back(
+            ElmCommandInput(1.1, "@2", "display the device description2",
+                    "General", "", "",""));
+
+    iterateChildren(doc_->get_root_node());
+
+
+    CPPUNIT_ASSERT_EQUAL(expectedElmCommands.size(), tested_handler_->getParsedCommands().size());
+    for(unsigned int i = 0; i < expectedElmCommands.size(); i++) {
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).basecommand_, tested_handler_->getParsedCommands().at(i).basecommand_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).basevalueformat_, tested_handler_->getParsedCommands().at(i).basevalueformat_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).description_, tested_handler_->getParsedCommands().at(i).description_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).group_, tested_handler_->getParsedCommands().at(i).group_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).subcommand_, tested_handler_->getParsedCommands().at(i).subcommand_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).subvalueformat_, tested_handler_->getParsedCommands().at(i).subvalueformat_);
+        CPPUNIT_ASSERT_EQUAL(expectedElmCommands.at(i).version_, tested_handler_->getParsedCommands().at(i).version_);
+    }
 }

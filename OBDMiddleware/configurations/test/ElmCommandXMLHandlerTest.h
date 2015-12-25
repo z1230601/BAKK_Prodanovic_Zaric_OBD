@@ -16,6 +16,7 @@ class ElmCommandXMLHandlerTest : public CppUnit::TestCase
         ElmCommandXMLHandler* tested_handler_;
         xmlpp::Document* doc_;
 
+        void iterateChildren(const xmlpp::Node* parent);
     public:
         void setUp();
         void tearDown();

@@ -11,36 +11,55 @@
 #define BASEVALUEFORMAT_TAG "basevalueformat"
 #define SUBCOMMAND_TAG "subcommand"
 #define SUBVALUEFORMAT_TAG "subvalueformat"
+#define COMMAND_TAG "command"
 
-typedef struct
+#include <vector>
+
+typedef struct _ElmCommandInput_
 {
-        std::string command_;
-        std::string value_format_;
+        float version_;
+        std::string basecommand_;
+        std::string description_;
+        std::string group_;
+        std::string basevalueformat_;
+        std::string subcommand_;
+        std::string subvalueformat_;
 
-} CommandType;
+        _ElmCommandInput_(float version, std::string basecommand,
+                std::string description, std::string group,
+                std::string basevalueformat, std::string subcommand,
+                std::string subvalueformat)
+        {
+            version_ = version;
+            basecommand_ = basecommand;
+            description_ = description;
+            group_ = group;
+            basevalueformat_ = basevalueformat;
+            subcommand_ = subcommand;
+            subvalueformat_ = subvalueformat;
+        }
+        _ElmCommandInput_()
+        {
+            version_ = 0.0;
+            basecommand_ = "";
+            description_ = "";
+            group_ = "";
+            basevalueformat_ = "";
+            subcommand_ = "";
+            subvalueformat_ = "";
+        }
+} ElmCommandInput;
 
 class ElmCommandXMLHandler : public DefaultXMLHandler
 {
     private:
-        float min_req_version_;
-
-        CommandType base_command_;
-        CommandType sub_command_;
-
-        std::string description_;
-        std::string group_;
+        std::vector<ElmCommandInput> parsed_commands_;
+        ElmCommandInput current_elm_command_;
 
     public:
         void handleNode(xmlpp::Node* node);
 
-        float getMinimumRequiredElmVersion();
-
-        std::string getBaseCommand();
-        std::string getDescription();
-        std::string getGroup();
-        std::string getBaseValueFormat();
-        std::string getSubCommand();
-        std::string getSubValueFormat();
+        std::vector<ElmCommandInput> getParsedCommands();
 
 };
 

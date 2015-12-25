@@ -4,61 +4,45 @@ void ElmCommandXMLHandler::handleNode(xmlpp::Node* node)
 {
     if(node->get_name().compare(VERSION_TAG) == 0)
     {
-        min_req_version_ = std::stof(getTextFromNode(node));
+        current_elm_command_.version_ = std::stof(getTextFromNode(node));
     }
     if(node->get_name().compare(BASECOMMMAND_TAG) == 0)
     {
-        base_command_.command_ = getTextFromNode(node);
+        current_elm_command_.basecommand_ = getTextFromNode(node);
     }
     if(node->get_name().compare(DESCRIPTION_TAG) == 0)
     {
-        description_ = getTextFromNode(node);
+        current_elm_command_.description_ = getTextFromNode(node);
     }
     if(node->get_name().compare(GROUP_TAG) == 0)
     {
-        group_ = getTextFromNode(node);
+        current_elm_command_.group_ = getTextFromNode(node);
     }
     if(node->get_name().compare(BASEVALUEFORMAT_TAG) == 0)
     {
-        base_command_.value_format_ = getTextFromNode(node);
+        current_elm_command_.basevalueformat_ = getTextFromNode(node);
     }
     if(node->get_name().compare(SUBCOMMAND_TAG) == 0)
     {
-        sub_command_.command_ = getTextFromNode(node);
+        current_elm_command_.subcommand_ = getTextFromNode(node);
     }
     if(node->get_name().compare(SUBVALUEFORMAT_TAG) == 0)
     {
-        sub_command_.value_format_ = getTextFromNode(node);
+        current_elm_command_.subvalueformat_ = getTextFromNode(node);
+    }
+    if(node->get_name().compare(COMMAND_TAG) == 0)
+    {
+        if(current_elm_command_.version_ == 0.0) return;
+
+        parsed_commands_.push_back(current_elm_command_);
+        current_elm_command_ = ElmCommandInput();
     }
 }
 
-float ElmCommandXMLHandler::getMinimumRequiredElmVersion()
-{
-    return min_req_version_;
-}
-
-std::string ElmCommandXMLHandler::getBaseCommand() {
-    return base_command_.command_;
-}
-
-std::string ElmCommandXMLHandler::getDescription()
-{
-    return description_;
-}
-
-std::string ElmCommandXMLHandler::getGroup()
-{
-    return group_;
-}
-
-std::string ElmCommandXMLHandler::getBaseValueFormat() {
-    return base_command_.value_format_;
-}
-
-std::string ElmCommandXMLHandler::getSubCommand() {
-    return sub_command_.command_;
-}
-
-std::string ElmCommandXMLHandler::getSubValueFormat() {
-    return sub_command_.value_format_;
+std::vector<ElmCommandInput> ElmCommandXMLHandler::getParsedCommands() {
+    if(current_elm_command_.version_ != 0.0){
+        parsed_commands_.push_back(current_elm_command_);
+        current_elm_command_ = ElmCommandInput();
+    }
+    return parsed_commands_;
 }
