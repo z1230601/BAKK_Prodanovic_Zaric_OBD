@@ -72,51 +72,6 @@ std::string DBRepresenter::getDatabaseName() const {
 	return dbname_;
 }
 
-bool DBRepresenter::parseConfigurationFile(std::string configurationFile) {
-	xmlpp::DomParser parser;
-	parser.set_validate();
-	parser.set_substitute_entities(); //We just want the text to be resolved/unescaped automatically.
-	parser.parse_file(configurationFile);
-	if (parser) {
-		const xmlpp::Node* currentNode = parser.get_document()->get_root_node(); //deleted by DomParser.
-
-		xmlpp::Node::NodeList children = currentNode->get_children();
-		for(xmlpp::Node::NodeList::iterator it = children.begin(); it != children.end(); ++it) {
-			parseNode(*it);
-		}
-	}
-
-	return !host_address_.empty() && !username_.empty() && !dbname_.empty();
-}
-
-void DBRepresenter::parseNode(xmlpp::Node* node) {
-	if(node->get_name().compare(ADDRESS_TAG) == 0) {
-		host_address_.append("tcp://");
-		host_address_.append(getTextFromNode(node));
-		host_address_.append(":3306");
-	}
-	if (node->get_name().compare(USER_TAG) == 0) {
-		username_ = getTextFromNode(node);
-	}
-	if (node->get_name().compare(PASSWORD_TAG) == 0) {
-		password_ = getTextFromNode(node);
-	}
-	if (node->get_name().compare(DBNAME_TAG) == 0) {
-		dbname_ = getTextFromNode(node);
-	}
-}
-
-std::string DBRepresenter::getTextFromNode(xmlpp::Node* node) {
-	xmlpp::Node::NodeList text_list = node->get_children();
-	if (text_list.size() == 1) {
-		xmlpp::TextNode* text =
-				dynamic_cast<xmlpp::TextNode*>(*text_list.begin());
-		return std::string(text->get_content().c_str());
-	}
-	return "";
-}
-
-
 SQLTable DBRepresenter::executeSQLStatement(std::string statement){
 	checkIfValid();
 	SQLTable result;

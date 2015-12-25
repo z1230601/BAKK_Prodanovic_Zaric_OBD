@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE database SYSTEM "database.dtd">
+
+<database>
+	<address>127.0.0.1</address>
+	<user>obd</user>
+	<password></password>
+	<dbname>OBD_TroubleCodes</dbname>
+</database>

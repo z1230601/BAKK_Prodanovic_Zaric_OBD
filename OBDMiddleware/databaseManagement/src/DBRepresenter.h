@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <libxml++/libxml++.h>
 
 #include "mysql_connection.h"
 #include "mysql_driver.h"
@@ -14,11 +13,6 @@
 #include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
-
-#define ADDRESS_TAG "address"
-#define USER_TAG "user"
-#define PASSWORD_TAG "password"
-#define DBNAME_TAG "dbname"
 
 typedef std::vector<std::vector<std::string>> SQLTable;
 
@@ -47,9 +41,6 @@ public:
 private:
 	bool valid_construction_ = false;
 
-	bool parseConfigurationFile(std::string);
-	std::string getTextFromNode(xmlpp::Node*);
-	void parseNode(xmlpp::Node*);
 	void checkIfValid();
 	static std::vector<std::string> getResultRowAsVector(sql::ResultSet* row, bool header = false);
 
