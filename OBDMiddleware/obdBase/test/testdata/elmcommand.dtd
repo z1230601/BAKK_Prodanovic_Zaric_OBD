@@ -1,6 +1,9 @@
 <!ELEMENT commands (command)>
-<!ELEMENT command (version, elmcommand, description, group)>
+<!ELEMENT command (version, basecommand, subcommand, description, group, basevalueformat, subvalueformat)>
 <!ELEMENT version (#PCDATA)>
-<!ELEMENT elmcommand (#PCDATA)>
+<!ELEMENT basecommand (#PCDATA)>
+<!ELEMENT subcommand (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
 <!ELEMENT group (#PCDATA)>
+<!ELEMENT basevalueformat (#PCDATA)>
+<!ELEMENT subvalueformat (#PCDATA)>
