@@ -1,10 +1,3 @@
-/*
- * DatabaseXMLHandler.h
- *
- *  Created on: Dec 25, 2015
- *      Author: zlatan
- */
-
 #ifndef DATABASEXMLHANDLER_H_
 #define DATABASEXMLHANDLER_H_
 

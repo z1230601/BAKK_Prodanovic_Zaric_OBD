@@ -1,7 +1,6 @@
 #include "DatabaseXMLHandlerTest.h"
 #include "../src/DatabaseXMLHandler.h"
 
-
 void DatabaseXMLHandlerTest::setUp()
 {
     tested_handler_ = new DatabaseXMLHandler();
@@ -10,16 +9,16 @@ void DatabaseXMLHandlerTest::setUp()
     xmlpp::Element* el = nullptr;
 
     el = root->add_child("address");
-    el->add_child_text(expected_address.c_str());
+    el->add_child_text("testAddress");
 
     el = root->add_child("user");
-    el->add_child_text(expected_user.c_str());
+    el->add_child_text("testUser");
 
     el = root->add_child("password");
-    el->add_child_text(expected_password.c_str());
+    el->add_child_text("testPw");
 
     el = root->add_child("dbname");
-    el->add_child_text(expected_db_name.c_str());
+    el->add_child_text("testDBName");
 }
 
 void DatabaseXMLHandlerTest::tearDown()
@@ -30,6 +29,11 @@ void DatabaseXMLHandlerTest::tearDown()
 
 void DatabaseXMLHandlerTest::testHandle()
 {
+    std::string expectedAddress = "testAddress";
+    std::string expectedUser = "testUser";
+    std::string expectedPassword = "testPw";
+    std::string expectedDBName = "testDBName";
+
     const xmlpp::Node* currentNode = doc_->get_root_node();
 
     xmlpp::Node::NodeList children = currentNode->get_children();
@@ -39,8 +43,9 @@ void DatabaseXMLHandlerTest::testHandle()
         tested_handler_->handleNode(*it);
     }
 
-    CPPUNIT_ASSERT_EQUAL("tcp://" + expected_address + ":3306",  tested_handler_->getHostAddress());
-    CPPUNIT_ASSERT_EQUAL(expected_password, tested_handler_->getPassword());
-    CPPUNIT_ASSERT_EQUAL(expected_user,     tested_handler_->getUsername());
-    CPPUNIT_ASSERT_EQUAL(expected_db_name,  tested_handler_->getDBName());
+    CPPUNIT_ASSERT_EQUAL("tcp://" + expectedAddress + ":3306",
+            tested_handler_->getHostAddress());
+    CPPUNIT_ASSERT_EQUAL(expectedPassword, tested_handler_->getPassword());
+    CPPUNIT_ASSERT_EQUAL(expectedUser, tested_handler_->getUsername());
+    CPPUNIT_ASSERT_EQUAL(expectedDBName, tested_handler_->getDBName());
 }
