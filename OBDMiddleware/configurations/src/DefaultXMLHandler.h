@@ -1,10 +1,3 @@
-/*
- * DefaultHandler.h
- *
- *  Created on: Dec 25, 2015
- *      Author: zlatan
- */
-
 #ifndef DEFAULTHANDLER_H_
 #define DEFAULTHANDLER_H_
 

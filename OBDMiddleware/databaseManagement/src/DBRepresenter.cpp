@@ -36,11 +36,6 @@ bool DBRepresenter::parseConfigurationFile(std::string configurationFile){
     dbname_ = handler->getDBName();
     password_ = handler->getPassword();
     username_ = handler->getUsername();
-//    std::cout << "parsed from xmlfile" << std::endl
-//            << host_address_ << std::endl
-//            << dbname_ << std::endl
-//            << password_ << std::endl
-//            << username_ << std::endl;
     delete handler;
     return success;
 }

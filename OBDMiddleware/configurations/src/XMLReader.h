@@ -6,13 +6,14 @@
 
 class XMLReader
 {
-        //ensure constructors are not implmented by compiler
+        //ensure constructors are not implemented by compiler
         XMLReader() = delete;
         XMLReader(XMLReader &o) = delete;
         XMLReader(XMLReader &&o) = delete;
 
     private:
         DefaultXMLHandler* handler_;
+
     public:
         XMLReader(DefaultXMLHandler* handler);
         virtual ~XMLReader();

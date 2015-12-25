@@ -1,8 +1,8 @@
 #include "DiagnosticTroubleCodeTest.h"
 #include "../src/DiagnosticTroubleCode.h"
+#include "../../configurations/src/Configuration.h"
 
 #include <string>
-#include "../src/Configuration.h"
 
 void DiagnosticTroubleCodeTest::setUp() {
 	dtc_under_test_ = new DiagnosticTroubleCode();

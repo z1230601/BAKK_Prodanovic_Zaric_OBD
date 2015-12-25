@@ -1,6 +1,6 @@
 #include "DiagnosticTroubleCode.h"
 #include "../../databaseManagement/src/DBExecuter.h"
-#include "Configuration.h"
+#include "../../configurations/src/Configuration.h"
 
 DiagnosticTroubleCode::DiagnosticTroubleCode() :
 		assembly_area_(0),

@@ -46,6 +46,7 @@ SET(LIBRARY_NAME "lib${OBDBase_target_name}.so")
 
 # link the libraries to the executable (most of them found by cmake modules)
 TARGET_LINK_LIBRARIES(${OBDBase_target_name}
+  ${configurations_library_location}
   ${database_library_location}
   ${LibXML++_LIBRARIES}
   ${Boost_LIBRARIES}
@@ -96,6 +97,7 @@ ADD_EXECUTABLE(OBDBaseTester
      ${UnitTests_SRCS})
 
 TARGET_LINK_LIBRARIES(OBDBaseTester
+                      ${configurations_library_location}
                       ${Boost_FILESYSTEM_LIBRARY}
                       ${Boost_SYSTEM_LIBRARY}
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
