@@ -9,7 +9,7 @@ void ElmCommandFactoryTest::tearDown() {
 
 }
 
-void ElmCommandFactoryTest::testXYZ() {
+void ElmCommandFactoryTest::testFactory() {
 
 }
 

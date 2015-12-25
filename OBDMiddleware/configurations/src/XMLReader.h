@@ -14,6 +14,7 @@ class XMLReader
     private:
         DefaultXMLHandler* handler_;
 
+        void iterateChildren(const xmlpp::Node* parent);
     public:
         XMLReader(DefaultXMLHandler* handler);
         virtual ~XMLReader();

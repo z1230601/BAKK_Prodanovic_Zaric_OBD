@@ -8,7 +8,7 @@ class ElmCommandFactory;
 
 class ElmCommandFactoryTest : public CppUnit::TestCase {
 	CPPUNIT_TEST_SUITE (ElmCommandFactoryTest);
-	CPPUNIT_TEST(testXYZ);
+	CPPUNIT_TEST(testFactory);
 	CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -17,7 +17,7 @@ private:
 public:
 	void setUp();
 	void tearDown();
-	void testXYZ();
+	void testFactory();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION (ElmCommandFactoryTest);
