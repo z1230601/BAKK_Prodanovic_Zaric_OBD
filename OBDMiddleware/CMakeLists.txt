@@ -14,6 +14,7 @@ SET(middleware_VESION_STRING "${middleware_VERSION_MAJOR}.${middleware_VERSION_M
 MESSAGE("Building Middleware with version: " ${middleware_VESION_STRING})
 
 # add sub-parts
+ADD_SUBDIRECTORY(configurations)
 ADD_SUBDIRECTORY(communicationInterface)
 ADD_SUBDIRECTORY(databaseManagement)
 ADD_SUBDIRECTORY(obdBase)

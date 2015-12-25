@@ -51,6 +51,8 @@ private:
 
 	sql::mysql::MySQL_Driver* driver_;
 	sql::Connection* connection_;
+
+	bool parseConfigurationFile(std::string configurationFile);
 };
 
 #endif /* DBREPRESENTER_H_ */

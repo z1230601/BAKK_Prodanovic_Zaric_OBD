@@ -92,15 +92,6 @@ TARGET_LINK_LIBRARIES(ConfigurationTester
 
                       )
 
-SET(TESTDBSETUP_PATH ${Configuration_SOURCE_DIR}/test/testdata/testdb.sql)
-
-ADD_CUSTOM_COMMAND(TARGET ConfigurationTester
-     PRE_BUILD
-     COMMAND ${Configuration_SOURCE_DIR}/test/testdata//setupDatabases.sh "${TESTDBSETUP_PATH}"
-     WORKING_DIR ${Configuration_SOURCE_DIR}
-     VERBATIM
-)
-
 FILE(GLOB Tests_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/test/*Test.cpp)
 
 FOREACH(test ${Tests_SRCS})

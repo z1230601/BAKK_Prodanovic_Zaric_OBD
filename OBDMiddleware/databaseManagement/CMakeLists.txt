@@ -1,6 +1,11 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(DatabaseManagement)
 
+
+IF(NOT DEFINED configurations_library_location)
+  SET(configurations_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../configurations/build/libconfiguration-dev.so")
+ENDIF(NOT DEFINED configurations_library_location)
+
 SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 SET(Boost_USE_STATIC_LIBS   ON)
 SET(Boost_USE_MULTITHREADED ON)
@@ -36,12 +41,15 @@ LIST(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 
 SET(Database_target_name database-connection-manager-dev)
 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../configurations/src/)
+
 #Make also shared library out of found cpps and set internal CMAKE VAR
 ADD_LIBRARY(${Database_target_name} SHARED ${EXECS})
 SET(LIBRARY_NAME "lib${Database_target_name}.so")
 
 # link the libraries to the executable (most of them found by cmake modules)
 TARGET_LINK_LIBRARIES(${Database_target_name}
+         ${configurations_library_location}
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
          ${LibXML++_LIBRARIES}
@@ -90,6 +98,8 @@ ADD_EXECUTABLE(DatabaseTester
      ${UnitTests_SRCS})
 
 TARGET_LINK_LIBRARIES(DatabaseTester
+
+         ${configurations_library_location}
                       ${Boost_FILESYSTEM_LIBRARY}
                       ${Boost_SYSTEM_LIBRARY}
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}

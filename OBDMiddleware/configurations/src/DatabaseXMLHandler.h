@@ -30,6 +30,11 @@ class DatabaseXMLHandler:public DefaultXMLHandler
         virtual ~DatabaseXMLHandler();
 
         void handleNode(xmlpp::Node* node);
+
+        std::string getHostAddress();
+        std::string getDBName();
+        std::string getPassword();
+        std::string getUsername();
 };
 
 #endif /* DATABASEXMLHANDLER_H_ */

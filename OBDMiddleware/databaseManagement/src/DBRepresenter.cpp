@@ -2,6 +2,8 @@
 #include <iostream>
 #include <exception>
 #include "Converter.h"
+#include "../../configurations/src/DatabaseXMLHandler.h"
+#include "../../configurations/src/XMLReader.h"
 
 DBRepresenter::DBRepresenter() {
 	//TODO: NOT really nice, is it?
@@ -14,6 +16,7 @@ DBRepresenter::DBRepresenter(std::string configurationFile) {
 	valid_construction_ = parseConfigurationFile(configurationFile);
 }
 
+
 DBRepresenter::~DBRepresenter() {
 	if(connection_ != NULL && !connection_->isClosed())
 		closeConnection();
@@ -23,6 +26,23 @@ DBRepresenter::~DBRepresenter() {
 
 	if(driver_ != NULL)
 		delete driver_;
+}
+
+bool DBRepresenter::parseConfigurationFile(std::string configurationFile){
+    DatabaseXMLHandler* handler = new DatabaseXMLHandler();
+    XMLReader reader(handler);
+    bool success = reader.parseFile(configurationFile);
+    host_address_ = handler->getHostAddress();
+    dbname_ = handler->getDBName();
+    password_ = handler->getPassword();
+    username_ = handler->getUsername();
+//    std::cout << "parsed from xmlfile" << std::endl
+//            << host_address_ << std::endl
+//            << dbname_ << std::endl
+//            << password_ << std::endl
+//            << username_ << std::endl;
+    delete handler;
+    return success;
 }
 
 bool DBRepresenter::isValid() {

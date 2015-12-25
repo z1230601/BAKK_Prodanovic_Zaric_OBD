@@ -78,12 +78,23 @@ void DBExecuterTest::testSimpleInsert() {
 	CPPUNIT_ASSERT(executer_under_test_->insertData(to_table, columns, data));
 }
 
+void printTable(SQLTable table){
+    for(auto row:table){
+        for(auto cell: row){
+            std::cout << cell << " | ";
+        }
+        std::cout << std::endl;
+    }
+
+}
 void DBExecuterTest::testInsertExistingID() {
 	std::string to_table = "testdata";
 	std::vector<std::string> columns { "ID", "Name" };
 	SQLTable data { { "3", "ShouldFail" } };
 
+//	printTable(executer_under_test_->readData(to_table, columns, "ID IS NOT NULL"));
 	CPPUNIT_ASSERT(!executer_under_test_->insertData(to_table, columns, data));
+//    printTable(executer_under_test_->readData(to_table, columns, "ID IS NOT NULL"));
 }
 
 void DBExecuterTest::testDeleteEntry() {

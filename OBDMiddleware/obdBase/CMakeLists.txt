@@ -1,6 +1,14 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(OBDBase)
 
+IF(NOT DEFINED database_library_location)
+  SET(database_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../databaseManagement/build/libdatabase-connection-manager-dev.so")
+ENDIF(NOT DEFINED database_library_location)
+
+IF(NOT DEFINED configurations_library_location)
+  SET(configurations_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../configurations/build/libconfiguration-dev.so")
+ENDIF(NOT DEFINED configurations_library_location)
+
 SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 ADD_SUBDIRECTORY(src)
@@ -30,6 +38,7 @@ LIST(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 SET(OBDBase_target_name "obd-base-dev")
 #Make also shared library out of found cpps and set internal CMAKE VAR
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../databaseManagement/src/)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../configurations/src/)
 
 ADD_LIBRARY(${OBDBase_target_name} SHARED ${EXECS})
 SET(LIBRARY_NAME "lib${OBDBase_target_name}.so")
