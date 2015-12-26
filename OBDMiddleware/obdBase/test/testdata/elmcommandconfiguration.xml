@@ -23,7 +23,7 @@
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"<CR>"</basecommand>
+		<basecommand>"&lt;CR&gt;"</basecommand>
 		<description>"repeat the last command"</description>
 		<group>"General"</group>
 	</command>
@@ -198,11 +198,15 @@
 		<version>1.0</version>
 		<basecommand>"CV"</basecommand>
 		<basevalueformat>"dddd"</basevalueformat> 
-		<description>"Calibrate the Voltage to dd.dd volts Volts
+		<description>"Calibrate the Voltage to dd.dd volts"</description>
+		<group>"Volts"</group> 
+	</command>
 	<command>
 		<version>1.4</version>
 		<basecommand>"CV 0000"</basecommand> 
-		<description>"Restore CV value to factory setting Volts
+		<description>"Restore CV value to factory setting"</description>
+		<group>"Volts"</group>
+	</command>
 	<command>
 		<version>1.0</version>
 		<basecommand>"D"</basecommand> 
@@ -211,7 +215,8 @@
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"D0"</basecommand>display of the DLC Off"</description> 
+		<basecommand>"D0"</basecommand>
+		<description>"display of the DLC Off"</description> 
 		<group>"CAN"</group> 
 	</command>
 	<command>
@@ -359,7 +364,9 @@
 	<command>
 		<version>1.4</version>
 		<basecommand>"IGN"</basecommand> 
-		<description>"read the IgnMon input level Other
+		<description>"read the IgnMon input level"</description>
+		<group>"Other"</group>
+	</command>
 	<command>
 		<version>1.2</version>
 		<basecommand>"IIA"</basecommand> 
@@ -594,7 +601,9 @@
 	<command>
 		<version>1.0</version>
 		<basecommand>"RV"</basecommand> 
-		<description>"Read the Voltage Volts
+		<description>"Read the Voltage"</description>
+		<group>"Volts"</group>
+	</command>
 	<command>
 		<version>1.3</version>
 		<basecommand>"S0"</basecommand> 
