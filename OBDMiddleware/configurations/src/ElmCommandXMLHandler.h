@@ -57,6 +57,8 @@ class ElmCommandXMLHandler : public DefaultXMLHandler
         ElmCommandInput current_elm_command_;
 
     public:
+        ElmCommandXMLHandler();
+        virtual ~ElmCommandXMLHandler();
         void handleNode(xmlpp::Node* node);
 
         std::vector<ElmCommandInput> getParsedCommands();

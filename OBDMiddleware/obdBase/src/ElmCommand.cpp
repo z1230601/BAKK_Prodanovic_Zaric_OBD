@@ -30,6 +30,23 @@ ElmCommand::ElmCommand(float minReqElmVersion,
     }
 }
 
+ElmCommand::ElmCommand(ElmCommandInput input){
+    base_command_.command_ = input.basecommand_;
+    base_command_.value_format_ = input.basevalueformat_;
+
+    sub_command_.command_ = input.subcommand_;
+    sub_command_.value_format_ = input.subvalueformat_;
+    description_ = input.description_;
+    group_ = input.group_;
+
+    if(input.version_ >= 1.0)
+    {
+        min_req_version_ = input.version_;
+    } else
+    {
+        throw std::runtime_error("Invalid Elm Version! Needs to be >= 1.0");
+    }
+}
 bool ElmCommand::isValidValue(std::string value) {
     std::string value_printable(value);
 

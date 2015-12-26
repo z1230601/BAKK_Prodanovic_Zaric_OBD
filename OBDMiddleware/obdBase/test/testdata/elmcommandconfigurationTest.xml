@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "elmcommand.dtd">
+
+<commands>
+	<command>
+		<version>1.3</version>
+		<basecommand>@3</basecommand>
+		<basevalueformat>cccccccccccc</basevalueformat>
+		<description>store the device identifier</description> 
+		<group>General</group>
+	</command>
+	<command>
+		<version>1.0</version>
+		<basecommand>&lt;CR&gt;</basecommand>
+		<description>repeat the last command</description>
+		<group>General</group>
+	</command>
+	<command>
+		<version>1.3</version>
+		<basecommand>CRA</basecommand> 
+		<basevalueformat>hhhhhhhh</basevalueformat>
+		<description>set CAN Receive Address to hhhhhhhh</description> 
+		<group>CAN</group> 
+	</command>
+	<command>
+		<version>1.4</version>
+		<basecommand>PB</basecommand> 
+		<basevalueformat>xx yy</basevalueformat>
+		<description>set Protocol B options and baud rate</description> 
+		<group>CAN</group> 
+	</command>
+	<command>
+		<version>1.1</version>
+		<basecommand>PP</basecommand> 
+		<basevalueformat>xx</basevalueformat>
+		<subcommand>SV</subcommand>
+		<subvalueformat>yy</subvalueformat>
+		<description>for PP xx, Set the Value to yy</description> 
+		<group>PPs</group> 
+	</command>
+</commands>
+   
+

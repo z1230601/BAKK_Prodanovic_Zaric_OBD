@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "../../configurations/src/ElmCommandXMLHandler.h"
 
 typedef struct
 {
@@ -30,6 +31,7 @@ class ElmCommand
         ElmCommand(float minReqElmVersion, std::string base_command,
                 std::string description, std::string group,
                 std::string base_value_format = "", std::string sub_command = "", std::string sub_value_format = "");
+        ElmCommand(ElmCommandInput input);
         virtual ~ElmCommand();
 
         bool isValidValue(std::string value);

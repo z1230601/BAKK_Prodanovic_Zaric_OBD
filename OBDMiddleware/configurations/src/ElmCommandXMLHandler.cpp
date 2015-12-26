@@ -46,3 +46,11 @@ std::vector<ElmCommandInput> ElmCommandXMLHandler::getParsedCommands() {
     }
     return parsed_commands_;
 }
+
+ElmCommandXMLHandler::ElmCommandXMLHandler(){
+
+}
+
+ElmCommandXMLHandler::~ElmCommandXMLHandler(){
+
+}

@@ -1,5 +1,5 @@
-<!ELEMENT commands (command)>
-<!ELEMENT command (version, basecommand, subcommand, description, group, basevalueformat, subvalueformat)>
+<!ELEMENT commands (command+)>
+<!ELEMENT command (version, basecommand, (basevalueformat*), (subcommand*), (subvalueformat*), description, group)>
 <!ELEMENT version (#PCDATA)>
 <!ELEMENT basecommand (#PCDATA)>
 <!ELEMENT subcommand (#PCDATA)>
