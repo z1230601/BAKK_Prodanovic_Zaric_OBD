@@ -4,764 +4,764 @@
 <commands>
 	<command>
 		<version>1.0</version>
-		<elmcomand>"@1"</elmcomand>
-		<description>"display the device description"</description>
-		<group>"General"</group>
+		<elmcomand>@1</elmcomand>
+		<description>display the device description</description>
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"@2"</basecommand>
-		<description>"display the device identifier"</description>
-		<group>"General"</group>
+		<basecommand>@2</basecommand>
+		<description>display the device identifier</description>
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"@3"</basecommand>
-		<basevalueformat>"cccccccccccc"</basevalueformat>
-		<description>"store the device identifier"</description> 
-		<group>"General"</group>
+		<basecommand>@3</basecommand>
+		<basevalueformat>cccccccccccc</basevalueformat>
+		<description>store the device identifier</description> 
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"&lt;CR&gt;"</basecommand>
-		<description>"repeat the last command"</description>
-		<group>"General"</group>
+		<basecommand>&lt;CR&gt;</basecommand>
+		<description>repeat the last command</description>
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"AL"</basecommand>
-		<description>"Allow Long (>7 byte) messages"</description> 
-		<group>"OBD"</group>
+		<basecommand>AL</basecommand>
+		<description>Allow Long (>7 byte) messages</description> 
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"AR"</basecommand>
-		<description>"Automatic Receive"</description>
-		<group>"OBD"</group>
+		<basecommand>AR</basecommand>
+		<description>Automatic Receive</description>
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"AT0"</basecommand>
-		<description>"Adaptive Timing Off"</description>
-		<group>"OBD"</group>
+		<basecommand>AT0</basecommand>
+		<description>Adaptive Timing Off</description>
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"AT1"</basecommand>
-		<description>"Adaptive Timing Auto1"</description>  
-		<group>"OBD"</group>
+		<basecommand>AT1</basecommand>
+		<description>Adaptive Timing Auto1</description>  
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"AT2"</basecommand>
-		<description>"Adaptive Timing Auto2"</description>
-		<group>"OBD"</group>
+		<basecommand>AT2</basecommand>
+		<description>Adaptive Timing Auto2</description>
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"BD"</basecommand>
-		<description>"perform a Buffer Dump"</description>
-		<group>"OBD"</group>
+		<basecommand>BD</basecommand>
+		<description>perform a Buffer Dump</description>
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"BI"</basecommand>
-		<description>"Bypass the Initialization sequence"</description> 
-		<group>"OBD"</group>
+		<basecommand>BI</basecommand>
+		<description>Bypass the Initialization sequence</description> 
+		<group>OBD</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"BRD"</basecommand>
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"try Baud rate Divisor hh"</description> 
-		<group>"General"</group>
+		<basecommand>BRD</basecommand>
+		<basevalueformat>hh</basevalueformat>
+		<description>try Baud rate Divisor hh</description> 
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"BRT"</basecommand>
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"set Baud Rate handshake Timeout"</description>
-		<group>"General"</group>
+		<basecommand>BRT</basecommand>
+		<basevalueformat>hh</basevalueformat>
+		<description>set Baud Rate handshake Timeout</description>
+		<group>General</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CAF0"</basecommand>
-		<description>"CAN Automatic Formatting Off"</description>
-		<group>"CAN"</group>
+		<basecommand>CAF0</basecommand>
+		<description>CAN Automatic Formatting Off</description>
+		<group>CAN</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CAF1"</basecommand>
-		<description>"CAN Automatic Formatting On"</description>
-		<group>"CAN"</group>
+		<basecommand>CAF1</basecommand>
+		<description>CAN Automatic Formatting On</description>
+		<group>CAN</group>
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"CEA"</basecommand>
-		<description>"turn off CAN Extended Addressing"</description>
-		<group>"CAN"</group>
+		<basecommand>CEA</basecommand>
+		<description>turn off CAN Extended Addressing</description>
+		<group>CAN</group>
 	</command>
 	<command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"CEA"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"use CAN Extended Address hh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CEA</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>use CAN Extended Address hh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CF"</basecommand> 
-		<basevalueformat>"hhhhhhhh"</basevalueformat>
-		<description>"set the ID Filter to hhhhhhhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CF</basecommand> 
+		<basevalueformat>hhhhhhhh</basevalueformat>
+		<description>set the ID Filter to hhhhhhhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CF"</basecommand> 
-		<basevalueformat>"hhh"</basevalueformat>
-		<description>"set the ID Filter to hhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CF</basecommand> 
+		<basevalueformat>hhh</basevalueformat>
+		<description>set the ID Filter to hhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CFC0"</basecommand> 
-		<description>"CAN Flow Control Off"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CFC0</basecommand> 
+		<description>CAN Flow Control Off</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CFC1"</basecommand> 
-		<description>"CAN Flow Control On"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CFC1</basecommand> 
+		<description>CAN Flow Control On</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CM"</basecommand> 
-		<basevalueformat>"hhhhhhhh"</basevalueformat>
-		<description>"set the ID Mask to hhhhhhhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CM</basecommand> 
+		<basevalueformat>hhhhhhhh</basevalueformat>
+		<description>set the ID Mask to hhhhhhhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CM"</basecommand> 
-		<basevalueformat>"hhh"</basevalueformat>
-		<description>"set the ID Mask to hhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CM</basecommand> 
+		<basevalueformat>hhh</basevalueformat>
+		<description>set the ID Mask to hhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CP"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"set CAN Priority (only for 29 bit)"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CP</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>set CAN Priority (only for 29 bit)</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"CRA"</basecommand> 
-		<description>"reset CAN Receive Address filters"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CRA</basecommand> 
+		<description>reset CAN Receive Address filters</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"CRA"</basecommand> 
-		<basevalueformat>"hhh"</basevalueformat>
-		<description>"set CAN Receive Address to hhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CRA</basecommand> 
+		<basevalueformat>hhh</basevalueformat>
+		<description>set CAN Receive Address to hhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"CRA"</basecommand> 
-		<basevalueformat>"hhhhhhhh"</basevalueformat>
-		<description>"set CAN Receive Address to hhhhhhhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CRA</basecommand> 
+		<basevalueformat>hhhhhhhh</basevalueformat>
+		<description>set CAN Receive Address to hhhhhhhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CS"</basecommand> 
-		<description>"show the CAN Status"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CS</basecommand> 
+		<description>show the CAN Status</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"CSM0"</basecommand> 
-		<description>"CAN Silent Mode Off"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CSM0</basecommand> 
+		<description>CAN Silent Mode Off</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"CSM1"</basecommand> 
-		<description>"CAN Silent Mode On"</description> 
-		<group>"CAN"</group> 
+		<basecommand>CSM1</basecommand> 
+		<description>CAN Silent Mode On</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"CV"</basecommand>
-		<basevalueformat>"dddd"</basevalueformat> 
-		<description>"Calibrate the Voltage to dd.dd volts"</description>
-		<group>"Volts"</group> 
+		<basecommand>CV</basecommand>
+		<basevalueformat>dddd</basevalueformat> 
+		<description>Calibrate the Voltage to dd.dd volts</description>
+		<group>Volts</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"CV 0000"</basecommand> 
-		<description>"Restore CV value to factory setting"</description>
-		<group>"Volts"</group>
+		<basecommand>CV 0000</basecommand> 
+		<description>Restore CV value to factory setting</description>
+		<group>Volts</group>
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"D"</basecommand> 
-		<description>"set all to Defaults"</description> 
-		<group>"General"</group> 
+		<basecommand>D</basecommand> 
+		<description>set all to Defaults</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"D0"</basecommand>
-		<description>"display of the DLC Off"</description> 
-		<group>"CAN"</group> 
+		<basecommand>D0</basecommand>
+		<description>display of the DLC Off</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"D1"</basecommand> 
-		<description>"display of the DLC On"</description> 
-		<group>"CAN"</group> 
+		<basecommand>D1</basecommand> 
+		<description>display of the DLC On</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"DM1"</basecommand> 
-		<description>"(J1939) Monitor for DM1 messages"</description> 
-		<group>"J1939"</group> 
+		<basecommand>DM1</basecommand> 
+		<description>(J1939) Monitor for DM1 messages</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"DP"</basecommand> 
-		<description>"Describe the current Protocol"</description> 
-		<group>"OBD"</group> 
+		<basecommand>DP</basecommand> 
+		<description>Describe the current Protocol</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"DPN"</basecommand> 
-		<description>"Describe the Protocol by Number"</description> 
-		<group>"OBD"</group> 
+		<basecommand>DPN</basecommand> 
+		<description>Describe the Protocol by Number</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"E0"</basecommand> 
-		<description>"Echo Off"</description> 
-		<group>"General"</group> 
+		<basecommand>E0</basecommand> 
+		<description>Echo Off</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"E1"</basecommand> 
-		<description>"Echo On"</description> 
-		<group>"General"</group> 
+		<basecommand>E1</basecommand> 
+		<description>Echo On</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"FC SD"</basecommand> 
-		<basevalueformat>"hhhhhhhhhh"</basevalueformat>
-		<description>"Flow Control Set Data to [...]"</description> 
-		<group>"CAN"</group> 
+		<basecommand>FC SD</basecommand> 
+		<basevalueformat>hhhhhhhhhh</basevalueformat>
+		<description>Flow Control Set Data to [...]</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"FC SH"</basecommand>
-		<basevalueformat>"hhhhhhhh"</basevalueformat> 
-		<description>"Flow Control Set the Header to hhhhhhhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>FC SH</basecommand>
+		<basevalueformat>hhhhhhhh</basevalueformat> 
+		<description>Flow Control Set the Header to hhhhhhhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"FC SH"</basecommand> 
-		<basevalueformat>"hhh"</basevalueformat>
-		<description>"Flow Control Set the Header to hhh"</description> 
-		<group>"CAN"</group> 
+		<basecommand>FC SH</basecommand> 
+		<basevalueformat>hhh</basevalueformat>
+		<description>Flow Control Set the Header to hhh</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"FC SM"</basecommand>
-		<basevalueformat>"h"</basevalueformat> 
-		<description>"Flow Control Set the Mode to h"</description> 
-		<group>"CAN"</group> 
+		<basecommand>FC SM</basecommand>
+		<basevalueformat>h</basevalueformat> 
+		<description>Flow Control Set the Mode to h</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.3a</version>
-		<basecommand>"FE"</basecommand> 
-		<description>"Forget Events"</description> 
-		<group>"General"</group> 
+		<basecommand>FE</basecommand> 
+		<description>Forget Events</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"FI"</basecommand> 
-		<description>"perform a Fast Initiation"</description> 
-		<group>"ISO"</group> 
+		<basecommand>FI</basecommand> 
+		<description>perform a Fast Initiation</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"H0"</basecommand> 
-		<description>"Headers Off"</description> 
-		<group>"OBD"</group> 
+		<basecommand>H0</basecommand> 
+		<description>Headers Off</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"H1"</basecommand> 
-		<description>"Headers On"</description> 
-		<group>"OBD"</group> 
+		<basecommand>H1</basecommand> 
+		<description>Headers On</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"I"</basecommand> 
-		<description>"Print the ID"</description> 
-		<group>"General"</group> 
+		<basecommand>I</basecommand> 
+		<description>Print the ID</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"IB 10"</basecommand> 
-		<description>"set the ISO Baud rate to 10400"</description> 
-		<group>"ISO"</group> 
+		<basecommand>IB 10</basecommand> 
+		<description>set the ISO Baud rate to 10400</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"IB 48"</basecommand> 
-		<description>"set the ISO Baud rate to 4800"</description> 
-		<group>"ISO"</group> 
+		<basecommand>IB 48</basecommand> 
+		<description>set the ISO Baud rate to 4800</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"IB 96"</basecommand> 
-		<description>"set the ISO Baud rate to 9600"</description> 
-		<group>"ISO"</group> 
+		<basecommand>IB 96</basecommand> 
+		<description>set the ISO Baud rate to 9600</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IFR H"</basecommand> 
-		<description>"IFR value from Header"</description> 
-		<group>"J1850"</group> 
+		<basecommand>IFR H</basecommand> 
+		<description>IFR value from Header</description> 
+		<group>J1850</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IFR S"</basecommand> 
-		<description>"IFR value from Source"</description> 
-		<group>"J1850"</group> 
+		<basecommand>IFR S</basecommand> 
+		<description>IFR value from Source</description> 
+		<group>J1850</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IFR0"</basecommand> 
-		<description>"IFRs Off"</description> 
-		<group>"J1850"</group> 
+		<basecommand>IFR0</basecommand> 
+		<description>IFRs Off</description> 
+		<group>J1850</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IFR1"</basecommand> 
-		<description>"IFRs Auto"</description> 
-		<group>"J1850"</group> 
+		<basecommand>IFR1</basecommand> 
+		<description>IFRs Auto</description> 
+		<group>J1850</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IFR2"</basecommand> 
-		<description>"IFRs On"</description> 
-		<group>"J1850"</group> 
+		<basecommand>IFR2</basecommand> 
+		<description>IFRs On</description> 
+		<group>J1850</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"IGN"</basecommand> 
-		<description>"read the IgnMon input level"</description>
-		<group>"Other"</group>
+		<basecommand>IGN</basecommand> 
+		<description>read the IgnMon input level</description>
+		<group>Other</group>
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"IIA"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"set the ISO (slow) Init Address to hh"</description> 
-		<group>"ISO"</group> 
+		<basecommand>IIA</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>set the ISO (slow) Init Address to hh</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"JE"</basecommand> 
-		<description>"use J1939 Elm data format"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JE</basecommand> 
+		<description>use J1939 Elm data format</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"JHF0"</basecommand> 
-		<description>"J1939 Header Formatting Off"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JHF0</basecommand> 
+		<description>J1939 Header Formatting Off</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"JHF1"</basecommand> 
-		<description>"J1939 Header Formatting On"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JHF1</basecommand> 
+		<description>J1939 Header Formatting On</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"JS"</basecommand> 
-		<description>"use J1939 SAE data format"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JS</basecommand> 
+		<description>use J1939 SAE data format</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"JTM1"</basecommand> 
-		<description>"set the J1939 Timer Multiplier to 1x"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JTM1</basecommand> 
+		<description>set the J1939 Timer Multiplier to 1x</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"JTM5"</basecommand> 
-		<description>"set the J1939 Timer Multiplier to 5x"</description> 
-		<group>"J1939"</group> 
+		<basecommand>JTM5</basecommand> 
+		<description>set the J1939 Timer Multiplier to 5x</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"KW"</basecommand> 
-		<description>"display the Key Words"</description> 
-		<group>"ISO"</group> 
+		<basecommand>KW</basecommand> 
+		<description>display the Key Words</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"KW0"</basecommand> 
-		<description>"Key Word checking Off"</description> 
-		<group>"ISO"</group> 
+		<basecommand>KW0</basecommand> 
+		<description>Key Word checking Off</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"KW1"</basecommand> 
-		<description>"Key Word checking On"</description> 
-		<group>"ISO"</group> 
+		<basecommand>KW1</basecommand> 
+		<description>Key Word checking On</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"L0"</basecommand> 
-		<description>"Linefeeds Off"</description> 
-		<group>"General"</group> 
+		<basecommand>L0</basecommand> 
+		<description>Linefeeds Off</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"L1"</basecommand> 
-		<description>"Linefeeds On"</description> 
-		<group>"General"</group> 
+		<basecommand>L1</basecommand> 
+		<description>Linefeeds On</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"LP"</basecommand> 
-		<description>"go to Low Power mode"</description> 
-		<group>"General"</group> 
+		<basecommand>LP</basecommand> 
+		<description>go to Low Power mode</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"M0"</basecommand> 
-		<description>"Memory Off"</description> 
-		<group>"General"</group> 
+		<basecommand>M0</basecommand> 
+		<description>Memory Off</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"M1"</basecommand> 
-		<description>"Memory On"</description> 
-		<group>"General"</group> 
+		<basecommand>M1</basecommand> 
+		<description>Memory On</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"MA"</basecommand> 
-		<description>"Monitor All"</description> 
-		<group>"OBD"</group> 
+		<basecommand>MA</basecommand> 
+		<description>Monitor All</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"MP"</basecommand> 
-		<basevalueformat>"hhhh"</basevalueformat>
-		<description>"(J1939) Monitor for PGN hhhh"</description> 
-		<group>"J1939"</group> 
+		<basecommand>MP</basecommand> 
+		<basevalueformat>hhhh</basevalueformat>
+		<description>(J1939) Monitor for PGN hhhh</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"MP"</basecommand>
-		<basevalueformat>"hhhh n"</basevalueformat> 
-		<description>"(J1939) Monitor for PGN hhhh, get n messages"</description> 
-		<group>"J1939"</group> 
+		<basecommand>MP</basecommand>
+		<basevalueformat>hhhh n</basevalueformat> 
+		<description>(J1939) Monitor for PGN hhhh, get n messages</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"MP"</basecommand>
-		<basevalueformat>"hhhhhh"</basevalueformat> 
-		<description>"(J1939) Monitor for PGN hhhhhh"</description> 
-		<group>"J1939"</group> 
+		<basecommand>MP</basecommand>
+		<basevalueformat>hhhhhh</basevalueformat> 
+		<description>(J1939) Monitor for PGN hhhhhh</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.4b</version>
-		<basecommand>"MP"</basecommand> 
-		<basevalueformat>"hhhhhh n"</basevalueformat>
-		<description>"(J1939) Monitor for PGN hhhhhh, get n messages"</description> 
-		<group>"J1939"</group> 
+		<basecommand>MP</basecommand> 
+		<basevalueformat>hhhhhh n</basevalueformat>
+		<description>(J1939) Monitor for PGN hhhhhh, get n messages</description> 
+		<group>J1939</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"MR hh"</basecommand> 
-		<description>"Monitor for Receiver = hh"</description> 
-		<group>"OBD"</group> 
+		<basecommand>MR hh</basecommand> 
+		<description>Monitor for Receiver = hh</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"MT"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"Monitor for Transmitter = hh"</description> 
-		<group>"OBD"</group> 
+		<basecommand>MT</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>Monitor for Transmitter = hh</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"NL"</basecommand> 
-		<description>"Normal Length (7 byte) messages"</description> 
-		<group>"OBD"</group> 
+		<basecommand>NL</basecommand> 
+		<description>Normal Length (7 byte) messages</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"PB"</basecommand> 
-		<basevalueformat>"xx yy"</basevalueformat>
-		<description>"set Protocol B options and baud rate"</description> 
-		<group>"CAN"</group> 
+		<basecommand>PB</basecommand> 
+		<basevalueformat>xx yy</basevalueformat>
+		<description>set Protocol B options and baud rate</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"PC"</basecommand> 
-		<description>"Protocol Close"</description> 
-		<group>"OBD"</group> 
+		<basecommand>PC</basecommand> 
+		<description>Protocol Close</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PP FF OFF"</basecommand> 
-		<description>"all Prog Parameters Off"</description> 
-		<group>"PPs"</group> 
+		<basecommand>PP FF OFF</basecommand> 
+		<description>all Prog Parameters Off</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PP FF ON"</basecommand> 
-		<description>"all Prog Parameters On"</description> 
-		<group>"PPs"</group> 
+		<basecommand>PP FF ON</basecommand> 
+		<description>all Prog Parameters On</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PP"</basecommand>
-		<basevalueformat>"xx"</basevalueformat> 
+		<basecommand>PP</basecommand>
+		<basevalueformat>xx</basevalueformat> 
 		<subcommand>OFF</subcommand>
-		<description>"disable Prog Parameter xx"</description> 
-		<group>"PPs"</group> 
+		<description>disable Prog Parameter xx</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PP"</basecommand>
-		<basevalueformat>"xx"</basevalueformat> 
+		<basecommand>PP</basecommand>
+		<basevalueformat>xx</basevalueformat> 
 		<subcommand>ON</subcommand>
-		<description>"enable Prog Parameter xx"</description> 
-		<group>"PPs"</group> 
+		<description>enable Prog Parameter xx</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PP"</basecommand> 
-		<basevalueformat>"xx"</basevalueformat>
+		<basecommand>PP</basecommand> 
+		<basevalueformat>xx</basevalueformat>
 		<subcommand>SV</subcommand>
 		<subvalueformat>yy</subvalueformat>
-		<description>"for PP xx, Set the Value to yy"</description> 
-		<group>"PPs"</group> 
+		<description>for PP xx, Set the Value to yy</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.1</version>
-		<basecommand>"PPS"</basecommand> 
-		<description>"print a PP Summary"</description> 
-		<group>"PPs"</group> 
+		<basecommand>PPS</basecommand> 
+		<description>print a PP Summary</description> 
+		<group>PPs</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"R0"</basecommand> 
-		<description>"Responses Off"</description> 
-		<group>"OBD"</group> 
+		<basecommand>R0</basecommand> 
+		<description>Responses Off</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"R1"</basecommand> 
-		<description>"Responses On"</description> 
-		<group>"OBD"</group> 
+		<basecommand>R1</basecommand> 
+		<description>Responses On</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"RA"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"set the Receive Address to hh"</description> 
-		<group>"OBD"</group> 
+		<basecommand>RA</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>set the Receive Address to hh</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"RD"</basecommand> 
-		<description>"Read the stored Data"</description> 
-		<group>"General"</group> 
+		<basecommand>RD</basecommand> 
+		<description>Read the stored Data</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"RTR"</basecommand> 
-		<description>"send an RTR message"</description> 
-		<group>"CAN"</group> 
+		<basecommand>RTR</basecommand> 
+		<description>send an RTR message</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"RV"</basecommand> 
-		<description>"Read the Voltage"</description>
-		<group>"Volts"</group>
+		<basecommand>RV</basecommand> 
+		<description>Read the Voltage</description>
+		<group>Volts</group>
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"S0"</basecommand> 
-		<description>"printing of Spaces Off"</description> 
-		<group>"OBD"</group> 
+		<basecommand>S0</basecommand> 
+		<description>printing of Spaces Off</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"S1"</basecommand> 
-		<description>"printing of Spaces On"</description> 
-		<group>"OBD"</group> 
+		<basecommand>S1</basecommand> 
+		<description>printing of Spaces On</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"SD"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"Store Data byte hh"</description> 
-		<group>"General"</group> 
+		<basecommand>SD</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>Store Data byte hh</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"SH"</basecommand>
-		<basevalueformat>"xx yy zz"</basevalueformat>
-		<description>"Set Header"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SH</basecommand>
+		<basevalueformat>xx yy zz</basevalueformat>
+		<description>Set Header</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"SH"</basecommand>
-		<basevalueformat>"yzz"</basevalueformat> 
-		<description>"Set Header"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SH</basecommand>
+		<basevalueformat>yzz</basevalueformat> 
+		<description>Set Header</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"SI"</basecommand> 
-		<description>"perform a Slow Initiation"</description> 
-		<group>"ISO"</group> 
+		<basecommand>SI</basecommand> 
+		<description>perform a Slow Initiation</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"SP A"</basecommand>
-		<basevalueformat>"h"</basevalueformat> 
-		<description>"Set Protocol to Auto, h and save it"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SP A</basecommand>
+		<basevalueformat>h</basevalueformat> 
+		<description>Set Protocol to Auto, h and save it</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"SP"</basecommand>
-		<basevalueformat>"h"</basevalueformat> 
-		<description>"Set Protocol to h and save it"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SP</basecommand>
+		<basevalueformat>h</basevalueformat> 
+		<description>Set Protocol to h and save it</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"SP 00"</basecommand> 
-		<description>"Set Protocol to Auto and save it"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SP 00</basecommand> 
+		<description>Set Protocol to Auto and save it</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"SR"</basecommand>
-		<basevalueformat>"hh"</basevalueformat> 
-		<description>"Set the Receive address to hh"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SR</basecommand>
+		<basevalueformat>hh</basevalueformat> 
+		<description>Set the Receive address to hh</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"SS"</basecommand> 
-		<description>"set Standard Search order (J1978)"</description> 
-		<group>"OBD"</group> 
+		<basecommand>SS</basecommand> 
+		<description>set Standard Search order (J1978)</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"ST"</basecommand>
-		<basevalueformat>"hh"</basevalueformat> 
-		<description>"Set Timeout to hh x 4 msec"</description> 
-		<group>"OBD"</group> 
+		<basecommand>ST</basecommand>
+		<basevalueformat>hh</basevalueformat> 
+		<description>Set Timeout to hh x 4 msec</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"SW"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"Set Wakeup interval to hh x 20 msec"</description> 
-		<group>"ISO"</group> 
+		<basecommand>SW</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>Set Wakeup interval to hh x 20 msec</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.4</version>
-		<basecommand>"TA"</basecommand> 
-		<basevalueformat>"hh"</basevalueformat>
-		<description>"set Tester Address to hh"</description> 
-		<group>"OBD"</group> 
+		<basecommand>TA</basecommand> 
+		<basevalueformat>hh</basevalueformat>
+		<description>set Tester Address to hh</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"TP A"</basecommand>
-		<basevalueformat>"h"</basevalueformat> 
-		<description>"Try Protocol h with Auto search"</description> 
-		<group>"OBD"</group> 
+		<basecommand>TP A</basecommand>
+		<basevalueformat>h</basevalueformat> 
+		<description>Try Protocol h with Auto search</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"TP"</basecommand>
-		<basevalueformat>"h"</basevalueformat> 
-		<description>"Try Protocol h"</description> 
-		<group>"OBD"</group> 
+		<basecommand>TP</basecommand>
+		<basevalueformat>h</basevalueformat> 
+		<description>Try Protocol h</description> 
+		<group>OBD</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"V0"</basecommand> 
-		<description>"use of Variable DLC Off"</description> 
-		<group>"CAN"</group> 
+		<basecommand>V0</basecommand> 
+		<description>use of Variable DLC Off</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.3</version>
-		<basecommand>"V1"</basecommand> 
-		<description>"use of Variable DLC On"</description> 
-		<group>"CAN"</group> 
+		<basecommand>V1</basecommand> 
+		<description>use of Variable DLC On</description> 
+		<group>CAN</group> 
 	</command>
 	<command>
 		<version>1.2</version>
-		<basecommand>"WM"</basecommand>
-		<basevalueformat>"hhhhhhhhhhhh"</basevalueformat> 
-		<description>"Set the Wakeup Message"</description> 
-		<group>"ISO"</group> 
+		<basecommand>WM</basecommand>
+		<basevalueformat>hhhhhhhhhhhh</basevalueformat> 
+		<description>Set the Wakeup Message</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"WM"</basecommand>
-		<basevalueformat>"xxyyzzaa"</basevalueformat> 
-		<description>"set the Wakeup Message to xxyyzzaa"</description> 
-		<group>"ISO"</group> 
+		<basecommand>WM</basecommand>
+		<basevalueformat>xxyyzzaa</basevalueformat> 
+		<description>set the Wakeup Message to xxyyzzaa</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"WM"</basecommand>
-		<basevalueformat>"xxyyzzaabb"</basevalueformat> 
-		<description>"set the Wakeup Message to xxyyzzaabb"</description> 
-		<group>"ISO"</group> 
+		<basecommand>WM</basecommand>
+		<basevalueformat>xxyyzzaabb</basevalueformat> 
+		<description>set the Wakeup Message to xxyyzzaabb</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"WM"</basecommand>
-		<basevalueformat>"xxyyzzaabbcc"</basevalueformat> 
-		<description>"set the Wakeup Message to xxyyzzaabbcc"</description> 
-		<group>"ISO"</group> 
+		<basecommand>WM</basecommand>
+		<basevalueformat>xxyyzzaabbcc</basevalueformat> 
+		<description>set the Wakeup Message to xxyyzzaabbcc</description> 
+		<group>ISO</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"WS"</basecommand> 
-		<description>"Warm Start"</description> 
-		<group>"General"</group> 
+		<basecommand>WS</basecommand> 
+		<description>Warm Start</description> 
+		<group>General</group> 
 	</command>
 	<command>
 		<version>1.0</version>
-		<basecommand>"Z"</basecommand> 
-		<description>"reset all"</description> 
-		<group>"General"</group> 
+		<basecommand>Z</basecommand> 
+		<description>reset all</description> 
+		<group>General</group> 
 	</command>	
 </commands>
    
