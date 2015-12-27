@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE commands SYSTEM "obdcommand.dtd">
+<servicemode>
+	<sid>1</sid>
+	<sid>2</sid>
+	<obdcommands>
+		<obdcommand>
+			<pid>66</pid>
+			<description>Luftmassenmesser</description>
+			<validitymapping>true</validitymapping>
+			<value interpretation="Calculation">
+				<name>MAF Sensor A</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>g/s</unit>				
+			</value>
+			<value interpretation="Calculation">
+				<name>MAF Sensor B</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>g/s</unit>				
+			</value>
+		</obdcommand>
+		<obdcommand>
+			<pid>5F</pid>
+			<description>Für das Fahrzeug gültige Abgasnorm</description>
+			<value interpretation="Mapping">
+				<bytes>1</bytes>
+				<mapping type="value">
+					<entry from="0E">LKW (Euro IV) B1</entry>
+					<entry from="0F">LKW (Euro V) B2</entry>
+					<entry from="10">LKW (Euro EEV) C</entry>
+				</mapping>		
+			</value>
+		</obdcommand>
+		<obdcommand>
+			<pid>65</pid>
+			<description>Zusätzliche Ein- und Ausgänge</description>
+			<validitymapping mode="auto">true</validitymapping>
+			<value interpretation="Mapping">
+				<bytes>1</bytes>
+				<mapping type="bit">
+				    <entry from="0" set="false">Kraftaufnahme inaktiv</entry>
+					<entry from="0" set="true">Kraftaufnahme aktiv</entry>
+					<entry from="1" set="false">Automatikgetriebe in Park-/Neutralstellung</entry>
+					<entry from="1" set="true">Vorwärts- oder Rückwärtsgang</entry>
+					<entry from="2" set="false">Manuelles Getriebe in Neutralstellung und/oder Kupplung getreten</entry>
+					<entry from="2" set="true">Gang eingelegt</entry>
+					<entry from="3" set="false">Vorglühlampe aus</entry>
+					<entry from="3" set="true">Lampe ein</entry>
+				</mapping>		
+			</value>
+		</obdcommand>
+		<obdcommand>
+			<pid>70</pid>
+			<description>Ladedruckregelung</description>
+			<validitymapping  mode="manual">true</validitymapping>
+			<value interpretation="Calculation">
+				<name>Soll Ladedruck A</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>kPa</unit>
+				<validitybit>0</validitybit>	
+			</value>
+			<value interpretation="Calculation">
+				<name>Ist Ladedruck A</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>kPa</unit>	
+				<validitybit>1</validitybit>			
+			</value>
+			<value interpretation="Calculation">
+				<name>Soll Ladedruck B</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>kPa</unit>	
+				<validitybit>3</validitybit>			
+			</value>
+			<value interpretation="Calculation">
+				<name>Ist Ladedruck B</name>
+				<bytes>2</bytes>
+				<min>0</min>
+				<max>2047,96875</max>
+				<unit>kPa</unit>	
+				<validitybit>4</validitybit>			
+			</value>
+			<value interpretation="Mapping">
+				<bytes>1</bytes>
+				<mapping type="bitcombination">
+					<validitybit from="01">2</validitybit>
+					<entry from="01" set="01">Offener Kreislauf, kein Fehler</entry>
+					<entry from="01" set="10">Geschlossener Kreislauf, kein Fehler</entry>
+					<entry from="01" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+					<validitybit from="23">5</validitybit>
+					<entry from="23" set="01">Offener Kreislauf, kein Fehler</entry>
+					<entry from="23" set="10">Geschlossener Kreislauf, kein Fehler</entry>
+					<entry from="23" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+				</mapping>		
+			</value>
+		</obdcommand>
+	</obdcommands>
+</servicemode>
+<servicemode>
+	<sid>5</sid>
+</servicemode>
+	
+
