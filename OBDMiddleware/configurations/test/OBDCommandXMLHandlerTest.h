@@ -15,8 +15,8 @@ class OBDCommandXMLHandlerTest : public CppUnit::TestCase
     CPPUNIT_TEST_SUITE_END();
 
     private:
-    xmlpp::DomParser parser_;
     OBDCommandXMLHandler* handler_for_test_;
+    xmlpp::Document* doc_;
 
     public:
     void setUp();

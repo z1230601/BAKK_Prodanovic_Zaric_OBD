@@ -46,7 +46,6 @@ void ElmCommandXMLHandlerTest::setUp()
 
     command_child = command_node->add_child("group");
     command_child->add_child_text("General");
-
 }
 
 void ElmCommandXMLHandlerTest::tearDown()
