@@ -1,10 +1,3 @@
-/*
- * XMLReader.cpp
- *
- *  Created on: Dec 25, 2015
- *      Author: zlatan
- */
-
 #include "XMLReader.h"
 #include <libxml++/libxml++.h>
 #include <iostream>

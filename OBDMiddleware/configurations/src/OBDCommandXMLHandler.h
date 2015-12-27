@@ -33,6 +33,8 @@ class OBDCommandXMLHandler : public DefaultXMLHandler
         void handleServiceInput(xmlpp::Node* node);
         void handleCommandInput(xmlpp::Node* node);
         void handleValueInput(xmlpp::Node* node);
+
+        std::vector<ServiceModeInput> getParsedData();
 };
 
 #endif /* OBDCOMMANDXMLHANDLER_H_ */

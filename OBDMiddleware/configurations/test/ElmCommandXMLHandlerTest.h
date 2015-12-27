@@ -6,12 +6,13 @@
 #include "libxml++/libxml++.h"
 
 #include "../src/ElmCommandXMLHandler.h"
+
 class ElmCommandXMLHandler;
 class ElmCommandXMLHandlerTest : public CppUnit::TestCase
 {
         CPPUNIT_TEST_SUITE (ElmCommandXMLHandlerTest);
         CPPUNIT_TEST(testHandle);
-        CPPUNIT_TEST (testHandle);CPPUNIT_TEST_SUITE_END();
+        CPPUNIT_TEST_SUITE_END();
     private:
         ElmCommandXMLHandler* tested_handler_;
         xmlpp::Document* doc_;

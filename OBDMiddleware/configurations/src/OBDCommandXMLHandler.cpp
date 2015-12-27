@@ -333,3 +333,7 @@ void OBDCommandXMLHandler::parseValidityBitTag(xmlpp::Node* node,
     entry.content_ = content;
     value.man_validity_entries_.push_back(entry);
 }
+
+std::vector<ServiceModeInput> OBDCommandXMLHandler::getParsedData() {
+    return parsed_data_;
+}

@@ -1,5 +1,4 @@
 #include "ElmCommandXMLHandlerTest.h"
-#include "../src/ElmCommandXMLHandler.h"
 #include <string>
 
 void ElmCommandXMLHandlerTest::setUp()
