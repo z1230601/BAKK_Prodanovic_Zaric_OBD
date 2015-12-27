@@ -16,6 +16,15 @@ class OBDCommandXMLHandler : public DefaultXMLHandler
         std::vector<std::string> command_tags_;
         std::vector<std::string> value_tags_;
         std::vector<std::string> service_tags_;
+
+
+        void parseValueTag(xmlpp::Node* node, OBDCommandInput &command);
+        void parseValidityMappingTag(xmlpp::Node* node, OBDCommandInput &command);
+        void parsePidTag(xmlpp::Node* node, OBDCommandInput &command);
+        void parseMappingTag(xmlpp::Node* node, OBDCommandValueInput &value);
+        void parseEntryTag(xmlpp::Node* node, OBDCommandValueInput &value);
+        void parseValidityBitTag(xmlpp::Node* node, OBDCommandValueInput &value);
+
     public:
         OBDCommandXMLHandler();
         virtual ~OBDCommandXMLHandler();

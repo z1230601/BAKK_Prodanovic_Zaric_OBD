@@ -3,6 +3,7 @@
 
 #include <string>
 #include <algorithm>
+#include <stdexcept>
 
 OBDCommandXMLHandler::OBDCommandXMLHandler()
 {
@@ -86,17 +87,12 @@ void OBDCommandXMLHandler::handleCommandInput(xmlpp::Node* node)
     }
 
     OBDCommandInput command = parsed_data_.back().commands_.back();
+
     if(node->get_name().compare(PARAMETERID_TAG) == 0)
     {
-        try
-        {
-            //convert pid string in hex format to int with stoi base 16
-            command.pid_ = std::stoi(getTextFromNode(node), nullptr, 16);
-        } catch (std::exception &e)
-        {
-            //TODO: do something
-        }
+        parsePidTag(node, command);
     }
+
     if(node->get_name().compare(DESCRIPTION_TAG) == 0)
     {
         command.description_ = getTextFromNode(node);
@@ -104,61 +100,15 @@ void OBDCommandXMLHandler::handleCommandInput(xmlpp::Node* node)
 
     if(node->get_name().compare(VALIDITYMAPPING_TAG) == 0)
     {
-        xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
-
-        if(element == nullptr)
-        {
-            return;
-        }
-        std::string content = getTextFromNode(node);
-        std::map<std::string, std::string> attributes =
-                getAttributesFromElement(element);
-
-        if(!content.empty() && content.compare("true") == 0)
-        {
-            if(attributes.find(MODE_ATTRIBUTE) != attributes.end())
-            {
-                if(attributes[MODE_ATTRIBUTE].compare("manual"))
-                {
-                    command.validity_mapping_mode_ =
-                            ValidityMappingMode::MANUAL;
-                } else
-                {
-                    command.validity_mapping_mode_ = ValidityMappingMode::AUTO;
-                }
-            } else
-            {
-                command.validity_mapping_mode_ = ValidityMappingMode::AUTO;
-            }
-        } else
-        {
-            command.validity_mapping_mode_ = ValidityMappingMode::OFF;
-        }
+        parseValidityMappingTag(node, command);
     }
 
     if(node->get_name().compare(VALUE_TAG) == 0)
     {
-        xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
-
-        if(element == nullptr)
-        {
-            return;
-        }
-
-        std::map<std::string, std::string> attributes =
-                getAttributesFromElement(element);
-        if(attributes.find(INTERPRETATION_ATTRIBUTE) != attributes.end())
-        {
-            command.values_.push_back(OBDCommandValueInput { });
-            command.values_.back().is_mapping_ =
-                    attributes[INTERPRETATION_ATTRIBUTE].compare("Mapping")
-                            == 0;
-        } else
-        {
-            //TODO: ERROR HANDLING DO SOMETHING
-        }
+        parseValueTag(node, command);
     }
 }
+
 void OBDCommandXMLHandler::handleValueInput(xmlpp::Node* node)
 {
     if(parsed_data_.empty() || parsed_data_.back().commands_.empty()
@@ -167,7 +117,219 @@ void OBDCommandXMLHandler::handleValueInput(xmlpp::Node* node)
         return;
     }
 
-    OBDCommandValueInput command = parsed_data_.back().commands_.back().values_
+    OBDCommandValueInput value = parsed_data_.back().commands_.back().values_
             .back();
 
+    if(node->get_name().compare(NAME_TAG))
+    {
+        value.name_ = getTextFromNode(node);
+    }
+
+    if(node->get_name().compare(BYTES_TAG))
+    {
+        try
+        {
+            value.bytes_ = std::stoi(getTextFromNode(node));
+        } catch (std::exception &e)
+        {
+            //TODO:ERRORHANDLING
+        }
+    }
+
+    if(node->get_name().compare(MIN_TAG))
+    {
+        try
+        {
+            value.min_ = std::stoi(getTextFromNode(node));
+        } catch (std::exception &e)
+        {
+            //TODO: ERRORHANDLING
+        }
+    }
+
+    if(node->get_name().compare(MAX_TAG))
+    {
+        try
+        {
+            value.max_ = std::stoi(getTextFromNode(node));
+        } catch (std::exception &e)
+        {
+            //TODO: ERRORHANDLING
+        }
+    }
+
+    if(node->get_name().compare(UNIT_TAG))
+    {
+        value.unit_ = getTextFromNode(node);
+    }
+
+    if(node->get_name().compare(MAPPING_TAG))
+    {
+        parseMappingTag(node, value);
+    }
+
+    if(node->get_name().compare(ENTRY_TAG))
+    {
+        parseEntryTag(node, value);
+    }
+
+    if(node->get_name().compare(VALIDITYBIT_TAG))
+    {
+        parseValidityBitTag(node, value);
+    }
+
+}
+
+void OBDCommandXMLHandler::parseValueTag(xmlpp::Node* node,
+        OBDCommandInput &command)
+{
+    xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
+
+    if(element == nullptr)
+    {
+        return;
+    }
+
+    std::map<std::string, std::string> attributes = getAttributesFromElement(
+            element);
+    if(attributes.find(INTERPRETATION_ATTRIBUTE) != attributes.end())
+    {
+        command.values_.push_back(OBDCommandValueInput { });
+        command.values_.back().is_mapping_ =
+                attributes[INTERPRETATION_ATTRIBUTE].compare("Mapping") == 0;
+    } else
+    {
+        //TODO: ERROR HANDLING DO SOMETHING
+    }
+}
+
+void OBDCommandXMLHandler::parseValidityMappingTag(xmlpp::Node* node,
+        OBDCommandInput &command)
+{
+    xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
+
+    if(element == nullptr)
+    {
+        return;
+    }
+    std::string content = getTextFromNode(node);
+    std::map<std::string, std::string> attributes = getAttributesFromElement(
+            element);
+
+    if(!content.empty() && content.compare("true") == 0)
+    {
+        if(attributes.find(MODE_ATTRIBUTE) != attributes.end())
+        {
+            if(attributes[MODE_ATTRIBUTE].compare("manual"))
+            {
+                command.validity_mapping_mode_ = ValidityMappingMode::MANUAL;
+            } else
+            {
+                command.validity_mapping_mode_ = ValidityMappingMode::AUTO;
+            }
+        } else
+        {
+            command.validity_mapping_mode_ = ValidityMappingMode::AUTO;
+        }
+    } else
+    {
+        command.validity_mapping_mode_ = ValidityMappingMode::OFF;
+    }
+}
+
+void OBDCommandXMLHandler::parsePidTag(xmlpp::Node* node,
+        OBDCommandInput &command)
+{
+    try
+    {
+        //convert pid string in hex format to int with stoi base 16
+        command.pid_ = std::stoi(getTextFromNode(node), nullptr, 16);
+    } catch (std::exception &e)
+    {
+        //TODO: do something
+    }
+}
+
+void OBDCommandXMLHandler::parseMappingTag(xmlpp::Node* node,
+        OBDCommandValueInput &value)
+{
+    xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
+
+    if(element == nullptr)
+    {
+        return;
+    }
+    std::map<std::string, std::string> attributes = getAttributesFromElement(
+            element);
+
+    if(attributes.find(TYPE_ATTRIBUTE) != attributes.end())
+    {
+        if(attributes[TYPE_ATTRIBUTE].compare("bit"))
+        {
+            value.mapping_type_ = MappingType::BIT;
+        } else if(attributes[TYPE_ATTRIBUTE].compare("bitcombination"))
+        {
+            value.mapping_type_ = MappingType::BITCOMBINATION;
+        } else if(attributes[TYPE_ATTRIBUTE].compare("value"))
+        {
+            value.mapping_type_ = MappingType::VALUE;
+        } else
+        {
+            throw std::runtime_error(
+                    "Wrong format of Mapping type: "
+                            + attributes[TYPE_ATTRIBUTE]
+                            + "\nexpected: bit||bitcombination||value");
+        }
+    } else
+    {
+        throw std::runtime_error("No mapping mode!");
+    }
+
+}
+
+void OBDCommandXMLHandler::parseEntryTag(xmlpp::Node* node,
+        OBDCommandValueInput &value)
+{
+    xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
+
+    if(element == nullptr)
+    {
+        return;
+    }
+    std::string content = getTextFromNode(node);
+    std::map<std::string, std::string> attributes = getAttributesFromElement(
+            element);
+
+    MappingEntry entry;
+    if(attributes.find(SET_ATTRIBUTE) != attributes.end())
+    {
+        entry.set_ = attributes[SET_ATTRIBUTE];
+    }
+    if(attributes.find(FROM_ATTRIBUTE) != attributes.end())
+    {
+        entry.from_ = attributes[FROM_ATTRIBUTE];
+    }
+    entry.content_ = content;
+    value.mapping_.push_back(entry);
+}
+
+void OBDCommandXMLHandler::parseValidityBitTag(xmlpp::Node* node,
+        OBDCommandValueInput &value)
+{
+    xmlpp::Element* element = dynamic_cast<xmlpp::Element*>(node);
+
+    if(element == nullptr)
+    {
+        return;
+    }
+    std::string content = getTextFromNode(node);
+    std::map<std::string, std::string> attributes = getAttributesFromElement(
+            element);
+    ValidityBitEntry entry;
+    if(attributes.find(FROM_ATTRIBUTE) != attributes.end())
+    {
+        entry.from_ = attributes[FROM_ATTRIBUTE];
+    }
+    entry.content_ = content;
+    value.man_validity_entries_.push_back(entry);
 }

@@ -51,7 +51,7 @@ typedef struct{
 
 typedef struct{
         bool is_mapping_;
-        uint8_t bytes; // expected 1-4
+        uint8_t bytes_; // expected 1-4
         std::vector<ValidityBitEntry> man_validity_entries_;
 
         // calculation specific part
