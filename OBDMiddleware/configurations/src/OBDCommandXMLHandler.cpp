@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 
 OBDCommandXMLHandler::OBDCommandXMLHandler()
 {
@@ -65,8 +66,11 @@ void OBDCommandXMLHandler::handleServiceInput(xmlpp::Node* node)
     {
         try
         {
+            std::string text = getTextFromNode(node);
+            if(!text.empty()){
             parsed_data_.back().sid_.push_back(
-                    (unsigned int) std::stoi(getTextFromNode(node)));
+                    (unsigned int) std::stoi(text));
+            }
         } catch (std::exception &e)
         {
             //TODO: do something

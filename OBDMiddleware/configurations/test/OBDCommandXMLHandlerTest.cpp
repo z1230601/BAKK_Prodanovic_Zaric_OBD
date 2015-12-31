@@ -11,7 +11,7 @@ void OBDCommandXMLHandlerTest::tearDown()
 
 void OBDCommandXMLHandlerTest::testServiceModeParse()
 {
-    CPPUNIT_ASSERT_EQUAL((size_t) 1, handler_for_test_->getParsedData().size());
+    CPPUNIT_ASSERT( handler_for_test_->getParsedData().size() > 1);
     CPPUNIT_ASSERT_EQUAL(expected_.sid_.size(),
             handler_for_test_->getParsedData().at(0).sid_.size());
     CPPUNIT_ASSERT_EQUAL(expected_.sid_.at(0),
@@ -36,7 +36,6 @@ xmlpp::Element* addChildWithText(xmlpp::Element* parent, std::string name,
 void OBDCommandXMLHandlerTest::setUp()
 {
     handler_for_test_ = new OBDCommandXMLHandler();
-    xmlpp::Element* rootNode = nullptr;
     try
     {
         xmlpp::DomParser parser;
@@ -45,18 +44,11 @@ void OBDCommandXMLHandlerTest::setUp()
         parser.parse_file("../test/testdata/obdcommand.xml");
         if(parser)
         {
-            rootNode = parser.get_document()->get_root_node();
+            iterateChildren(parser.get_document()->get_root_node());
         }
     } catch (std::exception & e)
     {
         std::cout << e.what() << std::endl;
-    }
-
-    for(xmlpp::Node::NodeList::iterator it =
-            rootNode->get_children().begin();
-            it != rootNode->get_children().end(); ++it)
-    {
-        iterateChildren(*it);
     }
 
     expected_.sid_.push_back(1);
@@ -97,6 +89,10 @@ void OBDCommandXMLHandlerTest::setUp()
 void OBDCommandXMLHandlerTest::iterateChildren(const xmlpp::Node* parent)
 {
     xmlpp::Node::NodeList children = parent->get_children();
+    if(children.empty())
+    {
+        return;
+    }
     for(xmlpp::Node::NodeList::iterator it = children.begin();
             it != children.end(); ++it)
     {
