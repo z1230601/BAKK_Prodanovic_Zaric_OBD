@@ -11,44 +11,18 @@ void OBDCommandXMLHandlerTest::tearDown()
 
 void OBDCommandXMLHandlerTest::testServiceModeParse()
 {
-
-    xmlpp::Node* first_service_mode_tag;
-
-    for(xmlpp::Node::NodeList::iterator it = doc_
-            ->get_root_node()->get_children().begin();
-            it != doc_->get_root_node()->get_children().end();
-            ++it)
-    {
-        if((*it)->get_name().compare("servicemode") == 0){
-            first_service_mode_tag = (*it);
-            break;
-        }
-    }
-
-    std::cout << "First service mode tag is:" << std::endl;
-    std::cout << first_service_mode_tag->get_name() << std::endl;
-    xmlpp::Node::NodeList
-    root_children = first_service_mode_tag->get_children();
-
-    std::cout << first_service_mode_tag->get_name() << std::endl;
-    handler_for_test_->handleNode(first_service_mode_tag);
-
-    for(xmlpp::Node::NodeList::iterator it = root_children.begin();
-            it != root_children.end(); ++it)
-    {
-        std::cout << (*it)->get_name() << std::endl;
-        if((*it)->get_name().compare("obdcommands") == 0)
-        {
-            break;
-        }
-
-        handler_for_test_->handleNode(*it);
-
-    }
-
     CPPUNIT_ASSERT_EQUAL((size_t) 1, handler_for_test_->getParsedData().size());
-    CPPUNIT_ASSERT_EQUAL((size_t) 2,
+    CPPUNIT_ASSERT_EQUAL(expected_.sid_.size(),
             handler_for_test_->getParsedData().at(0).sid_.size());
+    CPPUNIT_ASSERT_EQUAL(expected_.sid_.at(0),
+                handler_for_test_->getParsedData().at(0).sid_.at(0));
+    CPPUNIT_ASSERT_EQUAL(expected_.sid_.at(1),
+                    handler_for_test_->getParsedData().at(0).sid_.at(1));
+}
+
+void OBDCommandXMLHandlerTest::testPureValueCommand()
+{
+//    CPP
 }
 
 ///////////////////////////////////////////CONSTRUCTION SECTION /////////////////////////////////////////////////////////////
@@ -68,7 +42,6 @@ void OBDCommandXMLHandlerTest::setUp()
     xmlpp::Element* service_mode = nullptr;
 
     service_mode = root->add_child("servicemode");
-
     addChildWithText(service_mode, "sid", "1");
     addChildWithText(service_mode, "sid", "2");
     xmlpp::Element* commands = service_mode->add_child("obdcommands");
@@ -313,5 +286,59 @@ void OBDCommandXMLHandlerTest::setUp()
                 entry->set_attribute("set", "11");
             }
         }
+    }
+
+    for(xmlpp::Node::NodeList::iterator it =
+            doc_->get_root_node()->get_children().begin();
+            it != doc_->get_root_node()->get_children().end(); ++it)
+    {
+        iterateChildren(*it);
+    }
+
+    expected_.sid_.push_back(1);
+    expected_.sid_.push_back(2);
+
+    {
+        OBDCommandInput input;
+        input.pid_ = 0x66;
+        input.description_ = "Luftmassenmesser";
+        input.validity_mapping_mode_ = ValidityMappingMode::AUTO;
+
+        {
+            OBDCommandValueInput value;
+            value.is_mapping_ = false;
+            value.name_ = "MAF Sensor A";
+            value.bytes_ = 2;
+            value.min_ = 0;
+            value.max_ = 2047.96875;
+            value.unit_ = "g/s";
+
+            input.values_.push_back(value);
+        }
+        {
+            OBDCommandValueInput value;
+            value.is_mapping_ = false;
+            value.name_ = "MAF Sensor B";
+            value.bytes_ = 2;
+            value.min_ = 0;
+            value.max_ = 2047.96875;
+            value.unit_ = "g/s";
+
+            input.values_.push_back(value);
+        }
+        expected_.commands_.push_back(input);
+    }
+
+    std::cout << expect
+}
+
+void OBDCommandXMLHandlerTest::iterateChildren(const xmlpp::Node* parent)
+{
+    xmlpp::Node::NodeList children = parent->get_children();
+    for(xmlpp::Node::NodeList::iterator it = children.begin();
+            it != children.end(); ++it)
+    {
+        handler_for_test_->handleNode(*it);
+        iterateChildren(*it);
     }
 }
