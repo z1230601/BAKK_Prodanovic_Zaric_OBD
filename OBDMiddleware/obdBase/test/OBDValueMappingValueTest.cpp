@@ -26,3 +26,12 @@ void OBDValueMappingValueTest::testInputStructConstruction()
 {
 
 }
+
+void OBDValueMappingValueTest::testToValueConversion()
+{
+}
+
+void OBDValueMappingValueTest::testToSendableByteConversion()
+{
+}
+

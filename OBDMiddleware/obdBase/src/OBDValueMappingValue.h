@@ -11,9 +11,6 @@ class OBDValueMappingValue:public AbstractOBDValue
 
         void interpretToValue(std::vector<uint8_t> input);
         void interpretToByteArray(double value);
-
-
-
 };
 
 #endif /* OBDVALUEMAPPINGVALUE_H_ */
