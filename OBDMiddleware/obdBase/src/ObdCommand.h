@@ -2,6 +2,8 @@
 #define OBDCOMMAND_H_
 
 #include <string>
+#include <vector>
+#include <map>
 
 class ObdCommand
 {

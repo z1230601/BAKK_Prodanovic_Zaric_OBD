@@ -1,32 +1,89 @@
 #include "AbstractOBDValue.h"
+#include <stdexcept>
+#include <algorithm>
+
+#include <iostream>
 
 AbstractOBDValue::AbstractOBDValue()
-        : name_(""), interpreted_value_(0), byte_amount_(0)
+        : name_(""), interpreted_value_(0), byte_amount_(0), uninterpreted_value_(
+                0)
 {
 }
 
-AbstractOBDValue::AbstractOBDValue(std::string &name,
-        unsigned int interpreted_value, unsigned int byte_amount,
-        std::vector<uint8_t> &uniterpreted)
+AbstractOBDValue::AbstractOBDValue(std::string &name, double interpreted_value,
+        unsigned int byte_amount, unsigned int uninterpreted)
         : name_(name), interpreted_value_(interpreted_value), byte_amount_(
-                byte_amount), uninterpreted_value_(uniterpreted)
-{}
+                byte_amount), uninterpreted_value_(uninterpreted)
+{
+}
+
+AbstractOBDValue::AbstractOBDValue(std::string &name, unsigned int byte_amount)
+        : name_(name), interpreted_value_(0), byte_amount_(byte_amount), uninterpreted_value_(
+                0)
+{
+}
 
 AbstractOBDValue::~AbstractOBDValue()
-{}
+{
+}
 
-std::string AbstractOBDValue::getName(){
+std::string AbstractOBDValue::getName()
+{
     return name_;
 }
 
-unsigned int AbstractOBDValue::getInterpretedValue(){
+double AbstractOBDValue::getInterpretedValue()
+{
     return interpreted_value_;
 }
 
-unsigned int AbstractOBDValue::getByteAmount(){
+unsigned int AbstractOBDValue::getByteAmount()
+{
     return byte_amount_;
 }
 
-std::vector<uint8_t> AbstractOBDValue::getUninterpretedValue(){
+unsigned int AbstractOBDValue::getUninterpretedValue()
+{
     return uninterpreted_value_;
+}
+
+unsigned int AbstractOBDValue::calculateCompoundValue(
+        std::vector<uint8_t> input)
+{
+    if(input.size() < byte_amount_)
+    {
+        throw std::runtime_error(
+                "Input size was smaller than byte amount - not sufficient!\n");
+    }
+
+    unsigned int compound_value = 0;
+
+    for(unsigned int i = 0; i < byte_amount_; i++)
+    {
+        compound_value += input.at(i);
+
+        if(i != byte_amount_ - 1)
+        {
+            compound_value *= 256;
+        }
+    }
+
+    return compound_value;
+}
+
+std::vector<uint8_t> AbstractOBDValue::calculateByteArrayFromCompoundValue(
+        unsigned int input)
+{
+    std::vector<uint8_t> ret;
+    for(unsigned int i = 0; i < byte_amount_; i++)
+    {
+        if(i != 0)
+        {
+            input = input / 256;
+        }
+        ret.push_back(input & 0xFF);
+
+    }
+    std::reverse(ret.begin(), ret.end());
+    return ret;
 }

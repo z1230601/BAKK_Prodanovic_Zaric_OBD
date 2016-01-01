@@ -4,22 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/EmulatedDevice.cpp \
-../src/Main.cpp \
-../src/USBEmulationSupervisor.cpp \
-../src/USBRequestHandler.cpp 
+../src/Main.cpp 
 
 OBJS += \
-./src/EmulatedDevice.o \
-./src/Main.o \
-./src/USBEmulationSupervisor.o \
-./src/USBRequestHandler.o 
+./src/Main.o 
 
 CPP_DEPS += \
-./src/EmulatedDevice.d \
-./src/Main.d \
-./src/USBEmulationSupervisor.d \
-./src/USBRequestHandler.d 
+./src/Main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

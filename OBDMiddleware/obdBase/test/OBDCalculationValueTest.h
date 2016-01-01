@@ -10,6 +10,11 @@ class OBDCalculationValueTest : public CppUnit::TestCase
 {
         CPPUNIT_TEST_SUITE (OBDCalculationValueTest);
         CPPUNIT_TEST (testDefaultConstruction);
+        CPPUNIT_TEST(testParameterConstruction);
+        CPPUNIT_TEST(testInputStructConstruction);
+        CPPUNIT_TEST(testToSendableByteConversion);
+        CPPUNIT_TEST(testToValueConversion);
+        CPPUNIT_TEST(testAuxiliaryFunctions);
         CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -19,6 +24,11 @@ class OBDCalculationValueTest : public CppUnit::TestCase
         void setUp();
         void tearDown();
         void testDefaultConstruction();
+        void testParameterConstruction();
+        void testInputStructConstruction();
+        void testToValueConversion();
+        void testToSendableByteConversion();
+        void testAuxiliaryFunctions();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION(OBDCalculationValueTest);
 #endif /* OBDCALCULATIONVALUETEST_H_ */
