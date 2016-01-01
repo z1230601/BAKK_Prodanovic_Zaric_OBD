@@ -25,56 +25,58 @@
 #define FROM_ATTRIBUTE "from"
 #define MODE_ATTRIBUTE "mode"
 
-typedef enum {
-    OFF,
-    AUTO,
-    MANUAL
-}ValidityMappingMode;
+typedef enum
+{
+    OFF, AUTO, MANUAL
+} ValidityMappingMode;
 
-typedef enum{
-    BIT,
-    VALUE,
-    BITCOMBINATION,
-    NOTMAPPED
-}MappingType;
+typedef enum
+{
+    NOTMAPPED, BIT, VALUE, BITCOMBINATION
+} MappingType;
 
-typedef struct{
+typedef struct
+{
         std::string from_; //optional for mappingvalues
         std::string content_;
-}ValidityBitEntry;
+} ValidityBitEntry;
 
-typedef struct{
+typedef struct _MappingEntry_
+{
         std::string from_;
         std::string set_;
         std::string content_;
-}MappingEntry;
+} MappingEntry;
 
-typedef struct{
+typedef struct
+{
         bool is_mapping_;
         uint8_t bytes_; // expected 1-4
         std::vector<ValidityBitEntry> man_validity_entries_;
 
         // calculation specific part
         std::string name_;
-        int min_;
-        int max_;
+        double min_ = 0;
+        double max_ = 0;
         std::string unit_;
 
         // mapping specific part
         MappingType mapping_type_;
         std::vector<MappingEntry> mapping_;
-}OBDCommandValueInput;
+} OBDCommandValueInput;
 
-typedef struct {
+typedef struct
+{
         unsigned int pid_;
         std::string description_;
         ValidityMappingMode validity_mapping_mode_;
 //        std::map<uint8_t, std::string> validity_mapping_;
         std::vector<OBDCommandValueInput> values_;
-}OBDCommandInput;
+} OBDCommandInput;
 
-typedef struct {
+typedef struct
+{
         std::vector<unsigned int> sid_;
         std::vector<OBDCommandInput> commands_;
-}ServiceModeInput;
+} ServiceModeInput;
 #endif /* OBDCOMMANDINPUTDEFINITIONS_H_ */

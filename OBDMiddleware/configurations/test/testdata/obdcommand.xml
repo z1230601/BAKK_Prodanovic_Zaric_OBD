@@ -14,14 +14,14 @@
 						<name>MAF Sensor A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>g/s</unit>				
 					</value>
 					<value interpretation="calculation">
 						<name>MAF Sensor B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>g/s</unit>				
 					</value>
 		    	</values>
@@ -69,7 +69,7 @@
 						<name>Soll Ladedruck A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>
 						<validitybit>0</validitybit>	
 					</value>
@@ -77,7 +77,7 @@
 						<name>Ist Ladedruck A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>1</validitybit>			
 					</value>
@@ -85,7 +85,7 @@
 						<name>Soll Ladedruck B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>3</validitybit>			
 					</value>
@@ -93,7 +93,7 @@
 						<name>Ist Ladedruck B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>4</validitybit>			
 					</value>
