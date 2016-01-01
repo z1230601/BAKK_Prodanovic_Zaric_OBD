@@ -1,5 +1,7 @@
 #include "OBDCalculationValue.h"
 #include <math.h>
+#include <sstream>
+#include <boost/lexical_cast.hpp>
 
 OBDCalculationValue::OBDCalculationValue()
         : AbstractOBDValue()
@@ -52,6 +54,11 @@ double OBDCalculationValue::getMin()
 double OBDCalculationValue::getMax()
 {
     return max_;
+}
+
+std::string OBDCalculationValue::getInterpretedValueAsString()
+{
+    return boost::lexical_cast<std::string>(interpreted_value_);
 }
 
 std::string OBDCalculationValue::getUnit()

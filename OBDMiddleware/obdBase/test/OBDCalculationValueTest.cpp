@@ -87,6 +87,7 @@ void OBDCalculationValueTest::testToValueConversion()
 
     std::vector<uint8_t> testData { 127, 255 }; // = 32767
     double expectedValue = 1023.96875;
+    std::string expectedValueString = "1023.96875";
 
     delete value_under_test_;
     value_under_test_ = new OBDCalculationValue(expected);
@@ -97,7 +98,7 @@ void OBDCalculationValueTest::testToValueConversion()
             value_under_test_->getInterpretedValue());
     CPPUNIT_ASSERT_EQUAL(value_under_test_->calculateCompoundValue(testData),
             value_under_test_->getUninterpretedValue());
-
+    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->getInterpretedValueAsString());
 }
 
 void OBDCalculationValueTest::testToSendableByteConversion()
@@ -112,6 +113,7 @@ void OBDCalculationValueTest::testToSendableByteConversion()
 
     std::vector<uint8_t> expectedByteArray { 127, 255 }; // = 32767
     double expectedValue = 1023.96875;
+    std::string expectedValueString = "1023.96875";
 
     delete value_under_test_;
     value_under_test_ = new OBDCalculationValue(expected);
@@ -120,6 +122,8 @@ void OBDCalculationValueTest::testToSendableByteConversion()
 
     CPPUNIT_ASSERT_EQUAL(expectedValue,
             value_under_test_->getInterpretedValue());
+
+    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->getInterpretedValueAsString());
 
     CPPUNIT_ASSERT_EQUAL(
             value_under_test_->calculateCompoundValue(expectedByteArray),

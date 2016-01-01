@@ -14,6 +14,7 @@ class AbstractOBDValue
 
         virtual void interpretToValue(std::vector<uint8_t> input) = 0;
         virtual void interpretToByteArray(double value) = 0;
+        virtual std::string getInterpretedValueAsString() = 0;
 
         std::string getName();
         double getInterpretedValue();

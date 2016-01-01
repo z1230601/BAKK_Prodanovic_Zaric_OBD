@@ -16,6 +16,7 @@ class OBDCalculationValue : public AbstractOBDValue
 
         void interpretToValue(std::vector<uint8_t> input);
         void interpretToByteArray(double value);
+        std::string getInterpretedValueAsString();
 
         double getMin();
         double getMax();

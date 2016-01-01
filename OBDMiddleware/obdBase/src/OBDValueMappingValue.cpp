@@ -1,6 +1,7 @@
 #include "OBDValueMappingValue.h"
 
 OBDValueMappingValue::OBDValueMappingValue()
+:AbstractOBDValue()
 {}
 
 OBDValueMappingValue::~OBDValueMappingValue()
@@ -15,3 +16,9 @@ void OBDValueMappingValue::interpretToByteArray(double value)
 {
 
 }
+
+std::string OBDValueMappingValue::getInterpretedValueAsString()
+{
+    return "";
+}
+

@@ -25,7 +25,6 @@ class OBDValueMappingValueTest : public CppUnit::TestCase
         void testDefaultConstruction();
         void testParameterConstruction();
         void testInputStructConstruction();
-        void testInputStructConstruction();
         void testToValueConversion();
         void testToSendableByteConversion();
 
