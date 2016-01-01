@@ -1,20 +1,18 @@
-/*
- * OBDBitcombinationMappingValue.cpp
- *
- *  Created on: Jan 1, 2016
- *      Author: zlatan
- */
-
 #include "OBDBitcombinationMappingValue.h"
 
 OBDBitcombinationMappingValue::OBDBitcombinationMappingValue()
+{}
+
+OBDBitcombinationMappingValue::~OBDBitcombinationMappingValue()
+{}
+
+void OBDBitcombinationMappingValue::interpretToValue(std::vector<uint8_t> input)
 {
-    // TODO Auto-generated constructor stub
 
 }
 
-OBDBitcombinationMappingValue::~OBDBitcombinationMappingValue()
+void OBDBitcombinationMappingValue::interpretToByteArray(double value)
 {
-    // TODO Auto-generated destructor stub
+
 }
 
