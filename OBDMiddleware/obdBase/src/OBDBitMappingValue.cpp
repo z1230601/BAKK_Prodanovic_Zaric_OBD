@@ -1,10 +1,3 @@
-/*
- * OBDBitMappingValue.cpp
- *
- *  Created on: Jan 1, 2016
- *      Author: zlatan
- */
-
 #include "OBDBitMappingValue.h"
 
 OBDBitMappingValue::OBDBitMappingValue()
@@ -16,5 +9,13 @@ OBDBitMappingValue::OBDBitMappingValue()
 OBDBitMappingValue::~OBDBitMappingValue()
 {
     // TODO Auto-generated destructor stub
+}
+
+void OBDBitMappingValue::interpretToValue(std::vector<uint8_t> input) {
+
+}
+
+void OBDBitMappingValue::interpretToByteArray(double value) {
+
 }
 
