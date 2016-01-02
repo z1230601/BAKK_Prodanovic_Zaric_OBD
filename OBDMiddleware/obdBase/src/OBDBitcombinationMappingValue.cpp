@@ -6,13 +6,13 @@ OBDBitcombinationMappingValue::OBDBitcombinationMappingValue()
 OBDBitcombinationMappingValue::~OBDBitcombinationMappingValue()
 {}
 
-void OBDBitcombinationMappingValue::interpretToValue(std::vector<uint8_t> input)
+std::string OBDBitcombinationMappingValue::interpretToValue(std::vector<uint8_t> input)
 {
-
+    return "";
 }
 
-void OBDBitcombinationMappingValue::interpretToByteArray(double value)
+std::vector<uint8_t> OBDBitcombinationMappingValue::interpretToByteArray(std::string value)
 {
-
+    return std::vector<uint8_t> {};
 }
 

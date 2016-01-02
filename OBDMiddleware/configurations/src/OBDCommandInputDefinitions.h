@@ -1,6 +1,10 @@
 #ifndef OBDCOMMANDINPUTDEFINITIONS_H_
 #define OBDCOMMANDINPUTDEFINITIONS_H_
 
+#include <string>
+#include <map>
+#include <vector>
+
 #define SERVICEMODE_TAG "servicemode"
 #define SERVICEID_TAG "sid"
 #define OBDCOMMANDCOLLECTION_TAG "obdcommands"

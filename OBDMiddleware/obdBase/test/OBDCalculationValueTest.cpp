@@ -92,13 +92,13 @@ void OBDCalculationValueTest::testToValueConversion()
     delete value_under_test_;
     value_under_test_ = new OBDCalculationValue(expected);
 
-    value_under_test_->interpretToValue(testData);
+    value_under_test_->interpretCalculationValue(testData);
 
     CPPUNIT_ASSERT_EQUAL(expectedValue,
             value_under_test_->getInterpretedValue());
     CPPUNIT_ASSERT_EQUAL(value_under_test_->calculateCompoundValue(testData),
             value_under_test_->getUninterpretedValue());
-    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->getInterpretedValueAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->interpretToValue(testData));
 }
 
 void OBDCalculationValueTest::testToSendableByteConversion()
@@ -118,20 +118,18 @@ void OBDCalculationValueTest::testToSendableByteConversion()
     delete value_under_test_;
     value_under_test_ = new OBDCalculationValue(expected);
 
-    value_under_test_->interpretToByteArray(expectedValue);
+    value_under_test_->interpretCalculationByteArray(expectedValue);
 
     CPPUNIT_ASSERT_EQUAL(expectedValue,
             value_under_test_->getInterpretedValue());
 
-    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->getInterpretedValueAsString());
+    CPPUNIT_ASSERT_EQUAL(expectedValueString, value_under_test_->interpretToValue(expectedByteArray));
 
     CPPUNIT_ASSERT_EQUAL(
             value_under_test_->calculateCompoundValue(expectedByteArray),
             value_under_test_->getUninterpretedValue());
 
-    std::vector<uint8_t> actual = value_under_test_
-            ->calculateByteArrayFromCompoundValue(
-            value_under_test_->getUninterpretedValue());
+    std::vector<uint8_t> actual = value_under_test_->interpretToByteArray(expectedValueString);
     CPPUNIT_ASSERT_EQUAL(expectedByteArray.size(), actual.size());
     for(unsigned int i = 0; i < expectedByteArray.size(); i++)
     {

@@ -2,21 +2,27 @@
 #define OBDVALUEMAPPINGVALUE_H_
 
 #include "AbstractOBDValue.h"
+#include "../../configurations/src/OBDCommandInputDefinitions.h"
 #include <map>
-#include <string>
 
 
 class OBDValueMappingValue:public AbstractOBDValue
 {
     public:
         OBDValueMappingValue();
+        OBDValueMappingValue(OBDCommandValueInput input);
+        OBDValueMappingValue(unsigned int byte_amount, std::string &name);
+        OBDValueMappingValue(unsigned int byte_amount);
         virtual ~OBDValueMappingValue();
 
-        void interpretToValue(std::vector<uint8_t> input);
-        void interpretToByteArray(double value);
-        std::string getInterpretedValueAsString();
+        std::string interpretToValue(std::vector<uint8_t> input);
+        std::vector<uint8_t> interpretToByteArray(std::string value);
+
+        std::map<unsigned int, std::string> getMapping();
     private:
-        std::map<uint8_t, std::string> mapping_;
+        std::map<unsigned int, std::string> mapping_;
+        std::map<std::string, unsigned int> reverse_mapping_;
+
 };
 
 #endif /* OBDVALUEMAPPINGVALUE_H_ */

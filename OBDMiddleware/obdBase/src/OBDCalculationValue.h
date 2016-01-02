@@ -14,9 +14,11 @@ class OBDCalculationValue : public AbstractOBDValue
         OBDCalculationValue(OBDCommandValueInput input);
         virtual ~OBDCalculationValue();
 
-        void interpretToValue(std::vector<uint8_t> input);
-        void interpretToByteArray(double value);
-        std::string getInterpretedValueAsString();
+        void interpretCalculationValue(std::vector<uint8_t> input);
+        void interpretCalculationByteArray(double value);
+
+        std::string interpretToValue(std::vector<uint8_t> input);
+        std::vector<uint8_t> interpretToByteArray(std::string value);
 
         double getMin();
         double getMax();

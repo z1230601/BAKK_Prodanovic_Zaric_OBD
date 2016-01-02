@@ -9,8 +9,8 @@ class OBDBitcombinationMappingValue : public AbstractOBDValue
         OBDBitcombinationMappingValue();
         virtual ~OBDBitcombinationMappingValue();
 
-        void interpretToValue(std::vector<uint8_t> input);
-        void interpretToByteArray(double value);
+        std::string interpretToValue(std::vector<uint8_t> input);
+        std::vector<uint8_t> interpretToByteArray(std::string value);
 };
 
 #endif /* OBDBITCOMBINATIONMAPPINGVALUE_H_ */

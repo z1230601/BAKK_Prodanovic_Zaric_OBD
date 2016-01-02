@@ -24,7 +24,7 @@ OBDCalculationValue::~OBDCalculationValue()
 {
 }
 
-void OBDCalculationValue::interpretToValue(std::vector<uint8_t> input)
+void OBDCalculationValue::interpretCalculationValue(std::vector<uint8_t> input)
 {
     unsigned int compound_value = calculateCompoundValue(input);
 
@@ -35,7 +35,7 @@ void OBDCalculationValue::interpretToValue(std::vector<uint8_t> input)
     uninterpreted_value_ = compound_value;
 }
 
-void OBDCalculationValue::interpretToByteArray(double value)
+void OBDCalculationValue::interpretCalculationByteArray(double value)
 {
     interpreted_value_ = value;
     interpreted_value_ = std::min(interpreted_value_, max_);
@@ -56,9 +56,17 @@ double OBDCalculationValue::getMax()
     return max_;
 }
 
-std::string OBDCalculationValue::getInterpretedValueAsString()
+std::string OBDCalculationValue::interpretToValue(std::vector<uint8_t> input)
 {
+    interpretCalculationValue(input);
     return boost::lexical_cast<std::string>(interpreted_value_);
+}
+
+std::vector<uint8_t> OBDCalculationValue::interpretToByteArray(
+        std::string value)
+{
+    interpretCalculationByteArray(boost::lexical_cast<double>(value));
+    return calculateByteArrayFromCompoundValue(uninterpreted_value_);
 }
 
 std::string OBDCalculationValue::getUnit()

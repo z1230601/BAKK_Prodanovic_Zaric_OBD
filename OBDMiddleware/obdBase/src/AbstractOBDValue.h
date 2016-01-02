@@ -10,11 +10,11 @@ class AbstractOBDValue
         AbstractOBDValue();
         AbstractOBDValue(std::string &name, double interpreted_value, unsigned int byte_amount, unsigned int uninterpreted);
         AbstractOBDValue(std::string &name, unsigned int byte_amount);
+        AbstractOBDValue(unsigned int byte_amount);
         virtual ~AbstractOBDValue();
 
-        virtual void interpretToValue(std::vector<uint8_t> input) = 0;
-        virtual void interpretToByteArray(double value) = 0;
-        virtual std::string getInterpretedValueAsString() = 0;
+        virtual std::string interpretToValue(std::vector<uint8_t> input) = 0;
+        virtual std::vector<uint8_t> interpretToByteArray(std::string value) = 0;
 
         std::string getName();
         double getInterpretedValue();

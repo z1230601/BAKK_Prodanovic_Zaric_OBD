@@ -22,7 +22,12 @@ AbstractOBDValue::AbstractOBDValue(std::string &name, unsigned int byte_amount)
                 0)
 {
 }
+AbstractOBDValue::AbstractOBDValue(unsigned int byte_amount)
+        : name_(""), interpreted_value_(0), byte_amount_(byte_amount), uninterpreted_value_(
+                0)
+{
 
+}
 AbstractOBDValue::~AbstractOBDValue()
 {
 }
