@@ -3,22 +3,30 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestCase.h>
+#include "../../configurations/src/OBDCommandInputDefinitions.h"
+
+#include <vector>
 
 class ObdCommand;
 
 class ObdCommandTest : public CppUnit::TestCase
 {
-    CPPUNIT_TEST_SUITE (ObdCommandTest);
-    CPPUNIT_TEST (test);
-    CPPUNIT_TEST_SUITE_END();
+        CPPUNIT_TEST_SUITE (ObdCommandTest);
+        CPPUNIT_TEST (testConstruction);
+        CPPUNIT_TEST (testParameterConstruction);
+        CPPUNIT_TEST (testInputStructConstruction);CPPUNIT_TEST_SUITE_END();
 
     private:
-    ObdCommand* obdcommand_for_test_;
+        ObdCommand* obdcommand_under_test_;
+        OBDCommandInput input_;
+        std::vector<unsigned int> expected_sids_;
 
     public:
-    void setUp();
-    void tearDown();
-    void test();
+        void setUp();
+        void tearDown();
+        void testConstruction();
+        void testParameterConstruction();
+        void testInputStructConstruction();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (ObdCommandTest);
 #endif /* OBDCOMMANDTEST_H_ */

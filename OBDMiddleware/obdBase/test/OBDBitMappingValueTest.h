@@ -5,7 +5,6 @@
 #include <cppunit/TestCase.h>
 #include "../../configurations/src/OBDCommandInputDefinitions.h"
 
-
 class OBDBitMappingValue;
 
 class OBDBitMappingValueTest : public CppUnit::TestCase
@@ -20,7 +19,7 @@ class OBDBitMappingValueTest : public CppUnit::TestCase
 
     private:
         OBDBitMappingValue* value_under_test_;
-        OBDCommandValueInput value;
+        OBDCommandValueInput value_;
     public:
         void setUp();
         void tearDown();

@@ -6,36 +6,36 @@ void OBDBitMappingValueTest::setUp()
 {
     value_under_test_ = new OBDBitMappingValue();
 
-    value.is_mapping_ = true;
-    value.bytes_ = 1;
-    value.mapping_type_ = MappingType::BIT;
+    value_.is_mapping_ = true;
+    value_.bytes_ = 1;
+    value_.mapping_type_ = MappingType::BIT;
     {
         MappingEntry entry;
         entry.from_ = "0";
         entry.set_ = "false";
         entry.content_ = "Kraftaufnahme inaktiv";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "0";
         entry.set_ = "true";
         entry.content_ = "Kraftaufnahme aktiv";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "1";
         entry.set_ = "false";
         entry.content_ = "Automatikgetriebe in Park-/Neutralstellung";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "1";
         entry.set_ = "true";
         entry.content_ = "Vorwärts- oder Rückwärtsgang";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
@@ -43,28 +43,28 @@ void OBDBitMappingValueTest::setUp()
         entry.set_ = "false";
         entry.content_ =
                 "Manuelles Getriebe in Neutralstellung und/oder Kupplung getreten";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "2";
         entry.set_ = "true";
         entry.content_ = "Gang eingelegt";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "3";
         entry.set_ = "false";
         entry.content_ = "Vorglühlampe aus";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
     {
         MappingEntry entry;
         entry.from_ = "3";
         entry.set_ = "";
         entry.content_ = "Lampe ein";
-        value.mapping_.push_back(entry);
+        value_.mapping_.push_back(entry);
     }
 }
 
@@ -105,16 +105,16 @@ void OBDBitMappingValueTest::testParameterConstruction()
 void OBDBitMappingValueTest::testInputStructConstruction()
 {
     delete value_under_test_;
-    value_under_test_ = new OBDBitMappingValue(value);
+    value_under_test_ = new OBDBitMappingValue(value_);
 
-    CPPUNIT_ASSERT_EQUAL((unsigned int) value.bytes_,
+    CPPUNIT_ASSERT_EQUAL((unsigned int) value_.bytes_,
             value_under_test_->getByteAmount());
 
-    CPPUNIT_ASSERT_EQUAL(value.mapping_.size(),
+    CPPUNIT_ASSERT_EQUAL(value_.mapping_.size(),
             value_under_test_->getTrueMapping().size()
                     + value_under_test_->getFalseMapping().size());
 
-    for(MappingEntry entry : value.mapping_)
+    for(MappingEntry entry : value_.mapping_)
     {
         unsigned int key = std::stoi(entry.from_);
         if(entry.set_.compare("false") == 0)
@@ -140,7 +140,7 @@ void OBDBitMappingValueTest::testInputStructConstruction()
 void OBDBitMappingValueTest::testValueConversion()
 {
     delete value_under_test_;
-    value_under_test_ = new OBDBitMappingValue(value);
+    value_under_test_ = new OBDBitMappingValue(value_);
 
     std::vector<uint8_t> expectedByteArray { 2 };
     std::string expectedValueAsString = "Vorwärts- oder Rückwärtsgang";
@@ -172,7 +172,7 @@ void OBDBitMappingValueTest::testValueConversion()
 void OBDBitMappingValueTest::testValueConversionMultipleSelections()
 {
     delete value_under_test_;
-    value_under_test_ = new OBDBitMappingValue(value);
+    value_under_test_ = new OBDBitMappingValue(value_);
 
     std::vector<uint8_t> expectedByteArray { 10 };
     std::string expectedValueAsString =
