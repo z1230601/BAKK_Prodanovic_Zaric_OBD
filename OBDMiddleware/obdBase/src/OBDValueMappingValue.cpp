@@ -9,19 +9,34 @@ OBDValueMappingValue::OBDValueMappingValue()
 OBDValueMappingValue::OBDValueMappingValue(OBDCommandValueInput input)
         : AbstractOBDValue(input.bytes_)
 {
-    for(unsigned int i = 0; i < input.mapping_.size(); i++)
-    {
-        try
+    initMapping(input);
+}
+
+OBDValueMappingValue::OBDValueMappingValue(OBDCommandValueInput input,
+        ValidityMappingMode mode, unsigned int auto_pos)
+{
+    initMapping(input);
+    switch(mode)
         {
-            unsigned int key_to_insert = std::stoi(input.mapping_.at(i).from_,
-                    nullptr, 16);
-            mapping_[key_to_insert] = input.mapping_.at(i).content_;
-            reverse_mapping_[input.mapping_.at(i).content_] = key_to_insert;
-        } catch (std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
+            case ValidityMappingMode::AUTO:
+                setValidtyPatternBitPosition(auto_pos);
+                break;
+            case ValidityMappingMode::MANUAL:
+            {
+                if(input.man_validity_entries_.empty())
+                {
+                    throw std::runtime_error(
+                            "Manual Validity Mapping mode but no entry found!");
+                }
+                unsigned int bit_position = std::stoi(
+                        input.man_validity_entries_.at(0).content_);
+                setValidtyPatternBitPosition(bit_position);
+                break;
+            }
+            case ValidityMappingMode::OFF:
+                break;
         }
-    }
+
 }
 
 OBDValueMappingValue::OBDValueMappingValue(unsigned int byte_amount,
@@ -67,3 +82,21 @@ std::map<unsigned int, std::string> OBDValueMappingValue::getMapping()
 {
     return mapping_;
 }
+
+void OBDValueMappingValue::initMapping(OBDCommandValueInput input)
+{
+    for(unsigned int i = 0; i < input.mapping_.size(); i++)
+        {
+            try
+            {
+                unsigned int key_to_insert = std::stoi(input.mapping_.at(i).from_,
+                        nullptr, 16);
+                mapping_[key_to_insert] = input.mapping_.at(i).content_;
+                reverse_mapping_[input.mapping_.at(i).content_] = key_to_insert;
+            } catch (std::exception &e)
+            {
+                std::cout << e.what() << std::endl;
+            }
+        }
+}
+

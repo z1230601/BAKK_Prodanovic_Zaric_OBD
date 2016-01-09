@@ -21,6 +21,20 @@ OBDBitcombinationMappingValue::OBDBitcombinationMappingValue(
 }
 
 OBDBitcombinationMappingValue::OBDBitcombinationMappingValue(
+        OBDCommandValueInput input, ValidityMappingMode mode)
+        : OBDBitcombinationMappingValue(input)
+{
+    if(mode == ValidityMappingMode::MANUAL)
+    {
+        for(ValidityBitEntry entry: input.man_validity_entries_){
+            uint8_t validity_bit_mask_ = 0x1;
+            validity_bit_mask_ = validity_bit_mask_ << std::stoi(entry.content_);
+            validity_mask_mapping_[getKeyFromBitPositionString(entry.from_)] = validity_bit_mask_;
+        }
+    }
+}
+
+OBDBitcombinationMappingValue::OBDBitcombinationMappingValue(
         OBDCommandValueInput input)
         : AbstractOBDValue(input.name_, input.bytes_)
 {
@@ -88,7 +102,6 @@ std::vector<uint8_t> OBDBitcombinationMappingValue::interpretToByteArray(
             [](std::pair<unsigned int, bool> a)->bool
             {   return a.second;});
 
-
     if(sizeValidScope != splitted.size())
     {
         throw std::runtime_error("Validity and Input do not match in size!");
@@ -144,14 +157,28 @@ void OBDBitcombinationMappingValue::setBitcombinationScope(
     bitcombination_observed_ = valid_scope;
 }
 
+void OBDBitcombinationMappingValue::setValidityByte(uint8_t byte)
+{
+    bitcombination_observed_.clear();
+    std::map<unsigned int, uint8_t>::iterator it = validity_mask_mapping_.begin();
+    for(; it != validity_mask_mapping_.end(); it++){
+        bitcombination_observed_[it->first] = byte & it->second;
+    }
+}
+
+bool OBDBitcombinationMappingValue::isValueValid()
+{
+    return true;
+}
+
 unsigned int OBDBitcombinationMappingValue::countOccurencesOfZero(
         unsigned int value)
 {
     unsigned int zeros = 0;
-    while((value & 0x1) != 1 && zeros < 32){
+    while((value & 0x1) != 1 && zeros < 32)
+    {
         value = value >> 1;
         zeros++;
     }
     return zeros;
 }
-

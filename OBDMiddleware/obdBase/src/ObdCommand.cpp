@@ -16,8 +16,8 @@ ObdCommand::ObdCommand(std::vector<unsigned int> sids, unsigned int pid,
 ObdCommand::ObdCommand(std::vector<unsigned int> sids, OBDCommandInput input)
         : sids_(sids), pid_(input.pid_), description_(input.description_), mode_(input.validity_mapping_mode_)
 {
-    for(OBDCommandValueInput value:input.values_){
-        values_.push_back(OBDCommandValueFactory::getInstance()->createOBDValueFromInput(value));
+    for(unsigned int i = 0; i < input.values_.size(); i++){ //OBDCommandValueInput value : input.values_){
+        values_.push_back(OBDCommandValueFactory::getInstance()->createOBDValueFromInput(input.values_.at(i), input.validity_mapping_mode_, i));
     }
 }
 
@@ -66,5 +66,3 @@ std::vector<AbstractOBDValue*> ObdCommand::getValues()
 {
     return values_;
 }
-
-

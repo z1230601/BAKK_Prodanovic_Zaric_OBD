@@ -12,6 +12,7 @@ class OBDCalculationValue : public AbstractOBDValue
         OBDCalculationValue();
         OBDCalculationValue(std::string &name, unsigned int byte_amount, double min, double max, std::string &unit);
         OBDCalculationValue(OBDCommandValueInput input);
+        OBDCalculationValue(OBDCommandValueInput input, ValidityMappingMode mode, unsigned int autoPos);
         virtual ~OBDCalculationValue();
 
         void interpretCalculationValue(std::vector<uint8_t> input);

@@ -131,7 +131,8 @@ void OBDBitMappingValueTest::testInputStructConstruction()
                             != value_under_test_->getTrueMapping().end());
             CPPUNIT_ASSERT_EQUAL(entry.content_,
                     value_under_test_->getTrueMapping().at(key));
-        } else {
+        } else
+        {
             CPPUNIT_FAIL("Invalid set option");
         }
     }
@@ -203,4 +204,79 @@ void OBDBitMappingValueTest::testValueConversionMultipleSelections()
                 value_under_test_->interpretToByteArray(expectedValueAsString)
                         .at(i));
     }
+}
+
+void OBDBitMappingValueTest::testAutoValidityModeInputConstruction()
+{
+    ValidityMappingMode expected_mode = ValidityMappingMode::AUTO;
+
+    uint8_t first_bit = 0x1;
+//    uint8_t second_bit = 0x2;
+//    uint8_t third_bit = 0x4;
+//    uint8_t fourth_bit = 0x8;
+    uint8_t fifth_bit = 0x10;
+//    uint8_t sixth_bit = 0x20;
+//    uint8_t seventh_bit = 0x40;
+//    uint8_t eighth_bit = 0x80;
+
+    delete value_under_test_;
+    value_under_test_ = new OBDBitMappingValue(value_, expected_mode);
+
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(
+            value_under_test_->getBitScope().find(0)
+                    != value_under_test_->getBitScope().end());
+
+    CPPUNIT_ASSERT(value_under_test_->getBitScope()[0]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[1]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[2]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[3]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[4]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[5]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[6]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[7]);
+
+    value_under_test_->setValidityByte(fifth_bit);
+    CPPUNIT_ASSERT(
+            value_under_test_->getBitScope().find(4)
+                    != value_under_test_->getBitScope().end());
+
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[0]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[1]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[2]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[3]);
+    CPPUNIT_ASSERT(value_under_test_->getBitScope()[4]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[5]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[6]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[7]);
+}
+
+void OBDBitMappingValueTest::testTwoValidityBitInput()
+{
+    ValidityMappingMode expected_mode = ValidityMappingMode::AUTO;
+
+    uint8_t second_bit = 0x2;
+    uint8_t third_bit = 0x4;
+
+    uint8_t test_bit = second_bit | third_bit;
+
+    delete value_under_test_;
+    value_under_test_ = new OBDBitMappingValue(value_, expected_mode);
+
+    value_under_test_->setValidityByte(test_bit);
+    CPPUNIT_ASSERT(
+            value_under_test_->getBitScope().find(1)
+                    != value_under_test_->getBitScope().end());
+    CPPUNIT_ASSERT(
+            value_under_test_->getBitScope().find(2)
+                    != value_under_test_->getBitScope().end());
+
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[0]);
+    CPPUNIT_ASSERT(value_under_test_->getBitScope()[1]);
+    CPPUNIT_ASSERT(value_under_test_->getBitScope()[2]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[3]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[4]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[5]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[6]);
+    CPPUNIT_ASSERT(!value_under_test_->getBitScope()[7]);
 }

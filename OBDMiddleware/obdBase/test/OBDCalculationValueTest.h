@@ -12,6 +12,8 @@ class OBDCalculationValueTest : public CppUnit::TestCase
         CPPUNIT_TEST (testDefaultConstruction);
         CPPUNIT_TEST(testParameterConstruction);
         CPPUNIT_TEST(testInputStructConstruction);
+        CPPUNIT_TEST(testAutoModeInputConstruction);
+        CPPUNIT_TEST(testManualModeInputConstruction);
         CPPUNIT_TEST(testToSendableByteConversion);
         CPPUNIT_TEST(testToValueConversion);
         CPPUNIT_TEST(testAuxiliaryFunctions);
@@ -26,6 +28,8 @@ class OBDCalculationValueTest : public CppUnit::TestCase
         void testDefaultConstruction();
         void testParameterConstruction();
         void testInputStructConstruction();
+        void testAutoModeInputConstruction();
+        void testManualModeInputConstruction();
         void testToValueConversion();
         void testToSendableByteConversion();
         void testAuxiliaryFunctions();

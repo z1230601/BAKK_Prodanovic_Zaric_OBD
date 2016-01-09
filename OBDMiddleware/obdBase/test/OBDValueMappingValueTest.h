@@ -15,7 +15,8 @@ class OBDValueMappingValueTest : public CppUnit::TestCase
         CPPUNIT_TEST (testInputStructConstruction);
         CPPUNIT_TEST (testValueConversionFail);
         CPPUNIT_TEST (testValueConversion);
-
+        CPPUNIT_TEST (testAutoValidityModeInputConstruction);
+        CPPUNIT_TEST (testManualValidityModeInputConstruction);
         CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -29,6 +30,8 @@ class OBDValueMappingValueTest : public CppUnit::TestCase
         void testInputStructConstruction();
         void testValueConversion();
         void testValueConversionFail();
+        void testAutoValidityModeInputConstruction();
+        void testManualValidityModeInputConstruction();
 
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (OBDValueMappingValueTest);

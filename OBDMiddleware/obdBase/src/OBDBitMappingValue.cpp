@@ -15,30 +15,22 @@ OBDBitMappingValue::OBDBitMappingValue(unsigned int byte_amount)
 OBDBitMappingValue::OBDBitMappingValue(OBDCommandValueInput input)
         : AbstractOBDValue(input.name_, input.bytes_)
 {
-    for(unsigned int i = 0; i < input.mapping_.size(); i++)
-    {
-        try
-        {
-            unsigned int key_to_insert = std::stoi(input.mapping_.at(i).from_);
-            if(input.mapping_.at(i).set_.compare("false") == 0)
-            {
-                false_mapping_[key_to_insert] = input.mapping_.at(i).content_;
-                reverse_false_mapping_[input.mapping_.at(i).content_] =
-                        key_to_insert;
-            } else if(input.mapping_.at(i).set_.compare("true") == 0
-                    || input.mapping_.at(i).set_.empty())
-            {
-                true_mapping_[key_to_insert] = input.mapping_.at(i).content_;
-                reverse_true_mapping_[input.mapping_.at(i).content_] =
-                        key_to_insert;
-            } else
-            {
-                std::runtime_error("Invalid set option! [Must be true, false or empty string]");
-            }
-        } catch (std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
-        }
+    initMapping(input);
+}
+
+OBDBitMappingValue::OBDBitMappingValue(OBDCommandValueInput input,
+        ValidityMappingMode mode)
+{
+    initMapping(input);
+    switch(mode){
+        case ValidityMappingMode::AUTO:
+            initAutomaticValidityMapping();
+            break;
+        case ValidityMappingMode::MANUAL:
+            initManualValidityMapping(input);
+            break;
+        case ValidityMappingMode::OFF:
+            break;
     }
 }
 
@@ -128,3 +120,60 @@ void OBDBitMappingValue::setBitScope(
     bit_position_observed_ = bit_position_observed;
 }
 
+std::map<unsigned int, bool> OBDBitMappingValue::getBitScope(){
+    return bit_position_observed_;
+}
+
+void OBDBitMappingValue::initMapping(OBDCommandValueInput input)
+{
+    for(unsigned int i = 0; i < input.mapping_.size(); i++)
+    {
+        try
+        {
+            unsigned int key_to_insert = std::stoi(input.mapping_.at(i).from_);
+            if(input.mapping_.at(i).set_.compare("false") == 0)
+            {
+                false_mapping_[key_to_insert] = input.mapping_.at(i).content_;
+                reverse_false_mapping_[input.mapping_.at(i).content_] =
+                        key_to_insert;
+            } else if(input.mapping_.at(i).set_.compare("true") == 0
+                    || input.mapping_.at(i).set_.empty())
+            {
+                true_mapping_[key_to_insert] = input.mapping_.at(i).content_;
+                reverse_true_mapping_[input.mapping_.at(i).content_] =
+                        key_to_insert;
+            } else
+            {
+                std::runtime_error(
+                        "Invalid set option! [Must be true, false or empty string]");
+            }
+        } catch (std::exception &e)
+        {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+
+void OBDBitMappingValue::initManualValidityMapping(OBDCommandValueInput input)
+{
+}
+
+void OBDBitMappingValue::setValidityByte(uint8_t byte)
+{
+    bit_position_observed_.clear();
+
+    for( unsigned int i=0; i < 8; i++){
+        bit_position_observed_[i] = (byte >> i) & 0x1;
+    }
+}
+
+bool OBDBitMappingValue::isValueValid()
+{
+    //is always valid because bit_position_observed_ is checked in interpretation anyway
+    return true;
+}
+
+void OBDBitMappingValue::initAutomaticValidityMapping()
+{
+}

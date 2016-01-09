@@ -15,6 +15,8 @@ class OBDBitMappingValueTest : public CppUnit::TestCase
         CPPUNIT_TEST (testInputStructConstruction);
         CPPUNIT_TEST (testValueConversion);
         CPPUNIT_TEST (testValueConversionMultipleSelections);
+        CPPUNIT_TEST (testAutoValidityModeInputConstruction);
+        CPPUNIT_TEST (testTwoValidityBitInput);
         CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -28,6 +30,8 @@ class OBDBitMappingValueTest : public CppUnit::TestCase
         void testInputStructConstruction();
         void testValueConversion();
         void testValueConversionMultipleSelections();
+        void testAutoValidityModeInputConstruction();
+        void testTwoValidityBitInput();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (OBDBitMappingValueTest);
 

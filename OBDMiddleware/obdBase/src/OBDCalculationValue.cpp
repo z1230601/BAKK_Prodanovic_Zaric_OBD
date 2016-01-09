@@ -20,6 +20,35 @@ OBDCalculationValue::OBDCalculationValue(OBDCommandValueInput input)
 
 }
 
+OBDCalculationValue::OBDCalculationValue(OBDCommandValueInput input,
+        ValidityMappingMode mode, unsigned int auto_pos)
+        : AbstractOBDValue(input.name_, input.bytes_), min_(input.min_), max_(
+                input.max_), unit_(input.unit_)
+
+{
+    switch(mode)
+    {
+        case ValidityMappingMode::AUTO:
+            setValidtyPatternBitPosition(auto_pos);
+            break;
+        case ValidityMappingMode::MANUAL:
+        {
+            if(input.man_validity_entries_.empty())
+            {
+                throw std::runtime_error(
+                        "Manual Validity Mapping mode but no entry found for specific Value!");
+            }
+            unsigned int bit_position = std::stoi(
+                    input.man_validity_entries_.at(0).content_);
+            setValidtyPatternBitPosition(bit_position);
+            break;
+        }
+        case ValidityMappingMode::OFF:
+            break;
+    }
+
+}
+
 OBDCalculationValue::~OBDCalculationValue()
 {
 }

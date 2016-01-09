@@ -11,23 +11,29 @@ class OBDBitcombinationMappingValue : public AbstractOBDValue
         OBDBitcombinationMappingValue();
         OBDBitcombinationMappingValue(unsigned int byte_amount);
         OBDBitcombinationMappingValue(OBDCommandValueInput input);
+        OBDBitcombinationMappingValue(OBDCommandValueInput input,
+                ValidityMappingMode mode);
         virtual ~OBDBitcombinationMappingValue();
 
         std::string interpretToValue(std::vector<uint8_t> input);
         std::vector<uint8_t> interpretToByteArray(std::string value);
 
-        std::map<unsigned int, std::map<unsigned int, std::string> >  getMapping();
+        std::map<unsigned int, std::map<unsigned int, std::string> > getMapping();
         unsigned int getKeyFromBitPositionString(std::string value);
         void setBitcombinationScope(std::map<unsigned int, bool> valid_scope);
+
+        void setValidityByte(uint8_t byte);
+        bool isValueValid();
 
     private:
         std::map<unsigned int, std::map<unsigned int, std::string> > mapping_;
         std::map<unsigned int, std::map<std::string, unsigned int> > reverse_mapping_;
 
         std::map<unsigned int, bool> bitcombination_observed_;
-
+        std::map<unsigned int, uint8_t> validity_mask_mapping_;
 
         unsigned int countOccurencesOfZero(unsigned int value);
+        void initMapping();
 };
 
 #endif /* OBDBITCOMBINATIONMAPPINGVALUE_H_ */

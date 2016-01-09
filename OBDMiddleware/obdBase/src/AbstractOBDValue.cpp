@@ -92,3 +92,19 @@ std::vector<uint8_t> AbstractOBDValue::calculateByteArrayFromCompoundValue(
     std::reverse(ret.begin(), ret.end());
     return ret;
 }
+
+void AbstractOBDValue::setValidityByte(uint8_t byte)
+{
+    is_valid_ = byte & validity_bit_mask_;
+}
+
+bool AbstractOBDValue::isValueValid()
+{
+    return is_valid_;
+}
+
+void AbstractOBDValue::setValidtyPatternBitPosition(unsigned int pos)
+{
+    validity_bit_mask_ = 0x1;
+    validity_bit_mask_ = validity_bit_mask_ << pos;
+}

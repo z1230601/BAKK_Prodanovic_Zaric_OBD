@@ -15,7 +15,7 @@ class OBDCommandValueFactory
 
     public:
         virtual ~OBDCommandValueFactory();
-        AbstractOBDValue* createOBDValueFromInput(OBDCommandValueInput input);
+        AbstractOBDValue* createOBDValueFromInput(OBDCommandValueInput input, ValidityMappingMode mode, unsigned int autoPos);
         static OBDCommandValueFactory* getInstance();
 
     private:

@@ -58,7 +58,8 @@ void ObdCommandTest::testConstruction()
             obdcommand_under_test_->getValidityMapping().size());
     CPPUNIT_ASSERT_EQUAL(expectedMode,
             obdcommand_under_test_->getValidityMappingMode());
-    CPPUNIT_ASSERT_EQUAL((size_t) 0, obdcommand_under_test_->getValues(). size());
+    CPPUNIT_ASSERT_EQUAL((size_t) 0,
+            obdcommand_under_test_->getValues().size());
 }
 
 void ObdCommandTest::testParameterConstruction()
@@ -78,7 +79,8 @@ void ObdCommandTest::testParameterConstruction()
             obdcommand_under_test_->getSids().size());
     CPPUNIT_ASSERT_EQUAL(expectedMode,
             obdcommand_under_test_->getValidityMappingMode());
-    CPPUNIT_ASSERT_EQUAL((size_t) 0, obdcommand_under_test_->getValues(). size());
+    CPPUNIT_ASSERT_EQUAL((size_t) 0,
+            obdcommand_under_test_->getValues().size());
 }
 
 void ObdCommandTest::testInputStructConstruction()
@@ -86,14 +88,29 @@ void ObdCommandTest::testInputStructConstruction()
     delete obdcommand_under_test_;
     obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
 
-    CPPUNIT_ASSERT_EQUAL(expected_sids_.size(), obdcommand_under_test_->getSids().size());
-    for(unsigned i = 0; i < expected_sids_.size(); i++) {
-        CPPUNIT_ASSERT_EQUAL(expected_sids_.at(i), obdcommand_under_test_->getSids().at(i));
+    CPPUNIT_ASSERT_EQUAL(expected_sids_.size(),
+            obdcommand_under_test_->getSids().size());
+    for(unsigned i = 0; i < expected_sids_.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL(expected_sids_.at(i),
+                obdcommand_under_test_->getSids().at(i));
     }
 
     CPPUNIT_ASSERT_EQUAL(input_.pid_, obdcommand_under_test_->getPid());
-    CPPUNIT_ASSERT_EQUAL(input_.description_, obdcommand_under_test_->getDescription());
-    CPPUNIT_ASSERT_EQUAL(input_.validity_mapping_mode_, obdcommand_under_test_->getValidityMappingMode());
-    CPPUNIT_ASSERT_EQUAL(input_.values_.size(), obdcommand_under_test_->getValues(). size());
+    CPPUNIT_ASSERT_EQUAL(input_.description_,
+            obdcommand_under_test_->getDescription());
+    CPPUNIT_ASSERT_EQUAL(input_.validity_mapping_mode_,
+            obdcommand_under_test_->getValidityMappingMode());
+    CPPUNIT_ASSERT_EQUAL(input_.values_.size(),
+            obdcommand_under_test_->getValues().size());
 
 }
+
+void ObdCommandTest::testValidityMappingConstruction()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
+
+
+}
+

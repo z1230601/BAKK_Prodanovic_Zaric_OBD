@@ -11,6 +11,7 @@ class OBDValueMappingValue:public AbstractOBDValue
     public:
         OBDValueMappingValue();
         OBDValueMappingValue(OBDCommandValueInput input);
+        OBDValueMappingValue(OBDCommandValueInput input, ValidityMappingMode mode, unsigned int auto_pos);
         OBDValueMappingValue(unsigned int byte_amount, std::string &name);
         OBDValueMappingValue(unsigned int byte_amount);
         virtual ~OBDValueMappingValue();
@@ -19,10 +20,12 @@ class OBDValueMappingValue:public AbstractOBDValue
         std::vector<uint8_t> interpretToByteArray(std::string value);
 
         std::map<unsigned int, std::string> getMapping();
+
     private:
         std::map<unsigned int, std::string> mapping_;
         std::map<std::string, unsigned int> reverse_mapping_;
 
+        void initMapping(OBDCommandValueInput input);
 };
 
 #endif /* OBDVALUEMAPPINGVALUE_H_ */

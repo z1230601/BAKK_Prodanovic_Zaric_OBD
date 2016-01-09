@@ -133,3 +133,222 @@ void OBDValueMappingValueTest::testValueConversionFail()
     CPPUNIT_ASSERT(value_under_test_->interpretToByteArray(expectedValueAsString).empty());
 }
 
+void OBDValueMappingValueTest::testAutoValidityModeInputConstruction()
+{
+    ValidityMappingMode expected_mode = ValidityMappingMode::AUTO;
+
+    uint8_t first_bit = 0x1;
+    uint8_t second_bit = 0x2;
+    uint8_t third_bit = 0x4;
+    uint8_t fourth_bit = 0x8;
+    uint8_t fifth_bit = 0x10;
+    uint8_t sixth_bit = 0x20;
+    uint8_t seventh_bit = 0x40;
+    uint8_t eighth_bit = 0x80;
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 0);
+
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 1);
+
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 2);
+
+    value_under_test_->setValidityByte(third_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 3);
+
+    value_under_test_->setValidityByte(fourth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 4);
+
+    value_under_test_->setValidityByte(fifth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 5);
+
+    value_under_test_->setValidityByte(sixth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 6);
+
+    value_under_test_->setValidityByte(seventh_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, 7);
+
+    value_under_test_->setValidityByte(eighth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+}
+
+void OBDValueMappingValueTest::testManualValidityModeInputConstruction()
+{
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "0";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "1";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "2";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "3";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "4";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "5";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "6";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    {
+        ValidityBitEntry entry;
+
+        entry.content_ = "7";
+        input.man_validity_entries_.push_back(entry);
+    }
+
+    ValidityMappingMode expected_mode = ValidityMappingMode::MANUAL;
+
+    uint8_t first_bit = 0x1;
+    uint8_t second_bit = 0x2;
+    uint8_t third_bit = 0x4;
+    uint8_t fourth_bit = 0x8;
+    uint8_t fifth_bit = 0x10;
+    uint8_t sixth_bit = 0x20;
+    uint8_t seventh_bit = 0x40;
+    uint8_t eighth_bit = 0x80;
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(third_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(fourth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(first_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(fifth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(sixth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(seventh_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+
+    delete value_under_test_;
+    value_under_test_ = new OBDValueMappingValue(input, expected_mode, -1);
+
+    value_under_test_->setValidityByte(eighth_bit);
+    CPPUNIT_ASSERT(value_under_test_->isValueValid());
+    value_under_test_->setValidityByte(second_bit);
+    CPPUNIT_ASSERT(!value_under_test_->isValueValid());
+    input.man_validity_entries_.erase(input.man_validity_entries_.begin());
+}

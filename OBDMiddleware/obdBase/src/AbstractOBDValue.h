@@ -23,11 +23,18 @@ class AbstractOBDValue
         unsigned int calculateCompoundValue(std::vector<uint8_t> input);
         std::vector<uint8_t> calculateByteArrayFromCompoundValue(unsigned int input);
 
+        void setValidityByte(uint8_t byte);
+        bool isValueValid();
+
     protected:
         std::string name_;
         double interpreted_value_;
         unsigned int byte_amount_;
         unsigned int uninterpreted_value_;
+        uint8_t validity_bit_mask_;
+
+        bool is_valid_;
+        void setValidtyPatternBitPosition(unsigned int pos);
 };
 
 #endif /* ABSTRACTOBDCOMMANDVALUE_H_ */

@@ -14,7 +14,9 @@ class ObdCommandTest : public CppUnit::TestCase
         CPPUNIT_TEST_SUITE (ObdCommandTest);
         CPPUNIT_TEST (testConstruction);
         CPPUNIT_TEST (testParameterConstruction);
-        CPPUNIT_TEST (testInputStructConstruction);CPPUNIT_TEST_SUITE_END();
+        CPPUNIT_TEST (testInputStructConstruction);
+        CPPUNIT_TEST (testValidityMappingConstruction);
+        CPPUNIT_TEST_SUITE_END();
 
     private:
         ObdCommand* obdcommand_under_test_;
@@ -27,6 +29,7 @@ class ObdCommandTest : public CppUnit::TestCase
         void testConstruction();
         void testParameterConstruction();
         void testInputStructConstruction();
+        void testValidityMappingConstruction();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (ObdCommandTest);
 #endif /* OBDCOMMANDTEST_H_ */

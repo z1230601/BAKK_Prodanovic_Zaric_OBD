@@ -28,6 +28,7 @@ class ObdCommand
         ValidityMappingMode getValidityMappingMode();
         std::map<unsigned int, bool> getValidityMapping();
         std::vector<AbstractOBDValue*> getValues();
+
     private:
         std::vector<unsigned int> sids_;
         unsigned int pid_;
