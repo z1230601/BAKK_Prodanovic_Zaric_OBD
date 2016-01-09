@@ -18,7 +18,7 @@ class ObdCommand
         virtual ~ObdCommand();
 
         //should not be void just for now till specified
-        void interpretReceivedBytes(uint8_t data[]);
+        void interpretReceivedBytes(std::vector<uint8_t> data);
         void convertToSendableByteArray();
         std::string getRequestString(unsigned int desired_sid);
 

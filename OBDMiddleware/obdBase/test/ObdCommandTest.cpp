@@ -142,14 +142,18 @@ void ObdCommandTest::testInterpretReceivedBytes()
     delete obdcommand_under_test_;
     obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
 
-    uint8_t input_bytes[] = { 3, 2, 0, 4, 0 };
+    std::vector<unsigned char> input_bytes{ 3, 0x40, 0, 0x80, 0 };
+
     double expected_result1 = 512;
     double expected_result2 = 1024;
 
     obdcommand_under_test_->interpretReceivedBytes(input_bytes);
 
-    CPPUNIT_ASSERT_EQUAL((size_t) 2,obdcommand_under_test_->getValues().size());
-    CPPUNIT_ASSERT_EQUAL(expected_result1, obdcommand_under_test_->getValues().at(0)->getInterpretedValue());
-    CPPUNIT_ASSERT_EQUAL(expected_result2, obdcommand_under_test_->getValues().at(1)->getInterpretedValue());
+    CPPUNIT_ASSERT_EQUAL((size_t) 2,
+            obdcommand_under_test_->getValues().size());
+    CPPUNIT_ASSERT_EQUAL(expected_result1,
+            obdcommand_under_test_->getValues().at(0)->getInterpretedValue());
+    CPPUNIT_ASSERT_EQUAL(expected_result2,
+            obdcommand_under_test_->getValues().at(1)->getInterpretedValue());
 
 }
