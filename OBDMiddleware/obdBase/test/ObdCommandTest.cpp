@@ -1,5 +1,7 @@
 #include "ObdCommandTest.h"
 #include "../src/ObdCommand.h"
+#include "../src/AbstractOBDValue.h"
+#include <string>
 
 void ObdCommandTest::setUp()
 {
@@ -46,18 +48,12 @@ void ObdCommandTest::testConstruction()
     std::string expectedDescription = "";
     unsigned int expectedPid = 0;
     std::vector<unsigned int> expectedSids = { };
-    std::map<unsigned int, bool> expectedValidityMapping = { };
-    ValidityMappingMode expectedMode = ValidityMappingMode::OFF;
 
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             obdcommand_under_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedPid, obdcommand_under_test_->getPid());
     CPPUNIT_ASSERT_EQUAL(expectedSids.size(),
             obdcommand_under_test_->getSids().size());
-    CPPUNIT_ASSERT_EQUAL(expectedValidityMapping.size(),
-            obdcommand_under_test_->getValidityMapping().size());
-    CPPUNIT_ASSERT_EQUAL(expectedMode,
-            obdcommand_under_test_->getValidityMappingMode());
     CPPUNIT_ASSERT_EQUAL((size_t) 0,
             obdcommand_under_test_->getValues().size());
 }
@@ -65,20 +61,17 @@ void ObdCommandTest::testConstruction()
 void ObdCommandTest::testParameterConstruction()
 {
     unsigned int expectedPid = 0x65;
-    ValidityMappingMode expectedMode = ValidityMappingMode::AUTO;
     std::string expectedDescription = "Zusätzliche Ein- und Ausgänge";
 
     delete obdcommand_under_test_;
     obdcommand_under_test_ = new ObdCommand(expected_sids_, expectedPid,
-            expectedDescription, expectedMode);
+            expectedDescription);
 
     CPPUNIT_ASSERT_EQUAL(expectedDescription,
             obdcommand_under_test_->getDescription());
     CPPUNIT_ASSERT_EQUAL(expectedPid, obdcommand_under_test_->getPid());
     CPPUNIT_ASSERT_EQUAL(expected_sids_.size(),
             obdcommand_under_test_->getSids().size());
-    CPPUNIT_ASSERT_EQUAL(expectedMode,
-            obdcommand_under_test_->getValidityMappingMode());
     CPPUNIT_ASSERT_EQUAL((size_t) 0,
             obdcommand_under_test_->getValues().size());
 }
@@ -99,8 +92,6 @@ void ObdCommandTest::testInputStructConstruction()
     CPPUNIT_ASSERT_EQUAL(input_.pid_, obdcommand_under_test_->getPid());
     CPPUNIT_ASSERT_EQUAL(input_.description_,
             obdcommand_under_test_->getDescription());
-    CPPUNIT_ASSERT_EQUAL(input_.validity_mapping_mode_,
-            obdcommand_under_test_->getValidityMappingMode());
     CPPUNIT_ASSERT_EQUAL(input_.values_.size(),
             obdcommand_under_test_->getValues().size());
 
@@ -111,6 +102,54 @@ void ObdCommandTest::testValidityMappingConstruction()
     delete obdcommand_under_test_;
     obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
 
+    CPPUNIT_ASSERT_EQUAL(expected_sids_.size(),
+            obdcommand_under_test_->getSids().size());
+    for(unsigned int i = 0; i < expected_sids_.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL(expected_sids_.at(i),
+                obdcommand_under_test_->getSids().at(i));
+    }
+    CPPUNIT_ASSERT_EQUAL(input_.description_,
+            obdcommand_under_test_->getDescription());
+    CPPUNIT_ASSERT_EQUAL(input_.pid_, obdcommand_under_test_->getPid());
 
+    CPPUNIT_ASSERT_EQUAL(input_.values_.size(),
+            obdcommand_under_test_->getValues().size());
 }
 
+void ObdCommandTest::testRequestString()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
+
+    std::stringstream expected;
+    expected << "0" << expected_sids_.at(0) << " " << std::hex << input_.pid_
+            << std::dec;
+    unsigned int selected_sid = 1;
+    CPPUNIT_ASSERT_EQUAL(expected.str(),
+            obdcommand_under_test_->getRequestString(selected_sid));
+
+    expected.str("");
+    expected << "0" << expected_sids_.at(1) << " " << std::hex << input_.pid_
+            << std::dec;
+    selected_sid = 2;
+    CPPUNIT_ASSERT_EQUAL(expected.str(),
+            obdcommand_under_test_->getRequestString(selected_sid));
+}
+
+void ObdCommandTest::testInterpretReceivedBytes()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, input_);
+
+    uint8_t input_bytes[] = { 3, 2, 0, 4, 0 };
+    double expected_result1 = 512;
+    double expected_result2 = 1024;
+
+    obdcommand_under_test_->interpretReceivedBytes(input_bytes);
+
+    CPPUNIT_ASSERT_EQUAL((size_t) 2,obdcommand_under_test_->getValues().size());
+    CPPUNIT_ASSERT_EQUAL(expected_result1, obdcommand_under_test_->getValues().at(0)->getInterpretedValue());
+    CPPUNIT_ASSERT_EQUAL(expected_result2, obdcommand_under_test_->getValues().at(1)->getInterpretedValue());
+
+}
