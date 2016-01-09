@@ -250,3 +250,48 @@ void OBDBitcombinationMappingValueTest::testValueConversionMultipleValues()
                         .at(i));
     }
 }
+
+void OBDBitcombinationMappingValueTest::testManualValidtyMapping()
+{
+    ValidityMappingMode expected_mode = ValidityMappingMode::MANUAL;
+
+    uint8_t third_bit = 0x4;
+    uint8_t sixth_bit = 0x20;
+    uint8_t seventh_bit = 0x40;
+
+    unsigned int key01 = value_under_test_->getKeyFromBitPositionString("01");
+    unsigned int key23 = value_under_test_->getKeyFromBitPositionString("23");
+
+    delete value_under_test_;
+    value_under_test_ = new OBDBitcombinationMappingValue(value_,
+            expected_mode);
+
+    value_under_test_->setValidityByte(third_bit);
+    std::map<unsigned int, bool> actual_bit_scope = value_under_test_
+            ->getBitcombinationScope();
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01)->second);
+    CPPUNIT_ASSERT(!actual_bit_scope.find(key23)->second);
+
+    value_under_test_->setValidityByte(sixth_bit);
+    actual_bit_scope = value_under_test_->getBitcombinationScope();
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23)->second);
+    CPPUNIT_ASSERT(!actual_bit_scope.find(key01)->second);
+
+    value_under_test_->setValidityByte(sixth_bit | third_bit);
+    actual_bit_scope = value_under_test_->getBitcombinationScope();
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23)->second);
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01)->second);
+
+    value_under_test_->setValidityByte(seventh_bit);
+    actual_bit_scope = value_under_test_->getBitcombinationScope();
+    CPPUNIT_ASSERT(actual_bit_scope.find(key01) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(actual_bit_scope.find(key23) != actual_bit_scope.end());
+    CPPUNIT_ASSERT(!actual_bit_scope.find(key23)->second);
+    CPPUNIT_ASSERT(!actual_bit_scope.find(key01)->second);
+}

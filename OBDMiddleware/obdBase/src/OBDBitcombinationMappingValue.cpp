@@ -171,6 +171,11 @@ bool OBDBitcombinationMappingValue::isValueValid()
     return true;
 }
 
+std::map<unsigned int, bool> OBDBitcombinationMappingValue::getBitcombinationScope()
+{
+    return bitcombination_observed_;
+}
+
 unsigned int OBDBitcombinationMappingValue::countOccurencesOfZero(
         unsigned int value)
 {

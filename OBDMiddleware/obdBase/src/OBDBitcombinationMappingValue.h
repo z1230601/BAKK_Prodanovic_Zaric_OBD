@@ -20,7 +20,9 @@ class OBDBitcombinationMappingValue : public AbstractOBDValue
 
         std::map<unsigned int, std::map<unsigned int, std::string> > getMapping();
         unsigned int getKeyFromBitPositionString(std::string value);
+
         void setBitcombinationScope(std::map<unsigned int, bool> valid_scope);
+        std::map<unsigned int, bool> getBitcombinationScope();
 
         void setValidityByte(uint8_t byte);
         bool isValueValid();
@@ -33,7 +35,6 @@ class OBDBitcombinationMappingValue : public AbstractOBDValue
         std::map<unsigned int, uint8_t> validity_mask_mapping_;
 
         unsigned int countOccurencesOfZero(unsigned int value);
-        void initMapping();
 };
 
 #endif /* OBDBITCOMBINATIONMAPPINGVALUE_H_ */

@@ -211,13 +211,7 @@ void OBDBitMappingValueTest::testAutoValidityModeInputConstruction()
     ValidityMappingMode expected_mode = ValidityMappingMode::AUTO;
 
     uint8_t first_bit = 0x1;
-//    uint8_t second_bit = 0x2;
-//    uint8_t third_bit = 0x4;
-//    uint8_t fourth_bit = 0x8;
     uint8_t fifth_bit = 0x10;
-//    uint8_t sixth_bit = 0x20;
-//    uint8_t seventh_bit = 0x40;
-//    uint8_t eighth_bit = 0x80;
 
     delete value_under_test_;
     value_under_test_ = new OBDBitMappingValue(value_, expected_mode);

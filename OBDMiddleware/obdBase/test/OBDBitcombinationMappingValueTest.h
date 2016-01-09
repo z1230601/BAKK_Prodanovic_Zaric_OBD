@@ -16,6 +16,7 @@ class OBDBitcombinationMappingValueTest : public CppUnit::TestCase
     CPPUNIT_TEST (testValueConversion);
     CPPUNIT_TEST (testValueConversionSlightlyMoreComplicated);
     CPPUNIT_TEST (testValueConversionMultipleValues);
+    CPPUNIT_TEST (testManualValidtyMapping);
     CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -30,6 +31,7 @@ class OBDBitcombinationMappingValueTest : public CppUnit::TestCase
         void testValueConversion();
         void testValueConversionSlightlyMoreComplicated();
         void testValueConversionMultipleValues();
+        void testManualValidtyMapping();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (OBDBitcombinationMappingValueTest);
 #endif /* OBDBITCOMBINATIONMAPPINGVALUETEST_H_ */
