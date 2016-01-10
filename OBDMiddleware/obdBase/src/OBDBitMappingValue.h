@@ -26,6 +26,7 @@ class OBDBitMappingValue : public AbstractOBDValue
         void setValidityByte(uint8_t byte);
         bool isValueValid();
 
+        std::string getInterpretedValueAsString();
     private:
         std::map<unsigned int, std::string> true_mapping_;
         std::map<unsigned int, std::string> false_mapping_;

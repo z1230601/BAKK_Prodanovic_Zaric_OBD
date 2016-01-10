@@ -1,7 +1,6 @@
 #include "ObdCommand.h"
 #include "OBDCommandValueFactory.h"
 
-#include <iostream>
 #include <iomanip>
 #include <sstream>
 #include <algorithm>
@@ -28,6 +27,8 @@ ObdCommand::ObdCommand(std::vector<unsigned int> sids, OBDCommandInput input)
                 OBDCommandValueFactory::getInstance()->createOBDValueFromInput(
                         input.values_.at(i), input.validity_mapping_mode_, i));
     }
+    is_validity_mapping_active_ = !(input.validity_mapping_mode_
+            == ValidityMappingMode::OFF);
 }
 
 ObdCommand::~ObdCommand()
@@ -42,12 +43,16 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
     }
 
     unsigned int total_size = 0;
+    for(AbstractOBDValue* value : values_)
+    {
+        total_size += value->getByteAmount();
+    }
+
     if(is_validity_mapping_active_)
     {
         for(AbstractOBDValue* value : values_)
         {
             value->setValidityByte(data.at(0));
-            total_size += value->getByteAmount();
         }
 
         data.erase(data.begin());
@@ -60,7 +65,7 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
             std::vector<uint8_t>::const_iterator begins = data.begin() + i;
             std::vector<uint8_t>::const_iterator ends = data.begin() + i
                     + values_.at(j)->getByteAmount();
-            std::vector < uint8_t > subdata(begins, ends);
+            std::vector<uint8_t> subdata(begins, ends);
             values_.at(j)->interpretToValue(subdata);
             i += values_.at(j)->getByteAmount() - 1;
             j++;

@@ -13,7 +13,8 @@ class ObdCommand
 {
     public:
         ObdCommand();
-        ObdCommand(std::vector<unsigned int> sids, unsigned int pid, std::string description);
+        ObdCommand(std::vector<unsigned int> sids, unsigned int pid,
+                std::string description);
         ObdCommand(std::vector<unsigned int> sids, OBDCommandInput input);
         virtual ~ObdCommand();
 
