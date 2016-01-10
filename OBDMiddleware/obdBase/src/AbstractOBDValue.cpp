@@ -109,6 +109,16 @@ std::string AbstractOBDValue::getInterpretedValueAsString()
     return ss.str();
 }
 
+uint8_t AbstractOBDValue::getValidityMask()
+{
+    return validity_bit_mask_;
+}
+
+std::vector<uint8_t> AbstractOBDValue::getUninterpretedValueAsVector()
+{
+    return calculateByteArrayFromCompoundValue(uninterpreted_value_);
+}
+
 void AbstractOBDValue::setValidtyPatternBitPosition(unsigned int pos)
 {
     validity_bit_mask_ = 0x1;

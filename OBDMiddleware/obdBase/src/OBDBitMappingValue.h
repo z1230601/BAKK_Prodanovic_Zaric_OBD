@@ -27,6 +27,7 @@ class OBDBitMappingValue : public AbstractOBDValue
         bool isValueValid();
 
         std::string getInterpretedValueAsString();
+        uint8_t getValidityMask();
     private:
         std::map<unsigned int, std::string> true_mapping_;
         std::map<unsigned int, std::string> false_mapping_;
@@ -38,7 +39,6 @@ class OBDBitMappingValue : public AbstractOBDValue
 
         void initMapping(OBDCommandValueInput input);
         void initManualValidityMapping(OBDCommandValueInput input);
-        void initAutomaticValidityMapping();
 };
 
 #endif /* OBDBITMAPPINGVALUE_H_ */

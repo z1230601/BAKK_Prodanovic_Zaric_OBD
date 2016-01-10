@@ -20,7 +20,7 @@ class ObdCommand
 
         //should not be void just for now till specified
         void interpretReceivedBytes(std::vector<uint8_t> data);
-        void convertToSendableByteArray();
+        std::vector<uint8_t> convertToSendableByteArray();
         std::string getRequestString(unsigned int desired_sid);
 
         std::vector<unsigned int> getSids();

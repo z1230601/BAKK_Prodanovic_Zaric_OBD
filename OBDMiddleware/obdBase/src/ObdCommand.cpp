@@ -1,6 +1,7 @@
 #include "ObdCommand.h"
 #include "OBDCommandValueFactory.h"
 
+#include <iostream>
 #include <iomanip>
 #include <sstream>
 #include <algorithm>
@@ -73,8 +74,26 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
     }
 }
 
-void ObdCommand::convertToSendableByteArray()
+std::vector<uint8_t> ObdCommand::convertToSendableByteArray()
 {
+    std::vector<uint8_t> ret;
+    if(is_validity_mapping_active_)
+    {
+        uint8_t validity_mapping = 0;
+        for(unsigned int i = 0; i < values_.size(); i++)
+        {
+            uint8_t mask = values_.at(i)->getValidityMask();
+            std::cout << "Masking: " << std::hex << (int) validity_mapping << " | " << (int) mask << std::endl << std::dec;
+            validity_mapping = validity_mapping | mask;
+        }
+        ret.push_back(validity_mapping);
+    }
+
+    for(AbstractOBDValue* value : values_){
+        std::vector<uint8_t> uninterpreted = value->getUninterpretedValueAsVector();
+        ret.insert(ret.end(),uninterpreted.begin(), uninterpreted.end());
+    }
+    return ret;
 }
 
 std::string ObdCommand::getRequestString(unsigned int desired_sid)

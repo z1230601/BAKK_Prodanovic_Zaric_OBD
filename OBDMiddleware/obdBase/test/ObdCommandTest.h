@@ -11,16 +11,20 @@ class ObdCommand;
 
 class ObdCommandTest : public CppUnit::TestCase
 {
-        CPPUNIT_TEST_SUITE (ObdCommandTest);
-        CPPUNIT_TEST (testConstruction);
-        CPPUNIT_TEST (testParameterConstruction);
-        CPPUNIT_TEST (testInputStructConstruction);
-        CPPUNIT_TEST (testValidityMappingConstruction);
-        CPPUNIT_TEST (testRequestString);
-        CPPUNIT_TEST (testInterpretReceivedBytesCalculationValue);
-        CPPUNIT_TEST (testInterpretReceivedBytesValueMapping);
-        CPPUNIT_TEST (testInterpretReceivedBytesBitMapping);
-        CPPUNIT_TEST (testInterpretReceivedBytesBitCombinationMapping);
+    CPPUNIT_TEST_SUITE (ObdCommandTest);
+            CPPUNIT_TEST(testConstruction);
+            CPPUNIT_TEST(testParameterConstruction);
+            CPPUNIT_TEST(testInputStructConstruction);
+            CPPUNIT_TEST(testValidityMappingConstruction);
+            CPPUNIT_TEST(testRequestString);
+            CPPUNIT_TEST(testInterpretReceivedBytesCalculationValue);
+            CPPUNIT_TEST(testInterpretReceivedBytesValueMapping);
+            CPPUNIT_TEST(testInterpretReceivedBytesBitMapping);
+            CPPUNIT_TEST(testInterpretReceivedBytesBitCombinationMapping);
+            CPPUNIT_TEST(testConvertToSendableBytesCalculationValue);
+            CPPUNIT_TEST(testConvertToSendableBytesValueMapping);
+            CPPUNIT_TEST(testConvertToSendableBytesBitMapping);
+            CPPUNIT_TEST(testConvertToSendableBytesBitCombinationMapping);
         CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -42,8 +46,13 @@ class ObdCommandTest : public CppUnit::TestCase
         void testInterpretReceivedBytesValueMapping();
         void testInterpretReceivedBytesBitMapping();
         void testInterpretReceivedBytesBitCombinationMapping();
+        void testConvertToSendableBytesCalculationValue();
+        void testConvertToSendableBytesValueMapping();
+        void testConvertToSendableBytesBitMapping();
+        void testConvertToSendableBytesBitCombinationMapping();
+
         void testRequestString();
 
 };
-CPPUNIT_TEST_SUITE_REGISTRATION (ObdCommandTest);
+CPPUNIT_TEST_SUITE_REGISTRATION(ObdCommandTest);
 #endif /* OBDCOMMANDTEST_H_ */

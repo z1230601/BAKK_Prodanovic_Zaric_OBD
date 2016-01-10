@@ -23,17 +23,6 @@ OBDBitMappingValue::OBDBitMappingValue(OBDCommandValueInput input,
         : AbstractOBDValue(input.bytes_)
 {
     initMapping(input);
-    switch(mode)
-    {
-        case ValidityMappingMode::AUTO:
-            initAutomaticValidityMapping();
-            break;
-        case ValidityMappingMode::MANUAL:
-            initManualValidityMapping(input);
-            break;
-        case ValidityMappingMode::OFF:
-            break;
-    }
 }
 
 OBDBitMappingValue::~OBDBitMappingValue()
@@ -49,6 +38,7 @@ std::string OBDBitMappingValue::interpretToValue(std::vector<uint8_t> input)
 
 std::vector<uint8_t> OBDBitMappingValue::interpretToByteArray(std::string value)
 {
+    bit_position_observed_.clear();
     boost::dynamic_bitset<> ret(byte_amount_ * 8);
 
     std::vector<std::string> splitted;
@@ -59,20 +49,14 @@ std::vector<uint8_t> OBDBitMappingValue::interpretToByteArray(std::string value)
         if(reverse_true_mapping_.find(s) != reverse_true_mapping_.end())
         {
             unsigned int key = reverse_true_mapping_.at(s);
-            if(bit_position_observed_.find(key) != bit_position_observed_.end()
-                    && bit_position_observed_.at(key))
-            {
-                ret.set((size_t) key);
-            }
+            ret.set((size_t) key);
+            bit_position_observed_[key] = true;
         } else if(reverse_false_mapping_.find(s)
                 != reverse_false_mapping_.end())
         {
             unsigned int key = reverse_false_mapping_.at(s);
-            if(bit_position_observed_.find(key) != bit_position_observed_.end()
-                    && bit_position_observed_.at(key))
-            {
-                ret.reset((size_t) key);
-            }
+            ret.reset((size_t) key);
+            bit_position_observed_[key] = true;
         }
     }
 
@@ -133,10 +117,6 @@ void OBDBitMappingValue::initMapping(OBDCommandValueInput input)
     }
 }
 
-void OBDBitMappingValue::initManualValidityMapping(OBDCommandValueInput input)
-{
-}
-
 void OBDBitMappingValue::setValidityByte(uint8_t byte)
 {
     bit_position_observed_.clear();
@@ -153,8 +133,17 @@ bool OBDBitMappingValue::isValueValid()
     return true;
 }
 
-void OBDBitMappingValue::initAutomaticValidityMapping()
+uint8_t OBDBitMappingValue::getValidityMask()
 {
+    unsigned int ret = 0;
+    std::map<unsigned int, bool>::iterator it = bit_position_observed_.begin();
+    for(; it != bit_position_observed_.end(); it++)
+    {
+        unsigned int actual = it->second ? 1 : 0;
+        actual = actual << it->first;
+        ret = ret | actual;
+    }
+    return ret;
 }
 
 std::string OBDBitMappingValue::getInterpretedValueAsString()

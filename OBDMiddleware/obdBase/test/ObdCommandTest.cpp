@@ -378,6 +378,31 @@ void ObdCommandTest::testInterpretReceivedBytesCalculationValue()
 
 }
 
+void ObdCommandTest::testConvertToSendableBytesCalculationValue()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, calculation_input_);
+
+    std::vector<uint8_t> expected_bytes { 3, 0x40, 0, 0x80, 0 };
+    std::vector<std::string> input { "512", "1024" };
+
+    for(unsigned int i = 0; i < obdcommand_under_test_->getValues().size(); i++)
+    {
+        obdcommand_under_test_->getValues().at(i)->interpretToByteArray(
+                input.at(i));
+    }
+
+    std::vector<uint8_t> actual = obdcommand_under_test_
+            ->convertToSendableByteArray();
+
+    CPPUNIT_ASSERT_EQUAL(expected_bytes.size(), actual.size());
+
+    for(unsigned int i = 0; i < expected_bytes.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL(expected_bytes.at(i), actual.at(i));
+    }
+}
+
 void ObdCommandTest::testInterpretReceivedBytesValueMapping()
 {
     delete obdcommand_under_test_;
@@ -399,6 +424,30 @@ void ObdCommandTest::testInterpretReceivedBytesValueMapping()
 
     CPPUNIT_ASSERT_EQUAL(expected_result,
             obdcommand_under_test_->getValues().at(0)->getInterpretedValueAsString());
+}
+
+void ObdCommandTest::testConvertToSendableBytesValueMapping()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, value_input_);
+
+    std::vector<uint8_t> expected_bytes { 0x0E };
+    std::string input = "LKW (Euro IV) B1";
+
+    CPPUNIT_ASSERT_EQUAL((size_t) 1,
+            obdcommand_under_test_->getValues().size());
+
+    obdcommand_under_test_->getValues().at(0)->interpretToByteArray(input);
+
+    std::vector<uint8_t> actual = obdcommand_under_test_
+            ->convertToSendableByteArray();
+
+    CPPUNIT_ASSERT_EQUAL(expected_bytes.size(), actual.size());
+
+    for(unsigned int i = 0; i < expected_bytes.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL(expected_bytes.at(i), actual.at(i));
+    }
 }
 
 void ObdCommandTest::testInterpretReceivedBytesBitMapping()
@@ -436,6 +485,31 @@ void ObdCommandTest::testInterpretReceivedBytesBitMapping()
             obdcommand_under_test_->getValues().at(0)->getInterpretedValueAsString());
 }
 
+void ObdCommandTest::testConvertToSendableBytesBitMapping()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_, bit_input_);
+
+    std::vector<uint8_t> expected_bytes { 0x01, 0x01 };
+    std::string input = "Kraftaufnahme aktiv";
+
+    CPPUNIT_ASSERT_EQUAL((size_t) 1,
+            obdcommand_under_test_->getValues().size());
+
+    obdcommand_under_test_->getValues().at(0)->interpretToByteArray(input);
+
+    std::vector<uint8_t> actual = obdcommand_under_test_
+            ->convertToSendableByteArray();
+
+    CPPUNIT_ASSERT_EQUAL(expected_bytes.size(), actual.size());
+
+    for(unsigned int i = 0; i < expected_bytes.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL((unsigned int) expected_bytes.at(i),
+                (unsigned int) actual.at(i));
+    }
+}
+
 void ObdCommandTest::testInterpretReceivedBytesBitCombinationMapping()
 {
     delete obdcommand_under_test_;
@@ -462,4 +536,33 @@ void ObdCommandTest::testInterpretReceivedBytesBitCombinationMapping()
 
     CPPUNIT_ASSERT_EQUAL(expected_bitcombination_result,
             obdcommand_under_test_->getValues().at(i)->getInterpretedValueAsString());
+}
+
+void ObdCommandTest::testConvertToSendableBytesBitCombinationMapping()
+{
+    delete obdcommand_under_test_;
+    obdcommand_under_test_ = new ObdCommand(expected_sids_,
+            bitcombination_input_);
+
+    std::vector<uint8_t> expected_bytes { 0x3F, 0x00, 0x20, 0xFF, 0xE0, 0x61,
+            0x20, 0xB4, 0x80, 0x09 };
+    std::vector<std::string> inputs { "1", "2047", "777", "1444",
+            "Offener Kreislauf, kein Fehler\nGeschlossener Kreislauf, kein Fehler" };
+
+    CPPUNIT_ASSERT_EQUAL(inputs.size(), obdcommand_under_test_->getValues().size());
+    for(unsigned int i=0; i < inputs.size(); i++){
+        obdcommand_under_test_->getValues().at(i)->interpretToByteArray(inputs.at(i));
+    }
+
+    std::vector<uint8_t> actual = obdcommand_under_test_
+            ->convertToSendableByteArray();
+
+    CPPUNIT_ASSERT_EQUAL(expected_bytes.size(), actual.size());
+
+    for(unsigned int i = 0; i < expected_bytes.size(); i++)
+    {
+        CPPUNIT_ASSERT_EQUAL((unsigned int) expected_bytes.at(i),
+                (unsigned int) actual.at(i));
+    }
+
 }

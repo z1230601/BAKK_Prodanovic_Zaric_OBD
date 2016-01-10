@@ -146,6 +146,21 @@ void OBDBitcombinationMappingValue::setValidityByte(uint8_t byte)
     }
 }
 
+uint8_t OBDBitcombinationMappingValue::getValidityMask()
+{
+    uint8_t ret = 0;
+    std::map<unsigned int, uint8_t>::iterator it =
+            validity_mask_mapping_.begin();
+    for(; it != validity_mask_mapping_.end(); it++)
+    {
+        if(bitcombination_observed_.find(it->first) != bitcombination_observed_.end() &&
+                bitcombination_observed_[it->first]){
+            ret = ret | it->second;
+        }
+    }
+    return ret;
+}
+
 bool OBDBitcombinationMappingValue::isValueValid()
 {
     return true;
