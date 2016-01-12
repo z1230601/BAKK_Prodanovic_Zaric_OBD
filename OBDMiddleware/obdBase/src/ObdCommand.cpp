@@ -57,7 +57,6 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
             value->setValidityByte(data.at(0));
         }
 
-        std::cout << "enter not enterable area" << std::endl;
         data.erase(data.begin());
     }
 
@@ -85,7 +84,6 @@ std::vector<uint8_t> ObdCommand::convertToSendableByteArray()
         for(unsigned int i = 0; i < values_.size(); i++)
         {
             uint8_t mask = values_.at(i)->getValidityMask();
-            std::cout << "Masking: " << std::hex << (int) validity_mapping << " | " << (int) mask << std::endl << std::dec;
             validity_mapping = validity_mapping | mask;
         }
         ret.push_back(validity_mapping);
@@ -126,4 +124,13 @@ std::string ObdCommand::getDescription()
 std::vector<AbstractOBDValue*> ObdCommand::getValues()
 {
     return values_;
+}
+
+OBDBitcombinationMappingValue* ObdCommand::getFirstValueOfTypeBitcombination(){
+    for(AbstractOBDValue* value : values_){
+        if(dynamic_cast<OBDBitcombinationMappingValue*>(value) != nullptr){
+            return dynamic_cast<OBDBitcombinationMappingValue*>(value);
+        }
+    }
+    return nullptr;
 }

@@ -1,6 +1,7 @@
 #include "ObdCommandTest.h"
 #include "../src/ObdCommand.h"
 #include "../src/AbstractOBDValue.h"
+#include "../src/OBDBitcombinationMappingValue.h"
 #include <string>
 
 void ObdCommandTest::setUp()
@@ -548,6 +549,12 @@ void ObdCommandTest::testConvertToSendableBytesBitCombinationMapping()
             0x20, 0xB4, 0x80, 0x09 };
     std::vector<std::string> inputs { "1", "2047", "777", "1444",
             "Offener Kreislauf, kein Fehler\nGeschlossener Kreislauf, kein Fehler" };
+    std::map<unsigned int, bool> bit_scope_;
+    OBDBitcombinationMappingValue* bit_combination_value = obdcommand_under_test_->getFirstValueOfTypeBitcombination();
+    bit_scope_[bit_combination_value->getKeyFromBitPositionString("01")] = true;
+    bit_scope_[bit_combination_value->getKeyFromBitPositionString("23")] = true;
+
+    bit_combination_value->setBitcombinationScope(bit_scope_);
 
     CPPUNIT_ASSERT_EQUAL(inputs.size(), obdcommand_under_test_->getValues().size());
     for(unsigned int i=0; i < inputs.size(); i++){

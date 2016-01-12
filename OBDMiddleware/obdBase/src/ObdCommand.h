@@ -2,6 +2,7 @@
 #define OBDCOMMAND_H_
 
 #include "../../configurations/src/OBDCommandInputDefinitions.h"
+#include "OBDBitcombinationMappingValue.h"
 
 #include <string>
 #include <vector>
@@ -28,6 +29,7 @@ class ObdCommand
         std::string getDescription();
         std::vector<AbstractOBDValue*> getValues();
 
+        OBDBitcombinationMappingValue* getFirstValueOfTypeBitcombination();
     private:
         std::vector<unsigned int> sids_;
         unsigned int pid_;
