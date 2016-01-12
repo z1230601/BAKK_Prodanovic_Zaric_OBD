@@ -1,12 +1,4 @@
-/*
- * maincontroller.cpp
- *
- *  Created on: Dec 12, 2015
- *      Author: zlatan
- */
-
 #include "maincontroller.h"
-//#include "databaseManagement/DBExecuter.h"
 
 MainController* MainController::instance_;
 
@@ -18,7 +10,17 @@ MainController* MainController::getInstance(){
 	return instance_;
 }
 
+OBDCommandController* MainController::commandController() {
+	return command_controller_;
+}
+
+void MainController::init() {
+	Configuration::getInstance()->setDatabaseConfigFilePath("");
+	Configuration::getInstance()->setOBDCommandConfigFilePath("");
+}
+
 MainController::MainController() {
+	command_controller_ = new OBDCommandController();
 }
 
 MainController::~MainController() {
@@ -26,6 +28,6 @@ MainController::~MainController() {
 
 //void MainController::initDatabase(std::string &configuration_path){
 void MainController::initDatabase(){
-//	db_= new DBExecuter(configuration_path);
+	db_= new DBExecuter("/home/zlatan/development/bakk/cfg/dbconfiguration.xml");
 }
 

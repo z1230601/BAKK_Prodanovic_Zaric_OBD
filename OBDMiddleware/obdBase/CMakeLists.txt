@@ -1,14 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(OBDBase)
 
-IF(NOT DEFINED database_library_location)
-  SET(database_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../databaseManagement/build/libdatabase-connection-manager-dev.so")
-ENDIF(NOT DEFINED database_library_location)
-
-IF(NOT DEFINED configurations_library_location)
-  SET(configurations_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../configurations/build/libconfiguration-dev.so")
-ENDIF(NOT DEFINED configurations_library_location)
-
 SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 ADD_SUBDIRECTORY(src)
@@ -46,7 +38,7 @@ SET(LIBRARY_NAME "lib${OBDBase_target_name}.so")
 
 # link the libraries to the executable (most of them found by cmake modules)
 TARGET_LINK_LIBRARIES(${OBDBase_target_name}
-  ${configurations_library_location}
+  ${configuration_library_location}
   ${database_library_location}
   ${LibXML++_LIBRARIES}
   ${Boost_LIBRARIES}
@@ -59,16 +51,16 @@ MESSAGE("Adding dependcies to ${OBDBase_target_name}: " ${Database_target_name})
 FILE(GLOB_RECURSE dev_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 # Link result into home folder for easier finding
-GET_PROPERTY(obd_library_location TARGET ${OBDBase_target_name} PROPERTY LOCATION)
-MESSAGE (STATUS "obd_base_lib_location == ${obd_library_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
+GET_PROPERTY(obdbase_library_location TARGET ${OBDBase_target_name} PROPERTY LOCATION)
+MESSAGE (STATUS "obdbase_library_location == ${obdbase_library_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
 
-#ADD_CUSTOM_COMMAND(TARGET ${OBDBase_target_name}
-#   POST_BUILD
-#   COMMAND ln -s -f ${obd_library_location} ${LIBRARY_NAME}
-#   COMMAND mkdir -p middleware_includes
-#   COMMAND ln -s -f ${dev_INCLUDES} middleware_includes/.
-#   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
-#)
+ADD_CUSTOM_COMMAND(TARGET ${OBDBase_target_name}
+   POST_BUILD
+   COMMAND ln -s -f ${obdbase_library_location} ${LIBRARY_NAME}
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
+   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
+)
 
 ########################################################################################
 
@@ -97,7 +89,7 @@ ADD_EXECUTABLE(OBDBaseTester
      ${UnitTests_SRCS})
 
 TARGET_LINK_LIBRARIES(OBDBaseTester
-                      ${configurations_library_location}
+                      ${configuration_library_location}
                       ${Boost_FILESYSTEM_LIBRARY}
                       ${Boost_SYSTEM_LIBRARY}
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}

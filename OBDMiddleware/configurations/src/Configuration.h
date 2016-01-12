@@ -8,6 +8,7 @@ private:
 	Configuration();
 	static Configuration* instance_;
 	std::string database_path_;
+	std::string obdcommand_path_;
 
 public:
 	virtual ~Configuration();
@@ -16,6 +17,9 @@ public:
 
 	std::string getDatabaseConfigFilePath();
 	void setDatabaseConfigFilePath(std::string &path);
+
+	std::string getOBDCommandConfigFilePath();
+    void setOBDCommandConfigFilePath(std::string &path);
 };
 
 #endif /* CONFIGURATION_H_ */

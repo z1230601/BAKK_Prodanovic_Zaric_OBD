@@ -49,8 +49,8 @@ MESSAGE (STATUS "seiarl_lib_location == ${serial_communication_location} linking
 ADD_CUSTOM_COMMAND(TARGET serial-communication-dev 
    POST_BUILD
    COMMAND ln -s -f ${serial_communication_location} ${LIBRARY_NAME}
-   COMMAND mkdir -p middleware_includes
-   COMMAND ln -s -f ${dev_INCLUDES} middleware_includes/.
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
    WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
 )
 

@@ -2,9 +2,11 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(DatabaseManagement)
 
 
-IF(NOT DEFINED configurations_library_location)
-  SET(configurations_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../configurations/build/libconfiguration-dev.so")
-ENDIF(NOT DEFINED configurations_library_location)
+#IF(NOT DEFINED configuration_library_location)
+#  SET(configuration_library_location "${CMAKE_CURRENT_SOURCE_DIR}/../configurations/libconfiguration-dev.so")
+#ENDIF(NOT DEFINED configuration_library_location)
+
+MESSAGE(STATUS "Using in database to link to conf: " ${configuration_library_location})
 
 SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 SET(Boost_USE_STATIC_LIBS   ON)
@@ -39,8 +41,6 @@ INCLUDE_DIRECTORIES(${MYSQLCONNECTORCPP_INCLUDE_DIRS})
 FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 LIST(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 
-SET(Database_target_name database-connection-manager-dev)
-
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../configurations/src/)
 
 #Make also shared library out of found cpps and set internal CMAKE VAR
@@ -49,7 +49,7 @@ SET(LIBRARY_NAME "lib${Database_target_name}.so")
 
 # link the libraries to the executable (most of them found by cmake modules)
 TARGET_LINK_LIBRARIES(${Database_target_name}
-         ${configurations_library_location}
+         ${configuration_library_location}
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
          ${LibXML++_LIBRARIES}
@@ -66,8 +66,8 @@ MESSAGE (STATUS "database_lib_location == ${database_library_location} linking t
 ADD_CUSTOM_COMMAND(TARGET ${Database_target_name}
    POST_BUILD
    COMMAND ln -s -f ${database_library_location} ${LIBRARY_NAME}
-   COMMAND mkdir -p middleware_includes
-   COMMAND ln -s -f ${dev_INCLUDES} middleware_includes/.
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
    WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
 )
 
@@ -99,7 +99,7 @@ ADD_EXECUTABLE(DatabaseTester
 
 TARGET_LINK_LIBRARIES(DatabaseTester
 
-         ${configurations_library_location}
+         ${configuration_library_location}
                       ${Boost_FILESYSTEM_LIBRARY}
                       ${Boost_SYSTEM_LIBRARY}
                       ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}

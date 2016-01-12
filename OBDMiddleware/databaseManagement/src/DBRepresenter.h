@@ -14,7 +14,7 @@
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
 
-typedef std::vector<std::vector<std::string>> SQLTable;
+typedef std::vector<std::vector<std::string> > SQLTable;
 
 class DBRepresenter {
 public:

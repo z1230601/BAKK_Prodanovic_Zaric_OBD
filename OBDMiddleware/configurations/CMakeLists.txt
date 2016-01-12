@@ -26,7 +26,7 @@ INCLUDE_DIRECTORIES(${LibXML++_INCLUDE_DIRS})
 FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 LIST(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 
-SET(Configuration_target_name "configuration-dev")
+
 #Make also shared library out of found cpps and set internal CMAKE VAR
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../configurations/src/)
 
@@ -46,15 +46,15 @@ FILE(GLOB_RECURSE dev_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 # Link result into home folder for easier finding
 GET_PROPERTY(configuration_library_location TARGET ${Configuration_target_name} PROPERTY LOCATION)
-MESSAGE (STATUS "configuration_base_lib_location == ${obd_library_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
+MESSAGE (STATUS "configuration_lib_location == ${configuration_library_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
 
-#ADD_CUSTOM_COMMAND(TARGET ${Configuration_target_name}
-#   POST_BUILD
-#   COMMAND ln -s -f ${obd_library_location} ${LIBRARY_NAME}
-#   COMMAND mkdir -p middleware_includes
-#   COMMAND ln -s -f ${dev_INCLUDES} middleware_includes/.
-#   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
-#)
+ADD_CUSTOM_COMMAND(TARGET ${Configuration_target_name}
+   POST_BUILD
+   COMMAND ln -s -f ${configuration_library_location} ${LIBRARY_NAME}
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
+   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
+)
 
 ########################################################################################
 

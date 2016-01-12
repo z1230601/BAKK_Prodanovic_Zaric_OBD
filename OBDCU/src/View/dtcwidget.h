@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "abstractobdwidget.h"
+#include "../Controller/OBDCommandController.h"
 
 namespace Ui {
 class DTCWidget;

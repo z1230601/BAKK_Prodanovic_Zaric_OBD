@@ -1,0 +1,29 @@
+<!ELEMENT servicemodes (servicemode+)>
+<!ELEMENT servicemode ((sid+), (obdcommands?))>
+<!ELEMENT obdcommands ((obdcommand+))>
+<!ELEMENT obdcommand (pid, description, (validitymapping?), values)>
+<!ELEMENT values ((value+))>
+<!ELEMENT value ( (name, bytes, min, max, unit,(validitybit?)) | (bytes, mapping) )>
+<!ELEMENT mapping (((entry*), (validitybit*))*)>
+
+<!ELEMENT entry (#PCDATA)>
+<!ELEMENT validitymapping (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT pid (#PCDATA)>
+<!ELEMENT sid (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT bytes (#PCDATA)>
+<!ELEMENT min (#PCDATA)>
+<!ELEMENT max (#PCDATA)>
+<!ELEMENT unit (#PCDATA)>
+<!ELEMENT validitybit (#PCDATA)>
+
+
+<!ATTLIST entry from CDATA #REQUIRED>
+<!ATTLIST entry set CDATA #IMPLIED>
+<!ATTLIST validitybit from CDATA #IMPLIED>
+<!ATTLIST mapping type (bit|value|bitcombination) "bit">
+<!ATTLIST value interpretation (calculation|mapping) "calculation">
+<!ATTLIST validitymapping mode (manual|auto|off) "off">
+
+

@@ -1,6 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 PROJECT(OBDCU)
 
+SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
+
 IF(NOT DEFINED Middleware_SOURCE_PATH)
    SET(Middleware_SOURCE_PATH "/usr/lib/")
 ENDIF(NOT DEFINED Middleware_SOURCE_PATH)
@@ -21,7 +23,7 @@ ENDIF(DEFINED Middleware_BASE_PATH)
 
 #libdatabase-connection-manager-dev.so  libserial-communication-dev.a
 
-SET(CMAKE_CXX_FLAGS "-g -Wall")
+SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
 LIST(APPEND OBDCU_EXECUTABLES "src/Main.cpp")
 LIST(APPEND OBDCU_INCLUDES "")
@@ -42,6 +44,9 @@ ADD_EXECUTABLE(OBDCU ${OBDCU_EXECUTABLES})
 
 TARGET_LINK_LIBRARIES(OBDCU
   View
+  Controller
   ${middleware_dynamic_libraries}
   ${middleware_static_libraries}
-) #Model Controller)
+
+) #Model)
+
