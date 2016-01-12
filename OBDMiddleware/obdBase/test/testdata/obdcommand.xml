@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE commands SYSTEM "obdcommand.dtd">
+<!DOCTYPE servicemodes SYSTEM "obdcommand.dtd">
 <servicemodes>
 	<servicemode>
 		<sid>1</sid>
@@ -10,18 +10,18 @@
 				<description>Luftmassenmesser</description>
 				<validitymapping>true</validitymapping>
 				<values>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>MAF Sensor A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>g/s</unit>				
 					</value>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>MAF Sensor B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>g/s</unit>				
 					</value>
 		    	</values>
@@ -30,7 +30,7 @@
 				<pid>5F</pid>
 				<description>Für das Fahrzeug gültige Abgasnorm</description>
 				<values>
-				    <value interpretation="Mapping">
+				    <value interpretation="mapping">
 				    	<bytes>1</bytes>
 				    	<mapping type="value">
 				    		<entry from="0E">LKW (Euro IV) B1</entry>
@@ -45,7 +45,7 @@
 				<description>Zusätzliche Ein- und Ausgänge</description>
 				<validitymapping mode="auto">true</validitymapping>
 				<values>
-					<value interpretation="Mapping">
+					<value interpretation="mapping">
 						<bytes>1</bytes>
 						<mapping type="bit">
 						    <entry from="0" set="false">Kraftaufnahme inaktiv</entry>
@@ -65,39 +65,39 @@
 				<description>Ladedruckregelung</description>
 				<validitymapping  mode="manual">true</validitymapping>
 				<values>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>Soll Ladedruck A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>
 						<validitybit>0</validitybit>	
 					</value>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>Ist Ladedruck A</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>1</validitybit>			
 					</value>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>Soll Ladedruck B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>3</validitybit>			
 					</value>
-					<value interpretation="Caculation">
+					<value interpretation="calculation">
 						<name>Ist Ladedruck B</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047,96875</max>
+						<max>2047.96875</max>
 						<unit>kPa</unit>	
 						<validitybit>4</validitybit>			
 					</value>
-					<value interpretation="Mapping">
+					<value interpretation="mapping">
 						<bytes>1</bytes>
 						<mapping type="bitcombination">
 							<validitybit from="01">2</validitybit>
@@ -119,4 +119,3 @@
 	</servicemode>
 </servicemodes>
 	
-
