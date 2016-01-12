@@ -21,6 +21,7 @@ class OBDValueMappingValue:public AbstractOBDValue
 
         std::map<unsigned int, std::string> getMapping();
 
+        std::string getInterpretedValueAsString();
     private:
         std::map<unsigned int, std::string> mapping_;
         std::map<std::string, unsigned int> reverse_mapping_;

@@ -26,10 +26,13 @@ OBDBitcombinationMappingValue::OBDBitcombinationMappingValue(
 {
     if(mode == ValidityMappingMode::MANUAL)
     {
-        for(ValidityBitEntry entry: input.man_validity_entries_){
+        for(ValidityBitEntry entry : input.man_validity_entries_)
+        {
             uint8_t validity_bit_mask_ = 0x1;
-            validity_bit_mask_ = validity_bit_mask_ << std::stoi(entry.content_);
-            validity_mask_mapping_[getKeyFromBitPositionString(entry.from_)] = validity_bit_mask_;
+            validity_bit_mask_ = validity_bit_mask_
+                    << std::stoi(entry.content_);
+            validity_mask_mapping_[getKeyFromBitPositionString(entry.from_)] =
+                    validity_bit_mask_;
         }
     }
 }
@@ -59,34 +62,9 @@ OBDBitcombinationMappingValue::~OBDBitcombinationMappingValue()
 std::string OBDBitcombinationMappingValue::interpretToValue(
         std::vector<uint8_t> input)
 {
-    std::string ret = "";
-    unsigned int value = calculateCompoundValue(input);
-    uninterpreted_value_ = value;
-    interpreted_value_ = value;
-    std::map<unsigned int, bool>::iterator it =
-            bitcombination_observed_.begin();
-    for(; it != bitcombination_observed_.end(); it++)
-    {
-        if((*it).second)
-        {
-            unsigned int fromKey = (*it).first;
-
-            if(mapping_.find(fromKey) == mapping_.end())
-                continue;
-
-            unsigned int setKey = fromKey & value;
-            unsigned int occurencesOfZero = countOccurencesOfZero(fromKey);
-            setKey = (setKey >> occurencesOfZero);
-
-            if(mapping_.at(fromKey).find(setKey) == mapping_.at(fromKey).end())
-                continue;
-
-            ret += mapping_.at(fromKey).at(setKey);
-            ret += "\n";
-        }
-    }
-    ret = ret.substr(0, ret.size() - 1);
-    return ret;
+    uninterpreted_value_ = calculateCompoundValue(input);
+    interpreted_value_ = uninterpreted_value_;
+    return getInterpretedValueAsString();
 }
 
 std::vector<uint8_t> OBDBitcombinationMappingValue::interpretToByteArray(
@@ -160,15 +138,63 @@ void OBDBitcombinationMappingValue::setBitcombinationScope(
 void OBDBitcombinationMappingValue::setValidityByte(uint8_t byte)
 {
     bitcombination_observed_.clear();
-    std::map<unsigned int, uint8_t>::iterator it = validity_mask_mapping_.begin();
-    for(; it != validity_mask_mapping_.end(); it++){
+    std::map<unsigned int, uint8_t>::iterator it =
+            validity_mask_mapping_.begin();
+    for(; it != validity_mask_mapping_.end(); it++)
+    {
         bitcombination_observed_[it->first] = byte & it->second;
     }
+}
+
+uint8_t OBDBitcombinationMappingValue::getValidityMask()
+{
+    uint8_t ret = 0;
+    std::map<unsigned int, uint8_t>::iterator it =
+            validity_mask_mapping_.begin();
+    for(; it != validity_mask_mapping_.end(); it++)
+    {
+        if(bitcombination_observed_.find(it->first) != bitcombination_observed_.end() &&
+                bitcombination_observed_[it->first]){
+            ret = ret | it->second;
+        }
+    }
+    return ret;
 }
 
 bool OBDBitcombinationMappingValue::isValueValid()
 {
     return true;
+}
+
+std::string OBDBitcombinationMappingValue::getInterpretedValueAsString()
+{
+    std::string ret;
+    unsigned int input_data = interpreted_value_;
+
+    std::map<unsigned int, bool>::iterator it =
+            bitcombination_observed_.begin();
+    for(; it != bitcombination_observed_.end(); it++)
+    {
+        if((*it).second)
+        {
+            unsigned int fromKey = (*it).first;
+
+            if(mapping_.find(fromKey) == mapping_.end())
+                continue;
+
+            unsigned int setKey = fromKey & input_data;
+            unsigned int occurencesOfZero = countOccurencesOfZero(fromKey);
+            setKey = (setKey >> occurencesOfZero);
+
+            if(mapping_.at(fromKey).find(setKey) == mapping_.at(fromKey).end())
+                continue;
+
+            ret += mapping_.at(fromKey).at(setKey);
+            ret += "\n";
+        }
+    }
+    ret = ret.substr(0, ret.size() - 1);
+    return ret;
 }
 
 std::map<unsigned int, bool> OBDBitcombinationMappingValue::getBitcombinationScope()

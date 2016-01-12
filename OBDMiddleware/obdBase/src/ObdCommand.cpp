@@ -28,7 +28,9 @@ ObdCommand::ObdCommand(std::vector<unsigned int> sids, OBDCommandInput input)
                 OBDCommandValueFactory::getInstance()->createOBDValueFromInput(
                         input.values_.at(i), input.validity_mapping_mode_, i));
     }
+
     is_validity_mapping_active_ = !(input.validity_mapping_mode_ == ValidityMappingMode::OFF);
+
 }
 
 ObdCommand::~ObdCommand()
@@ -43,12 +45,16 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
     }
 
     unsigned int total_size = 0;
+    for(AbstractOBDValue* value : values_)
+    {
+        total_size += value->getByteAmount();
+    }
+
     if(is_validity_mapping_active_)
     {
         for(AbstractOBDValue* value : values_)
         {
             value->setValidityByte(data.at(0));
-            total_size += value->getByteAmount();
         }
 
         std::cout << "enter not enterable area" << std::endl;
@@ -62,7 +68,7 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
             std::vector<uint8_t>::const_iterator begins = data.begin() + i;
             std::vector<uint8_t>::const_iterator ends = data.begin() + i
                     + values_.at(j)->getByteAmount();
-            std::vector < uint8_t > subdata(begins, ends);
+            std::vector<uint8_t> subdata(begins, ends);
             values_.at(j)->interpretToValue(subdata);
             i += values_.at(j)->getByteAmount() - 1;
             j++;
@@ -70,8 +76,26 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
     }
 }
 
-void ObdCommand::convertToSendableByteArray()
+std::vector<uint8_t> ObdCommand::convertToSendableByteArray()
 {
+    std::vector<uint8_t> ret;
+    if(is_validity_mapping_active_)
+    {
+        uint8_t validity_mapping = 0;
+        for(unsigned int i = 0; i < values_.size(); i++)
+        {
+            uint8_t mask = values_.at(i)->getValidityMask();
+            std::cout << "Masking: " << std::hex << (int) validity_mapping << " | " << (int) mask << std::endl << std::dec;
+            validity_mapping = validity_mapping | mask;
+        }
+        ret.push_back(validity_mapping);
+    }
+
+    for(AbstractOBDValue* value : values_){
+        std::vector<uint8_t> uninterpreted = value->getUninterpretedValueAsVector();
+        ret.insert(ret.end(),uninterpreted.begin(), uninterpreted.end());
+    }
+    return ret;
 }
 
 std::string ObdCommand::getRequestString(unsigned int desired_sid)

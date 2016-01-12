@@ -23,9 +23,11 @@ class AbstractOBDValue
         unsigned int calculateCompoundValue(std::vector<uint8_t> input);
         std::vector<uint8_t> calculateByteArrayFromCompoundValue(unsigned int input);
 
-        void setValidityByte(uint8_t byte);
-        bool isValueValid();
-
+        virtual void setValidityByte(uint8_t byte);
+        virtual bool isValueValid();
+        virtual std::string getInterpretedValueAsString();
+        virtual std::vector<uint8_t> getUninterpretedValueAsVector();
+        virtual uint8_t getValidityMask();
     protected:
         std::string name_;
         double interpreted_value_;

@@ -2,8 +2,7 @@
 #include <stdexcept>
 #include <algorithm>
 
-#include <iostream>
-
+#include <sstream>
 AbstractOBDValue::AbstractOBDValue()
         : name_(""), interpreted_value_(0), byte_amount_(0), uninterpreted_value_(
                 0)
@@ -101,6 +100,23 @@ void AbstractOBDValue::setValidityByte(uint8_t byte)
 bool AbstractOBDValue::isValueValid()
 {
     return is_valid_;
+}
+
+std::string AbstractOBDValue::getInterpretedValueAsString()
+{
+    std::stringstream ss;
+    ss << interpreted_value_;
+    return ss.str();
+}
+
+uint8_t AbstractOBDValue::getValidityMask()
+{
+    return validity_bit_mask_;
+}
+
+std::vector<uint8_t> AbstractOBDValue::getUninterpretedValueAsVector()
+{
+    return calculateByteArrayFromCompoundValue(uninterpreted_value_);
 }
 
 void AbstractOBDValue::setValidtyPatternBitPosition(unsigned int pos)
