@@ -5,26 +5,1574 @@
 		<sid>1</sid>
 		<sid>2</sid>
 		<obdcommands>
+			<!-- PID 00 -->
 			<obdcommand>
-				<pid>66</pid>
-				<description>Luftmassenmesser</description>
+				<pid>00</pid>
+				<description>Unterstützte PIDs im Bereich 01-20</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 01 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 01 unterstützt</entry>
+							<entry from="1" set="false">PID 02 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 02 unterstützt</entry>
+							<entry from="2" set="false">PID 03 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 03 unterstützt</entry>
+							<entry from="3" set="false">PID 04 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 04 unterstützt</entry>
+							<entry from="4" set="false">PID 05 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 05 unterstützt</entry>
+							<entry from="5" set="false">PID 06 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 06 unterstützt</entry>
+							<entry from="6" set="false">PID 07 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 07 unterstützt</entry>
+							<entry from="7" set="false">PID 08 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 08 unterstützt</entry>
+							<entry from="8" set="false">PID 09 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 09 unterstützt</entry>
+							<entry from="9" set="false">PID 0A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 0A unterstützt</entry>
+							<entry from="10" set="false">PID 0B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 0B unterstützt</entry>
+							<entry from="11" set="false">PID 0C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 0C unterstützt</entry>
+							<entry from="12" set="false">PID 0D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 0D unterstützt</entry>
+							<entry from="13" set="false">PID 0E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 0E unterstützt</entry>
+							<entry from="14" set="false">PID 0F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 0F unterstützt</entry>
+							<entry from="15" set="false">PID 10 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 10 unterstützt</entry>
+							<entry from="16" set="false">PID 11 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 11 unterstützt</entry>
+							<entry from="17" set="false">PID 12 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 12 unterstützt</entry>
+							<entry from="18" set="false">PID 13 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 13 unterstützt</entry>
+							<entry from="19" set="false">PID 14 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 14 unterstützt</entry>
+							<entry from="20" set="false">PID 15 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 15 unterstützt</entry>
+							<entry from="21" set="false">PID 16 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 16 unterstützt</entry>
+							<entry from="22" set="false">PID 17 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 17 unterstützt</entry>
+							<entry from="23" set="false">PID 18 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 18 unterstützt</entry>
+							<entry from="24" set="false">PID 19 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 19 unterstützt</entry>
+							<entry from="25" set="false">PID 1A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 1A unterstützt</entry>
+							<entry from="26" set="false">PID 1B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 1B unterstützt</entry>
+							<entry from="27" set="false">PID 1C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 1C unterstützt</entry>
+							<entry from="28" set="false">PID 1D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 1D unterstützt</entry>
+							<entry from="29" set="false">PID 1E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 1E unterstützt</entry>
+							<entry from="30" set="false">PID 1F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 1F unterstützt</entry>
+							<entry from="31" set="false">PID 20 nicht unterstützt</entry>
+							<entry from="31" set="true">PID 20 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>01</pid>
+				<description>Systemstatus (Readiness Code), MIL</description>
+				<validitymapping></validitymapping>
+				<values>
+					<value>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>02</pid>
+				<description>DTC, der Abspeicherung von Freeze Frame Daten auslöste</description>
 				<validitymapping>true</validitymapping>
 				<values>
 					<value interpretation="calculation">
-						<name>MAF Sensor A</name>
+						<name>DTC</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047.96875</max>
-						<unit>g/s</unit>				
+						<max>65535</max>
+						<unit></unit>	
 					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>03</pid>
+				<description>Status Einspritzsystem System 1 und 2</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>2</bytes>
+						<mapping type="bit">
+							<!-- System 1 -->
+							<entry from="0">Offener Kreislauf (hat noch nicht die Bedingungen erfüllt, um den Kreislauf zu schließen</entry>
+							<entry from="1">Geschlossener Kreislauf</entry>
+							<entry from="2">Geschlossener Kreislauf (bedingt durch Fahrverhalten)</entry>
+							<entry from="3">Offener Kreislauf (wegen Fehler)</entry>
+							<entry from="4">Geschlossener Kreislauf (aber Fehler)</entry>
+							<!-- <entry from="5-7">Reserviert</entry> -->
+							<!-- System 2 -->
+							<entry from="8">Offener Kreislauf (hat noch nicht die Bedingungen erfüllt, um den Kreislauf zu schließen</entry>
+							<entry from="9">Geschlossener Kreislauf</entry>
+							<entry from="10">Geschlossener Kreislauf (bedingt durch Fahrverhalten)</entry>
+							<entry from="11">Offener Kreislauf (wegen Fehler)</entry>
+							<entry from="12">Geschlossener Kreislauf (aber Fehler)</entry>
+							<!-- <entry from="13-15">Reserviert</entry> -->
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>04</pid>
+				<description>Motorlast (berechnet)</description>
+				<values>
 					<value interpretation="calculation">
-						<name>MAF Sensor B</name>
+						<name>Motorlast</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>05</pid>
+				<description>Kühlmitteltemperatur</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kühlmitteltemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>06</pid>
+				<description>Kurzzeitige Kraftstoff-Einspritz-Korrektur Bank 1, Bank 3</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 1</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+					<!-- Nur geliefert wenn vom Fahrzeug unterstützt (anhand PID 1D feststellbar) -->
+					<value interpretation="calculation">
+						<name>Bank 3</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>07</pid>
+				<description>Langfristige Kraftstoff-Einspritz-Korrektur Bank 1, Bank 3</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 1</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+					<!-- Nur geliefert wenn vom Fahrzeug unterstützt (anhand PID 1D feststellbar) -->
+					<value interpretation="calculation">
+						<name>Bank 3</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>08</pid>
+				<description>Kurzzeitige Kraftstoff-Einspritz-Korrektur Bank 2, Bank 4</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 2</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+					<!-- Nur geliefert wenn vom Fahrzeug unterstützt (anhand PID 1D feststellbar) -->
+					<value interpretation="calculation">
+						<name>Bank 4</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>09</pid>
+				<description>Langfristige Kraftstoff-Einspritz-Korrektur Bank 2, Bank 4</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 2</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+					<!-- Nur geliefert wenn vom Fahrzeug unterstützt (anhand PID 1D feststellbar) -->
+					<value interpretation="calculation">
+						<name>Bank 4</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0A</pid>
+				<description>Kraftstoffdruck an der Kraftstoffverteilerleiste relativ zur Umgebungsatmosphäre</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kraftstoffdruck</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>765</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0B</pid>
+				<description>Absolutdruck Ansaugrohr</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutdruck</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>255</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0C</pid>
+				<description>Motordrehzahl</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Motordrehzahl</name>
 						<bytes>2</bytes>
 						<min>0</min>
-						<max>2047.96875</max>
-						<unit>g/s</unit>				
+						<max>16383.75</max>
+						<unit>1/min</unit>
 					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0D</pid>
+				<description>Fahrzeuggeschwindigkeit</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Fahrzeuggeschwindigkeit</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>255</max>
+						<unit>km/h</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0E</pid>
+				<description>Zündwinkel/-voreilung Zylinder 1</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Zündwinkel/-voreilung</name>
+						<bytes>1</bytes>
+						<min>-64</min>
+						<max>63.5</max>
+						<unit>1/min</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>0F</pid>
+				<description>Ansauglufttemperatur</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Ansauglufttemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>10</pid>
+				<description>Luftdurchfluss Luftmassenmesser</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Luftdurchfluss</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655.35</max>
+						<unit>g/s</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>11</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Drosselklappen-/Gaspedalstellung</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>12</pid>
+				<description>Angesteuerter Status Zweiluftsystem</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0">dem ersten Katalysator vorgeschaltet</entry>
+							<entry from="1">dem Einlass des zweiten Katalysators nachgeschaltet</entry>
+							<entry from="2">Umgebungsdruck/Ausgeschaltet</entry>
+							<entry from="3">Pumpe ein zur Diagnose</entry>
+							<!-- <entry from="4-7">Reserviert</entry> -->
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>13</pid>
+				<description>Einbauort Lambdasonde</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0" set="false">Bank 1, Sensor 1 nicht vorhanden</entry>
+							<entry from="0" set="true">Bank 1, Sensor 1 vorhanden</entry>
+							<entry from="1" set="false">Bank 1, Sensor 2 nicht vorhanden</entry>
+							<entry from="1" set="true">Bank 1, Sensor 2 vorhanden</entry>
+							<entry from="2" set="false">Bank 1, Sensor 3 nicht vorhanden</entry>
+							<entry from="2" set="true">Bank 1, Sensor 3 vorhanden</entry>
+							<entry from="3" set="false">Bank 1, Sensor 4 nicht vorhanden</entry>
+							<entry from="3" set="true">Bank 1, Sensor 4 vorhanden</entry>
+							<entry from="4" set="false">Bank 2, Sensor 1 nicht vorhanden</entry>
+							<entry from="4" set="true">Bank 2, Sensor 1 vorhanden</entry>
+							<entry from="5" set="false">Bank 2, Sensor 2 nicht vorhanden</entry>
+							<entry from="5" set="true">Bank 2, Sensor 2 vorhanden</entry>
+							<entry from="6" set="false">Bank 2, Sensor 3 nicht vorhanden</entry>
+							<entry from="6" set="true">Bank 2, Sensor 3 vorhanden</entry>
+							<entry from="7" set="false">Bank 2, Sensor 4 nicht vorhanden</entry>
+							<entry from="7" set="true">Bank 2, Sensor 4 vorhanden</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 14-1B TBD -->
+			<obdcommand>
+				<pid>14</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>15</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>16</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>17</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>18</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>19</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>1A</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>1B</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 14-1B TBD -->
+			<obdcommand>
+				<pid>1C</pid>
+				<description>OBD Kompatibilität des Fahrzeugs</description>
+				<values>
+				    <value interpretation="mapping">
+				    	<bytes>1</bytes>
+				    	<mapping type="value">
+							<entry from = "01">OBDII California ARB</entry>
+							<entry from = "02">OBD (Federal EPA)</entry>
+							<entry from = "03">OBD und OBD II</entry>
+							<entry from = "04">OBD I</entry>
+							<entry from = "05">nicht OBD kompatibel</entry>
+							<entry from = "06">EOBD (Europa)</entry>
+							<entry from = "07">EOBD und OBD II</entry>
+							<entry from = "08">EOBD und OBD</entry>
+							<entry from = "09">EOBD, OBD, OBD II</entry>
+							<entry from = "0A">JOBD (Japan)</entry>
+							<entry from = "0B">JOBD und OBD II</entry>
+							<entry from = "0C">JOBD und EOBD</entry>
+							<entry from = "0D">JOBD, EOBD, OBD II</entry>
+							<!-- 0E - 10 reserviert-->
+				    		<entry from = "11">EMD (Engine Manufacturer Diagnostics) für LKW</entry>
+		      				<entry from = "12">EMD+</entry>
+		    				<entry from = "13">HD OBD-C</entry>
+							<entry from = "14">HD OBD</entry>
+							<entry from = "15">WWH OBD (Weltweit harmonisiertes OBD)</entry>
+							<!-- 16 reserviert-->
+							<entry from = "17">HD EOBD-I (LKW Euro OBD Stufe 1 ohne NOx Überwachung)</entry>
+							<entry from = "18">HD EOBD-I N(Stufe 1 mit NOx)</entry>
+							<entry from = "19">HD EOBD-II (Stufe 2 ohne NOx)</entry>
+							<entry from = "1A">HD EOBD-II N(Stufe 2 mit NOx)</entry>
+							<!-- 1B reserviert-->
+							<entry from = "1C">OBDBr-1 (Brasilien Phase 1)</entry>
+							<entry from = "1D">OBDBr-2 (Brasilien Phase 2)</entry>
+							<entry from = "1E">KOBD (Korea)</entry>
+							<entry from = "1F">IOBD I (Indien 1)</entry>
+							<entry from = "20">IOBD II (Indien 2)</entry>
+							<entry from = "21">HD EOBD-VI (LKW Euro VI)</entry>
+							<!-- 22-FA reserviert-->
+							<!-- FB-FF für Zuordnung nicht verfügbar-->							
+		    			</mapping>		
+		    		</value>
 		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>1D</pid>
+				<description>Einbauort Lambdasonde</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0" set="false">Bank 1, Sensor 1 nicht vorhanden</entry>
+							<entry from="0" set="true">Bank 1, Sensor 1 vorhanden</entry>
+							<entry from="1" set="false">Bank 1, Sensor 2 nicht vorhanden</entry>
+							<entry from="1" set="true">Bank 1, Sensor 2 vorhanden</entry>
+							<entry from="2" set="false">Bank 1, Sensor 3 nicht vorhanden</entry>
+							<entry from="2" set="true">Bank 1, Sensor 3 vorhanden</entry>
+							<entry from="3" set="false">Bank 1, Sensor 4 nicht vorhanden</entry>
+							<entry from="3" set="true">Bank 1, Sensor 4 vorhanden</entry>
+							<entry from="4" set="false">Bank 2, Sensor 1 nicht vorhanden</entry>
+							<entry from="4" set="true">Bank 2, Sensor 1 vorhanden</entry>
+							<entry from="5" set="false">Bank 2, Sensor 2 nicht vorhanden</entry>
+							<entry from="5" set="true">Bank 2, Sensor 2 vorhanden</entry>
+							<entry from="6" set="false">Bank 2, Sensor 3 nicht vorhanden</entry>
+							<entry from="6" set="true">Bank 2, Sensor 3 vorhanden</entry>
+							<entry from="7" set="false">Bank 2, Sensor 4 nicht vorhanden</entry>
+							<entry from="7" set="true">Bank 2, Sensor 4 vorhanden</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>1E</pid>
+				<description>Leistungsentnahme Nebenantrieb</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0" set="false">nicht aktiv (Aus)</entry>
+							<entry from="0" set="true">aktiv (Ein)</entry>
+							<!-- 1-7 reserviert -->
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>1F</pid>
+				<description>Zeit seit Motorstart</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Zeit</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>sec.</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- PID 20 -->
+			<obdcommand>
+				<pid>20</pid>
+				<description>Unterstützte PIDs im Bereich 21-40</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 21 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 21 unterstützt</entry>
+							<entry from="1" set="false">PID 22 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 22 unterstützt</entry>
+							<entry from="2" set="false">PID 23 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 23 unterstützt</entry>
+							<entry from="3" set="false">PID 24 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 24 unterstützt</entry>
+							<entry from="4" set="false">PID 25 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 25 unterstützt</entry>
+							<entry from="5" set="false">PID 26 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 26 unterstützt</entry>
+							<entry from="6" set="false">PID 27 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 27 unterstützt</entry>
+							<entry from="7" set="false">PID 28 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 28 unterstützt</entry>
+							<entry from="8" set="false">PID 29 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 29 unterstützt</entry>
+							<entry from="9" set="false">PID 2A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 2A unterstützt</entry>
+							<entry from="10" set="false">PID 2B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 2B unterstützt</entry>
+							<entry from="11" set="false">PID 2C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 2C unterstützt</entry>
+							<entry from="12" set="false">PID 2D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 2D unterstützt</entry>
+							<entry from="13" set="false">PID 2E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 2E unterstützt</entry>
+							<entry from="14" set="false">PID 2F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 2F unterstützt</entry>
+							<entry from="15" set="false">PID 30 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 10 unterstützt</entry>
+							<entry from="16" set="false">PID 31 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 31 unterstützt</entry>
+							<entry from="17" set="false">PID 32 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 32 unterstützt</entry>
+							<entry from="18" set="false">PID 33 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 33 unterstützt</entry>
+							<entry from="19" set="false">PID 34 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 34 unterstützt</entry>
+							<entry from="20" set="false">PID 35 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 35 unterstützt</entry>
+							<entry from="21" set="false">PID 36 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 36 unterstützt</entry>
+							<entry from="22" set="false">PID 37 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 37 unterstützt</entry>
+							<entry from="23" set="false">PID 38 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 38 unterstützt</entry>
+							<entry from="24" set="false">PID 39 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 39 unterstützt</entry>
+							<entry from="25" set="false">PID 3A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 3A unterstützt</entry>
+							<entry from="26" set="false">PID 3B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 3B unterstützt</entry>
+							<entry from="27" set="false">PID 3C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 3C unterstützt</entry>
+							<entry from="28" set="false">PID 3D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 3D unterstützt</entry>
+							<entry from="29" set="false">PID 3E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 3E unterstützt</entry>
+							<entry from="30" set="false">PID 3F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 3F unterstützt</entry>
+							<entry from="31" set="false">PID 40 nicht unterstützt</entry>
+							<entry from="31" set="true">PID 40 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>21</pid>
+				<description>Fahrtstrecke seit aufleuchten der MIL</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Fahrtstrecke</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>22</pid>
+				<description>Kraftstoffdruck relativ zu Einlassvakuum</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kraftstoffdruck</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>5177.27</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>23</pid>
+				<description>Kraftstoffdruck</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kraftstoffdruck</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 24-2B TBD -->
+			<obdcommand>
+				<pid>24</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>25</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>26</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>27</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>28</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>29</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>2A</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>2B</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 24-2B TBD -->
+			<obdcommand>
+				<pid>2C</pid>
+				<description>Anforderung Abgasrückführrate</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Anforderung Abgasrückführrate</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>2D</pid>
+				<description>Fehler bei Abgasrückführrate</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Fehler Abgasrückführrate</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>2E</pid>
+				<description>Sollposition des Regenerierventils des Verdunstungssystems</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Sollposition Regenerierventils</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>2F</pid>
+				<description>Kraftstofftankinhalt</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kraftstofftankinhalt</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>30</pid>
+				<description>Anzahl Warmlaufzyklen</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Anzahl Warmlaufzyklen</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>255</max>
+						<unit></unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>31</pid>
+				<description>Fahrstrecke seit Fehlercode-Löschung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Fahrstrecke Fehlercode-Löschung</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>32</pid>
+				<description>Druck Verdunstungssystem (Kraftstofftank)</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Druck Verdunstungssystem</name>
+						<bytes>2</bytes>
+						<min>-8192</min>
+						<max>8191</max>
+						<unit>Pa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>33</pid>
+				<description>Absoluter barometrischer Druck</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Druck Verdunstungssystem</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>255</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 34-3B TBD -->
+			<obdcommand>
+				<pid>34</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>35</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>36</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>37</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>38</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>39</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>3A</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>3B</pid>
+				<description></description>
+				<validitymapping></validitymapping>
+				<values>
+					<value interpretation="">
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 34-3B TBD -->
+			<obdcommand>
+				<pid>3C</pid>
+				<description>Temperatur Katalysatorsubstrat Bank 1, Sensor 1</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatur Katalysatorsubstrat Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>3D</pid>
+				<description>Temperatur Katalysatorsubstrat Bank 2, Sensor 1</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatur Katalysatorsubstrat Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>3E</pid>
+				<description>Temperatur Katalysatorsubstrat Bank 1, Sensor 2</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatur Katalysatorsubstrat Bank 1, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>3F</pid>
+				<description>Temperatur Katalysatorsubstrat Bank 2, Sensor 2</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatur Katalysatorsubstrat Bank 2, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- PID 40 -->
+			<obdcommand>
+				<pid>40</pid>
+				<description>Unterstützte PIDs im Bereich 41-60</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 41 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 41 unterstützt</entry>
+							<entry from="1" set="false">PID 42 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 42 unterstützt</entry>
+							<entry from="2" set="false">PID 43 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 43 unterstützt</entry>
+							<entry from="3" set="false">PID 44 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 44 unterstützt</entry>
+							<entry from="4" set="false">PID 45 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 45 unterstützt</entry>
+							<entry from="5" set="false">PID 46 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 46 unterstützt</entry>
+							<entry from="6" set="false">PID 47 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 47 unterstützt</entry>
+							<entry from="7" set="false">PID 48 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 48 unterstützt</entry>
+							<entry from="8" set="false">PID 49 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 49 unterstützt</entry>
+							<entry from="9" set="false">PID 4A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 4A unterstützt</entry>
+							<entry from="10" set="false">PID 4B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 4B unterstützt</entry>
+							<entry from="11" set="false">PID 4C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 4C unterstützt</entry>
+							<entry from="12" set="false">PID 4D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 4D unterstützt</entry>
+							<entry from="13" set="false">PID 4E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 4E unterstützt</entry>
+							<entry from="14" set="false">PID 4F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 4F unterstützt</entry>
+							<entry from="15" set="false">PID 50 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 50 unterstützt</entry>
+							<entry from="16" set="false">PID 51 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 51 unterstützt</entry>
+							<entry from="17" set="false">PID 52 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 52 unterstützt</entry>
+							<entry from="18" set="false">PID 53 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 53 unterstützt</entry>
+							<entry from="19" set="false">PID 54 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 54 unterstützt</entry>
+							<entry from="20" set="false">PID 55 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 55 unterstützt</entry>
+							<entry from="21" set="false">PID 56 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 56 unterstützt</entry>
+							<entry from="22" set="false">PID 57 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 57 unterstützt</entry>
+							<entry from="23" set="false">PID 58 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 58 unterstützt</entry>
+							<entry from="24" set="false">PID 59 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 59 unterstützt</entry>
+							<entry from="25" set="false">PID 5A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 5A unterstützt</entry>
+							<entry from="26" set="false">PID 5B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 5B unterstützt</entry>
+							<entry from="27" set="false">PID 5C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 5C unterstützt</entry>
+							<entry from="28" set="false">PID 5D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 5D unterstützt</entry>
+							<entry from="29" set="false">PID 5E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 5E unterstützt</entry>
+							<entry from="30" set="false">PID 5F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 5F unterstützt</entry>
+							<entry from="31" set="false">PID 60 nicht unterstützt</entry>
+							<entry from="31" set="true">PID 60 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>41</pid>
+				<description>Überwachungsstatus</description>
+				<validitymapping>true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>4</bytes>
+						<mapping type="bit">
+							<!-- Byte A -->
+							<!-- 0-7 Reserviert -->
+							<!-- Byte B -->
+							<entry from="8" set="false">Fehlzündung Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="8" set="true">Fehlzündung Überwachung aktiviert</entry>
+							<entry from="9" set="false">Kraftstoffsystem Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="9" set="true">Kraftstoffsystem Überwachung aktiviert</entry>
+							<entry from="10" set="false">Periphere Bauteile Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="10" set="true">Periphere Bauteile Überwachung aktiviert</entry>
+							<!-- 11 Reserviert -->
+							<entry from="12" set="false">Fehlzündung Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="12" set="true">Fehlzündung Überwachung noch nicht abgeschlossen</entry>
+							<entry from="13" set="false">Kraftstoffsystem Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="13" set="true">Kraftstoffsystem Überwachung nicht abgeschlossen</entry>
+							<entry from="14" set="false">Periphere Bauteile Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="14" set="true">Periphere Bauteile Überwachung nicht abgeschlossen</entry>
+							<!-- 15 Reserviert -->
+							<!-- Byte C -->
+							<entry from="16" set="false">Katalysator Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="16" set="true">Katalysator Überwachung aktiviert</entry>
+							<entry from="17" set="false">Katalysator Heizungs-Schaltkreis Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="17" set="true">Katalysator Heizungs-Schaltkreis Überwachung aktiviert</entry>
+							<entry from="18" set="false">Kraftstoffverdampfungssystem Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="18" set="true">Kraftstoffverdampfungssystem Überwachung aktiviert</entry>
+							<entry from="19" set="false">Zweitluft Zuführungssystem Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="19" set="true">Zweitluft Zuführungssystem Überwachung aktiviert</entry>
+							<entry from="20" set="false">Klimaanlage Kühlmittel Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="20" set="true">Klimaanlage Kühlmittel Überwachung aktiviert</entry>
+							<entry from="21" set="false">Lambdasonde Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="21" set="true">Lambdasonde Überwachung aktiviert</entry>
+							<entry from="22" set="false">Lambdasonde Heizungs-Schaltkreis Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="22" set="true">Lambdasonde Heizungs-Schaltkreis Überwachung aktiviert</entry>
+							<entry from="23" set="false">Abgasrückführung Überwachung ausgeschaltet/nicht unterstützt</entry>
+							<entry from="23" set="true">Abgasrückführung Überwachung aktiviert</entry>
+							<!-- Byte D -->
+							<entry from="24" set="false">Katalysator Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="24" set="true">Katalysator Überwachung nicht abgeschlossen</entry>
+							<entry from="25" set="false">Katalysator Heizungs-Schaltkreis Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="25" set="true">Katalysator Heizungs-Schaltkreis Überwachung nicht abgeschlossen</entry>
+							<entry from="26" set="false">Kraftstoffverdampfungssystem Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="26" set="true">Kraftstoffverdampfungssystem Überwachung nicht abgeschlossen</entry>
+							<entry from="27" set="false">Zweitluft Zuführungssystem Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="27" set="true">Zweitluft Zuführungssystem Überwachung nicht abgeschlossen</entry>
+							<entry from="28" set="false">Klimaanlage Kühlmittel Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="28" set="true">Klimaanlage Kühlmittel Überwachung nicht abgeschlossen</entry>
+							<entry from="29" set="false">Lambdasonde Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="29" set="true">Lambdasonde Überwachung nicht abgeschlossen</entry>
+							<entry from="30" set="false">Lambdasonde Heizungs-Schaltkreis Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="30" set="true">Lambdasonde Heizungs-Schaltkreis Überwachung nicht abgeschlossen</entry>
+							<entry from="31" set="false">Abgasrückführung Überwachung abgeschlossen/nicht unterstützt</entry>
+							<entry from="31" set="true">Abgasrückführung Überwachung nicht abgeschlossen</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>42</pid>
+				<description>Eingangsspannung Steuergerät</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Eingangsspannung Steuergerät</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65.535</max>
+						<unit>V</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>43</pid>
+				<description>Motorlast(absolut)</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Motorlast(absolut)</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>25700</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>44</pid>
+				<description>Sollposition Äquivalenzverhältnis Lambdasonde</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Sollposition Äquivalenzverhältnis Lambdasonde</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>1.999</max>
+						<unit></unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>45</pid>
+				<description>Relative Drosselklappen-/Gaspedalstellung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Relative Drosselklappen-/Gaspedalstellung</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>46</pid>
+				<description>Umgebungstemperatur</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Umgebungstemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>47</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung B</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutwert Drosselklappen-/Gaspedalstellung B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>48</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung C</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutwert Drosselklappen-/Gaspedalstellung C</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>49</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung D</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutwert Drosselklappen-/Gaspedalstellung D</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>4A</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung E</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutwert Drosselklappen-/Gaspedalstellung E</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>4B</pid>
+				<description>Absolutwert Drosselklappen-/Gaspedalstellung F</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutwert Drosselkappen-/Gaspedalstellung F</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>4C</pid>
+				<description>Sollposition Drosselklappensteller</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Sollposition Drosselklappensteller</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>4D</pid>
+				<description>Zeit des Motorbetriebs seit MIL an</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Zeit des Motorbetriebs seit MIL an</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>Min.</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>4E</pid>
+				<description>Betriebsdauer seit Fehlercode-Löschung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Betriebsdauer seit Fehlercode-Löschung</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>Min.</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 4F-50 nicht für den Servicetechniker gedacht -->
+			<obdcommand>
+				<pid>51</pid>
+				<description>Derzeit vom Fahrzeug verwendeter Treibstoff</description>
+				<values>
+				    <value interpretation="mapping">
+				    	<bytes>1</bytes>
+				    	<mapping type="value">
+							<entry from = "01">Benzin</entry>
+							<entry from = "02">Methanol</entry>
+							<entry from = "03">Ethanol</entry>
+							<entry from = "04">Diesel</entry>
+							<entry from = "05">Flüssig-/Autogas (LPG)</entry>
+							<entry from = "06">Erdgas (CNG)</entry>
+							<entry from = "07">Propan</entry>
+							<entry from = "08">Batterie/Elektrisch</entry>
+							<entry from = "09">Bi-Fuel: Benzin in Gebrauch</entry>
+							<entry from = "0A">Bi-Fuel: Methanol in Gebrauch</entry>
+							<entry from = "0B">Bi-Fuel: Ethanol in Gebrauch</entry>
+							<entry from = "0C">Bi-Fuel: LPG in Gebrauch</entry>
+							<entry from = "0D">Bi-Fuel: CNG in Gebrauch</entry>
+							<entry from = "0E">Bi-Fuel: Propan in Gebrauch</entry>
+							<entry from = "0F">Bi-Fuel: Batterie in Gebrauch</entry>
+							<entry from = "10">Bi-Fuel: Batterie und Verbrennungsmotor in Gebrauch</entry>
+				    		<entry from = "11">Hybrid: Benzin in Gebrauch</entry>
+		      				<entry from = "12">Hybrid: Ethanol in Gebrauch</entry>
+		    				<entry from = "13">Hybrid: Diesel in Gebrauch</entry>
+							<entry from = "14">Hybrid: Batterie in Gebrauch</entry>
+							<entry from = "15">Hybrid: Batterie und Verbrennungsmotor in Gebrauch</entry>
+							<entry from = "16">Hybrid: Regenerierungsmodus</entry>
+							<entry from = "17">Bi-Fuel: Diesel in Gebrauch</entry>
+							<!-- 18-FF reserviert -->							
+		    			</mapping>		
+		    		</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>60</pid>
+				<description>Unterstützte PIDs im Bereich 61-80</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 01 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 01 unterstützt</entry>
+							<entry from="1" set="false">PID 02 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 02 unterstützt</entry>
+							<entry from="2" set="false">PID 03 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 03 unterstützt</entry>
+							<entry from="3" set="false">PID 04 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 04 unterstützt</entry>
+							<entry from="4" set="false">PID 05 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 05 unterstützt</entry>
+							<entry from="5" set="false">PID 06 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 06 unterstützt</entry>
+							<entry from="6" set="false">PID 07 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 07 unterstützt</entry>
+							<entry from="7" set="false">PID 08 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 08 unterstützt</entry>
+							<entry from="8" set="false">PID 09 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 09 unterstützt</entry>
+							<entry from="9" set="false">PID 0A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 0A unterstützt</entry>
+							<entry from="10" set="false">PID 0B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 0B unterstützt</entry>
+							<entry from="11" set="false">PID 0C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 0C unterstützt</entry>
+							<entry from="12" set="false">PID 0D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 0D unterstützt</entry>
+							<entry from="13" set="false">PID 0E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 0E unterstützt</entry>
+							<entry from="14" set="false">PID 0F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 0F unterstützt</entry>
+							<entry from="15" set="false">PID 10 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 10 unterstützt</entry>
+							<entry from="16" set="false">PID 11 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 11 unterstützt</entry>
+							<entry from="17" set="false">PID 12 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 12 unterstützt</entry>
+							<entry from="18" set="false">PID 13 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 13 unterstützt</entry>
+							<entry from="19" set="false">PID 14 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 14 unterstützt</entry>
+							<entry from="20" set="false">PID 15 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 15 unterstützt</entry>
+							<entry from="21" set="false">PID 16 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 16 unterstützt</entry>
+							<entry from="22" set="false">PID 17 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 17 unterstützt</entry>
+							<entry from="23" set="false">PID 18 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 18 unterstützt</entry>
+							<entry from="24" set="false">PID 19 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 19 unterstützt</entry>
+							<entry from="25" set="false">PID 1A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 1A unterstützt</entry>
+							<entry from="26" set="false">PID 1B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 1B unterstützt</entry>
+							<entry from="27" set="false">PID 1C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 1C unterstützt</entry>
+							<entry from="28" set="false">PID 1D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 1D unterstützt</entry>
+							<entry from="29" set="false">PID 1E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 1E unterstützt</entry>
+							<entry from="30" set="false">PID 1F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 1F unterstützt</entry>
+							<entry from="31" set="false">PID 20 nicht unterstützt</entry>
+							<entry from="31" set="true">PID 20 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>52</pid>
+				<description>Alkoholanteil im Ethanol bzw. Methanol</description>
+				<values>
+					<value interpretation="calculation">
+						<name>>Alkoholanteil im Ethanol bzw. Methanol</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>53</pid>
+				<description>Absoluter Druck Kraftstoffverdunstungsrückhaltesystem</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absoluter Druck Kraftstoffverdunstungsrückhaltesystem</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>327.675</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>54</pid>
+				<description>Druck Kraftstoffverdunstungsrückhaltesystem</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Druck Kraftstoffverdunstungsrückhaltesystem</name>
+						<bytes>2</bytes>
+						<min>-32767</min>
+						<max>32768</max>
+						<unit>Pa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>55</pid>
+				<description>Kurzzeitige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 1, Bank 2</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kurzzeitige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 1, Bank 2</name>
+						<bytes>2</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>56</pid>
+				<description>Langfristige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 1, Bank 3</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Langfristige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 1, Bank 3</name>
+						<bytes>2</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>57</pid>
+				<description>Kurzzeitige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 2, Bank 4</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Kurzzeitige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 2, Bank 4</name>
+						<bytes>2</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>58</pid>
+				<description>Langfristige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 2, Bank 4</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Langfristige Kraftstoff-Einspritz-Korrektur zweiter Lambdasensor Bank 2, Bank 4</name>
+						<bytes>2</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>59</pid>
+				<description>Absoluter Kraftstoffdruck</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Absoluter Kraftstoffdruck</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>5A</pid>
+				<description>Relative Gaspedalstellung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Relative Gaspedalstellung</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>5B</pid>
+				<description>Restlebensdauer der Hybrid-Batterie</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Restlebensdauer der Hybrid-Batterie</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>5C</pid>
+				<description>Motor Öltemperatur</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Motor Öltemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>5D</pid>
+				<description>Zeitpunkt Treibstoffeinspritzung</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Zeitpunkt Treibstoffeinspritzung</name>
+						<bytes>2</bytes>
+						<min>-210</min>
+						<max>301.992</max>
+						<unit>°</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>5E</pid>
+				<description>Treibstoffverbrauch</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Treibstoffverbrauch</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>3276.75</max>
+						<unit>L/h</unit>
+					</value>
+				</values>
 			</obdcommand>
 			<obdcommand>
 				<pid>5F</pid>
@@ -40,6 +1588,137 @@
 		    		</value>
 		    	</values>
 			</obdcommand>
+			<!-- PID 60 -->
+			<obdcommand>
+				<pid>60</pid>
+				<description>Unterstützte PIDs im Bereich 61-80</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 61 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 61 unterstützt</entry>
+							<entry from="1" set="false">PID 62 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 62 unterstützt</entry>
+							<entry from="2" set="false">PID 63 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 63 unterstützt</entry>
+							<entry from="3" set="false">PID 64 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 64 unterstützt</entry>
+							<entry from="4" set="false">PID 65 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 65 unterstützt</entry>
+							<entry from="5" set="false">PID 66 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 66 unterstützt</entry>
+							<entry from="6" set="false">PID 67 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 67 unterstützt</entry>
+							<entry from="7" set="false">PID 68 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 68 unterstützt</entry>
+							<entry from="8" set="false">PID 69 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 69 unterstützt</entry>
+							<entry from="9" set="false">PID 6A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 6A unterstützt</entry>
+							<entry from="10" set="false">PID 6B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 6B unterstützt</entry>
+							<entry from="11" set="false">PID 6C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 6C unterstützt</entry>
+							<entry from="12" set="false">PID 6D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 6D unterstützt</entry>
+							<entry from="13" set="false">PID 6E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 6E unterstützt</entry>
+							<entry from="14" set="false">PID 6F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 6F unterstützt</entry>
+							<entry from="15" set="false">PID 70 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 70 unterstützt</entry>
+							<entry from="16" set="false">PID 71 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 71 unterstützt</entry>
+							<entry from="17" set="false">PID 72 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 72 unterstützt</entry>
+							<entry from="18" set="false">PID 73 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 73 unterstützt</entry>
+							<entry from="19" set="false">PID 74 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 74 unterstützt</entry>
+							<entry from="20" set="false">PID 75 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 75 unterstützt</entry>
+							<entry from="21" set="false">PID 76 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 76 unterstützt</entry>
+							<entry from="22" set="false">PID 77 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 77 unterstützt</entry>
+							<entry from="23" set="false">PID 78 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 78 unterstützt</entry>
+							<entry from="24" set="false">PID 79 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 79 unterstützt</entry>
+							<entry from="25" set="false">PID 7A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 7A unterstützt</entry>
+							<entry from="26" set="false">PID 7B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 7B unterstützt</entry>
+							<entry from="27" set="false">PID 7C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 7C unterstützt</entry>
+							<entry from="28" set="false">PID 7D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 7D unterstützt</entry>
+							<entry from="29" set="false">PID 7E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 7E unterstützt</entry>
+							<entry from="30" set="false">PID 7F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 7F unterstützt</entry>
+							<entry from="31" set="false">PID 80 nicht unterstützt</entry>
+							<entry from="31" set="true">PID 80 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>61</pid>
+				<description>Vom Fahrer angefordertes Drehmoment</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Vom Fahrer angefordertes Drehmoment</name>
+						<bytes>1</bytes>
+						<min>-125</min>
+						<max>130</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>62</pid>
+				<description>Aktuelles Drehmoment</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Aktuelles Drehmoment</name>
+						<bytes>1</bytes>
+						<min>-125</min>
+						<max>130</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>63</pid>
+				<description>Referenz Drehmoment</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Referenz Drehmoment</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>Nm</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 64 TBD -->
+			<obdcommand>
+				<pid>64</pid>
+				<description>Drehmomentlimit</description>
+				<values>
+					<value interpretation="calculation">
+						<name>Drehmomentlimit</name>
+						<bytes>1</bytes>
+						<min>-125</min>
+						<max>130</max>
+						<unit>%</unit>
+					</value>
+				</values>
+			</obdcommand>
+			<!-- TBD -->
 			<obdcommand>
 				<pid>65</pid>
 				<description>Zusätzliche Ein- und Ausgänge</description>
@@ -60,6 +1739,374 @@
 					</value>
 				</values>
 			</obdcommand>
+			<obdcommand>
+				<pid>66</pid>
+				<description>Luftmassenmesser</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>MAF Sensor A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>2047.96875</max>
+						<unit>g/s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>MAF Sensor B</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>2047.96875</max>
+						<unit>g/s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>67</pid>
+				<description>Motorkühlmitteltemperatur</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperaturgeber 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>68</pid>
+				<description>Ansauglufttemperatur</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 1, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 1, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 1, Sensor 3</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 2, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 2, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperaturgeber Bank 2, Sensor 3</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>69</pid>
+				<description>Abgasrückführung Ansteuerung und Fehler</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Auslastungsgrad/Ventilposition für System A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Auslastungsgrad/Ventilposition für System A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Fehlerdaten für System A</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Auslastungsgrad/Ventilposition für System B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Auslastungsgrad/Ventilposition für System B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Fehlerdaten für System B</name>
+						<bytes>1</bytes>
+						<min>-100</min>
+						<max>99.22</max>
+						<unit>%</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>6A</pid>
+				<description>Einlassluftdurchsatz bei Diesel</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Einlassluftdurchsatz A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Drosselklappenposition A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Einlassluftdurchsatz B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Drosselklappenposition B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- 6B TBD -->
+			<obdcommand>
+				<pid>6B</pid>
+				<description>Temperatur Abgasrückführung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatursensor A Bank 1, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperatursensor C Bank 1, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperatursensor B Bank 2, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperatursensor D Bank 2, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- TBD -->
+			<obdcommand>
+				<pid>6C</pid>
+				<description>Drosselklappenstellung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Drosselklappenstellung A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Drosselklappenposition A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Drosselklappenstellung B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Drosselklappenposition B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>6D</pid>
+				<description>Kraftstoffdruckkontrolle</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Druck A Kraftstoffverteilerleiste</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Druck A Kraftstoffverteilerleiste</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperatur A Kraftstoffverteilerleiste</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Druck B Kraftstoffverteilerleiste</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Druck B Kraftstoffverteilerleiste</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Temperatur B Kraftstoffverteilerleiste</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>6E</pid>
+				<description>Einspritzdruckkontrolle</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Einspritzdruck A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Einspritzdruck A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Einspritzdruck B</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Einspritzdruck B</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655350</max>
+						<unit>kPa</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- 6F Skalierung?! -->
+			<obdcommand>
+				<pid>6F</pid>
+				<description>Turbolader Druck Einlassöffnung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Sensor A, 1 kPa pro Bit</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max></max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor B, 1 kPa pro Bit</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max></max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor A, 8 kPa pro Bit</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max></max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor B, 8 kPa pro Bit</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max></max>
+						<unit>kPa</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- Skalierung?! -->
 			<obdcommand>
 				<pid>70</pid>
 				<description>Ladedruckregelung</description>
@@ -112,11 +2159,1215 @@
 					</value>
 				</values>
 			</obdcommand>
+			<obdcommand>
+				<pid>71</pid>
+				<description>Kontrolle variable Turbinengeometrie</description>
+				<validitymapping  mode="manual">true</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Leitschaufelnposition A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>
+						<validitybit>0</validitybit>	
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Leitschaufelnposition A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>	
+						<validitybit>1</validitybit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Leitschaufelnposition B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>	
+						<validitybit>3</validitybit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Leitschaufelnposition B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>	
+						<validitybit>4</validitybit>			
+					</value>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bitcombination">
+							<validitybit from="01">2</validitybit>
+							<entry from="01" set="01">Offener Kreislauf, kein Fehler</entry>
+							<entry from="01" set="10">Geschlossener Kreislauf, kein Fehler</entry>
+							<entry from="01" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+							<validitybit from="23">5</validitybit>
+							<entry from="23" set="01">Offener Kreislauf, kein Fehler</entry>
+							<entry from="23" set="10">Geschlossener Kreislauf, kein Fehler</entry>
+							<entry from="23" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+						</mapping>		
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>72</pid>
+				<description>Bypasskontrolle (Waste-Gate)</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Soll Bypassstellung A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Bypassstellung A</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>					
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Bypassstellung B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>					
+					</value>
+					<value interpretation="calculation">
+						<name>Ist Bypassstellung B</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>					
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>73</pid>
+				<description>Abgasdruck</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Abgasdrucksensor Bank 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655.35</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Abgasdrucksensor Bank 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>655.35</max>
+						<unit>kPa</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>74</pid>
+				<description>Drehzahl Turbolader</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Drehzahl Turbo A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>1/min</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Drehzahl Turbo B</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>1/min</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>75</pid>
+				<description>Temperatur Turbolader</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Turbo A Kompressoreingangstemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Kompressorausgangstemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Turbineneingangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Turbinenausgangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>76</pid>
+				<description>Temperatur Turbolader</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Turbo A Kompressoreingangstemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Kompressorausgangstemperatur</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Turbineneingangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Turbo A Turbinenausgangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>77</pid>
+				<description>Temperatur Ladeluftkühler</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 1</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 2</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>78</pid>
+				<description>Abgastemperatur Bank 1</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 1, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>79</pid>
+				<description>Abgastemperatur Bank 2</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7A</pid>
+				<description>Dieselpartikelfilter Bank 1</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Deltadruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Einlassdruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Ausgangsdruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>			
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7B</pid>
+				<description>Dieselpartikelfilter Bank 2</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Deltadruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Einlassdruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Ausgangsdruck</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>kPa</unit>			
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7C</pid>
+				<description>Temperatur Dieselpartikelfilter</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Bank 1 Einlasstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 1 Ausgangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2 Einlasstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Bank 2 Ausgangstemperatur</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7D</pid>
+				<description>NOx-Überwachung Grenzwertbereich</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0">Innerhalb des Grenzwertbereichs</entry>
+							<entry from="1">Außerhalb des Grenzwertbereichs</entry>
+							<entry from="2">Innerhalb des herstellerspezifischen Ausnahmebereiches</entry>
+							<entry from="3">Außerhalb des herstellerspezifischen Ausnahmebereiches</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7E</pid>
+				<description>Feinstaub-Überwachung Grenzwertbereich</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<entry from="0">Innerhalb des Grenzwertbereichs</entry>
+							<entry from="1">Außerhalb des Grenzwertbereichs</entry>
+							<entry from="2">Innerhalb des herstellerspezifischen Ausnahmebereiches</entry>
+							<entry from="3">Außerhalb des herstellerspezifischen Ausnahmebereiches</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>7F</pid>
+				<description>Motorlaufzeit</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Leerlaufzeit</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Laufzeit mit aktiviertem Nebenantrieb</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>			
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- PID 80 -->
+			<obdcommand>
+				<pid>80</pid>
+				<description>Unterstützte PIDs im Bereich 81-A0</description>
+				<validitymapping mode="auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+					<bytes>4</bytes>
+						<mapping type="bit">
+						    <entry from="0" set="false">PID 81 nicht unterstützt</entry>
+							<entry from="0" set="true">PID 81 unterstützt</entry>
+							<entry from="1" set="false">PID 82 nicht unterstützt</entry>
+							<entry from="1" set="true">PID 82 unterstützt</entry>
+							<entry from="2" set="false">PID 83 nicht unterstützt</entry>
+							<entry from="2" set="true">PID 83 unterstützt</entry>
+							<entry from="3" set="false">PID 84 nicht unterstützt</entry>
+							<entry from="3" set="true">PID 84 unterstützt</entry>
+							<entry from="4" set="false">PID 85 nicht unterstützt</entry>
+							<entry from="4" set="true">PID 85 unterstützt</entry>
+							<entry from="5" set="false">PID 86 nicht unterstützt</entry>
+							<entry from="5" set="true">PID 86 unterstützt</entry>
+							<entry from="6" set="false">PID 87 nicht unterstützt</entry>
+							<entry from="6" set="true">PID 87 unterstützt</entry>
+							<entry from="7" set="false">PID 88 nicht unterstützt</entry>
+							<entry from="7" set="true">PID 88 unterstützt</entry>
+							<entry from="8" set="false">PID 89 nicht unterstützt</entry>
+							<entry from="8" set="true">PID 89 unterstützt</entry>
+							<entry from="9" set="false">PID 8A nicht unterstützt</entry>
+							<entry from="9" set="true">PID 8A unterstützt</entry>
+							<entry from="10" set="false">PID 8B nicht unterstützt</entry>
+							<entry from="10" set="true">PID 8B unterstützt</entry>
+							<entry from="11" set="false">PID 8C nicht unterstützt</entry>
+							<entry from="11" set="true">PID 8C unterstützt</entry>
+							<entry from="12" set="false">PID 8D nicht unterstützt</entry>
+							<entry from="12" set="true">PID 8D unterstützt</entry>
+							<entry from="13" set="false">PID 8E nicht unterstützt</entry>
+							<entry from="13" set="true">PID 8E unterstützt</entry>
+							<entry from="14" set="false">PID 8F nicht unterstützt</entry>
+							<entry from="14" set="true">PID 8F unterstützt</entry>
+							<entry from="15" set="false">PID 90 nicht unterstützt</entry>
+							<entry from="15" set="true">PID 90 unterstützt</entry>
+							<entry from="16" set="false">PID 91 nicht unterstützt</entry>
+							<entry from="16" set="true">PID 91 unterstützt</entry>
+							<entry from="17" set="false">PID 92 nicht unterstützt</entry>
+							<entry from="17" set="true">PID 92 unterstützt</entry>
+							<entry from="18" set="false">PID 93 nicht unterstützt</entry>
+							<entry from="18" set="true">PID 93 unterstützt</entry>
+							<entry from="19" set="false">PID 94 nicht unterstützt</entry>
+							<entry from="19" set="true">PID 94 unterstützt</entry>
+							<entry from="20" set="false">PID 95 nicht unterstützt</entry>
+							<entry from="20" set="true">PID 95 unterstützt</entry>
+							<entry from="21" set="false">PID 96 nicht unterstützt</entry>
+							<entry from="21" set="true">PID 96 unterstützt</entry>
+							<entry from="22" set="false">PID 97 nicht unterstützt</entry>
+							<entry from="22" set="true">PID 97 unterstützt</entry>
+							<entry from="23" set="false">PID 98 nicht unterstützt</entry>
+							<entry from="23" set="true">PID 98 unterstützt</entry>
+							<entry from="24" set="false">PID 99 nicht unterstützt</entry>
+							<entry from="24" set="true">PID 99 unterstützt</entry>
+							<entry from="25" set="false">PID 9A nicht unterstützt</entry>
+							<entry from="25" set="true">PID 9A unterstützt</entry>
+							<entry from="26" set="false">PID 9B nicht unterstützt</entry>
+							<entry from="26" set="true">PID 9B unterstützt</entry>
+							<entry from="27" set="false">PID 9C nicht unterstützt</entry>
+							<entry from="27" set="true">PID 9C unterstützt</entry>
+							<entry from="28" set="false">PID 9D nicht unterstützt</entry>
+							<entry from="28" set="true">PID 9D unterstützt</entry>
+							<entry from="29" set="false">PID 9E nicht unterstützt</entry>
+							<entry from="29" set="true">PID 9E unterstützt</entry>
+							<entry from="30" set="false">PID 9F nicht unterstützt</entry>
+							<entry from="30" set="true">PID 9F unterstützt</entry>
+							<entry from="31" set="false">PID A0 nicht unterstützt</entry>
+							<entry from="31" set="true">PID A0 unterstützt</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>81</pid>
+				<description>Motorlaufzeit mit AECD Nr. 1-5</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 1</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 2</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 3</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 4</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 5</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>82</pid>
+				<description>Motorlaufzeit mit AECD Nr. 6-10</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 6</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 7</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 8</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 9</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 10</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>83</pid>
+				<description>NOx Sensor</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>NOx Konzentration Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>ppm</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>NOx Konzentration Bank 1, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>ppm</unit>					
+					</value>
+					<value interpretation="calculation">
+						<name>NOx Konzentration Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>ppm</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>NOx Konzentration Bank 2, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>ppm</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>84</pid>
+				<description>Temperatur Oberfläche Ansaugstutzen</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Temperatur Oberfläche Ansaugstutzen</name>
+						<bytes>1</bytes>
+						<min>-40</min>
+						<max>215</max>
+						<unit>°C</unit>				
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>85</pid>
+				<description>NOx Kontrollsystem</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Durchschnittlicher Verbrauch an Reduktionsmittel</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>327.675</max>
+						<unit>L/h</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Soll Verbrauch an Reduktionsmittel</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>327.675</max>
+						<unit>L/h</unit>						
+					</value>
+					<value interpretation="calculation">
+						<name>Tankinhalt</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Zeit seitdem der NOx Warnmodus aktiv ist</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>86</pid>
+				<description>Feinstaubsensor</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Feinstaubkonzentration Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>819.1875</max>
+						<unit>mg/m³</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Feinstaubkonzentration Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>819.1875</max>
+						<unit>mg/m³</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>87</pid>
+				<description>Absolutdruck Ansaugstutzen</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolutdruck Ansaugstutzen A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>2047.96875</max>
+						<unit>kPa</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Absolutdruck Ansaugstutzen A</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>2047.96875</max>
+						<unit>kPa</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- 88 TBD -->
+			<obdcommand>
+				<pid>88</pid>
+				<description>Status SCR Induzierung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<!-- Byte A, B ergänzen -->
+					<value interpretation="calculation">
+						<name>Zurückgelegte Strecke mit aktiviertem Induzierungssystem im aktuellen 10K Block</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Zurückgelegte Strecke im aktuellen 10K Block</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Zurückgelegte Strecke mit aktiviertem Induzierungssystem im aktuellen 20K Block</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Zurückgelegte Strecke mit aktiviertem Induzierungssystem im aktuellen 30K Block</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Zurückgelegte Strecke mit aktiviertem Induzierungssystem im aktuellen 40K Block</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- TBD -->
+			<obdcommand>
+				<pid>89</pid>
+				<description>Motorlaufzeit mit AECD Nr. 11-15</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 11</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 12</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 13</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 14</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 15</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>8A</pid>
+				<description>Motorlaufzeit mit AECD Nr. 16-20</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 16</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 17</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 18</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 19</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Gesamtlaufzeit mit Gerät 20</name>
+						<bytes>4</bytes>
+						<min>0</min>
+						<max>4294967295</max>
+						<unit>s</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- 8B TBD -->
+			<obdcommand>
+				<pid>8B</pid>
+				<description>Status Diesel Nachbehandlung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<!-- Byte A,B TBD -->
+					<value interpretation="calculation">
+						<name>Normale Auslösung für DPF Regenerierung</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Durchschnittliche Zeit zwischen DPF Regenerierungsauslösung</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>min</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Durchschnittliche Distanz zwischen DPF Regenerierungsauslösung</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>km</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- TBD -->
+			<obdcommand>
+				<pid>8C</pid>
+				<description>Lambdasensor</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Sensorsättigung Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensorsättigung Bank 1, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Sensorsättigung Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Sensorsättigung Bank 2, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Bank 1, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Bank 2, Sensor 2</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>8D</pid>
+				<description>Absolute Drosselklappenstellung</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Absolute Drosselklappenstellung</name>
+						<bytes>1</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>8E</pid>
+				<description>Motor Reibungsmoment</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Motor Reibungsmoment</name>
+						<bytes>1</bytes>
+						<min>-125</min>
+						<max>130</max>
+						<unit>%</unit>				
+					</value>
+				</values>
+			</obdcommand>
+			<!-- 8F ANSEHEN!!! -->
+			<obdcommand>
+				<pid>8F</pid>
+				<description>Feinstaubsensor</description>
+				<validitymapping  mode="manual">true</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Signal Feinstaubsensor Bank 1, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>%</unit>	
+						<validitybit>1</validitybit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Signal Feinstaubsensor Bank 2, Sensor 1</name>
+						<bytes>2</bytes>
+						<min>-327.68</min>
+						<max>327.67</max>
+						<unit>%</unit>	
+						<validitybit>3</validitybit>			
+					</value>
+					<value interpretation="mapping">
+						<bytes>1</bytes>
+						<mapping type="bit">
+							<validitybit from="0">0</validitybit>
+							<entry from="0">Sensormessung aktiv</entry>
+							<entry from="1">Sensor regeneriert</entry>
+							<validitybit from="2">2</validitybit>
+							<entry from="0">Sensormessung aktiv</entry>
+							<entry from="1">Sensor regeneriert</entry>
+						</mapping>		
+					</value>
+				</values>
+			</obdcommand>
+			<!-- ANSEHEN!!! -->
+			<obdcommand>
+				<pid>92</pid>
+				<description>Status Treibstoffkontrollsystem</description>
+				<validitymapping mode = "auto">true</validitymapping>
+				<values>
+					<value interpretation="mapping">
+						<bytes>2</bytes>
+						<mapping type="bit">
+							<entry from = "0">Status Treibstoffdruckkontrollsystem 1 bei geschlossenem Kreislauf</entry>
+							<entry from = "1">Einspritzmengenkontrollsystem 1 bei geschlossenem Kreislauf</entry>
+							<entry from = "2">Einspritzzeitpunktkontrollsystem 1 bei geschlossenem Kreislauf</entry>
+							<entry from = "3">Kraftstoffverteilungskontrollsystem 1 bei geschlossenem Kreislauf</entry>
+							<entry from = "4">Status Treibstoffdruckkontrollsystem 2 bei geschlossenem Kreislauf</entry>
+							<entry from = "5">Einspritzmengenkontrollsystem 2 bei geschlossenem Kreislauf</entry>
+							<entry from = "6">Einspritzzeitpunktkontrollsystem 2 bei geschlossenem Kreislauf</entry>
+							<entry from = "7">Kraftstoffverteilungskontrollsystem 2 bei geschlossenem Kreislauf</entry>
+						</mapping>
+					</value>
+				</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>93</pid>
+				<description>WWH-OBD Fahrzeug OBD Zähler</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Kontinuierlich aufaddierender Zähler für Zeit in der die MIL dauerhaft ein war</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>65535</max>
+						<unit>h</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<!-- 94 TBD -->
+			<obdcommand>
+				<pid></pid>
+				<description></description>
+				<values>
+					<value>
+					</value>
+				</values>
+			</obdcommand>	
+			<!-- 94 TBD -->
+			<obdcommand>
+				<pid>98</pid>
+				<description>Temperatur Abgasrückführungssystem (EGT) Bank 1</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Sensor 5 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 6 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 7 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 8 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>99</pid>
+				<description>Temperatur Abgasrückführungssystem (EGT) Bank 2</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Sensor 5 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 6 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 7 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Sensor 8 wird unterstützt</name>
+						<bytes>2</bytes>
+						<min>-40</min>
+						<max>6513.5</max>
+						<unit>°C</unit>				
+					</value>
+		    	</values>
+			</obdcommand>
+			<obdcommand>
+				<pid>9C</pid>
+				<description>Lambdasensor</description>
+				<validitymapping>false</validitymapping>
+				<values>
+					<value interpretation="calculation">
+						<name>Konzentration Lambdasonde Bank 1, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Konzentration Lambdasonde Bank 1, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Konzentration Lambdasonde Bank 2, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Konzentration Lambdasonde Bank 2, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>100</max>
+						<unit>%</unit>			
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Lambdasonde Bank 1, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Lambdasonde Bank 1, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Lambdasonde Bank 2, Sensor 3</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+					<value interpretation="calculation">
+						<name>Lambdawert Lambdasonde Bank 2, Sensor 4</name>
+						<bytes>2</bytes>
+						<min>0</min>
+						<max>7.99</max>
+						<unit></unit>				
+					</value>
+		    	</values>
+			</obdcommand>
 		</obdcommands>
 	</servicemode>
 	<servicemode>
 		<sid>5</sid>
 	</servicemode>
 </servicemodes>
-	
-
