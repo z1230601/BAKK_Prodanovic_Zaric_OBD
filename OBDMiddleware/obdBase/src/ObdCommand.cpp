@@ -28,6 +28,7 @@ ObdCommand::ObdCommand(std::vector<unsigned int> sids, OBDCommandInput input)
                 OBDCommandValueFactory::getInstance()->createOBDValueFromInput(
                         input.values_.at(i), input.validity_mapping_mode_, i));
     }
+    is_validity_mapping_active_ = !(input.validity_mapping_mode_ == ValidityMappingMode::OFF);
 }
 
 ObdCommand::~ObdCommand()
@@ -50,6 +51,7 @@ void ObdCommand::interpretReceivedBytes(std::vector<uint8_t> data)
             total_size += value->getByteAmount();
         }
 
+        std::cout << "enter not enterable area" << std::endl;
         data.erase(data.begin());
     }
 
