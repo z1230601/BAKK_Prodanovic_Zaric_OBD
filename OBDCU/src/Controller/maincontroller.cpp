@@ -22,6 +22,7 @@ void MainController::init() {
 	Configuration::getInstance()->setOBDCommandConfigFilePath(
 			"/home/zlatan/development/bakk/cfg/obdcommand.xml");
 
+	initDatabase();
 	command_controller_->init();
 }
 

@@ -21,9 +21,24 @@ ELSE(DEFINED Middleware_BASE_PATH)
    ENDIF(EXISTS "/usr/includes/OBDMiddleware/")
 ENDIF(DEFINED Middleware_BASE_PATH)
 
+###############################################################################################
+SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
+MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
+FIND_PACKAGE(CppUnit REQUIRED)
+FIND_PACKAGE(Xml++ REQUIRED)
+FIND_PACKAGE(MySQLConnectorCPP REQUIRED)
+
+
+INCLUDE_DIRECTORIES(includes)
+INCLUDE_DIRECTORIES(${LibXML++_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${MYSQLCONNECTORCPP_INCLUDE_DIRS})
+###############################################################################################
+
 #libdatabase-connection-manager-dev.so  libserial-communication-dev.a
 
 SET(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
+
+FIND_PACKAGE(Qt4 REQUIRED)
 
 LIST(APPEND OBDCU_EXECUTABLES "src/Main.cpp")
 LIST(APPEND OBDCU_INCLUDES "")

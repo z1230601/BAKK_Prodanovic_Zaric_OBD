@@ -33,6 +33,8 @@ public:
 	DiagnosticTroubleCode();
 	DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id, unsigned int source_id, unsigned int fault_id, std::string &description);
 	DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass, std::string &sourceclass, unsigned int fault_id, std::string &description);
+	DiagnosticTroubleCode(std::string table, std::string codeClassAsHexString, std::string source_class_as_hex_string,
+	        std::string fault_id_as_hex_string, std::string description);
 	virtual ~DiagnosticTroubleCode();
 
 	bool isValidlyConstructed();
@@ -41,6 +43,8 @@ public:
 	std::string getDescription();
 	std::string getAssemblyName();
 	std::string getTableName();
+
+	std::string toStringForView();
 
 	unsigned int getAssemblyAreaID();
 	unsigned int getCodeClassID();
@@ -51,6 +55,8 @@ public:
 
 	void fromElmHexValue(int hexvalue);
 	unsigned int toElmHexValue();
+
+
 };
 
 #endif /* DIAGNOSTICTROUBLECODE_H_ */

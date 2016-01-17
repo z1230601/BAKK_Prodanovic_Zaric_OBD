@@ -10,5 +10,6 @@ INCLUDE(${QT_USE_FILE})
 ADD_LIBRARY(Controller STATIC ${controller_SOURCES})
 
 TARGET_LINK_LIBRARIES(Controller
-   ${QT_LIBRARIES}
+   Qt4::QtGui 
+   Qt4::QtXml
 )
