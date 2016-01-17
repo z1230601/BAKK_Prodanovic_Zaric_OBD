@@ -18,7 +18,8 @@ Configuration* Configuration::getInstance() {
 std::string Configuration::getDatabaseConfigFilePath() {
 	return database_path_;
 }
-void Configuration::setDatabaseConfigFilePath(std::string &path) {
+
+void Configuration::setDatabaseConfigFilePath(std::string path) {
 	database_path_ = path;
 }
 
@@ -27,9 +28,9 @@ std::string Configuration::getOBDCommandConfigFilePath()
     return obdcommand_path_;
 }
 
-void Configuration::setOBDCommandConfigFilePath(std::string& path)
+void Configuration::setOBDCommandConfigFilePath(std::string path)
 {
-    obdcommand_path_ = path
+    obdcommand_path_ = path;
 }
 
 

@@ -32,6 +32,7 @@ ADD_SUBDIRECTORY(configurations)
 ADD_SUBDIRECTORY(communicationInterface)
 ADD_SUBDIRECTORY(databaseManagement)
 ADD_SUBDIRECTORY(obdBase)
+ADD_SUBDIRECTORY(cmake_modules)
 
 ADD_DEPENDENCIES(${Database_target_name} ${Configuration_target_name})
 

@@ -1,4 +1,5 @@
 #include "View/viewadministrator.h"
+#include "Controller/maincontroller.h"
 
 int main(int argc, char** argv){
 	MainController::getInstance()->init();

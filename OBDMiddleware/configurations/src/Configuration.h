@@ -16,10 +16,10 @@ public:
 	static Configuration* getInstance();
 
 	std::string getDatabaseConfigFilePath();
-	void setDatabaseConfigFilePath(std::string &path);
+	void setDatabaseConfigFilePath(std::string path);
 
 	std::string getOBDCommandConfigFilePath();
-    void setOBDCommandConfigFilePath(std::string &path);
+    void setOBDCommandConfigFilePath(std::string path);
 };
 
 #endif /* CONFIGURATION_H_ */

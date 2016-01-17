@@ -1,7 +1,8 @@
 #ifndef MAINCONTROLLER_H_
 #define MAINCONTROLLER_H_
 
-#include "OBDCommandController.h"
+#include <string>
+#include "OBDController.h"
 #include "DBExecuter.h"
 
 class MainController {
@@ -9,19 +10,19 @@ public:
 	virtual ~MainController();
 	static MainController* getInstance();
 
-	void initDatabase();//void initDatabase(std::string &configuration_path);
+	void initDatabase();
 
-	OBDCommandController* commandController();
+	OBDController* getOBDController();
 	void init();
+
+	DBExecuter* getDb();
+	void setDb(DBExecuter* db);
+
 private:
 	static MainController* instance_;
 	MainController();
-
-	OBDCommandController* command_controller_;
-
-
+	OBDController* command_controller_;
 	DBExecuter* db_;
-
 };
 
 #endif /* MAINCONTROLLER_H_ */
