@@ -42,6 +42,7 @@ void USBEmulationSupervisor::process_usb_request_block_(usb::urb* urb) {
 		USBRequestHandler::getInstance()->handleBulkRequest(urb);
 		return;
 	}
+
 	if (!urb->is_control()) {
 		std::cout << "not CONTROL" << std::endl;
 		return;
@@ -93,13 +94,13 @@ void USBEmulationSupervisor::updateWorkState() {
 }
 
 void USBEmulationSupervisor::handleIncomingPortStatusWork(usb::vhci::port_stat_work* port_status_work){
-	std::cout << "got port stat work" << std::endl;
-	std::cout << "status: 0x" << std::setw(4) << std::setfill('0') << std::right
-			<< std::hex << port_status_work->get_port_stat().get_status() << std::endl;
-	std::cout << "change: 0x" << std::setw(4) << std::setfill('0') << std::right
-			<< port_status_work->get_port_stat().get_change() << std::endl;
-	std::cout << "flags:  0x" << std::setw(2) << std::setfill('0') << std::right
-			<< static_cast<int>(port_status_work->get_port_stat().get_flags()) << std::endl;
+//	std::cout << "got port stat work" << std::endl;
+//	std::cout << "status: 0x" << std::setw(4) << std::setfill('0') << std::right
+//			<< std::hex << port_status_work->get_port_stat().get_status() << std::endl;
+//	std::cout << "change: 0x" << std::setw(4) << std::setfill('0') << std::right
+//			<< port_status_work->get_port_stat().get_change() << std::endl;
+//	std::cout << "flags:  0x" << std::setw(2) << std::setfill('0') << std::right
+//			<< static_cast<int>(port_status_work->get_port_stat().get_flags()) << std::endl;
 	if (port_status_work->get_port() != 1) {
 		std::cerr << "invalid port" << std::endl;
 		return;
