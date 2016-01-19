@@ -1063,8 +1063,7 @@ P1437;A/C Evaporator Air Temperature Circuit High
 P1438;A/C Evaporator Air Temperature Circuit Range/Performance
 P1439;Floor Temperature Switch Circuit Malfunction
 P1440;Purge Valve Stuck Open
-P1441;Evaporative Emission (EVAP) System Flow During Non-Purge Chevrolet Only
-P1441;Evaporative Emission (EVAP) System Flow During Non-Purge Oldsmobile Only
+P1441;Evaporative Emission (EVAP) System Flow During Non-Purge
 P1442;Evaporative Emission Control System Leak Detected
 P1443;Evaporative Emission Control System Control Valve
 P1444;Purge Flow Sensor Circuit Low Input

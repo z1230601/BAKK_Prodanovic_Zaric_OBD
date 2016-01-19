@@ -1181,7 +1181,6 @@ INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortD
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5511,1,5,135,'Throttle Control Unit Modulated Command Malfunction','null');
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5512,1,5,136,'Throttle Control Unit Detected Loss of Return Spring','null');
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5513,1,5,137,'TCU Unable To Control Desired Throttle Angle','null');
-INSERT INTO `null` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (0,0,0,0,'null','null');
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5633,1,6,1,'ECM/TCM Serial Communication Error','null');
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5634,1,6,2,'Immobilizer/ECM Communication Error','null');
 INSERT INTO `Powertrain` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (5635,1,6,3,'EEPROM Malfunction','null');
@@ -3331,4 +3330,3 @@ INSERT INTO `Network` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDesc
 INSERT INTO `Network` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (4656,1,2,48,'SCP (J1850) Invalid or Missing Data for Electric Defrost','null');
 INSERT INTO `Network` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (4657,1,2,49,'SCP (J1850) Invalid or Missing Data for Electric Defrost','null');
 INSERT INTO `Network` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (4658,1,2,50,'SCP (J1850) Invalid or Missing Data for Navigation','null');
-INSERT INTO `Network` (`ID`, `ID_CodeClass`, `ID_Source`, `ID_Fault`, `ShortDescription`, `Diagnosis`) VALUES (4659,1,2,51,'SCP (J1850) Invalid or
