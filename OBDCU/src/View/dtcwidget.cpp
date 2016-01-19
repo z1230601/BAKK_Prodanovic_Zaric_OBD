@@ -1,36 +1,28 @@
 #include "dtcwidget.h"
 #include "ui_dtcwidget.h"
 #include "../Controller/maincontroller.h"
-
+#include <QErrorMessage>
 
 DTCWidget::DTCWidget(QWidget *parent) :
     AbstractOBDWidget(parent),
     ui(new Ui::DTCWidget)
 {
     ui->setupUi(this);
-    QStringList list_tables = MainController::getInstance()->getOBDController()->getTableList();
-    table_model_ = new QStringListModel();
-    table_model_->setStringList(list_tables);
-    ui->tableSelection->setModel(table_model_);
 
-    QStringList list_columns = MainController::getInstance()->getOBDController()->
-            getColumnList(ui->tableSelection->currentText());
-    column_model_ = new QStringListModel();
-    column_model_->setStringList(list_columns);
-    ui->columnSelection->setModel(column_model_);
+    ui->DTCList->setWrapping(true);
+    ui->tableSelection->setModel(MainController::getInstance()->getOBDController()->getTableModel());
+    MainController::getInstance()->getOBDController()->
+            updateColumnModel(ui->tableSelection->currentText());
+    ui->columnSelection->setModel(MainController::getInstance()->getOBDController()->getColumnModel());
+    ui->DTCList->setModel(MainController::getInstance()->getOBDController()->getDtcListModel());
+    ui->permanentDTCList->setModel(MainController::getInstance()->getOBDController()->getPermanentListModel());
+    ui->pendingDTCList->setModel(MainController::getInstance()->getOBDController()->getPendingListModel());
 
-    dtc_list_model_ = new QStringListModel();
-    ui->DTCList->setModel(dtc_list_model_);
-    permanent_list_model_ = new QStringListModel();
-    ui->permanentDTCList->setModel(permanent_list_model_);
-    pending_list_model_ = new QStringListModel();
-    ui->pendingDTCList->setModel(pending_list_model_);
 }
 
 DTCWidget::~DTCWidget()
 {
     delete ui;
-    delete column_model_;
 }
 
 void DTCWidget::on_DTCSearchButton_clicked()
@@ -39,9 +31,8 @@ void DTCWidget::on_DTCSearchButton_clicked()
 }
 
 void DTCWidget::search(){
-    QStringList list_search = MainController::getInstance()->getOBDController()->searchModelList(
+    MainController::getInstance()->getOBDController()->searchForDTC(
                 ui->tableSelection->currentText(), ui->columnSelection->currentText(), ui->DTCSearchBox->text());
-    dtc_list_model_->setStringList(list_search);
 }
 
 void DTCWidget::on_DTCSearchBox_returnPressed()
@@ -51,27 +42,42 @@ void DTCWidget::on_DTCSearchBox_returnPressed()
 
 void DTCWidget::on_addToPendingButtoon_clicked()
 {
+    MainController::getInstance()->getOBDController()->addToPending(current_DTC_selection_);
 }
 
 void DTCWidget::on_removeFromPendingButton_clicked()
 {
-
+    MainController::getInstance()->getOBDController()->removeFromPending(current_pending_DTC_selection_);
 }
 
 void DTCWidget::on_addToPermanentButton_clicked()
 {
-    QStringList new_list = MainController::getInstance()->getOBDController()->addToPermanent(current_DTC_selection_);
-    permanent_list_model_->setStringList(new_list);
-    dtc_list_model_->setStringList(MainController::getInstance()->getOBDController()->getCurrentDTCList());
+    MainController::getInstance()->getOBDController()->addToPermanent(current_DTC_selection_);
 }
 
 void DTCWidget::on_removeFromPermanentButton_clicked()
 {
-
+    MainController::getInstance()->getOBDController()->removeFromPermanent(current_permanent_DTC_selection_);
 }
 
 void DTCWidget::on_DTCList_clicked(const QModelIndex &index)
 {
-    QModelIndexList list = ui->DTCList->selectionModel()->selectedIndexes();
     current_DTC_selection_ = index.data(Qt::DisplayRole).toString();
+}
+
+void DTCWidget::on_permanentDTCList_clicked(const QModelIndex &index)
+{
+    current_permanent_DTC_selection_ = index.data(Qt::DisplayRole).toString();
+}
+
+void DTCWidget::on_pendingDTCList_clicked(const QModelIndex &index)
+{
+    current_pending_DTC_selection_= index.data(Qt::DisplayRole).toString();
+}
+
+void DTCWidget::on_tableSelection_currentIndexChanged(const QString &arg1)
+{
+    MainController::getInstance()->getOBDController()->
+            updateColumnModel(ui->tableSelection->currentText());
+    ui->columnSelection->setCurrentIndex(0);
 }

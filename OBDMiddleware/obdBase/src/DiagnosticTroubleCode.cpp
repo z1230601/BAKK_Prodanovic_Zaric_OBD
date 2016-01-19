@@ -252,7 +252,7 @@ std::string DiagnosticTroubleCode::toStringForView()
             source_class_ID_ <<
             (fault_ID_ < 16 ? "0" : "") <<
             fault_ID_ << std::dec;
-    ret << " " << description_;
+    ret << "\t" << description_;
 
     return ret.str();
 }

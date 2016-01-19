@@ -31,18 +31,37 @@
       </layout>
      </item>
      <item>
-      <widget class="QComboBox" name="tableSelection"/>
+      <widget class="QComboBox" name="tableSelection">
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QComboBox" name="columnSelection"/>
      </item>
      <item>
       <widget class="QListView" name="DTCList">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::MultiSelection</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::ElideNone</enum>
+       </property>
        <property name="isWrapping" stdset="0">
         <bool>true</bool>
        </property>
        <property name="layoutMode">
         <enum>QListView::Batched</enum>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
        </property>
       </widget>
      </item>

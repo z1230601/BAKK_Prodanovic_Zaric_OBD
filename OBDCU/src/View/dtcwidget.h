@@ -30,14 +30,17 @@ private slots:
 
     void on_DTCList_clicked(const QModelIndex &index);
 
+    void on_permanentDTCList_clicked(const QModelIndex &index);
+
+    void on_pendingDTCList_clicked(const QModelIndex &index);
+
+    void on_tableSelection_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::DTCWidget *ui;
     QString current_DTC_selection_;
-    QStringListModel* column_model_;
-    QStringListModel* table_model_;
-    QStringListModel* dtc_list_model_;
-    QStringListModel* permanent_list_model_;
-    QStringListModel* pending_list_model_;
+    QString current_permanent_DTC_selection_;
+    QString current_pending_DTC_selection_;
 
     void search();
 };
