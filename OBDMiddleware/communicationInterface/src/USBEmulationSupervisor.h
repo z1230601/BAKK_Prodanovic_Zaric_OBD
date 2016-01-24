@@ -10,12 +10,15 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition.hpp>
 
+class USBRequestHandler;
+
 class USBEmulationSupervisor{
 private:
 	usb::vhci::local_hcd* emulation_interface_;
+	USBRequestHandler* request_handler_;
 
 	static void notifyJobQueued(void* arg, usb::vhci::hcd& from) throw();
-	static void process_usb_request_block_(usb::urb* urb);
+	void process_usb_request_block_(usb::urb* urb);
 	void updateWorkState();
 	void handleIncomingPortStatusWork(usb::vhci::port_stat_work* port_status_work);
 

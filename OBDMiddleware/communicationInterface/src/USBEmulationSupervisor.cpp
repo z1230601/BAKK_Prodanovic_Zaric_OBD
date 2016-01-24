@@ -10,6 +10,7 @@ pthread_cond_t work_present_;
 USBEmulationSupervisor::USBEmulationSupervisor() {
 	try {
 		emulation_interface_ = new usb::vhci::local_hcd(1);
+		request_handler_ = new USBRequestHandler();
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
@@ -39,7 +40,7 @@ void USBEmulationSupervisor::notifyJobQueued(void* arg, usb::vhci::hcd& from) th
 
 void USBEmulationSupervisor::process_usb_request_block_(usb::urb* urb) {
 	if (urb->is_bulk()) {
-		USBRequestHandler::getInstance()->handleBulkRequest(urb);
+		request_handler_->handleBulkRequest(urb);
 		return;
 	}
 
@@ -52,7 +53,7 @@ void USBEmulationSupervisor::process_usb_request_block_(usb::urb* urb) {
 		urb->stall();
 		return;
 	}
-	USBRequestHandler::getInstance()->handleUSBRequest(urb);
+	request_handler_->handleUSBRequest(urb);
 }
 
 void USBEmulationSupervisor::run() {

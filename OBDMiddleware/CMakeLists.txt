@@ -34,6 +34,15 @@ ADD_SUBDIRECTORY(databaseManagement)
 ADD_SUBDIRECTORY(obdBase)
 ADD_SUBDIRECTORY(cmake_modules)
 
+
+ADD_CUSTOM_COMMAND(TARGET serial-communication-dev 
+   POST_BUILD
+   COMMAND ln -s -f ${serial_communication_location} ${LIBRARY_NAME}
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
+   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
+)
+
 ADD_DEPENDENCIES(${Database_target_name} ${Configuration_target_name})
 
 ##Packaging      ##############################################################

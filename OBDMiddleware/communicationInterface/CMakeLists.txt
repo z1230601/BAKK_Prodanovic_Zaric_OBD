@@ -46,15 +46,6 @@ target_link_libraries (serial-communication-dev
 GET_PROPERTY(serial_communication_location TARGET serial-communication-dev PROPERTY LOCATION)
 MESSAGE (STATUS "seiarl_lib_location == ${serial_communication_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
 
-ADD_CUSTOM_COMMAND(TARGET serial-communication-dev 
-   POST_BUILD
-   COMMAND ln -s -f ${serial_communication_location} ${LIBRARY_NAME}
-   COMMAND mkdir -p ${middleware_include_dir}
-   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
-   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
-)
-
-
 ###### Install & Packaging #####
 SET(INSTALL_DIR "/usr/lib/")
 INSTALL(TARGETS

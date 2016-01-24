@@ -1,18 +1,14 @@
-/*
- * USBRequestHandlerTest.cpp
- *
- *  Created on: Oct 28, 2015
- *      Author: zlatan
- */
 #include "USBRequestHandlerTest.h"
 #include "../src/USBRequestHandler.h"
 //#include "../src/EmulatedDevice.h"
 #include "libusb_vhci.h"
 
-void testCallback(std::string & command){
+USBRequestHandler* USBRequestHandlerTest::handler_to_test_;
+
+void USBRequestHandlerTest::testCallback(std::string & command){
 	std::cout << "Enter testcallback with : "<< command << "\n";
 	if(command == "atz"){
-		USBRequestHandler::getDevice()->addAnswerToQueue("answer");
+		handler_to_test_->getDevice()->addAnswerToQueue("answer");
 	}else{
 		CPPUNIT_FAIL("Wrong command parsed");
 	}
@@ -20,20 +16,18 @@ void testCallback(std::string & command){
 
 
 void USBRequestHandlerTest::setUp(){
-//	test_request_ =
-	USBRequestHandler::initCallback(&testCallback);
+	handler_to_test_ = new USBRequestHandler(&USBRequestHandlerTest::testCallback);
 }
 
 void USBRequestHandlerTest::tearDown(){
 	delete test_request_;
+	delete handler_to_test_;
 }
 
 
 void USBRequestHandlerTest::testInit(){
-	USBRequestHandler::initCallback(&testCallback);
-	CPPUNIT_ASSERT(USBRequestHandler::getDevice() == NULL);
-	USBRequestHandler::getInstance();
-	CPPUNIT_ASSERT(USBRequestHandler::getDevice() != NULL);
+	handler_to_test_->initCallback(&testCallback);
+	CPPUNIT_ASSERT(handler_to_test_->getDevice() != NULL);
 }
 
 //data handler
@@ -46,7 +40,7 @@ void USBRequestHandlerTest::testBulkInRequest() {
 				0x80, 0x0, 0x0, 0x0, 0x0, 0);
 
 		CPPUNIT_ASSERT(request->get_status() != USB_VHCI_STATUS_SUCCESS);
-		USBRequestHandler::getInstance()->handleBulkRequest(request);
+		handler_to_test_->handleBulkRequest(request);
 		CPPUNIT_ASSERT(request->get_status() == USB_VHCI_STATUS_SUCCESS);
 		CPPUNIT_ASSERT(request->get_buffer_actual() == 2);
 		CPPUNIT_ASSERT(request->get_buffer()[0] == 0x01);
@@ -65,7 +59,7 @@ void USBRequestHandlerTest::testBulkInBufferWrongRequest() {
 				0x80, 0x0, 0x0, 0x0, 0x0, 0);
 
 		CPPUNIT_ASSERT(request->get_status() != USB_VHCI_STATUS_SUCCESS);
-		USBRequestHandler::getInstance()->handleBulkRequest(request);
+		handler_to_test_->handleBulkRequest(request);
 		CPPUNIT_ASSERT(request->get_status() == USB_VHCI_STATUS_STALL);
 		CPPUNIT_ASSERT(request->get_buffer_actual() == 0);
 		CPPUNIT_ASSERT(request->get_buffer() == NULL);
@@ -84,12 +78,12 @@ void USBRequestHandlerTest::testBulkOutRequest() {
 				false, 0, NULL, true, 0, USB_VHCI_STATUS_PENDING, 0, 0x0, 0, 0,
 				0x02, 0x0, 0x0, 0x0, 0x0, 0);
 		CPPUNIT_ASSERT(request->get_status() != USB_VHCI_STATUS_SUCCESS);
-		USBRequestHandler::getInstance()->handleBulkRequest(request);
+		handler_to_test_->handleBulkRequest(request);
 		CPPUNIT_ASSERT(request->get_status() == USB_VHCI_STATUS_SUCCESS);
 	}
 
 	std::string expected = "answer\n\r>";
-	std::string result = USBRequestHandler::getInstance()->device_representation_->getCurrentSendBuffer();
+	std::string result = handler_to_test_->getDevice()->getCurrentSendBuffer();
 	CPPUNIT_ASSERT_EQUAL(expected,result);
 }
 

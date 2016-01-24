@@ -1,10 +1,3 @@
-/*
- * EmulatedDevice.h
- *
- *  Created on: Oct 5, 2015
- *      Author: zlatan
- */
-
 #ifndef EMULATEDDEVICE_H_
 #define EMULATEDDEVICE_H_
 

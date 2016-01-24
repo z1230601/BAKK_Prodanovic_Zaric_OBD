@@ -119,9 +119,8 @@ void EmulatedDevice::evaluateCommand(){
 	current_incomplete_command_.clear();
 }
 
-
 void EmulatedDevice::defaultCommandHandler(std::string command){
-	USBRequestHandler::getDevice()->addAnswerToQueue("Callback not initialized...");
+	addAnswerToQueue("Callback not initialized...");
 }
 
 void EmulatedDevice::addAnswerToQueue(std::string data){

@@ -13,6 +13,8 @@
 #include <cppunit/TestCase.h>
 #include "libusb_vhci.h"
 
+class USBRequestHandler;
+
 class USBRequestHandlerTest: public CppUnit::TestCase{
 	CPPUNIT_TEST_SUITE( USBRequestHandlerTest );
 	CPPUNIT_TEST( testInit );
@@ -25,6 +27,7 @@ class USBRequestHandlerTest: public CppUnit::TestCase{
     CPPUNIT_TEST_SUITE_END();
 
 private:
+    static USBRequestHandler* handler_to_test_;
 	usb::urb* test_request_;
 
 public:
@@ -38,6 +41,8 @@ public:
 	void testBulkInRequest();
 	void testBulkInBufferWrongRequest();
 	void testBulkOutRequest();
+	static void testCallback(std::string & command);
+
 };
 CPPUNIT_TEST_SUITE_REGISTRATION(USBRequestHandlerTest);
 #endif /* USBREQUESTHANDLERTEST_H_ */
