@@ -60,6 +60,7 @@ bool DBExecuter::insertData(std::string table, std::vector<std::string> columns,
         database_->connectToDatabase();
         std::string columns_as_string_ = boost::algorithm::join(columns, ", ");
         std::string data_values_ = getValuesFromInput(data);
+        std::cout << "DATA VALUES: " <<  data_values_ << std::endl;
         std::string query = "INSERT INTO " + table + " (" + columns_as_string_
                 + ") VALUES " + data_values_;
         database_->executeSQLStatement(query);
@@ -104,8 +105,5 @@ std::string DBExecuter::getValuesFromInput(SQLTable data)
 
 std::vector<std::string> DBExecuter::getTablenames() const
 {
-    std::cout << "Enter Db Exectuor\n";
-    std::cout << "Table name are: " + tablenames_.size() << "long\n";
     return tablenames_;
 }
-

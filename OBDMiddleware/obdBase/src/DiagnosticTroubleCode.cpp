@@ -15,13 +15,16 @@ DiagnosticTroubleCode::DiagnosticTroubleCode()
 DiagnosticTroubleCode::DiagnosticTroubleCode(std::string table,
         std::string code_class_as_hex_string,
         std::string source_class_as_hex_string,
-        std::string fault_id_as_hex_string, std::string description)
+        std::string fault_id_as_hex_string, std::string description,
+        bool is_database)
         : description_(description)
 {
     std::map<unsigned int, std::string>::iterator it = assembly_table_.begin();
     for(; it != assembly_table_.end(); it++)
     {
-        if((*it).second.compare(table) == 0)
+        if((*it).second.compare(table) == 0
+                || (table.size() == 1
+                        && (*it).second.substr(0, 1).compare(table) == 0))
         {
             assembly_area_ = (*it).first;
             break;
@@ -29,9 +32,15 @@ DiagnosticTroubleCode::DiagnosticTroubleCode(std::string table,
     }
     try
     {
-        code_class_ID_ = std::stoi(code_class_as_hex_string, nullptr, 16);
-        source_class_ID_ = std::stoi(source_class_as_hex_string, nullptr, 16);
-        fault_ID_ = std::stoi(fault_id_as_hex_string, nullptr, 10);
+        int base = 16;
+
+        if(is_database)
+        {
+            base = 10;
+        }
+        code_class_ID_ = std::stoi(code_class_as_hex_string, nullptr, base);
+        source_class_ID_ = std::stoi(source_class_as_hex_string, nullptr, base);
+        fault_ID_ = std::stoi(fault_id_as_hex_string, nullptr, base);
     } catch (std::exception & e)
     {
         std::cout << e.what() << std::endl;
@@ -162,6 +171,49 @@ bool DiagnosticTroubleCode::isValidlyConstructed()
     return valid_construction_;
 }
 
+bool DiagnosticTroubleCode::alreadyInDatabase(DBExecuter* dbexecuter)
+{
+    std::string condition = "`ID_CodeClass` = " + std::to_string(code_class_ID_)
+            + " AND `ID_Source` = " + std::to_string(source_class_ID_)
+            + " AND `ID_Fault` = " + std::to_string(fault_ID_);
+
+    std::cout << assembly_table_.at(assembly_area_) << " - " << condition
+            << std::endl;
+
+    std::vector<std::vector<std::string>> readData = dbexecuter->readData(
+            assembly_table_.at(assembly_area_),
+            std::vector<std::string> { "*" }, condition);
+
+    return readData.size() >= 2;
+}
+
+void DiagnosticTroubleCode::addToDatabase(DBExecuter* dbexecuter)
+{
+    std::vector<std::string> columns { "ID", "ID_CodeClass", "ID_Source",
+            "ID_Fault", "Description" };
+
+    unsigned int id = ((((code_class_ID_) << (3 * HEX_LENGTH))
+            | (source_class_ID_ << (2 * HEX_LENGTH))) | fault_ID_);
+
+    std::vector<std::vector<std::string> > data { { std::to_string(id),
+            std::to_string(code_class_ID_), std::to_string(source_class_ID_),
+            std::to_string(fault_ID_), description_ } };
+
+    dbexecuter->insertData(assembly_table_.at(assembly_area_), columns, data);
+}
+
+void DiagnosticTroubleCode::removeFromDatabase(DBExecuter* dbexecuter)
+{
+    std::vector<std::string> columns { "ID" };
+
+    unsigned int id = ((((code_class_ID_) << (3 * HEX_LENGTH))
+            | (source_class_ID_ << (2 * HEX_LENGTH))) | fault_ID_);
+
+    std::vector<std::string> data { std::to_string(id) };
+
+    dbexecuter->deleteData(assembly_table_.at(assembly_area_), columns, data);
+}
+
 std::string DiagnosticTroubleCode::getCodeClass()
 {
     return code_class_;
@@ -247,11 +299,9 @@ std::string DiagnosticTroubleCode::toStringForView()
     {
         ret << "U";
     }
-    ret << std::hex <<
-            code_class_ID_ <<
-            source_class_ID_ <<
-            (fault_ID_ < 16 ? "0" : "") <<
-            fault_ID_ << std::dec;
+    ret << std::hex << code_class_ID_ << source_class_ID_
+            << (fault_ID_ < 16 ? "0" : "") << fault_ID_ << std::dec;
+
     ret << "\t" << description_;
 
     return ret.str();

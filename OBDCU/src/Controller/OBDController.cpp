@@ -35,7 +35,7 @@ void OBDController::initViewModels() {
 }
 
 QStringList OBDController::getTableList() {
-	std::vector < std::string > list =
+	std::vector<std::string> list =
 			MainController::getInstance()->getDb()->getTablenames();
 
 	QStringList ret;
@@ -52,8 +52,8 @@ void OBDController::updateDTCList() {
 	QStringList ret;
 	for (; it != current_trouble_codes_.end(); it++) {
 
-		if (!inCurrentPermanentCodes((*it).second->toStringForView()) &&
-				!inCurrentPendingCodes((*it).second->toStringForView())) {
+		if (!inCurrentPermanentCodes((*it).second->toStringForView())
+				&& !inCurrentPendingCodes((*it).second->toStringForView())) {
 			ret << QString((*it).second->toStringForView().c_str());
 		}
 	}
@@ -64,9 +64,10 @@ void OBDController::updateDTCList() {
 void OBDController::updateColumnModel(QString currentInput) {
 	columns_.clear();
 	QStringList ret;
-	std::vector < std::string > columns { "COLUMN_NAME" };
+	std::vector<std::string> columns { "COLUMN_NAME" };
 	std::string table = "INFORMATION_SCHEMA.COLUMNS";
-	std::string condition = "TABLE_NAME =  '" + currentInput.toStdString() + "'";
+	std::string condition = "TABLE_NAME =  '" + currentInput.toStdString()
+			+ "'";
 
 	SQLTable readData = MainController::getInstance()->getDb()->readData(table,
 			columns, condition);
@@ -85,22 +86,23 @@ void OBDController::searchForDTC(QString table, QString column,
 	freeDTC(current_trouble_codes_);
 	current_trouble_codes_.clear();
 
+	last_search_ = std::make_tuple(table, column, currentInput);
+
 	std::string condition = column.toStdString() + " LIKE '%"
 			+ currentInput.toStdString() + "%'";
-
 
 	SQLTable readdata = MainController::getInstance()->getDb()->readData(
 			table.toStdString(), columns_, condition);
 
 	for (unsigned int i = 1; i < readdata.size(); i++) {
-		DiagnosticTroubleCode * current = new DiagnosticTroubleCode(
+		DiagnosticTroubleCode* current = new DiagnosticTroubleCode(
 				table.toStdString(), readdata.at(i).at(1), readdata.at(i).at(2),
-				readdata.at(i).at(3), readdata.at(i).at(4));
+				readdata.at(i).at(3), readdata.at(i).at(4), true);
 
 		if (current->isValidlyConstructed()) {
 
-			if (!inCurrentPermanentCodes(current->toStringForView()) &&
-					!inCurrentPendingCodes(current->toStringForView())) {
+			if (!inCurrentPermanentCodes(current->toStringForView())
+					&& !inCurrentPendingCodes(current->toStringForView())) {
 				QString entry = QString(current->toStringForView().c_str());
 				current_trouble_codes_[entry] = current;
 				ret << entry;
@@ -211,6 +213,85 @@ void OBDController::initCommands() {
 		for (unsigned int sid : input.sid_) {
 			commands_[sid] = pids;
 		}
+	}
+}
+
+bool OBDController::checkDTCExistence(DiagnosticTroubleCode& DTC_to_add,
+		QString code, QString description) {
+	if (code.isEmpty() || description.isEmpty()) {
+		std::cout << "Empty fields are not valid!" << std::endl;
+		return true;
+	}
+
+	std::string code_as_string = code.toStdString();
+	DTC_to_add = DiagnosticTroubleCode(code_as_string.substr(0, 1),
+			code_as_string.substr(1, 1), code_as_string.substr(2, 1),
+			code_as_string.substr(3, 2), description.toStdString());
+
+	if (!DTC_to_add.isValidlyConstructed()) {
+		std::cout << "Not validly constructed" << std::endl;
+		return true;
+	}
+
+	if (DTC_to_add.alreadyInDatabase(MainController::getInstance()->getDb())) {
+		std::cout << "Already in Database" << std::endl;
+		return true;
+	}
+
+	return false;
+}
+
+bool OBDController::addDTCToDatabase(QString code, QString description) {
+	DiagnosticTroubleCode DTC_to_add;
+
+	if (!checkDTCExistence(DTC_to_add, code, description)) {
+		DTC_to_add.addToDatabase(MainController::getInstance()->getDb());
+
+		std::cout << "Added to database" << std::endl;
+		if (std::get<0>(last_search_) != "") {
+			searchForDTC(std::get < 0 > (last_search_),
+					std::get < 1 > (last_search_),
+					std::get < 2 > (last_search_));
+		}
+		return true;
+	}
+	return false;
+}
+
+void OBDController::removeDTCFromDatabase(QString actual) {
+	if (actual.isEmpty())
+		return;
+
+	std::map<QString, DiagnosticTroubleCode*>::iterator it =
+			current_trouble_codes_.find(actual);
+
+	if (it != current_trouble_codes_.end()) {
+		DiagnosticTroubleCode* to_erase = (*it).second;
+		current_trouble_codes_.erase(it);
+		to_erase->removeFromDatabase(MainController::getInstance()->getDb());
+		delete to_erase;
+	}
+	updateDTCList();
+}
+
+std::pair<QString, QString> OBDController::getDTCData(QString actual) {
+	if (actual.isEmpty())
+		return std::make_pair("", "");
+
+	std::string code = actual.toStdString().substr(0, 5);
+	std::string description = actual.toStdString().substr(6);
+	return std::make_pair(QString::fromStdString(code),
+			QString::fromStdString(description));
+}
+
+void OBDController::editDTCInDatabase(QString actual, QString code,
+		QString description) {
+
+	DiagnosticTroubleCode DTC;
+
+	if (!checkDTCExistence(DTC, code, description)) {
+		removeDTCFromDatabase(actual);
+		addDTCToDatabase(code, description);
 	}
 }
 
