@@ -16,8 +16,12 @@ public:
     explicit EmulationWidget(QWidget *parent = 0);
     ~EmulationWidget();
 
+private slots:
+
 private:
     Ui::EmulationWidget *ui;
+
+    void fillDataFromModel();
 };
 
 #endif // EMULATIONWIDGET_H

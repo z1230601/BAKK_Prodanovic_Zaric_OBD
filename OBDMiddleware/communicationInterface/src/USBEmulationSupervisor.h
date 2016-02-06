@@ -26,6 +26,8 @@ public:
 	USBEmulationSupervisor();
 	~USBEmulationSupervisor();
 	void run();
+
+	USBRequestHandler* getRequestHandler() const;
 };
 
 

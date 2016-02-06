@@ -8,12 +8,13 @@
 #include <boost/function.hpp>
 
 class EmulatedDevice{
+
 private:
 	uint16_t address;
 	std::stringstream current_incomplete_command_;
 	std::stringstream send_buffer_;
 	std::map<int, std::string> id_string_descriptor_mapping_;
-
+	uint8_t* current_language_;
 	boost::function<void (std::string)> command_received_callback_;
 
 	uint8_t* getStringDescriptorDataFromString(const std::string to_convert);
@@ -43,6 +44,8 @@ public:
 
 	//for testing
 	std::string getCurrentSendBuffer();
+
+
 };
 
 const uint8_t dev_desc[] = {
@@ -104,12 +107,16 @@ const uint8_t conf_desc[] = {
 	0      // intervall
 };
 
-
-const uint8_t selectable_languages[] = {
+std::map<std::string, uint8_t[]> laguanges_{{"ENGLISH",{
 	4,      // descriptor length
 	3,      // type: string
 	0x09,   // lang id: english (us)
 	0x04    //  "
-};
+}}, {"GERMAN",{
+        4,      // descriptor length
+        3,      // type: string
+        0x07,   // lang id: german  (us)
+        0x04    //  "
+    }}};
 
 #endif /* EMULATEDDEVICE_H_ */

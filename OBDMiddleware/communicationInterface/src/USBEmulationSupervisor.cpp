@@ -132,3 +132,8 @@ void USBEmulationSupervisor::handleIncomingPortStatusWork(usb::vhci::port_stat_w
 	if (port_status_work->triggers_disable())
 		std::cout << "port is disabled" << std::endl;
 }
+
+USBRequestHandler* USBEmulationSupervisor::getRequestHandler() const
+{
+    return request_handler_;
+}

@@ -1,0 +1,9 @@
+<?xml version="<version>1.0</version>" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "obdconfiguration.dtd">
+
+
+<configuration>
+	<databaseconfigueration>/home/zlatan/development/bakk/cfg/dbconfiguration.xml</databaseconfigueration>
+	<obdcommandconfiguration>/home/zlatan/development/bakk/cfg/obdcommand.xml</obdcommandconfiguration>
+	<elmcommandconfiguration>/home/zlatan/development/bakk/cfg/elmcommandconfiguration.xml</elmcommandconfiguration>
+</configuration>

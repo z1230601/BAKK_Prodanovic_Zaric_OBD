@@ -34,6 +34,7 @@ void EmulatedDevice::initStringDescriptorMapping(){
 	id_string_descriptor_mapping_.insert(std::make_pair(2,"FT232R USB UART"));
 	id_string_descriptor_mapping_.insert(std::make_pair(3, "A7030PE3"));
 	id_string_descriptor_mapping_.insert(std::make_pair(6, "FTDI"));
+	current_language_ = laguanges_["ENGLISH"];
 }
 
 uint8_t* EmulatedDevice::getStringDescriptorDataFromString(const std::string to_convert){
@@ -69,7 +70,7 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-	return selectable_languages;
+	return current_language_;
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
