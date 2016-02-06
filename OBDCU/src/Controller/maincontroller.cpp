@@ -18,9 +18,9 @@ OBDController* MainController::getOBDController() {
 
 void MainController::init() {
 	Configuration::getInstance()->setDatabaseConfigFilePath(
-			"/home/zlatan/development/bakk/cfg/dbconfiguration.xml");
+			"/home/zoran/Schreibtisch/BAKK/BAKK_Prodanovic_Zaric_OBD/cfg/dbconfiguration.xml");
 	Configuration::getInstance()->setOBDCommandConfigFilePath(
-			"/home/zlatan/development/bakk/cfg/obdcommand.xml");
+			"/home/zoran/Schreibtisch/BAKK/BAKK_Prodanovic_Zaric_OBD/cfg/obdcommand.xml");
 
 	initDatabase();
 	command_controller_->init();

@@ -7,6 +7,8 @@
 #include <vector>
 #include <map>
 
+class DBExecuter;
+
 class DiagnosticTroubleCode {
 private:
 	std::map<unsigned int, std::string> assembly_table_{
@@ -34,10 +36,14 @@ public:
 	DiagnosticTroubleCode(unsigned int assembly_id, unsigned int code_id, unsigned int source_id, unsigned int fault_id, std::string &description);
 	DiagnosticTroubleCode(unsigned int assembly_id, std::string &codeclass, std::string &sourceclass, unsigned int fault_id, std::string &description);
 	DiagnosticTroubleCode(std::string table, std::string codeClassAsHexString, std::string source_class_as_hex_string,
-	        std::string fault_id_as_hex_string, std::string description);
+	        std::string fault_id_as_hex_string, std::string description, bool is_database = false);
 	virtual ~DiagnosticTroubleCode();
 
+	void addToDatabase(DBExecuter* dbexecuter);
+	void removeFromDatabase(DBExecuter* dbexecuter);
+
 	bool isValidlyConstructed();
+	bool alreadyInDatabase(DBExecuter* dbexecuter);
 	std::string getCodeClass();
 	std::string getSourceClass();
 	std::string getDescription();

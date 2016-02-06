@@ -17,7 +17,6 @@ DTCWidget::DTCWidget(QWidget *parent) :
     ui->DTCList->setModel(MainController::getInstance()->getOBDController()->getDtcListModel());
     ui->permanentDTCList->setModel(MainController::getInstance()->getOBDController()->getPermanentListModel());
     ui->pendingDTCList->setModel(MainController::getInstance()->getOBDController()->getPendingListModel());
-
 }
 
 DTCWidget::~DTCWidget()
@@ -25,14 +24,14 @@ DTCWidget::~DTCWidget()
     delete ui;
 }
 
-void DTCWidget::on_DTCSearchButton_clicked()
-{
-    search();
-}
-
 void DTCWidget::search(){
     MainController::getInstance()->getOBDController()->searchForDTC(
                 ui->tableSelection->currentText(), ui->columnSelection->currentText(), ui->DTCSearchBox->text());
+}
+
+void DTCWidget::on_DTCSearchButton_clicked()
+{
+    search();
 }
 
 void DTCWidget::on_DTCSearchBox_returnPressed()

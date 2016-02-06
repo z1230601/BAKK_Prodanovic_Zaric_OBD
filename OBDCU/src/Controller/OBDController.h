@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <map>
+#include <utility>
+#include <tuple>
+
 #include "ObdCommand.h"
 #include "DiagnosticTroubleCode.h"
 #include "DBRepresenter.h"
@@ -27,9 +30,15 @@ public:
 
 	void addToPermanent(QString command);
 	void removeFromPermanent(QString command);
+
 	void addToPending(QString command);
 	void removeFromPending(QString command);
 
+	bool checkDTCExistence(DiagnosticTroubleCode& DTC_to_add, QString code, QString description);
+	bool addDTCToDatabase(QString code, QString description);
+	void removeDTCFromDatabase(QString actual);
+	std::pair<QString, QString> getDTCData(QString actual);
+	void editDTCInDatabase(QString actual, QString code, QString description);
 
 	QStringListModel* getColumnModel() const;
 	QStringListModel* getDtcListModel() const;
@@ -50,6 +59,7 @@ private:
 	QStringListModel* dtc_list_model_;
 	QStringListModel* permanent_list_model_;
 	QStringListModel* pending_list_model_;
+	std::tuple<QString, QString, QString> last_search_;
 
 
 	void initCommands();

@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     stackedtabwrapper.cpp \
     errorpage.cpp \
     abstractobdwidget.cpp \
-    viewadministrator.cpp
+    viewadministrator.cpp \
+    adddatabasedtcdialog.cpp
 
 HEADERS  += mainwindow.h \
     homewidget.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     stackedtabwrapper.h \
     errorpage.h \
     abstractobdwidget.h \
-    viewadministrator.h
+    viewadministrator.h \
+    adddatabasedtcdialog.h
 
 FORMS    += mainwindow.ui \
     homewidget.ui \
@@ -51,7 +53,8 @@ FORMS    += mainwindow.ui \
     sensorwidget.ui \
     actionsidebar.ui \
     stackedtabwrapper.ui \
-    errorpage.ui
+    errorpage.ui \
+    adddatabasedtcdialog.ui
 
 RESOURCES += \
     resources.qrc

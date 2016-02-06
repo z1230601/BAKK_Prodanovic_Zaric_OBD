@@ -25,50 +25,60 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetMinimumSize</enum>
-         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLineEdit" name="DTCSearchBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMinimumSize</enum>
            </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+           <item>
+            <widget class="QLineEdit" name="DTCSearchBox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="DTCSearchButton">
+             <property name="text">
+              <string>Search</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="searchBtn">
-           <property name="text">
-            <string>Search</string>
-           </property>
-          </widget>
+          <widget class="QComboBox" name="tableSelection"/>
+         </item>
+         <item>
+          <widget class="QComboBox" name="columnSelection"/>
          </item>
         </layout>
        </item>
        <item>
         <widget class="QPushButton" name="addDTCButton">
          <property name="text">
-          <string>Add DTC</string>
+          <string>Add New DTC</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="removeDTCButton">
          <property name="text">
-          <string>Remove DTC</string>
+          <string>Remove Selected DTC</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="editDTCButton">
          <property name="text">
-          <string>Edit DTC</string>
+          <string>Edit Selected DTC</string>
          </property>
         </widget>
        </item>
