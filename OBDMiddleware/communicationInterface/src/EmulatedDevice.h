@@ -14,7 +14,7 @@ private:
 	std::stringstream current_incomplete_command_;
 	std::stringstream send_buffer_;
 	std::map<int, std::string> id_string_descriptor_mapping_;
-	uint8_t* current_language_;
+//	uint8_t* current_language_;
 	boost::function<void (std::string)> command_received_callback_;
 
 	uint8_t* getStringDescriptorDataFromString(const std::string to_convert);
@@ -24,6 +24,8 @@ private:
 	void defaultCommandHandler(std::string command);
 
 public:
+//	static std::map<std::string, uint8_t[]> laguanges_;
+
 	EmulatedDevice();
 
 	EmulatedDevice(boost::function<void (std::string)> const &to_set);
@@ -37,6 +39,7 @@ public:
 	const uint8_t* getLanguageDescriptor();
 
 	uint8_t* getStringDescriptorFromId(int id);
+	std::string getStringFromId(int id);
 	uint8_t* getCurrentDataToSendAsUint8Array();
 	void setRecievedData(uint8_t* data, int length);
 
@@ -107,16 +110,17 @@ const uint8_t conf_desc[] = {
 	0      // intervall
 };
 
-std::map<std::string, uint8_t[]> laguanges_{{"ENGLISH",{
-	4,      // descriptor length
-	3,      // type: string
-	0x09,   // lang id: english (us)
-	0x04    //  "
-}}, {"GERMAN",{
-        4,      // descriptor length
-        3,      // type: string
-        0x07,   // lang id: german  (us)
-        0x04    //  "
-    }}};
+const uint8_t english_descpritor[] = {
+            4,      // descriptor length
+            3,      // type: string
+            0x09,   // lang id: english (us)
+            0x04    //  "
+        };
+//const uint8_t german_descriptor[] = {
+//            4,      // descriptor length
+//            3,      // type: string
+//            0x07,   // lang id: german  (us)
+//            0x04    //  "
+//        };
 
 #endif /* EMULATEDDEVICE_H_ */

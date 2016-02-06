@@ -2,6 +2,7 @@
 #define COMMUNICATIONCONTROLLER_H_
 #include <QString>
 #include <QLineEdit>
+#include <QComboBox>
 #include "USBEmulationSupervisor.h"
 
 class CommunicationController {

@@ -5,9 +5,9 @@ int main(int argc, char** argv){
     Q_INIT_RESOURCE(resources);
 
     if(argc != 2){
-    	std::cout << "usage"
+    	std::cout << "usage ./OBDCU <path to obdcuconfig>";
     }
-	MainController::getInstance()->init();
+	MainController::getInstance()->init(argv[1]);
 	ViewAdministrator::getInstance()->startView(argc, argv);
 	//start view via a singleton in a separate thread since its blocking
 	//start/adjust this thread to model thread and use controller as communication and locking!!!!

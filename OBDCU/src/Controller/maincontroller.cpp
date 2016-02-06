@@ -1,6 +1,7 @@
 #include "maincontroller.h"
 #include "Configuration.h"
 #include "XMLReader.h"
+#include "../Model/ObdcuXmlHandler.h"
 #include <iostream>
 
 MainController* MainController::instance_;

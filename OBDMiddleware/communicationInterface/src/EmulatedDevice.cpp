@@ -1,10 +1,3 @@
-/*
- * EmulatedDevice.cpp
- *
- *  Created on: Oct 5, 2015
- *      Author: zlatan
- */
-
 #include <cstdlib>
 #include <iostream>
 #include "EmulatedDevice.h"
@@ -18,6 +11,8 @@ EmulatedDevice::EmulatedDevice(){
 EmulatedDevice::EmulatedDevice(boost::function<void (std::string)> const &to_set){
 	initStringDescriptorMapping();
 	command_received_callback_ = to_set;
+//	laguanges_["ENGLISH"] = english_descriptor;
+//	laguanges_["GERMAN"] = german_descriptor;
 }
 
 EmulatedDevice::EmulatedDevice(void (*to_set)(std::string &)){
@@ -34,7 +29,7 @@ void EmulatedDevice::initStringDescriptorMapping(){
 	id_string_descriptor_mapping_.insert(std::make_pair(2,"FT232R USB UART"));
 	id_string_descriptor_mapping_.insert(std::make_pair(3, "A7030PE3"));
 	id_string_descriptor_mapping_.insert(std::make_pair(6, "FTDI"));
-	current_language_ = laguanges_["ENGLISH"];
+//	current_language_ = laguanges_["ENGLISH"];
 }
 
 uint8_t* EmulatedDevice::getStringDescriptorDataFromString(const std::string to_convert){
@@ -70,7 +65,7 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-	return current_language_;
+	return english_descpritor;
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
@@ -122,6 +117,14 @@ void EmulatedDevice::evaluateCommand(){
 
 void EmulatedDevice::defaultCommandHandler(std::string command){
 	addAnswerToQueue("Callback not initialized...");
+}
+
+std::string EmulatedDevice::getStringFromId(int id)
+{
+    if(id_string_descriptor_mapping_.find(id) != id_string_descriptor_mapping_.end()){
+        return id_string_descriptor_mapping_[id];
+    }
+    return "";
 }
 
 void EmulatedDevice::addAnswerToQueue(std::string data){

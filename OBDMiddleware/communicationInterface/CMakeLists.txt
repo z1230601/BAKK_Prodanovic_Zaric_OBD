@@ -29,22 +29,30 @@ FILE(GLOB_RECURSE EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 LIST(REMOVE_ITEM EXECS ${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp)
 #message(STATUS "without main: " ${EXECS})
 
-
+SET(Communcation_target_name "serial-communication-dev")
 #Make also shared library out of found cpps and SET internal CMAKE VAR
-ADD_LIBRARY(serial-communication-dev STATIC ${EXECS})
+ADD_LIBRARY(${Communcation_target_name} STATIC ${EXECS})
 
 SET(LIBRARY_NAME "libserial-communication-dev.a")
 FILE(GLOB_RECURSE dev_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 # link the libraries to the executable (most of them found by cmake modules)
-target_link_libraries (serial-communication-dev 
+target_link_libraries ( ${Communcation_target_name}
          ${CMAKE_THREAD_LIBS_INIT}
          ${Boost_LIBRARIES}
          ${LIBUSB_1_LIBRARIES}
          ${LIBUSB_VHCI_LIBRARIES})
 
-GET_PROPERTY(serial_communication_location TARGET serial-communication-dev PROPERTY LOCATION)
+GET_PROPERTY(serial_communication_location TARGET ${Communcation_target_name} PROPERTY LOCATION)
 MESSAGE (STATUS "seiarl_lib_location == ${serial_communication_location} linking to ${OBDMiddleware_SOURCE_DIR}/")
+
+ADD_CUSTOM_COMMAND(TARGET ${Communcation_target_name}
+   POST_BUILD
+   COMMAND ln -s -f ${serial_communication_location} ${LIBRARY_NAME}
+   COMMAND mkdir -p ${middleware_include_dir}
+   COMMAND ln -s -f ${dev_INCLUDES} ${middleware_include_dir}/.
+   WORKING_DIRECTORY "${OBDMiddleware_SOURCE_DIR}/"
+)
 
 ###### Install & Packaging #####
 SET(INSTALL_DIR "/usr/lib/")
@@ -54,7 +62,6 @@ INSTALL(TARGETS
 )
 
 SET(include_INSTALL_DIR /usr/includes/OBDMiddleware/)
-
 
 #Install includes into dir
 INSTALL(FILES
