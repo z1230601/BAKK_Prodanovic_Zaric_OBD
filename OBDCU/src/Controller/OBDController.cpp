@@ -218,7 +218,7 @@ void OBDController::initCommands() {
 
 bool OBDController::checkDTCExistence(DiagnosticTroubleCode& DTC_to_add,
 		QString code, QString description) {
-	if (code.isEmpty() || description.isEmpty()) {
+	if (code.isEmpty()) {
 		std::cout << "Empty fields are not valid!" << std::endl;
 		return true;
 	}
