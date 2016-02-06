@@ -50,12 +50,7 @@ void DatabaseWidget::on_addDTCButton_clicked()
 
     if(dialog_code == QDialog::Accepted)
     {
-        if(MainController::getInstance()->getOBDController()->addDTCToDatabase(dialog.getCode(), dialog.getDescription()))
-        {
-            std::cout << "Added new element to database" << std::endl;
-        }
-        else
-            std::cout << "Already existing or non-valid element" << std::endl;
+        MainController::getInstance()->getOBDController()->addDTCToDatabase(dialog.getCode(), dialog.getDescription());
     }
 }
 
@@ -75,4 +70,9 @@ void DatabaseWidget::on_editDTCButton_clicked()
     {
         MainController::getInstance()->getOBDController()->editDTCInDatabase(current_DTC_selected_,dialog.getCode(), dialog.getDescription());
     }
+}
+
+void DatabaseWidget::on_configureDatabaseButton_clicked()
+{
+
 }

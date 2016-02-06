@@ -34,6 +34,8 @@ private slots:
 
     void on_editDTCButton_clicked();
 
+    void on_configureDatabaseButton_clicked();
+
 private:
     Ui::DatabaseWidget *ui;
     QString current_DTC_selected_;
