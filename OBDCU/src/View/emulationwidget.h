@@ -22,6 +22,8 @@ private slots:
 
     void on_runBtn_clicked();
 
+    void on_stopBtn_clicked();
+
 private:
     Ui::EmulationWidget *ui;
 

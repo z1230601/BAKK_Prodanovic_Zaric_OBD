@@ -72,22 +72,23 @@ void CommunicationController::saveSettings(QString config_path,
 }
 
 void CommunicationController::runEmulation() {
-//	if(!emulation_thread_.timed_join(0)){
-//		emulation_thread_.interrupt();
-//	}
+	if(emulation_->isRunning()){
+		emulation_->terminate();
+	}
 	try {
 		emulation_thread_ = boost::thread(&USBEmulationSupervisor::run,
 				emulation_);
 	} catch (boost::thread_interrupted& interruption) {
 		// thread was interrupted, this is expected.
+		std::cout << "interrupted" << std::endl;
 	} catch (std::exception& e) {
 
 	}
 }
 
 void CommunicationController::stopEmulation() {
-//	if(!emulation_thread_.timed_join(0)){
-//		emulation_thread_.interrupt();
-//	}
+	if(emulation_->isRunning()){
+		emulation_->terminate();
+	}
 }
 

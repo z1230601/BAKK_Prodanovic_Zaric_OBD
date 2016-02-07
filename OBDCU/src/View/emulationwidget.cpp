@@ -32,5 +32,12 @@ void EmulationWidget::on_saveBtn_clicked()
 
 void EmulationWidget::on_runBtn_clicked()
 {
+    std::cout << "run clicked\n";
     MainController::getInstance()->getCommunicationController()->runEmulation();
+}
+
+void EmulationWidget::on_stopBtn_clicked()
+{
+    std::cout << "Stop clicked\n";
+    MainController::getInstance()->getCommunicationController()->stopEmulation();
 }
