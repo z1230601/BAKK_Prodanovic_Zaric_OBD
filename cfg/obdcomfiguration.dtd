@@ -1,6 +1,0 @@
-<!ELEMENT commands (command)>
-<!ELEMENT command (version, elmcommand, description, group)>
-<!ELEMENT version (#PCDATA)>
-<!ELEMENT elmcommand (#PCDATA)>
-<!ELEMENT description (#PCDATA)>
-<!ELEMENT group (#PCDATA)>

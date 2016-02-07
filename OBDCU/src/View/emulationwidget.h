@@ -18,6 +18,10 @@ public:
 
 private slots:
 
+    void on_saveBtn_clicked();
+
+    void on_runBtn_clicked();
+
 private:
     Ui::EmulationWidget *ui;
 

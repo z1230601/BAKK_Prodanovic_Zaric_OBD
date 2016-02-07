@@ -3,16 +3,21 @@
 #include "EmulatedDevice.h"
 #include "USBRequestHandler.h"
 
-EmulatedDevice::EmulatedDevice(){
+
+EmulatedDevice::EmulatedDevice(): current_language_("ENGLISH"){
 	initStringDescriptorMapping();
 	command_received_callback_ = NULL;
+	languages_["ENGLISH"] = english_descpritor;
+    languages_["GERMAN"] = german_descriptor;
+
 }
 
-EmulatedDevice::EmulatedDevice(boost::function<void (std::string)> const &to_set){
+EmulatedDevice::EmulatedDevice(boost::function<void (std::string)> const &to_set):
+        current_language_("ENGLISH"){
 	initStringDescriptorMapping();
 	command_received_callback_ = to_set;
-//	laguanges_["ENGLISH"] = english_descriptor;
-//	laguanges_["GERMAN"] = german_descriptor;
+	languages_["ENGLISH"] = english_descpritor;
+	languages_["GERMAN"] = german_descriptor;
 }
 
 EmulatedDevice::EmulatedDevice(void (*to_set)(std::string &)){
@@ -65,7 +70,7 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-	return english_descpritor;
+	return languages_[current_language_];
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
@@ -121,9 +126,11 @@ void EmulatedDevice::defaultCommandHandler(std::string command){
 
 std::string EmulatedDevice::getStringFromId(int id)
 {
+
     if(id_string_descriptor_mapping_.find(id) != id_string_descriptor_mapping_.end()){
         return id_string_descriptor_mapping_[id];
     }
+    std::cout <<  "Not in map: " << id_string_descriptor_mapping_.size()<< std::endl;
     return "";
 }
 
@@ -134,3 +141,31 @@ void EmulatedDevice::addAnswerToQueue(std::string data){
 std::string EmulatedDevice::getCurrentSendBuffer(){
 	return send_buffer_.str();
 }
+
+void EmulatedDevice::setCurrentLanguage(std::string selection)
+{
+    if(languages_.find(selection) != languages_.end()){
+        current_language_ = selection;
+    }
+}
+
+std::vector<std::string> EmulatedDevice::getSelectableLanguages()
+{
+    std::vector<std::string> keys;
+    std::map<std::string, const uint8_t*>::iterator it = languages_.begin();
+    for(; it != languages_.end(); it++){
+        keys.push_back((*it).first);
+    }
+    return keys;
+}
+
+void EmulatedDevice::setStringWithId(int id, std::string data)
+{
+    id_string_descriptor_mapping_[id] = data;
+}
+
+std::string EmulatedDevice::getCurrentLanguage()
+{
+    return current_language_;
+}
+

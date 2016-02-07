@@ -15,7 +15,7 @@ public:
 
 	OBDController* getOBDController();
 	CommunicationController* getCommunicationController();
-	void init(std::string configuration_file);
+	bool init(std::string configuration_file);
 
 	DBExecuter* getDb();
 	void setDb(DBExecuter* db);

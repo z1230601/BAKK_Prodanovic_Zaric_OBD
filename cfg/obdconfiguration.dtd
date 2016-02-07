@@ -1,0 +1,4 @@
+<!ELEMENT configuration (databaseconfiguration, obdcommandconfiguration, elmcommandconfiguration)>
+<!ELEMENT databaseconfiguration (#PCDATA)>
+<!ELEMENT obdcommandconfiguration (#PCDATA)>
+<!ELEMENT elmcommandconfiguration (#PCDATA)>

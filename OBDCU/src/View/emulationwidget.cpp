@@ -17,6 +17,20 @@ EmulationWidget::~EmulationWidget()
 
 void EmulationWidget::fillDataFromModel(){
     MainController::getInstance()->getCommunicationController()->initConfigurationPath(ui->elmCfgInput);
-    MainController::getInstance()->getCommunicationController()->initLaguage(ui->langSelector);
+    MainController::getInstance()->getCommunicationController()->initLanguage(ui->langSelector);
     MainController::getInstance()->getCommunicationController()->initDescriptors(ui->manStringInput, ui->productStringInput, ui->serialStringInput);
+}
+
+void EmulationWidget::on_saveBtn_clicked()
+{
+    MainController::getInstance()->getCommunicationController()->saveSettings(ui->elmCfgInput->text(),
+                                                                              ui->langSelector->currentText(),
+                                                                              ui->manStringInput->text(),
+                                                                              ui->productStringInput->text(),
+                                                                              ui->serialStringInput->text());
+}
+
+void EmulationWidget::on_runBtn_clicked()
+{
+    MainController::getInstance()->getCommunicationController()->runEmulation();
 }

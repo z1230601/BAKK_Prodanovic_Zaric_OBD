@@ -18,12 +18,19 @@ OBDController* MainController::getOBDController() {
 	return command_controller_;
 }
 
-void MainController::init(std::string configuration_file) {
+bool MainController::init(std::string configuration_file) {
 	ObdcuXmlHandler* handler = new ObdcuXmlHandler();
 	XMLReader reader(handler);
 	bool success = reader.parseFile(configuration_file);
+	std::cout << "Success is " << success << std::endl;
 	initDatabase();
+	std::cout << "INit of db complete"<< std::endl;
+
+	std::cout << "returning\n";
+	communication_controller_ = new CommunicationController();
+	command_controller_ = new OBDController();
 	command_controller_->init();
+	return success;
 }
 
 DBExecuter* MainController::getDb() {
@@ -39,8 +46,6 @@ CommunicationController* MainController::getCommunicationController() {
 }
 
 MainController::MainController() {
-	command_controller_ = new OBDController();
-	communication_controller_ = new CommunicationController();
 }
 
 MainController::~MainController() {
