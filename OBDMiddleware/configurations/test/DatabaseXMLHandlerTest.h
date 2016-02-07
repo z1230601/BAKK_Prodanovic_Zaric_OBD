@@ -11,6 +11,7 @@ class DatabaseXMLHandlerTest:public CppUnit::TestCase
 {
     CPPUNIT_TEST_SUITE (DatabaseXMLHandlerTest);
     CPPUNIT_TEST (testHandle);
+    CPPUNIT_TEST (testWriteHandle);
     CPPUNIT_TEST_SUITE_END();
 
     private:
@@ -21,6 +22,7 @@ class DatabaseXMLHandlerTest:public CppUnit::TestCase
       void setUp();
       void tearDown();
       void testHandle();
+      void testWriteHandle();
 };
 CPPUNIT_TEST_SUITE_REGISTRATION (DatabaseXMLHandlerTest);
 #endif /* DATABASEXMLHANDLERTEST_H_ */

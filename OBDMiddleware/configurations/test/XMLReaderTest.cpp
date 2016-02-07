@@ -40,7 +40,7 @@ void XMLReaderTest::testParseFile()
     CPPUNIT_ASSERT(
             xmlreader_under_test_->parseFile(
                     "../test/testdata/dbconfiguration.xml"));
-    unsigned int acutalNotOccured = mockhandler_->getNotOccured().size();
-    CPPUNIT_ASSERT_EQUAL((unsigned int) 0, acutalNotOccured);
+    unsigned int actualNotOccured = mockhandler_->getNotOccured().size();
+    CPPUNIT_ASSERT_EQUAL((unsigned int) 0, actualNotOccured);
 }
 

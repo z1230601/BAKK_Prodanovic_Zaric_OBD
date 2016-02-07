@@ -1,5 +1,4 @@
 #include "XMLReader.h"
-#include <libxml++/libxml++.h>
 #include <iostream>
 
 XMLReader::XMLReader(DefaultXMLHandler* handler)

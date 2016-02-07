@@ -2,7 +2,6 @@
 #define XMLREADER_H_
 
 #include "DefaultXMLHandler.h"
-#include "libxml++/libxml++.h"
 
 class XMLReader
 {
