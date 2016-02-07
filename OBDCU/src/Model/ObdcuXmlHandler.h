@@ -3,7 +3,7 @@
 
 #include "DefaultXMLHandler.h"
 
-#define DATABSECONFIG_TAG "databaseconfigueration"
+#define DATABSECONFIG_TAG "databaseconfiguration"
 #define OBDCONFIG_TAG "obdcommandconfiguration"
 #define ELMCONFIG_TAG "elmcommandconfiguration"
 

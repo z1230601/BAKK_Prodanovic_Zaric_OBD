@@ -7,6 +7,7 @@ int main(int argc, char** argv){
     if(argc != 2){
     	std::cout << "usage ./OBDCU <path to obdcuconfig>";
     }
+    std::cout << argv[1] << std::endl;
 	MainController::getInstance()->init(argv[1]);
 	ViewAdministrator::getInstance()->startView(argc, argv);
 	//start view via a singleton in a separate thread since its blocking

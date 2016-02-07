@@ -33,4 +33,15 @@ void Configuration::setOBDCommandConfigFilePath(std::string path)
     obdcommand_path_ = path;
 }
 
+std::string Configuration::getELMConfigFilePath()
+{
+    return elm_path_;
+}
+
+void Configuration::setELMConfigFilePath(std::string path)
+{
+    elm_path_ = path;
+}
+
+
 

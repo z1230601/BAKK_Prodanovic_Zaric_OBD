@@ -23,7 +23,7 @@ void ObdcuXmlHandler::handleNode(xmlpp::Node* node) {
 	if(node->get_name().compare(ELMCONFIG_TAG) == 0){
 		std::string path = getTextFromNode(node);
 		//TODO: check if path existant
-		Configuration::getInstance()->ElmCommandConfigFilePath(path);
+		Configuration::getInstance()->setELMConfigFilePath(path);
 	}
 }
 
