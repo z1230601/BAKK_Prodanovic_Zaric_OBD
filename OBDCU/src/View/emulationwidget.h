@@ -16,8 +16,18 @@ public:
     explicit EmulationWidget(QWidget *parent = 0);
     ~EmulationWidget();
 
+private slots:
+
+    void on_saveBtn_clicked();
+
+    void on_runBtn_clicked();
+
+    void on_stopBtn_clicked();
+
 private:
     Ui::EmulationWidget *ui;
+
+    void fillDataFromModel();
 };
 
 #endif // EMULATIONWIDGET_H

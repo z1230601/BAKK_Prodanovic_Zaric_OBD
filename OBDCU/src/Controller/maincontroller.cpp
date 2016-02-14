@@ -1,5 +1,7 @@
 #include "maincontroller.h"
 #include "Configuration.h"
+#include "XMLReader.h"
+#include "../Model/ObdcuXmlHandler.h"
 #include <iostream>
 
 MainController* MainController::instance_;
@@ -16,14 +18,20 @@ OBDController* MainController::getOBDController() {
 	return command_controller_;
 }
 
-void MainController::init() {
-	Configuration::getInstance()->setDatabaseConfigFilePath(
-			"/home/zoran/Schreibtisch/BAKK/BAKK_Prodanovic_Zaric_OBD/cfg/dbconfiguration.xml");
-	Configuration::getInstance()->setOBDCommandConfigFilePath(
-			"/home/zoran/Schreibtisch/BAKK/BAKK_Prodanovic_Zaric_OBD/cfg/obdcommand.xml");
+bool MainController::init(std::string configuration_file) {
+	ObdcuXmlHandler* handler = new ObdcuXmlHandler();
+	XMLReader reader(handler);
+	bool success = reader.parseFile(configuration_file);
+	std::cout << "Success is " << success << std::endl;
 
 	initDatabase();
+	std::cout << "INit of db complete"<< std::endl;
+
+	std::cout << "returning\n";
+	communication_controller_ = new CommunicationController();
+	command_controller_ = new OBDController();
 	command_controller_->init();
+	return success;
 }
 
 DBExecuter* MainController::getDb() {
@@ -31,11 +39,14 @@ DBExecuter* MainController::getDb() {
 }
 
 void MainController::setDb(DBExecuter* db) {
-		db_ = db;
+	db_ = db;
+}
+
+CommunicationController* MainController::getCommunicationController() {
+	return communication_controller_;
 }
 
 MainController::MainController() {
-	command_controller_ = new OBDController();
 }
 
 MainController::~MainController() {

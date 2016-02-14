@@ -1,23 +1,23 @@
-/*
- * EmulatedDevice.cpp
- *
- *  Created on: Oct 5, 2015
- *      Author: zlatan
- */
-
 #include <cstdlib>
 #include <iostream>
 #include "EmulatedDevice.h"
 #include "USBRequestHandler.h"
 
-EmulatedDevice::EmulatedDevice(){
+
+EmulatedDevice::EmulatedDevice(): current_language_("ENGLISH"){
 	initStringDescriptorMapping();
 	command_received_callback_ = NULL;
+	languages_["ENGLISH"] = english_descpritor;
+    languages_["GERMAN"] = german_descriptor;
+
 }
 
-EmulatedDevice::EmulatedDevice(boost::function<void (std::string)> const &to_set){
+EmulatedDevice::EmulatedDevice(boost::function<void (std::string)> const &to_set):
+        current_language_("ENGLISH"){
 	initStringDescriptorMapping();
 	command_received_callback_ = to_set;
+	languages_["ENGLISH"] = english_descpritor;
+	languages_["GERMAN"] = german_descriptor;
 }
 
 EmulatedDevice::EmulatedDevice(void (*to_set)(std::string &)){
@@ -34,9 +34,11 @@ void EmulatedDevice::initStringDescriptorMapping(){
 	id_string_descriptor_mapping_.insert(std::make_pair(2,"FT232R USB UART"));
 	id_string_descriptor_mapping_.insert(std::make_pair(3, "A7030PE3"));
 	id_string_descriptor_mapping_.insert(std::make_pair(6, "FTDI"));
+//	current_language_ = laguanges_["ENGLISH"];
 }
 
 uint8_t* EmulatedDevice::getStringDescriptorDataFromString(const std::string to_convert){
+    std::cout << "Converting: " << to_convert << std::endl;
 	unsigned int length = 2 + to_convert.length()*2;
 	uint8_t* converted = (uint8_t*) std::malloc(length * sizeof(uint8_t));
 
@@ -69,7 +71,8 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-	return selectable_languages;
+//	return languages_[current_language_];
+    return english_descpritor;
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
@@ -123,6 +126,16 @@ void EmulatedDevice::defaultCommandHandler(std::string command){
 	addAnswerToQueue("Callback not initialized...");
 }
 
+std::string EmulatedDevice::getStringFromId(int id)
+{
+
+    if(id_string_descriptor_mapping_.find(id) != id_string_descriptor_mapping_.end()){
+        return id_string_descriptor_mapping_[id];
+    }
+    std::cout <<  "Not in map: " << id_string_descriptor_mapping_.size()<< std::endl;
+    return "";
+}
+
 void EmulatedDevice::addAnswerToQueue(std::string data){
 	send_buffer_ << data << "\n\r>";
 }
@@ -130,3 +143,37 @@ void EmulatedDevice::addAnswerToQueue(std::string data){
 std::string EmulatedDevice::getCurrentSendBuffer(){
 	return send_buffer_.str();
 }
+
+void EmulatedDevice::setCurrentLanguage(std::string selection)
+{
+    if(languages_.find(selection) != languages_.end()){
+        current_language_ = selection;
+    }
+}
+
+std::vector<std::string> EmulatedDevice::getSelectableLanguages()
+{
+    std::vector<std::string> keys;
+    std::map<std::string, const uint8_t*>::iterator it = languages_.begin();
+    for(; it != languages_.end(); it++){
+        keys.push_back((*it).first);
+    }
+    return keys;
+}
+
+void EmulatedDevice::setStringWithId(int id, std::string data)
+{
+    id_string_descriptor_mapping_[id] = data;
+}
+
+std::string EmulatedDevice::getCurrentLanguage()
+{
+    return current_language_;
+}
+
+void EmulatedDevice::setCallback(
+		const boost::function<void(std::string)>& to_set) {
+	command_received_callback_ = to_set;
+}
+
+

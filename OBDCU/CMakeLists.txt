@@ -22,12 +22,15 @@ ELSE(DEFINED Middleware_BASE_PATH)
 ENDIF(DEFINED Middleware_BASE_PATH)
 
 ###############################################################################################
+FIND_PACKAGE(Boost COMPONENTS thread system REQUIRED)
 SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 MESSAGE( STATUS "CMAKE_MODULE_PATH:         " ${CMAKE_MODULE_PATH} )
 FIND_PACKAGE(CppUnit REQUIRED)
 FIND_PACKAGE(Xml++ REQUIRED)
 FIND_PACKAGE(MySQLConnectorCPP REQUIRED)
-
+FIND_PACKAGE(libusb-1.0 REQUIRED)
+FIND_PACKAGE(libusb_vhci REQUIRED)
+FIND_PACKAGE(Xml++ REQUIRED)
 
 INCLUDE_DIRECTORIES(includes)
 INCLUDE_DIRECTORIES(${LibXML++_INCLUDE_DIRS})
@@ -60,8 +63,12 @@ ADD_EXECUTABLE(OBDCU ${OBDCU_EXECUTABLES})
 TARGET_LINK_LIBRARIES(OBDCU
   View
   Controller
+  Model
   ${middleware_dynamic_libraries}
   ${middleware_static_libraries}
-
+  ${LIBUSB_1_LIBRARIES}
+  ${LIBUSB_VHCI_LIBRARIES}
+  ${Boost_LIBRARIES}
+  ${LibXML++_LIBRARIES}
 ) #Model)
 

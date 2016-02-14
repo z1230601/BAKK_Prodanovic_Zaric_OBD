@@ -14,6 +14,7 @@ class USBRequestHandler;
 
 class USBEmulationSupervisor{
 private:
+	bool running_ = false;
 	usb::vhci::local_hcd* emulation_interface_;
 	USBRequestHandler* request_handler_;
 
@@ -24,8 +25,14 @@ private:
 
 public:
 	USBEmulationSupervisor();
+	USBEmulationSupervisor(void (*device_handler_)(std::string&));
 	~USBEmulationSupervisor();
 	void run();
+
+	bool isRunning();
+	void terminate();
+
+	USBRequestHandler* getRequestHandler() const;
 };
 
 

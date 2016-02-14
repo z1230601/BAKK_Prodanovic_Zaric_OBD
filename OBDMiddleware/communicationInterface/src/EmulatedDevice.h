@@ -8,12 +8,14 @@
 #include <boost/function.hpp>
 
 class EmulatedDevice{
+
 private:
 	uint16_t address;
 	std::stringstream current_incomplete_command_;
 	std::stringstream send_buffer_;
 	std::map<int, std::string> id_string_descriptor_mapping_;
-
+	std::map<std::string, const uint8_t*> languages_;
+	std::string current_language_;
 	boost::function<void (std::string)> command_received_callback_;
 
 	uint8_t* getStringDescriptorDataFromString(const std::string to_convert);
@@ -31,11 +33,16 @@ public:
 	~EmulatedDevice();
 	EmulatedDevice(EmulatedDevice & cpy);
 
+
+	void setCallback(boost::function<void (std::string)> const &to_set);
+
 	const uint8_t* getDeviceDescriptor();
 	const uint8_t* getConfigurationDescriptor();
 	const uint8_t* getLanguageDescriptor();
 
 	uint8_t* getStringDescriptorFromId(int id);
+	std::string getStringFromId(int id);
+	void setStringWithId(int id, std::string data);
 	uint8_t* getCurrentDataToSendAsUint8Array();
 	void setRecievedData(uint8_t* data, int length);
 
@@ -43,6 +50,11 @@ public:
 
 	//for testing
 	std::string getCurrentSendBuffer();
+
+	std::vector<std::string> getSelectableLanguages();
+	void setCurrentLanguage(std::string selection);
+	std::string getCurrentLanguage();
+
 };
 
 const uint8_t dev_desc[] = {
@@ -104,12 +116,17 @@ const uint8_t conf_desc[] = {
 	0      // intervall
 };
 
-
-const uint8_t selectable_languages[] = {
-	4,      // descriptor length
-	3,      // type: string
-	0x09,   // lang id: english (us)
-	0x04    //  "
-};
+const uint8_t english_descpritor[] = {
+            4,      // descriptor length
+            3,      // type: string
+            0x09,   // lang id: english (us)
+            0x04    //  "
+        };
+const uint8_t german_descriptor[] = {
+            4,      // descriptor length
+            3,      // type: string
+            0x07,   // lang id: german  (us)
+            0x04    //  "
+        };
 
 #endif /* EMULATEDDEVICE_H_ */

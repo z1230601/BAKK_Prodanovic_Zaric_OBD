@@ -3,6 +3,7 @@
 
 #include <string>
 #include "OBDController.h"
+#include "CommunicationController.h"
 #include "DBExecuter.h"
 
 class MainController {
@@ -13,7 +14,8 @@ public:
 	void initDatabase();
 
 	OBDController* getOBDController();
-	void init();
+	CommunicationController* getCommunicationController();
+	bool init(std::string configuration_file);
 
 	DBExecuter* getDb();
 	void setDb(DBExecuter* db);
@@ -22,6 +24,7 @@ private:
 	static MainController* instance_;
 	MainController();
 	OBDController* command_controller_;
+	CommunicationController* communication_controller_;
 	DBExecuter* db_;
 };
 
