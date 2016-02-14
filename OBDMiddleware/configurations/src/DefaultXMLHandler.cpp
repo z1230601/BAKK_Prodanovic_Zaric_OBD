@@ -1,6 +1,6 @@
 #include "DefaultXMLHandler.h"
 
-DefaultXMLHandler::DefaultXMLHandler()
+DefaultXMLHandler::DefaultXMLHandler() : is_writing_(false)
 {
 }
 
@@ -8,10 +8,15 @@ DefaultXMLHandler::~DefaultXMLHandler()
 {
 }
 
+void DefaultXMLHandler::setWriting(bool writing) {
+    is_writing_ = writing;
+}
+
 std::string DefaultXMLHandler::getTextFromNode(xmlpp::Node* node)
 {
     xmlpp::Element* node_as_element = dynamic_cast<xmlpp::Element*>(node);
-    if(node_as_element == NULL) {
+    if(node_as_element == NULL)
+    {
         return "";
     }
 
@@ -21,6 +26,17 @@ std::string DefaultXMLHandler::getTextFromNode(xmlpp::Node* node)
         return "";
     }
     return std::string(text->get_content().c_str());
+}
+
+void DefaultXMLHandler::setTextToNode(xmlpp::Node* node, std::string new_text)
+{
+    xmlpp::Element* node_as_element = dynamic_cast<xmlpp::Element*>(node);
+    if(node_as_element == NULL)
+    {
+        return;
+    }
+
+    node_as_element->set_child_text(new_text);
 }
 
 std::map<std::string, std::string> DefaultXMLHandler::getAttributesFromElement(

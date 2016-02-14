@@ -1,5 +1,7 @@
 #include "adddatabasedtcdialog.h"
 #include "ui_adddatabasedtcdialog.h"
+#include <QRegExp>
+#include <QRegExpValidator>
 #include <iostream>
 
 AddDatabaseDtcDialog::AddDatabaseDtcDialog(QWidget *parent) :
@@ -7,7 +9,9 @@ AddDatabaseDtcDialog::AddDatabaseDtcDialog(QWidget *parent) :
     ui(new Ui::AddDatabaseDtcDialog)
 {
     ui->setupUi(this);
-    is_edit = false;
+    QRegExpValidator* code_validator = new QRegExpValidator(QRegExp("[B|C|P|U][0-9A-F]{4}"), this);
+    ui->code->setValidator(code_validator);
+    ui->code->setPlaceholderText("DTC starting with P,B,C,U");
 }
 
 AddDatabaseDtcDialog::~AddDatabaseDtcDialog()
@@ -26,11 +30,11 @@ QString AddDatabaseDtcDialog::getDescription() {
 void AddDatabaseDtcDialog::editValues(QString code, QString description) {
     ui->code->setText(code);
     ui->description->setText(description);
-    is_edit = true;
 }
 
 void AddDatabaseDtcDialog::on_buttonBox_accepted()
 {
+
     this->setResult(QDialog::Accepted);
 }
 

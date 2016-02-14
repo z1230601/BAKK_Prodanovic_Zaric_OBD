@@ -27,7 +27,6 @@ private slots:
 
 private:
     Ui::AddDatabaseDtcDialog *ui;
-    bool is_edit;
 };
 
 #endif // ADDDATABASEDTCDIALOG_H

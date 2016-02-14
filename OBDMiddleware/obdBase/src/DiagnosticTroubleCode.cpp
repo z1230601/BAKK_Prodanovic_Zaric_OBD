@@ -177,9 +177,6 @@ bool DiagnosticTroubleCode::alreadyInDatabase(DBExecuter* dbexecuter)
             + " AND `ID_Source` = " + std::to_string(source_class_ID_)
             + " AND `ID_Fault` = " + std::to_string(fault_ID_);
 
-    std::cout << assembly_table_.at(assembly_area_) << " - " << condition
-            << std::endl;
-
     std::vector<std::vector<std::string>> readData = dbexecuter->readData(
             assembly_table_.at(assembly_area_),
             std::vector<std::string> { "*" }, condition);

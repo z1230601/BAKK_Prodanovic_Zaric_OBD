@@ -1,16 +1,16 @@
-#include "XMLReader.h"
+#include "XMLWriter.h"
 #include <iostream>
 
-XMLReader::XMLReader(DefaultXMLHandler* handler)
+XMLWriter::XMLWriter(DefaultXMLHandler* handler)
         : handler_(handler)
 {
 }
 
-XMLReader::~XMLReader()
+XMLWriter::~XMLWriter()
 {
 }
 
-bool XMLReader::parseFile(std::string configurationFile)
+bool XMLWriter::writeFile(std::string configurationFile)
 {
     try
     {
@@ -21,6 +21,7 @@ bool XMLReader::parseFile(std::string configurationFile)
         if(parser)
         {
             iterateChildren(parser.get_document()->get_root_node());
+            parser.get_document()->write_to_file_formatted(configurationFile);
         }
     } catch (std::exception & e)
     {
@@ -30,7 +31,7 @@ bool XMLReader::parseFile(std::string configurationFile)
     return true;
 }
 
-void XMLReader::iterateChildren(const xmlpp::Node* parent)
+void XMLWriter::iterateChildren(const xmlpp::Node* parent)
 {
     xmlpp::Node::NodeList children = parent->get_children();
     for(xmlpp::Node::NodeList::iterator it = children.begin();
