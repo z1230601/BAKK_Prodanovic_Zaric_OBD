@@ -38,6 +38,7 @@ void EmulatedDevice::initStringDescriptorMapping(){
 }
 
 uint8_t* EmulatedDevice::getStringDescriptorDataFromString(const std::string to_convert){
+    std::cout << "Converting: " << to_convert << std::endl;
 	unsigned int length = 2 + to_convert.length()*2;
 	uint8_t* converted = (uint8_t*) std::malloc(length * sizeof(uint8_t));
 
@@ -70,7 +71,8 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-	return languages_[current_language_];
+//	return languages_[current_language_];
+    return english_descpritor;
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
@@ -168,4 +170,10 @@ std::string EmulatedDevice::getCurrentLanguage()
 {
     return current_language_;
 }
+
+void EmulatedDevice::setCallback(
+		const boost::function<void(std::string)>& to_set) {
+	command_received_callback_ = to_set;
+}
+
 

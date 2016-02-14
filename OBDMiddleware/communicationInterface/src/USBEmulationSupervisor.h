@@ -25,6 +25,7 @@ private:
 
 public:
 	USBEmulationSupervisor();
+	USBEmulationSupervisor(void (*device_handler_)(std::string&));
 	~USBEmulationSupervisor();
 	void run();
 

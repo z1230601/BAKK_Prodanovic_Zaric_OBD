@@ -41,13 +41,16 @@ void USBRequestHandler::handleUSBRequest(usb::urb* usb_request_to_process_)
         handleDescriptorRequest(usb_request_to_process_);
     }else if(key == ( 0x8000 | URB_RQ_GET_STATUS) || key == ( 0x0400 | URB_RQ_GET_STATUS)){
         handleStatusRequest(usb_request_to_process_);
+    }else{
+//        handleFail(usb_request_to_process_, r, rt);
+        justAck(usb_request_to_process_);
     }
 }
 
 void USBRequestHandler::initCallback(void (*to_set)(std::string &))
 {
     //TODO: implement function in emulated Device
-//    device_representation_->setCallback(to_set);
+    device_representation_->setCallback(to_set);
 }
 
 
@@ -70,9 +73,7 @@ void USBRequestHandler::handleInterfaceRequest(usb::urb* req)
 void USBRequestHandler::handleDescriptorRequest(
         usb::urb* usb_request_to_process_)
 {
-    std::cout << "GET_DESCRIPTOR" << std::endl;
-    std::cout << "Language is: " << usb_request_to_process_->get_wIndex()
-            << std::endl;
+    std::cout << "GET_DESCRIPTOR-----------------------------------" << std::endl;
 
     switch(usb_request_to_process_->get_wValue() >> 8)
     {
@@ -89,6 +90,7 @@ void USBRequestHandler::handleDescriptorRequest(
                     usb_request_to_process_, 2);
             break;
         case 3:
+            std::cout << "STRING_DESCRIPTOR" << std::endl;
             handleGetStringDescriptorRequest(usb_request_to_process_);
             break;
         default:
@@ -120,6 +122,7 @@ void USBRequestHandler::handleGetStringDescriptorRequest(
         } catch (std::runtime_error e)
         {
             usb_request_to_process_->stall();
+            std::cout << "Caught exception\n";
         }
     }
 }

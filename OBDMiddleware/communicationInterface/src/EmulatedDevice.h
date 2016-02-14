@@ -33,6 +33,9 @@ public:
 	~EmulatedDevice();
 	EmulatedDevice(EmulatedDevice & cpy);
 
+
+	void setCallback(boost::function<void (std::string)> const &to_set);
+
 	const uint8_t* getDeviceDescriptor();
 	const uint8_t* getConfigurationDescriptor();
 	const uint8_t* getLanguageDescriptor();

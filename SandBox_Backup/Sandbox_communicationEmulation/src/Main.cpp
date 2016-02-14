@@ -2,21 +2,23 @@
 #include "USBRequestHandler.h"
 #include "boost/function.hpp"
 
+USBEmulationSupervisor* sup;
+
 void testHandler(std::string &command){
 	std::cout << "TestHandle: " << command << std::endl;
 	if(command == "atz"){
-		USBRequestHandler::getDevice()->addAnswerToQueue("ELM327 v1.4");
+		sup->getRequestHandler()->getDevice()->addAnswerToQueue("ELM327 v1.4");
 	}
 
 	if(command == "something"){
-		USBRequestHandler::getDevice()->addAnswerToQueue("ANSWER");
+		sup->getRequestHandler()->getDevice()->addAnswerToQueue("ANSWER");
 	}
 }
 
 int main() {
-	USBEmulationSupervisor sup;
-	USBRequestHandler::initCallback(&testHandler);
-	sup.run();
+	sup = new USBEmulationSupervisor();
+	sup->getRequestHandler()->initCallback(&testHandler);
+	sup->run();
 
 	return 0;
 }

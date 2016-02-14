@@ -10,19 +10,29 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition.hpp>
 
+class USBRequestHandler;
+
 class USBEmulationSupervisor{
 private:
+	bool running_ = false;
 	usb::vhci::local_hcd* emulation_interface_;
+	USBRequestHandler* request_handler_;
 
 	static void notifyJobQueued(void* arg, usb::vhci::hcd& from) throw();
-	static void process_usb_request_block_(usb::urb* urb);
+	void process_usb_request_block_(usb::urb* urb);
 	void updateWorkState();
 	void handleIncomingPortStatusWork(usb::vhci::port_stat_work* port_status_work);
 
 public:
 	USBEmulationSupervisor();
+	USBEmulationSupervisor(void (*device_handler_)(std::string&));
 	~USBEmulationSupervisor();
 	void run();
+
+	bool isRunning();
+	void terminate();
+
+	USBRequestHandler* getRequestHandler() const;
 };
 
 

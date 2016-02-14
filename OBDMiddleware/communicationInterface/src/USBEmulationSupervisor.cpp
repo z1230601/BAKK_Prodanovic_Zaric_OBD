@@ -2,6 +2,8 @@
 #include "USBRequestHandler.h"
 #include <boost/thread.hpp>
 #include <pthread.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 bool work_is_queued_(true), waiting_for_work(false);
 pthread_mutex_t work_is_queued_mutex_;
@@ -10,6 +12,10 @@ pthread_cond_t work_present_;
 USBEmulationSupervisor::USBEmulationSupervisor()
 {
     request_handler_ = new USBRequestHandler();
+}
+USBEmulationSupervisor::USBEmulationSupervisor(void (*device_handler_)(std::string&))
+{
+    request_handler_ = new USBRequestHandler(device_handler_);
 }
 
 USBEmulationSupervisor::~USBEmulationSupervisor()
@@ -57,6 +63,7 @@ void USBEmulationSupervisor::process_usb_request_block_(usb::urb* urb)
 
 void USBEmulationSupervisor::run()
 {
+    setuid(0);
     try
     {
         emulation_interface_ = new usb::vhci::local_hcd(1);
