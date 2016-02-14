@@ -6,7 +6,7 @@
 #include <utility>
 #include <tuple>
 
-#include "ObdCommand.h"
+#include "OBDCommand.h"
 #include "DiagnosticTroubleCode.h"
 #include "DBRepresenter.h"
 #include "DiagnosticTroubleCode.h"

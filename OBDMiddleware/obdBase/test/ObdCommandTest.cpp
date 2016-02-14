@@ -1,5 +1,5 @@
 #include "ObdCommandTest.h"
-#include "../src/ObdCommand.h"
+#include "../src/OBDCommand.h"
 #include "../src/AbstractOBDValue.h"
 #include "../src/OBDBitcombinationMappingValue.h"
 #include <string>

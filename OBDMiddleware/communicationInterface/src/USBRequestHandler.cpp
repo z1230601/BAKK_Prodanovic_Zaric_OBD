@@ -49,7 +49,6 @@ void USBRequestHandler::handleUSBRequest(usb::urb* usb_request_to_process_)
 
 void USBRequestHandler::initCallback(void (*to_set)(std::string &))
 {
-    //TODO: implement function in emulated Device
     device_representation_->setCallback(to_set);
 }
 
