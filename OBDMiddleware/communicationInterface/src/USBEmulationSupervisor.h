@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <libusb_vhci.h>
 #include <string>
+#include <sstream>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition.hpp>
 
@@ -17,6 +18,7 @@ private:
 	bool running_ = false;
 	usb::vhci::local_hcd* emulation_interface_;
 	USBRequestHandler* request_handler_;
+
 
 	static void notifyJobQueued(void* arg, usb::vhci::hcd& from) throw();
 	void process_usb_request_block_(usb::urb* urb);
@@ -32,7 +34,10 @@ public:
 	bool isRunning();
 	void terminate();
 
+	std::string getMessages();
 	USBRequestHandler* getRequestHandler() const;
+
+	static std::stringstream messages_;
 };
 
 

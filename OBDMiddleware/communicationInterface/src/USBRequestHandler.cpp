@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <boost/bind.hpp>
 
+#include "USBEmulationSupervisor.h"
+
 USBRequestHandler::USBRequestHandler(void (*device_handler_)(std::string&))
 {
     device_representation_ = new EmulatedDevice(device_handler_);
@@ -55,41 +57,41 @@ void USBRequestHandler::initCallback(void (*to_set)(std::string &))
 
 void USBRequestHandler::handleAddressRequest(usb::urb* req)
 {
-    std::cout << "SET_ADDRESS" << std::endl;
+    USBEmulationSupervisor::messages_ << "SET_ADDRESS" << std::endl;
     req->ack();
 }
 void USBRequestHandler::handleConfigurationRequest(usb::urb* req)
 {
-    std::cout << "SET_CONFIGURATION" << std::endl;
+    USBEmulationSupervisor::messages_ << "SET_CONFIGURATION" << std::endl;
     req->ack();
 }
 void USBRequestHandler::handleInterfaceRequest(usb::urb* req)
 {
-    std::cout << "SET_INTERFACE" << std::endl;
+    USBEmulationSupervisor::messages_ << "SET_INTERFACE" << std::endl;
     req->ack();
 }
 
 void USBRequestHandler::handleDescriptorRequest(
         usb::urb* usb_request_to_process_)
 {
-    std::cout << "GET_DESCRIPTOR-----------------------------------" << std::endl;
+    USBEmulationSupervisor::messages_ << "GET_DESCRIPTOR" << std::endl;
 
     switch(usb_request_to_process_->get_wValue() >> 8)
     {
         case 1:
-            std::cout << "DEVICE_DESCRIPTOR" << std::endl;
+            USBEmulationSupervisor::messages_ << "DEVICE_DESCRIPTOR" << std::endl;
             copyIntoBufferAndAcknowledgeRequest(
                     device_representation_->getDeviceDescriptor(),
                     usb_request_to_process_);
             break;
         case 2:
-            std::cout << "CONFIGURATION_DESCRIPTOR" << std::endl;
+            USBEmulationSupervisor::messages_ << "CONFIGURATION_DESCRIPTOR" << std::endl;
             copyIntoBufferAndAcknowledgeRequest(
                     device_representation_->getConfigurationDescriptor(),
                     usb_request_to_process_, 2);
             break;
         case 3:
-            std::cout << "STRING_DESCRIPTOR" << std::endl;
+            USBEmulationSupervisor::messages_ << "STRING_DESCRIPTOR" << std::endl;
             handleGetStringDescriptorRequest(usb_request_to_process_);
             break;
         default:
@@ -101,7 +103,7 @@ void USBRequestHandler::handleDescriptorRequest(
 void USBRequestHandler::handleGetStringDescriptorRequest(
         usb::urb* usb_request_to_process_)
 {
-    std::cout << "STRING_DESCRIPTOR: "
+    USBEmulationSupervisor::messages_ << "STRING_DESCRIPTOR: "
             << (usb_request_to_process_->get_wValue() & 0xff) << std::endl;
     int id = usb_request_to_process_->get_wValue() & 0xff;
     if(id == 0)
@@ -121,7 +123,7 @@ void USBRequestHandler::handleGetStringDescriptorRequest(
         } catch (std::runtime_error e)
         {
             usb_request_to_process_->stall();
-            std::cout << "Caught exception\n";
+            USBEmulationSupervisor::messages_ << "Caught exception\n";
         }
     }
 }
@@ -143,17 +145,17 @@ void USBRequestHandler::handleFail(usb::urb* usb_request_to_process_,
 {
     if(what.find(r) != what.end())
     {
-        std::cout << "Not recognized: bmRequestType: " << std::bitset<8>(rt)
+        USBEmulationSupervisor::messages_ << "Not recognized: bmRequestType: " << std::bitset<8>(rt)
                 << " bRequest: " << (int) r << std::dec << " " << what.at(r)
                 << std::endl;
         unsigned int key = rt;
         key = key << 8;
         key = key | r;
 
-        std::cout << "key: " << std::hex << key << std::endl;
+        USBEmulationSupervisor::messages_ << "key: " << std::hex << key << std::endl;
     } else
     {
-        std::cout << "Not recognized: bmRequestType: " << std::bitset<8>(rt)
+        USBEmulationSupervisor::messages_ << "Not recognized: bmRequestType: " << std::bitset<8>(rt)
                 << " bRequest: " << (int) r << std::endl;
     }
     usb_request_to_process_->stall();
@@ -182,11 +184,11 @@ void USBRequestHandler::handleBulkRequest(usb::urb* usb_request_to_process_)
 
     if(usb_request_to_process_->is_in())
     {
-        std::cout << "Handle in\n";
+        USBEmulationSupervisor::messages_ << "Handle in\n";
         handleBulkInRequest(usb_request_to_process_);
     } else
     {
-        std::cout << "Handle out\n";
+        USBEmulationSupervisor::messages_ << "Handle out\n";
         handleBulkOutRequest(usb_request_to_process_);
     }
 }
@@ -202,13 +204,12 @@ void USBRequestHandler::handleBulkInRequest(usb::urb* usb_request_to_process_)
         uint8_t* buff2 = device_representation_
                 ->getCurrentDataToSendAsUint8Array();
         int length = buff2[0];
-        std::cout << "lenght " << length << " buff: "
+        USBEmulationSupervisor::messages_ << "lenght " << length << " buff: "
                 << (buff == NULL ? "NULL" : "NOT NULL") << std::endl;
         std::copy(buff2, buff2 + length, buff);
         buff[0] = 0x01;
         buff[1] = 0x60;
         usb_request_to_process_->set_buffer_actual(length);
-        std::cout << "ACK!!\n";
         usb_request_to_process_->ack();
     } else
     {
@@ -218,7 +219,6 @@ void USBRequestHandler::handleBulkInRequest(usb::urb* usb_request_to_process_)
 
 void USBRequestHandler::handleBulkOutRequest(usb::urb* usb_request_to_process)
 {
-    //Use Emulated Device here!
     device_representation_->setRecievedData(
             usb_request_to_process->get_buffer(),
             usb_request_to_process->get_buffer_length());

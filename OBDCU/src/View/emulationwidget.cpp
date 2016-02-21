@@ -1,6 +1,7 @@
 #include "emulationwidget.h"
 #include "ui_emulationwidget.h"
 #include "../Controller/maincontroller.h"
+#include <QScrollBar>
 
 EmulationWidget::EmulationWidget(QWidget *parent) :
     AbstractOBDWidget(parent),
@@ -19,6 +20,7 @@ void EmulationWidget::fillDataFromModel(){
     MainController::getInstance()->getCommunicationController()->initConfigurationPath(ui->elmCfgInput);
     MainController::getInstance()->getCommunicationController()->initLanguage(ui->langSelector);
     MainController::getInstance()->getCommunicationController()->initDescriptors(ui->manStringInput, ui->productStringInput, ui->serialStringInput);
+    MainController::getInstance()->getCommunicationController()->setLogDisplay(ui->emulationLogBrowser);
 }
 
 void EmulationWidget::on_saveBtn_clicked()
@@ -40,4 +42,11 @@ void EmulationWidget::on_stopBtn_clicked()
 {
     std::cout << "Stop clicked\n";
     MainController::getInstance()->getCommunicationController()->stopEmulation();
+}
+
+void EmulationWidget::on_refreshBtn_clicked()
+{
+    MainController::getInstance()->getCommunicationController()->refresh();
+    QScrollBar *sb = ui->emulationLogBrowser->verticalScrollBar();
+    sb->setValue(sb->maximum());
 }

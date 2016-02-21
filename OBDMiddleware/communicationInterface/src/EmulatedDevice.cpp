@@ -2,7 +2,7 @@
 #include <iostream>
 #include "EmulatedDevice.h"
 #include "USBRequestHandler.h"
-
+#include "USBEmulationSupervisor.h"
 
 EmulatedDevice::EmulatedDevice(): current_language_("ENGLISH"){
 	initStringDescriptorMapping();
@@ -38,7 +38,7 @@ void EmulatedDevice::initStringDescriptorMapping(){
 }
 
 uint8_t* EmulatedDevice::getStringDescriptorDataFromString(const std::string to_convert){
-    std::cout << "Converting: " << to_convert << std::endl;
+    USBEmulationSupervisor::messages_ << "Converting: " << to_convert << std::endl;
 	unsigned int length = 2 + to_convert.length()*2;
 	uint8_t* converted = (uint8_t*) std::malloc(length * sizeof(uint8_t));
 
@@ -71,8 +71,7 @@ const uint8_t* EmulatedDevice::getConfigurationDescriptor(){
 }
 
 const uint8_t* EmulatedDevice::getLanguageDescriptor(){
-//	return languages_[current_language_];
-    return english_descpritor;
+	return languages_[current_language_];
 }
 
 uint8_t* EmulatedDevice::getCurrentDataToSendAsUint8Array(){
@@ -88,8 +87,8 @@ void EmulatedDevice::setRecievedData(uint8_t* data, int length){
 	string_data[length] = '\0';
 
 	std::string input(reinterpret_cast<char*>(string_data));
-//	std::cout << "length = " << length << std::endl;
-//	std::cout << "input = " << input << std::endl;
+//	USBEmulationSupervisor::messages_ << "length = " << length << std::endl;
+//	USBEmulationSupervisor::messages_ << "input = " << input << std::endl;
 	if(length == 1 && string_data[0] == 0x0d){
 		evaluateCommand();
 	}else{
@@ -102,13 +101,13 @@ void EmulatedDevice::setRecievedData(uint8_t* data, int length){
 void EmulatedDevice::evaluateCommand(){
 	//just stream into file for communication
 	std::string command_got_ = current_incomplete_command_.str();
-	std::cout << command_got_ << std::endl;
+	USBEmulationSupervisor::messages_ << "Got command " << command_got_ << std::endl;
 	int break_position = -1;
 	while((break_position = command_got_.find('\r')) != -1){
 		command_got_.at(break_position) = ' ';
 	}
 
-//	std::cout << "Break position: " << break_position << std::endl;
+//	USBEmulationSupervisor::messages_ << "Break position: " << break_position << std::endl;
 
 	if(command_received_callback_ != NULL){
 		command_received_callback_(command_got_);
@@ -116,8 +115,8 @@ void EmulatedDevice::evaluateCommand(){
 		defaultCommandHandler(command_got_);
 	}
 
-//	std::cout << "\ncurrent command_: " << std::endl;
-//	std::cout << command_got_ << std::endl;
+//	USBEmulationSupervisor::messages_ << "\ncurrent command_: " << std::endl;
+//	USBEmulationSupervisor::messages_ << command_got_ << std::endl;
 	current_incomplete_command_.str(std::string());
 	current_incomplete_command_.clear();
 }
@@ -132,7 +131,7 @@ std::string EmulatedDevice::getStringFromId(int id)
     if(id_string_descriptor_mapping_.find(id) != id_string_descriptor_mapping_.end()){
         return id_string_descriptor_mapping_[id];
     }
-    std::cout <<  "Not in map: " << id_string_descriptor_mapping_.size()<< std::endl;
+    USBEmulationSupervisor::messages_ <<  "Not in map: " << id_string_descriptor_mapping_.size()<< std::endl;
     return "";
 }
 

@@ -5,6 +5,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+std::stringstream USBEmulationSupervisor::messages_;
+
 bool work_is_queued_(true), waiting_for_work(false);
 pthread_mutex_t work_is_queued_mutex_;
 pthread_cond_t work_present_;
@@ -12,10 +14,12 @@ pthread_cond_t work_present_;
 USBEmulationSupervisor::USBEmulationSupervisor()
 {
     request_handler_ = new USBRequestHandler();
+//    std::cout.rdbuf(messages_.rdbuf());
 }
 USBEmulationSupervisor::USBEmulationSupervisor(void (*device_handler_)(std::string&))
 {
     request_handler_ = new USBRequestHandler(device_handler_);
+//    std::cout.rdbuf(messages_.rdbuf());
 }
 
 USBEmulationSupervisor::~USBEmulationSupervisor()
@@ -49,12 +53,12 @@ void USBEmulationSupervisor::process_usb_request_block_(usb::urb* urb)
 
     if(!urb->is_control())
     {
-        std::cout << "not CONTROL" << std::endl;
+        messages_ << "not CONTROL" << std::endl;
         return;
     }
     if(urb->get_endpoint_number())
     {
-        std::cout << "not ep0" << std::endl;
+        messages_ << "not ep0" << std::endl;
         urb->stall();
         return;
     }
@@ -70,7 +74,7 @@ void USBEmulationSupervisor::run()
 
     } catch (std::exception &e)
     {
-        std::cout << e.what() << std::endl;
+        messages_ << e.what() << std::endl;
         return;
     }
     usb::vhci::hcd::callback hcd_callback(&notifyJobQueued, NULL);
@@ -101,7 +105,7 @@ void USBEmulationSupervisor::run()
                 process_usb_request_block_(puw->get_urb());
             } else if(dynamic_cast<usb::vhci::cancel_urb_work*>(work)) //usb::vhci::cancel_urb_work* cuw = dynamic_cast<usb::vhci::cancel_urb_work*>(work))
             {
-                std::cout << "got cancel urb work" << std::endl;
+                messages_ << "got cancel urb work" << std::endl;
             } else
             {
                 std::cerr << "got invalid work" << std::endl;
@@ -111,7 +115,7 @@ void USBEmulationSupervisor::run()
         }
     }
     emulation_interface_->remove_work_enqueued_callback(hcd_callback);
-    std::cout << "thread is out of loop\n";
+    messages_ << "thread is out of loop\n";
     delete emulation_interface_;
 }
 
@@ -130,12 +134,12 @@ void USBEmulationSupervisor::updateWorkState()
 void USBEmulationSupervisor::handleIncomingPortStatusWork(
         usb::vhci::port_stat_work* port_status_work)
 {
-//	std::cout << "got port stat work" << std::endl;
-//	std::cout << "status: 0x" << std::setw(4) << std::setfill('0') << std::right
+//	messages_ << "got port stat work" << std::endl;
+//	messages_ << "status: 0x" << std::setw(4) << std::setfill('0') << std::right
 //			<< std::hex << port_status_work->get_port_stat().get_status() << std::endl;
-//	std::cout << "change: 0x" << std::setw(4) << std::setfill('0') << std::right
+//	messages_ << "change: 0x" << std::setw(4) << std::setfill('0') << std::right
 //			<< port_status_work->get_port_stat().get_change() << std::endl;
-//	std::cout << "flags:  0x" << std::setw(2) << std::setfill('0') << std::right
+//	messages_ << "flags:  0x" << std::setw(2) << std::setfill('0') << std::right
 //			<< static_cast<int>(port_status_work->get_port_stat().get_flags()) << std::endl;
     if(port_status_work->get_port() != 1)
     {
@@ -144,35 +148,35 @@ void USBEmulationSupervisor::handleIncomingPortStatusWork(
     }
     if(port_status_work->triggers_power_off())
     {
-        std::cout << "port is powered off" << std::endl;
+        messages_ << "port is powered off" << std::endl;
     }
     if(port_status_work->triggers_power_on())
     {
-        std::cout << "port is powered on -> connecting device" << std::endl;
+        messages_ << "port is powered on -> connecting device" << std::endl;
         emulation_interface_->port_connect(1, usb::data_rate_full);
     }
     if(port_status_work->triggers_reset())
     {
-        std::cout << "port is resetting" << std::endl;
+        messages_ << "port is resetting" << std::endl;
         if(emulation_interface_->get_port_stat(1).get_connection())
         {
-            std::cout << "-> completing reset" << std::endl;
+            messages_ << "-> completing reset" << std::endl;
             emulation_interface_->port_reset_done(1);
         }
     }
     if(port_status_work->triggers_resuming())
     {
-        std::cout << "port is resuming" << std::endl;
+        messages_ << "port is resuming" << std::endl;
         if(emulation_interface_->get_port_stat(1).get_connection())
         {
-            std::cout << "-> completing resume" << std::endl;
+            messages_ << "-> completing resume" << std::endl;
             emulation_interface_->port_resumed(1);
         }
     }
     if(port_status_work->triggers_suspend())
-        std::cout << "port is suspended" << std::endl;
+        messages_ << "port is suspended" << std::endl;
     if(port_status_work->triggers_disable())
-        std::cout << "port is disabled" << std::endl;
+        messages_ << "port is disabled" << std::endl;
 }
 
 bool USBEmulationSupervisor::isRunning()
@@ -187,7 +191,14 @@ void USBEmulationSupervisor::terminate()
     pthread_cond_signal(&work_present_);
 }
 
+std::string USBEmulationSupervisor::getMessages()
+{
+    return messages_.str();
+}
+
 USBRequestHandler* USBEmulationSupervisor::getRequestHandler() const
 {
     return request_handler_;
 }
+
+

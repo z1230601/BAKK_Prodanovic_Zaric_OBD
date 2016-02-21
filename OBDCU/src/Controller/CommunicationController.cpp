@@ -92,3 +92,14 @@ void CommunicationController::stopEmulation() {
 	}
 }
 
+void CommunicationController::setLogDisplay(QTextBrowser* emulationLogBrowser) {
+	log_browser_ = emulationLogBrowser;
+}
+
+void CommunicationController::refresh() {
+	std::string new_string = emulation_->getMessages();
+	log_browser_->setText(QString(new_string.c_str()));
+}
+
+
+
