@@ -1,0 +1,1 @@
+pandoc -f html -t latex Documentation.html > Documentation.tex

@@ -1,0 +1,81 @@
+%%%% Time-stamp: <2012-08-20 17:41:39 vk>
+
+%% example text content
+%% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
+%% scrbook starts with part (optional), chapter, section, ...
+\chapter{Motivation}
+
+The motivation for this project is the increasing complexity of modern car systems. The amount of integrated control units in automotive 
+systems these days tends to go beyond 80. The resulting energy consumption for the electrical components in such a system sums up to 2,5 kW. 
+This grounds the decision of the automotive industry to deal with its own energy management of these components. Considering the number of 
+control units and their energy consumption an effective handling of these units seems inevitable. Since the knowledge about the fundamental 
+functionality of control units is kept with the manufacturer, serious knowledge deficit surfaces regarding control units from the perspective 
+of a common service mechanic. Thus leading to a dependency on expensive information and/or tools provided by the manufacturer of the automobile.
+The car service shop is forced to rely on those tools. If suspicion of a fault in a control unit arises it is common practice to change the whole 
+unit to resolve this suspicion rather than fixing the real cause of the actual error.
+On the other hand this opens possibilities for the manufacturer to keep his income over development periods high. Since knowledge about the 
+specifics or the right protocols is restricted communication with the full functionality extent giving automotive manufacturers the chance to 
+sell those protocols or a service for diagnosing, keeping their income high.
+After discovering that there are standards defining most of the diagnostic trouble codes (DTCs) and the possibility to request those with 
+hardware available at an economic price it seems reasonable to develop an open source software implementing those functionalities. Further 
+than just requesting DTCs the software is meant to entail ELM327 features as well. 
+
+\section{Market Analysis of Existing OBD Tools}
+The first impression of the OBD diagnostic tools market may seem vast, but focusing on open source solutions it is limited to a handful of tools.
+During the research phase we found different software starting by pyOBD and ScanTool, over ScanMaster and EasyObd up to OBD Auto Doctor. 
+When putting them under practical tests huge difficulties emerged. The following analysis is meant to provide the foundation for this bachelor 
+thesis to implement an open source OBD tool as well as a test system for OBD tools under Linux, which should easily be extendable to Windows.
+
+The strategy on keeping the software easily extendable is to adapt the general programming style to use system independent libraries, thus 
+ensuring the ability to run on most common systems. As a foundation of the market analysis testing the currently available software seem reasonable. 
+Therefore the basic testing strategy is to choose a distribution and try to execute the following steps:
+
+%ENUMARTION
+establish a connection to the OBD interface via an ELM327 microcontroller 
+read trouble codes produced by self-made errors
+reset trouble code memory
+
+Those steps define the basic functionalities in every OBD standard which can be considered as the minimum requirements for an OBD diagnosis tool.
+By acquiring two standard USB to OBD cables at least hardware independence can be established to a certain degree. Additionally the conclusion, that 
+the costs of the required hardware are low, can be drawn and thus leading to average consumers with low budgets representing the target audience. Due
+to the requirement of hardware independence the focus of the project shifts to a pure software implementation. Even though only the use of hardware 
+based on the ELM327 chip is intended, compatibility for most ELM chips is the long term goal. 
+
+Taking the variety of the target audience into account, as many different cars and systems as available served as testing environments to experience 
+the behaviour of the tested tools under different circumstances. Those cars consist of a Renault Trafic 2006 1.9 TDI, an Opel Vivaro 2009, 
+an Opel Zafira 2004 as well as a VW Sharan 2003 1.9 TDI. By using Windows and Ubuntu the majority of distributions are covered.
+
+\subsection{Windows}
+Four different OBD softwares on a Windows 7 OS are tested:
+%ENUMARTION
+EasyObdII Version 2.5
+OBD Auto Doctor
+ScanMaster-ELM DEMO
+OBD 2007
+
+With OBD 2007 and EasyObdII Version 2.5 problems occurred while just trying to connect to the control unit, making it difficult to conduct the tests. 
+Different attempts to solve this problem failed.\\
+Since only trial/demo versions are available for free, the range of testable functions is limited to measuring the actual engine RPM, the vehicle 
+speed or the load value. Due to the encountered problems, a satisfying analysis could not be executed thoroughly.
+\subsection{Ubuntu}
+Connecting to the control unit under Linux proved to be a problem as the ELM327 uses the USB port (ttyUSB) but most of the tested software only 
+searches for COM ports (ttyS).
+Assuming intact hardware, no immediate solution appeared of how to mount the USB device onto the COM port nor how to configure the software such that 
+it connects to the USB port. However, using the low level standard software screen supplied by Linux seemed to be the best approach, as it enables 
+communication with any serial device in form of HEX commands. With this approach the request for trouble codes in HEX format is possible, but 
+additional information such as datasheets, computer knowledge as well as forums for decoding the response are necessary.
+
+\subsection{Conclusion}
+Although spending much time in trying to enable the software’s functionality on both systems, the benefit is limited. Judging from the interface of 
+those freeware tools the usability is not satisfactory. Nevertheless, communicating with the ELM327 seems possible with the terminal based software 
+used. In conclusion it can be stated that the functionalities of the device itself seem intact, though appropriate open source software is hard to 
+find.
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
+%%% Local Variables: 
+%%% mode: latex
+%%% mode: auto-fill
+%%% mode: flyspell
+%%% eval: (ispell-change-dictionary "en_US")
+%%% TeX-master: "main"
+%%% End: 

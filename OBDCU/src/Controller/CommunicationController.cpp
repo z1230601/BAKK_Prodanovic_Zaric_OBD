@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QStringList>
 #include <pthread.h>
+#include <boost/bind.hpp>
 
 #define MANUNFACTURER_STRINGDESCRIPTOR_ID 1
 #define PRODUCT_STRINGDESCRIPTOR_ID 2
@@ -13,6 +14,7 @@
 CommunicationController::CommunicationController() {
 	emulation_ = new USBEmulationSupervisor();
 	languages_model_ = new QStringListModel();
+
 }
 
 CommunicationController::~CommunicationController() {
@@ -72,6 +74,8 @@ void CommunicationController::saveSettings(QString config_path,
 }
 
 void CommunicationController::runEmulation() {
+	boost::function<void (std::string)> callback = boost::bind(&CommunicationController::commandCallback, this, _1);
+	emulation_->getRequestHandler()->getDevice()->setCallback(callback);
 	if(emulation_->isRunning()){
 		emulation_->terminate();
 	}
@@ -94,6 +98,31 @@ void CommunicationController::stopEmulation() {
 
 void CommunicationController::setLogDisplay(QTextBrowser* emulationLogBrowser) {
 	log_browser_ = emulationLogBrowser;
+}
+
+
+void CommunicationController::commandCallback(std::string &got_command) {
+	if(got_command.empty()){
+		return;
+	}
+	std::string pending = "0700";
+	std::string permanent = "0300";
+	std::string deleteRequest = "0400";
+	if(got_command.at(0) == '0'){
+		emulation_->getRequestHandler()->getDevice()->addAnswerTo
+	}
+	if(got_command == pending){
+		std::cout << "pending command"<< std::endl;
+	}
+	else if(got_command == permanent){
+		std::cout << "permanent command"<< std::endl;
+	}else if(got_command == deleteRequest){
+		std::cout << "delete command"<< std::endl;
+	}else if(got_command.find("at") == 0){
+		std::cout << "elm command"<< std::endl;
+	}else{
+		std::cout << "Command get: " << got_command << std::endl;
+	}
 }
 
 void CommunicationController::refresh() {

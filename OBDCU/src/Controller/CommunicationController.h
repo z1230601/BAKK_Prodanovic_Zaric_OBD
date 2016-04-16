@@ -8,6 +8,8 @@
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <QTextBrowser>
+#include <map>
+#include <string>
 
 class CommunicationController {
 
@@ -16,6 +18,10 @@ private:
 	QStringListModel* languages_model_;
 	boost::thread emulation_thread_;
 	QTextBrowser* log_browser_;
+	std::map<std::string, std::string> response_mapping_;
+
+
+
 
 public:
 	CommunicationController();
@@ -31,6 +37,8 @@ public:
 
 	void setLogDisplay(QTextBrowser* emulationLogBrowser);
 	void refresh();
+
+	void commandCallback(std::string &got_command);
 };
 
 #endif /* COMMUNICATIONCONTROLLER_H_ */
