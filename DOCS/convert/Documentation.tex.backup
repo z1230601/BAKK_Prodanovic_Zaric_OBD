@@ -363,7 +363,10 @@ database.}
 possibilities and a lack of OBD software solutions making it the base
 platform for this project. Another discovery discussed in the previous
 chapter is the division of the project into three major parts. The
-theoretical analysis of OBD, the OBD test tool, more prec
+theoretical analysis of OBD, the OBD test tool, more precisely the ECU
+emulation and the OBD tool itself. }{Since this approach bears the
+danger of code duplication and decentralized functionalities another
+optimization is required. ~Extracting the similar functionalities }{of
 the latter two project parts leads to a commonly used OBD middleware
 part. }
 
@@ -373,10 +376,7 @@ of:}
 \begin{itemize}
 \tightlist
 \item
-  {Device Communication}isely the ECU
-emulation and the OBD tool itself. }{Since this approach bears the
-danger of code duplication and decentralized functionalities another
-optimization is required. ~Extracting the similar functionalities }{of
+  {Device Communication}
 \end{itemize}
 
 \begin{itemize}

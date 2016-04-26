@@ -249,10 +249,10 @@
 
 \input{chapters/Motivation}
 \input{chapters/Goals}
-\input{chapters/Specification}
+\input{chapters/Specifications}
 \input{chapters/OBDBasics}
 \input{chapters/Implementation}
-\input{chapters/Projectspecific}
+\input{chapters/ProjectSpecific}
 \input{chapters/SoftwareDevelopmentTechniques}
 
 %% include tex file chapters:
@@ -267,6 +267,11 @@
 
 \printbibliography              %% remove, if using BibTeX instead of biblatex
 % \include{further_ressources}  %% this is a suggestion: you have to create this file on demand
+
+
+
+
+
 
 %%%% end{document}
 \end{document}
