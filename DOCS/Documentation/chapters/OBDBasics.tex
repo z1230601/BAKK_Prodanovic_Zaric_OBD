@@ -3,6 +3,7 @@
 %% example text content
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
+\mybiblatexfile
 
 \chapter{On Board Diagnosis Basics}
 OBD was originally introduced as a way to monitor CO2 emissions for climatic reasons, but since its introduction its range of abilities 
@@ -19,9 +20,11 @@ ISO 15765-4 CAN. Basically the ELM327 serves as an interface communicating as a 
 PC it is attached to and K-Line to communicate with the CU. The hardware port variates depending on the intended usage and circumstances and can go 
 from USB over Bluetooth to Wi-Fi or even RS-232. 
 
-\subsection{Busses}
+\setcounter{section}{0}
+\section{Busses}
 Busses are an essential part of every computer system. As this project covers the communication to external hardware, which in turn communicates to other external hardware, busses are an important point for the completion of this thesis. This chapter’s focus lies on the busses used by the ELM327 and more specific to the busses to which basic knowledge is recommended for this project.  
 The automotive industry applies KL-Line bus, MOST bus as well as CAN. As the busses used for diagnosis are abstracted due to the usage of the ELM327, this chapter will not cover the CAN, MOST and KL-Line bus but instead it will provide basics on USB which are fundamental for the emulation and the serial communication.
+
 
 \subsection{Universal Serial Bus (USB)}
 USB is used for a vast range of devices. Due to the project requirements for the selection and communication to as well as the emulation of an USB device, it seems appropriate to cover the relevant USB basics. Readers who already have experience with USB or knowledge about the general functionality of the protocol can skip this chapter.
@@ -40,7 +43,7 @@ Token packets can either be IN, OUT or SETUP. IN signals the USB device that the
 Data packets define their states as DATA0, DATA1, DATA2 and MDATA, whereas the latter two are only available in high speed mode. Each can transfer a maximum of 1024 bytes of data depending on the speed mode.
 Finally the handshake packet can take the values ACK, NAK, STALL, which signals the host that the transaction was successful, unsuccessful or that the device is waiting for the host to initiate a transaction.
 
-\subsubsection{ 4 Transfer Types}
+\subsubsection{4 Transfer Types}
 Although USB being a host centric communication the standard supplies 4 different types of transfers: 
 \begin{itemize}
  \item Control
@@ -55,30 +58,34 @@ addresses, and selecting configurations. Typically those kinds of transfers are 
 The term data transfers sums up the latter three transfers in the above list. They are transfers transmitting data to the functionality 
 behind the interface. 
 
-\subsubsection*{Control Transfers}
+\paragraph{Control Transfers}
 Each control transfer can undergo three possible stages: 
 \begin{description}
  \item[Setup Stage]Different Settings/Data are requested
  \item[Data Stage] Requested data is sent
  \item[Status Stage] Handshake and confirmation of successful transmission takes place
-As an example one can imagine a digital camera which can either be used as a webcam or as a storage device to get the data already memorized on it.
-When attached, the host only knows that an USB device was attached. It has to request the different endpoints for the different functionalities from 
-the device. Control transfers will be initiated to request the configuration acquiring those settings (setup stage). The transmission of the
-descriptor hierarchy (see Descriptors), which represents the different functionalities and the corresponding ports, will take place in the data 
-stage.
 \end{description}
+
+As an example one can imagine a digital camera which can either be used as a webcam or as a storage device to get the data already 
+memorized on it. When attached, the host only knows that an USB device was attached. It has to request the different endpoints for the 
+different functionalities from the device. Control transfers will be initiated to request the configuration acquiring those settings 
+(setup stage). The transmission of the
+descriptor hierarchy (see Descriptors), which represents the different functionalities and the corresponding ports, will take place in 
+the data stage.
+
 Successful transfers will be ensured by transmitting another set of packets with zero length to confirm its validity.
 
-\subsubsection*{Interrupt Transfers}
+\paragraph{Interrupt Transfers}
 As almost any hardware device, USB Devices have the capability to send Interrupts as well. As mentioned before USB is a host centric communication 
 meaning that, although being an interrupt transfer, it still needs to be polled by the host. 
-\subsubsection*{Isochronous Transfers}
+\paragraph{Isochronous Transfers}
 Isochronous transfers are specified for data which is streamable, like video or audio. It has the specialty of not requesting a resend of data if a packet is not transmitted correctly. The maximum data payload size, depending on the type of communication, is up to 1024 bytes and is defined in the endpoint descriptor (see Descriptors). It is common practice to define multiple interfaces for isochronous endpoints as in case of bandwidth restrictions alternatives can be provided.
-\subsubsection*{Bulk Transfers}
-As the name suggests bulk transfers are meant to deal with bulky data, like files or images. It does not guarantee a latency or bandwidth.
-Therefore it offers a secure way of transmitting data as retransmission is initiated on failed transfers. Unfortunately only devices supporting 
-full or high speed can use this type of transfer. 
-\subsubsection*{Descriptors}
+\paragraph{Bulk Transfers}
+As the name suggests bulk transfers are meant to deal with bulky data, like files or images. It does not guarantee a latency or 
+bandwidth. Therefore it offers a secure way of transmitting data as retransmission is initiated on failed transfers. Unfortunately 
+only devices supporting full or high speed can use this type of transfer. 
+
+\subsubsection{Descriptors}
 Due to the necessity of transmitting USB configurations to the host, different descriptors defining the devices functionality and its coupling to
 the endpoints exist. This subchapter shall give an overview of these descriptors in means of type and structure since it is an essential part of the 
 emulation. 
@@ -95,14 +102,14 @@ purposes. The following are defined in the USB standard:
 Each descriptor contains the summed length, including the length itself, as the first argument and the descriptor type as the second one. There is 
 always at least one device, configuration, interface and endpoint descriptor.
 
-\subsection{Device Descriptor}
+\paragraph{Device Descriptor}
 The device descriptor serves as general information about the device. It contains the vendor and product id identifying the exact type of device as 
 well as the binary coded decimal device code defined in the official USB standard. We used the feature of setting this device code to 255, which will 
 induce the behaviour of vendor specific driver loading. That being said, if a vendor should be a so called FTDI device, such as microchips, the 
 driver for serial communications are loaded. Relevant elements of the device descriptor are: 
 
-
-\begin{tabular}{c|c}
+\begin{table}[h!]
+\begin{tabular}{c| p{10cm}}
 Field & Description \\ \hline
 bLength & length of the complete packet (including the length itself) in bytes \\
 bDescriptorType & type of descriptor (device 0x01) \\
@@ -113,11 +120,12 @@ idProduct & product id of the device\\
 bcdDevice & corresponding device integer (binary coded decimal) \\
 iManufacturer & ID of the string descriptor representing the manufacturer\\
 iProduct & ID of the string descriptor representing the product \\
-bNumConfigurations & amount of configurations \\
- 
+bNumConfigurations & amount of configurations \\ 
 \end{tabular}
+\caption{Device Descriptor Fields}
+\end{table}
 
-\begin{verbatim*}
+\begin{verbatim}
  const uint8_t dev_desc[] = {
 	18,     // descriptor length
 	1,      // type: device descriptor
@@ -138,14 +146,15 @@ bNumConfigurations & amount of configurations \\
 	3,      // serial number string
 	1       // number of configurations
 };
-\end{verbatim*}
-\subsection{Configuration Descriptor}
+\end{verbatim}
+
+\paragraph{Configuration Descriptor}
 A USB device can provide different configurations which depend on the power mode of the attached device. The configuration descriptor supplies mostly 
 power settings. Self powered mode indicates that an external power source is applied. It can be chosen by devices with a limited amount of power. On 
 the other hand bus powered settings will require more energy to be transmitted over the bus thus draining more energy of the host device. Additionally 
 configuration descriptors serve as a grouping of interfaces.
-
-\begin{tabular}{c|c}
+\begin{table}
+\begin{tabular}{c|p{10 cm}} 
 Field & Description \\ \hline
 bLength & complete length of the packet (include the length itself) in bytes \\
 bDescriptorType & type of descriptor (device 0x02)\\
@@ -156,12 +165,16 @@ iConfiguration & ID of the string for the configuration name\\
 bmAttributes  power mode\\
 bMaxPower & the maximum power consumption (consumption = value * 2mA) \\
 \end{tabular}
+ \caption{Configuration Descriptor Fields}
+\end{table}
 
-\subsection{Interface Descriptor}
+
+\paragraph{Interface Descriptor}
 Interface descriptors have the purpose of representing a single functionality and grouping the needed endpoints together, thus making 
 it simpler for the host to select a specific functionality.
 
-\begin{tabular}{c|c}
+\begin{table}
+\begin{tabular}{c|p{10 cm}}
 Field & Description \\
 bLength &  complete length of the packet (include the length itself) in bytes \\
 bDescriptorType &  type of descriptor (device 0x04) \\
@@ -173,12 +186,15 @@ bInterfaceSubClass & standardized class id (in USB standard) describing the inte
 bInterfaceProtocol & standardized protocol id (in USB standard) describing the protocol type \\
 iInterface & ID of string for interface name (string descriptor request) \\
 \end{tabular}
+ \caption{Interface Descriptor Fields}
+\end{table}
+\paragraph{Endpoint Descriptor} 
 
-\subsection{Endpoint Descriptor} 
 Endpoints are the sinks and sources of data for the device. As mentioned above different types of transfers exist, hence different types of 
 endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.
 
-\begin{tabular}{c|c}
+\begin{table}
+\begin{tabular}{c|p{10 cm}}
 Field & Description \\ \hline
 bLength & complete length of the packet (include the length itself) in bytes \\
 bDescriptorType & type of descriptor (device 0x05) \\
@@ -187,27 +203,41 @@ bmAttributes & type of endpoint (see transfer types)\\
 wMaxPacketSize & max receiving or sending endpoint size\\
 bInterval & for interrupt transfer type endpoints define polling rate in frames\\
 \end{tabular}
-\subsection{String  Descriptor}
+ \caption{Endpoint Descriptor Fields}
+\end{table}
+
+\paragraph{String  Descriptor}
 Since the descriptors need some string with variable length, instead of defining a maximum byte length for string fields in descriptors and thus 
-limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are described by a, in 
-the device context, unique ID and can be separately requested in  different languages. Therefore string descriptors are utile descriptors whose 
-purpose is to enable free name definition and also offer multilanguage support.
-\begin{tabular}{c|c}
+limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are 
+described by a, in the device context, unique ID and can be separately requested in  different languages. Therefore string descriptors 
+are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support.
+
+\begin{table}
+\begin{tabular}{c|p{10 cm}}
 Field & Description \\ \hline
 bLength & complete length of the packet (include the length itself) in bytes \\
 bDescriptorType & type of descriptor (device 0x03)
 \end{tabular}
+ \caption{String Descriptor Main Fields}
+\end{table}
 
 In case of string descriptor ID 0 the selectable languages are returned as a list of standardized IDs
-\begin{tabular}{c|c}
+\begin{table}
+\begin{tabular}{c|p{10 cm}}
 wLANGID[0] & first language id in form of (0xXXXX) \\
 wLANGID[1] & second language \\
 wLANGID[x] & n language 
 \end{tabular}
+ \caption{String Descriptor Language Fields}
+\end{table}
+
 In case of any other string descriptor ID the  message would end as follows:
-\begin{tabular}{c|c}
+\begin{table}
+\begin{tabular}{c|p{10 cm}}
 bString & unicode string where every single char is separated by a null byte
 \end{tabular}
+ \caption{String Descriptor Fields}
+\end{table}
 
 \begin{verbatim}
  uint8_t conf_desc[] = {
@@ -249,8 +279,11 @@ bString & unicode string where every single char is separated by a null byte
 }; 
 \end{verbatim}
 
-\subsection{Requests}
-The previous sections introduce different types of transfers. One of them is the control transfer which serves as a way of controlling the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically the use of a request can be derived by its name. The existing requests are listed below.
+\subsubsection{Requests}
+The previous sections introduce different types of transfers. One of them is the control transfer which serves as a way of controlling 
+the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically 
+the use of a request can be derived by its name. The existing requests are listed below.
+
 \paragraph{Device Requests}
 \begin{itemize}
  \item GET\_STATUS
@@ -274,13 +307,14 @@ The previous sections introduce different types of transfers. One of them is the
 
 \paragraph{Endpoint Requests}
 \begin{itemize}
- \item GET_STATUS
-CLEAR_FEATURE
-SET_FEATURE
-SYNC_FRAME
+ \item GET\_STATUS
+ \item CLEAR\_FEATURE
+ \item SET\_FEATURE
+ \item SYNC\_FRAME
 \end{itemize}
 
-Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the following structure:
+Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the 
+following structure:
 \begin{itemize}
  \item bmRequestType (1 byte)
  \item bRequest (1 byte)
@@ -289,7 +323,7 @@ Each of these requests is identified by a combination of two ID fields called re
  \item wLength (2 bytes)
 \end{itemize}
 
-Command Structure and Behaviour
+\subsection{Command Structure and Behaviour}
 At the beginning of automotive manufacturing almost all components were mechanical. As technology developed more and more electrical 
 components found their way into the automobile. At some point the requirement for a standardized interface emerged. Due to the fact 
 that different manufacturers had already applied different technologies, the problem of standardizing their systems would have 
@@ -309,8 +343,7 @@ displayed. However, they commonly can be classified into 4 categories depending 
  \item Network
 \end{itemize}
 
-\subsection{Service Modes}
-(http://www.outilsobdfacile.com/obd-mode-pid.php)
+\section{Service Modes}
 The SAE J1979 and the ISO 15031-5 are two standards which define the available service modes needed to make a diagnostic analysis of cropped up fault codes. Currently there are ten prevalent operation modes, but there are still five reserved modes for eventual future modifications of the actual standard. Additionally manufacturers have the possibility to implement their own diagnoses by using higher service modes.
 Nine of the ten specified modes provide information of sensor measurements or triggered diagnostic trouble codes recorded in the error memory. The remaining mode is meant to clear the memory. Nowadays automobiles are not obligated to support every service  mode, de facto just a limited amount of information can be acquired via the OBD interface.
 Following the ten service modes as well as a short description of their respective function are listed: (SCHÄFFER)
@@ -328,7 +361,7 @@ Following the ten service modes as well as a short description of their respecti
 \end{description}
 
 Furthermore so called OBD PIDs (Parameter Identifiers) are needed to be able to request data from a vehicle successfully. In the following section 
-we discuss the characteristics of PIDs.
+we discuss the characteristics of PIDs.\cite{SCHAFF1}
 
 \subsection{Parameter Identifier}
 Parameter identifier are used to specify the exact sub functionality or location of the selected service mode. A sub functionality can
