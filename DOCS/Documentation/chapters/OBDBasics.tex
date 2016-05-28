@@ -38,7 +38,7 @@ Token packets can either be IN, OUT or SETUP. IN signals the USB device that the
 Data packets define their states as DATA0, DATA1, DATA2 and MDATA, whereas the latter two are only available in high speed mode. Each can transfer a maximum of 1024 bytes of data depending on the speed mode.
 Finally the handshake packet can take the values ACK, NAK, STALL, which signals the host that the transaction was successful, unsuccessful or that the device is waiting for the host to initiate a transaction.
 
-\subsection{ 4 Transfer Types}
+\subsubsection{ 4 Transfer Types}
 Although USB being a host centric communication the standard supplies 4 different types of transfers: 
 \begin{itemize}
  \item Control
@@ -53,7 +53,7 @@ addresses, and selecting configurations. Typically those kinds of transfers are 
 The term data transfers sums up the latter three transfers in the above list. They are transfers transmitting data to the functionality 
 behind the interface. 
 
-\subsection{Control Transfers}
+\subsubsection*{Control Transfers}
 Each control transfer can undergo three possible stages: 
 \begin{description}
  \item[Setup Stage]Different Settings/Data are requested
@@ -67,16 +67,16 @@ stage.
 \end{description}
 Successful transfers will be ensured by transmitting another set of packets with zero length to confirm its validity.
 
-\subsection{Interrupt Transfers}
+\subsubsection*{Interrupt Transfers}
 As almost any hardware device, USB Devices have the capability to send Interrupts as well. As mentioned before USB is a host centric communication 
 meaning that, although being an interrupt transfer, it still needs to be polled by the host. 
-\subsection{Isochronous Transfers}
+\subsubsection*{Isochronous Transfers}
 Isochronous transfers are specified for data which is streamable, like video or audio. It has the specialty of not requesting a resend of data if a packet is not transmitted correctly. The maximum data payload size, depending on the type of communication, is up to 1024 bytes and is defined in the endpoint descriptor (see Descriptors). It is common practice to define multiple interfaces for isochronous endpoints as in case of bandwidth restrictions alternatives can be provided.
-\subsection{Bulk Transfers}
+\subsubsection*{Bulk Transfers}
 As the name suggests bulk transfers are meant to deal with bulky data, like files or images. It does not guarantee a latency or bandwidth.
 Therefore it offers a secure way of transmitting data as retransmission is initiated on failed transfers. Unfortunately only devices supporting 
 full or high speed can use this type of transfer. 
-\subsection{Descriptors}
+\subsubsection*{Descriptors}
 Due to the necessity of transmitting USB configurations to the host, different descriptors defining the devices functionality and its coupling to
 the endpoints exist. This subchapter shall give an overview of these descriptors in means of type and structure since it is an essential part of the 
 emulation. 
@@ -156,63 +156,57 @@ bMaxPower & the maximum power consumption (consumption = value * 2mA) \\
 \end{tabular}
 
 \subsection{Interface Descriptor}
-Interface descriptors have the purpose of representing a single functionality and grouping the needed endpoints together, thus making it simpler for 
-the host to select a specific functionality.
+Interface descriptors have the purpose of representing a single functionality and grouping the needed endpoints together, thus making 
+it simpler for the host to select a specific functionality.
 
 \begin{tabular}{c|c}
 Field & Description \\
 bLength &  complete length of the packet (include the length itself) in bytes \\
 bDescriptorType &  type of descriptor (device 0x04) \\
-bInterfaceNumber
-index of interface
-bAlternateSetting
-index of alternative interface if this should fail due to e.g. speed capabilities
-bNumEndpoints
-amount of endpoints
-bInterfaceClass
-standardized class id (in USB standard) describing the interface type
-bInterfaceSubClass
-standardized class id (in USB standard) describing the interface type
-bInterfaceProtocol
-standardized protocol id (in USB standard) describing the protocol type
-iInterface
-ID of string for interface name (string descriptor request)
+bInterfaceNumber & index of interface \\
+bAlternateSetting & index of alternative interface if this should fail due to e.g. speed capabilities \\
+bNumEndpoints & amount of endpoints \\
+bInterfaceClass & standardized class id (in USB standard) describing the interface type \\
+bInterfaceSubClass & standardized class id (in USB standard) describing the interface type \\
+bInterfaceProtocol & standardized protocol id (in USB standard) describing the protocol type \\
+iInterface & ID of string for interface name (string descriptor request) \\
 \end{tabular}
 
-Endpoint  Descriptor
-Endpoints are the sinks and sources of data for the device. As mentioned above different types of transfers exist, hence different types of endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.
-Field
-Description
-bLength
-complete length of the packet (include the length itself) in bytes
-bDescriptorType
-type of descriptor (device 0x05)
-bEndpointAddress
-address of the endpoint and direction
-bmAttributes
-type of endpoint (see transfer types)
-wMaxPacketSize
-max receiving or sending endpoint size
-bInterval
-for interrupt transfer type endpoints define polling rate in frames
-String  Descriptor
-Since the descriptors need some string with variable length, instead of defining a maximum byte length for string fields in descriptors and thus limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are described by a, in the device context, unique ID and can be separately requested in  different languages. Therefore string descriptors are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support.
-Field
-Description
-bLength
-complete length of the packet (include the length itself) in bytes
-bDescriptorType
-type of descriptor (device 0x03)
+\subsection{Endpoint Descriptor} 
+Endpoints are the sinks and sources of data for the device. As mentioned above different types of transfers exist, hence different types of 
+endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.
+
+\begin{tabular}{c|c}
+Field & Description \\ \hline
+bLength & complete length of the packet (include the length itself) in bytes \\
+bDescriptorType & type of descriptor (device 0x05) \\
+bEndpointAddress & address of the endpoint and direction\\
+bmAttributes & type of endpoint (see transfer types)\\
+wMaxPacketSize & max receiving or sending endpoint size\\
+bInterval & for interrupt transfer type endpoints define polling rate in frames\\
+\end{tabular}
+\subsection{String  Descriptor}
+Since the descriptors need some string with variable length, instead of defining a maximum byte length for string fields in descriptors and thus 
+limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are described by a, in 
+the device context, unique ID and can be separately requested in  different languages. Therefore string descriptors are utile descriptors whose 
+purpose is to enable free name definition and also offer multilanguage support.
+\begin{tabular}{c|c}
+Field & Description \\ \hline
+bLength & complete length of the packet (include the length itself) in bytes \\
+bDescriptorType & type of descriptor (device 0x03)
+\end{tabular}
+
 In case of string descriptor ID 0 the selectable languages are returned as a list of standardized IDs
-wLANGID[0]
-first language id in form of (0xXXXX)
-wLANGID[1]
-second language
-wLANGID[x]
-n language 
-in case of any other string descriptor ID the  message would end as follows:
-bString
-unicode string where every single char is separated by a null byte
+\begin{tabular}{c|c}
+wLANGID[0] & first language id in form of (0xXXXX) \\
+wLANGID[1] & second language \\
+wLANGID[x] & n language 
+\end{tabular}
+In case of any other string descriptor ID the  message would end as follows:
+\begin{tabular}{c|c}
+bString & unicode string where every single char is separated by a null byte
+\end{tabular}
+
 \begin{verbatim}
  uint8_t conf_desc[] = {
 	9,      // descriptor length
@@ -253,67 +247,95 @@ unicode string where every single char is separated by a null byte
 }; 
 \end{verbatim}
 
-% Requests
-% The previous sections introduce different types of transfers. One of them is the control transfer which serves as a way of controlling the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically the use of a request can be derived by its name. The existing requests are listed below.
-% Device Requests:
-% GET_STATUS
-% CLEAR_FEATURE
-% SET_FEATURE
-% SET_ADDRESS
-% GET_DESCRIPTOR
-% SET_DESCRIPOTR
-% GET_CONFIGURATION
-% SET_CONFIGURATION
-% 
-% Interface Requests
-% GET_STATUS
-% CLEAR_FEATURE
-% SET_FEATURE
-% GET_INTERFACE
-% SET_INTERFACE
-% 
-% Endpoint Requests
-% GET_STATUS
-% CLEAR_FEATURE
-% SET_FEATURE
-% SYNC_FRAME
-% 
-% Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the following structure:
-% bmRequestType (1 byte)
-% bRequest (1 byte)
-% wValue (2 bytes)
-% wIndex (2 bytes)
-% wLength (2 bytes)
-% 
-% 
-% Command Structure and Behaviour
-% At the beginning of automotive manufacturing almost all components were mechanical. As technology developed more and more electrical components found their way into the automobile. At some point the requirement for a standardized interface emerged. Due to the fact that different manufacturers had already applied different technologies, the problem of standardizing their systems would have resulted in huge redevelopment costs. As no manufacturer could be expected to carry those costs, the OBD standard does not define the utilization of any specific technology. Instead it defines the interface and format to which every automobile must be able to communicate with standardized commands. 
-% This diagnostic data must have a uniform format. This format is called diagnostic trouble code or simply fault code. Since every vehicle has the same theoretical background, standardizing types of faults is feasible. This property also simplifies a categorization of trouble codes, whereby different standards for diagnosing vehicles have been introduced by the International Organization for Standardization (ISO) and Society of Automotive Engineers (SAE). 
-% Due to the amount of integrated control units, their varying function set and size as well as their location a need for clustering is displayed. However, they commonly can be classified into 4 categories depending on their functionality in the vehicle:
-% Powertrain 
-% Chassis 
-% Body 
-% Network
-% 
-% Service Modes (http://www.outilsobdfacile.com/obd-mode-pid.php)
-% The SAE J1979 and the ISO 15031-5 are two standards which define the available service modes needed to make a diagnostic analysis of cropped up fault codes. Currently there are ten prevalent operation modes, but there are still five reserved modes for eventual future modifications of the actual standard. Additionally manufacturers have the possibility to implement their own diagnoses by using higher service modes.
-% Nine of the ten specified modes provide information of sensor measurements or triggered diagnostic trouble codes recorded in the error memory. The remaining mode is meant to clear the memory. Nowadays automobiles are not obligated to support every service  mode, de facto just a limited amount of information can be acquired via the OBD interface.
-% Following the ten service modes as well as a short description of their respective function are listed: (SCHÄFFER)
-% 
-% Request current data: depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
-% Request freeze frame data: faults, causing the malfunction indicator lamp (MIL) to flash while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
-% Request stored diagnostic trouble codes: this mode is used to read out emission based faults without deleting the fault codes from memory.
-% Delete stored diagnostic trouble codes: this service mode provides the capability of deleting all stored DTCs from the memory irreversibly. Furthermore the freeze frame data as well as the readiness code, which contains the data of the continuous and non-continuous monitoring of the car’s self-testing emission system, is reset. It is recommended to use this mode cautiously, as it also resets the MIL and all its related counters.
-% Request O2-Sensor values: this mode ascertains the measured values of the O2-sensor. The conversion of the requested values is depending on the manufacturer.
-% Request specific, non-continuous monitored systems: similar to service mode five the sixth service mode especially provides data of non-continuous monitored components. The range of considered components is  manufacturer dependent.
-% Request pending DTCs: this mode allows a comfortable way to read out reoccurring fault codes during a test drive after the vehicle got repaired and the DTCs got deleted. Especially fault codes which do not show up in service mode three can be emphasized with mode seven.
-% Control on-board systems/test/components: this mode supplies external control of on-board systems, testing functions or other components by turning them temporarily or permanently  on or off .
-% Request vehicle information: the vehicle information contains e.g. the VIN (vehicle identification number) as well as several calibration values.
-% Permanent emission-based DTCs: this service mode is only available to CUs which communicate via the CAN protocol. DTCs stored in this part of the memory cannot be cleared by service mode four due to their severeness, instead only several road cycles will cause the CU to clear the fault if the problem does not reappear.
-% Furthermore so called OBD PIDs (Parameter Identifiers) are needed to be able to request data from a vehicle successfully. In the following section we discuss the characteristics of PIDs.
-% Parameter Identifier
-% Parameter identifier are used to specify the exact sub functionality or location of the selected service mode. A sub functionality can be a specific sensor or requested data like VIN. Every service mode contains an own set of available, valid PIDs to produce meaningful requests. Many PIDs are already specified and included in the OBD-II standard SAE J1979. Due to the fact that each manufacturer can define vehicle specific PIDs it is not guaranteed that all vehicles will respond to all available PIDs, even though they are valid. Leading to the solution of reserving the first PID in a set of 32 PIDs for requesting the valid PIDs of the set. Depending on the service mode in combination with the parameter identifier the byte-length as well as the value-range of the response can vary. 
-% 
+\subsection{Requests}
+The previous sections introduce different types of transfers. One of them is the control transfer which serves as a way of controlling the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically the use of a request can be derived by its name. The existing requests are listed below.
+\paragraph{Device Requests}
+\begin{itemize}
+ \item GET\_STATUS
+ \item CLEAR\_FEATURE
+ \item SET\_FEATURE
+ \item SET\_ADDRESS
+ \item GET\_DESCRIPTOR
+ \item SET\_DESCRIPOTR
+ \item GET\_CONFIGURATION
+ \item SET\_CONFIGURATION
+\end{itemize}
+
+\paragraph{Interface Requests}
+\begin{itemize}
+ \item GET\_STATUS
+ \item CLEAR\_FEATURE
+ \item SET\_FEATURE
+ \item GET\_INTERFACE
+ \item SET\_INTERFACE
+\end{itemize}
+
+\paragraph{Endpoint Requests}
+\begin{itemize}
+ \item GET_STATUS
+CLEAR_FEATURE
+SET_FEATURE
+SYNC_FRAME
+\end{itemize}
+
+Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the following structure:
+\begin{itemize}
+ \item bmRequestType (1 byte)
+ \item bRequest (1 byte)
+ \item wValue (2 bytes)
+ \item wIndex (2 bytes)
+ \item wLength (2 bytes)
+\end{itemize}
+
+Command Structure and Behaviour
+At the beginning of automotive manufacturing almost all components were mechanical. As technology developed more and more electrical 
+components found their way into the automobile. At some point the requirement for a standardized interface emerged. Due to the fact 
+that different manufacturers had already applied different technologies, the problem of standardizing their systems would have 
+resulted in huge redevelopment costs. As no manufacturer could be expected to carry those costs, the OBD standard does not define the 
+utilization of any specific technology. Instead it defines the interface and format to which every automobile must be able to 
+communicate with standardized commands. 
+This diagnostic data must have a uniform format. This format is called diagnostic trouble code or simply fault code. Since every 
+vehicle has the same theoretical background, standardizing types of faults is feasible. This property also simplifies a categorization 
+of trouble codes, whereby different standards for diagnosing vehicles have been introduced by the International Organization for 
+Standardization (ISO) and Society of Automotive Engineers (SAE). 
+Due to the amount of integrated control units, their varying function set and size as well as their location a need for clustering is 
+displayed. However, they commonly can be classified into 4 categories depending on their functionality in the vehicle:
+\begin{itemize}
+ \item Powertrain 
+ \item Chassis 
+ \item Body 
+ \item Network
+\end{itemize}
+
+\subsection{Service Modes}
+(http://www.outilsobdfacile.com/obd-mode-pid.php)
+The SAE J1979 and the ISO 15031-5 are two standards which define the available service modes needed to make a diagnostic analysis of cropped up fault codes. Currently there are ten prevalent operation modes, but there are still five reserved modes for eventual future modifications of the actual standard. Additionally manufacturers have the possibility to implement their own diagnoses by using higher service modes.
+Nine of the ten specified modes provide information of sensor measurements or triggered diagnostic trouble codes recorded in the error memory. The remaining mode is meant to clear the memory. Nowadays automobiles are not obligated to support every service  mode, de facto just a limited amount of information can be acquired via the OBD interface.
+Following the ten service modes as well as a short description of their respective function are listed: (SCHÄFFER)
+\begin{description}
+ \item[Request current data] depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
+ \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to flash while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
+ \item[Request stored diagnostic trouble codes] this mode is used to read out emission based faults without deleting the fault codes from memory.
+ \item[Delete stored diagnostic trouble codes] this service mode provides the capability of deleting all stored DTCs from the memory irreversibly. Furthermore the freeze frame data as well as the readiness code, which contains the data of the continuous and non-continuous monitoring of the car’s self-testing emission system, is reset. It is recommended to use this mode cautiously, as it also resets the MIL and all its related counters.
+ \item[Request O2-Sensor values] this mode ascertains the measured values of the O2-sensor. The conversion of the requested values is depending on the manufacturer.
+ \item[Request specific, non-continuous monitored systems] similar to service mode five the sixth service mode especially provides data of non-continuous monitored components. The range of considered components is  manufacturer dependent.
+ \item[Request pending DTCs] this mode allows a comfortable way to read out reoccurring fault codes during a test drive after the vehicle got repaired and the DTCs got deleted. Especially fault codes which do not show up in service mode three can be emphasized with mode seven.
+ \item[Control on-board systems/test/components]  this mode supplies external control of on-board systems, testing functions or other components by turning them temporarily or permanently  on or off.
+ \item[Request vehicle information] the vehicle information contains e.g. the VIN (vehicle identification number) as well as several calibration values.
+ \item[Permanent emission-based DTCs] this service mode is only available to CUs which communicate via the CAN protocol. DTCs stored in this part of the memory cannot be cleared by service mode four due to their severeness, instead only several road cycles will cause the CU to clear the fault if the problem does not reappear.
+\end{description}
+
+Furthermore so called OBD PIDs (Parameter Identifiers) are needed to be able to request data from a vehicle successfully. In the following section 
+we discuss the characteristics of PIDs.
+
+\subsection{Parameter Identifier}
+Parameter identifier are used to specify the exact sub functionality or location of the selected service mode. A sub functionality can
+be a specific sensor or requested data like VIN. Every service mode contains an own set of available, valid PIDs to produce meaningful requests. Many PIDs are 
+already specified and included in the OBD-II standard SAE J1979. Due to the fact that each manufacturer can define vehicle specific PIDs it is not 
+guaranteed that all vehicles will respond to all available PIDs, even though they are valid. Leading to the solution of reserving the first PID in a 
+set of 32 PIDs for requesting the valid PIDs of the set. Depending on the service mode in combination with the parameter identifier the byte-length 
+as well as the value-range of the response can vary. 
+
 
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
