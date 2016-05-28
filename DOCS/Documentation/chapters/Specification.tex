@@ -10,6 +10,8 @@ this project. Another discovery discussed in the previous chapter is the divisio
 OBD, the OBD test tool, more precisely the ECU emulation and the OBD tool itself. Since this approach bears the danger of code duplication and 
 decentralized functionalities another optimization is required.  Extracting the similar functionalities of the latter two project parts leads to a 
 commonly used OBD middleware part. 
+
+\section{Technical Specification}
 The OBD middleware is located at the root of the project and consists of:
 \begin{description}
 \item[Device Communication]
@@ -31,8 +33,7 @@ The representation of the DTC and their responses are coupled in this package as
 The character of the OBD middleware makes this package a perfect starting point for this project. 
 The different project parts are explained in the chapter Implementation and Project Specific Implementation
 
-\setcounter{subsection}{0}
-\subsection{Technical Specifications}
+\section{Non-Technical Specifications}
 Due to the increasing popularity of agile software development and consistency of using Automotive SPICE in automotive systems 
 an additional scientific part arose. The combination of  the  widespread technique of agile software development with the  rigid Automotive 
 SPICE concept additionally makes the implementation of the project a case study on software development in the automotive context. 
