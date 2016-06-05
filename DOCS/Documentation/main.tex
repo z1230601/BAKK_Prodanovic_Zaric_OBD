@@ -248,7 +248,6 @@
 \mainmatter                     %% KOMA: marks main part using arabic page numbers and such; only available in scrbook
 
 \input{chapters/Motivation}
-\input{chapters/Goals}
 \input{chapters/Specification}
 \input{chapters/OBDBasics}
 \input{chapters/Implementation}
@@ -264,6 +263,7 @@
 
 \appendix                       %% closes main document, appendix follows until end; only available in book-classes
 \addpart*{Appendix}             %% adding Appendix to tableofcontents
+\label{sec:Appendix}
 
 \printbibliography              %% remove, if using BibTeX instead of biblatex
 % \include{further_ressources}  %% this is a suggestion: you have to create this file on demand

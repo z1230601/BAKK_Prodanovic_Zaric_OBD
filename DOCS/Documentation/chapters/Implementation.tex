@@ -106,7 +106,7 @@ manipulated the database this script can be used to reset the test database to i
 The configuration parameters can either be entered hardcoded or by parsing an XML file containing the host address, user, password and database 
 name. The parsing  structure is thoroughly explained in the Configuration section. The XML looks as follows:
 
-\begin{lstlisting}
+\begin{verbatim}
  <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE database SYSTEM "database.dtd">
  <database>
@@ -115,7 +115,7 @@ name. The parsing  structure is thoroughly explained in the Configuration sectio
    <password></password>
    <dbname>OBD_TroubleCodes</dbname>
  </database>
-\end{lstlisting}
+\end{verbatim}
 
 The password field is left empty as the user obd has no password setup.  
 
@@ -139,7 +139,7 @@ Calculation values are responses or part of a response, where the received value
 As the name suggests there are additional calculations necessary. The standard defines the environment parameters of these values, which are 
 supplied by an XML file. PID 0x66 shows an example of a calculation value:
 
-\begin{lstlisting}
+\begin{verbatim}
  <value interpretation="calculation">
   <name>MAF Sensor A</name>
   <bytes>2</bytes>
@@ -147,7 +147,7 @@ supplied by an XML file. PID 0x66 shows an example of a calculation value:
   <max>2047.96875</max>
   <unit>g/s</unit>
  </value>
-\end{lstlisting}
+\end{verbatim}
 
 These definitions describe the range of the received data, in this case from 0 - 2047.96875 g/s for 0 - 65535 decimal value of two bytes. 
 This means that a received byte value of 0 corresponds to 0 g/s and a decimal value of 65535 represents 2047.9687 g/s. When resolving these 
@@ -157,7 +157,7 @@ relations the following formula can be used for converting values:
 
 \[ v_{interpreted} = v_{raw} * c_s + min \]
 
-\begin{lstlisting}
+\begin{verbatim}
  void OBDCalculationValue::interpretCalculationValue(std::vector<uint8_t> input)
  {
    unsigned int compound_value = calculateCompoundValue(input);
@@ -165,13 +165,13 @@ relations the following formula can be used for converting values:
    interpreted_value_ = compound_value * scale + min_;
    uninterpreted_value_ = compound_value;
  }
-\end{lstlisting}
+\end{verbatim}
 
 The conversion of interpreted values to raw values  naturally deduces:
 
 \[ v_{raw} = \frac{(v_{interpreted} - min)}{c_s} \]
 
-\begin{lstlisting}
+\begin{verbatim}
  void OBDCalculationValue::interpretCalculationByteArray(double value)
  {
    interpreted_value_ = value;
@@ -180,14 +180,14 @@ The conversion of interpreted values to raw values  naturally deduces:
    double scale = (max_ - min_) / (pow(2.0, byte_amount_ * 8.0) - 1);
    uninterpreted_value_ = (interpreted_value_ - min_) / scale;
  }
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Value Mapping Values}
 
 These are values whose raw values are used on a predefined mapping to get a string representation of this specific PID’s request. Meaning the 
 value directly maps to a result string. The configuration of such a value requires only the mapping itself, as illustrated by the PID 0x5f:
 
-\begin{lstlisting}
+\begin{verbatim}
  <value interpretation="mapping">
   <bytes>1</bytes>
   <mapping type="value">
@@ -196,7 +196,7 @@ value directly maps to a result string. The configuration of such a value requir
    <entry from="10">LKW (Euro EEV) C</entry>
   </mapping>        
 </value>
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Bit Mapping Values}
 
@@ -204,7 +204,7 @@ As the name suggests bit mapping values are values, where each bit has a differe
 the mapping and significance of the single bits. In some cases a bits true and false value signify different outputs for the same entity. An 
 example of such a value is PID 0 as well as PID 0x65.
 
-\begin{lstlisting}
+\begin{verbatim}
  <value interpretation="mapping">
   <bytes>1</bytes>
   <mapping type="bit">
@@ -218,20 +218,20 @@ example of such a value is PID 0 as well as PID 0x65.
    <entry from="3" set="true">Lampe ein</entry>
   </mapping>
  </value>
-\end{lstlisting}
+\end{verbatim}
 
 The from field specifies the bit position while the set attribute is an optional attribute to assign a bits value to a concrete output. In this 
 case it is supplied, meaning that depending  on the bits status different strings are mapped. If the set attribute is not explicitly stated it 
 is assumed true.
 
-\begin{lstlisting}
+\begin{verbatim}
  std::string OBDBitMappingValue::interpretToValue(std::vector<uint8_t> input)
  {
    interpreted_value_ = calculateCompoundValue(input);
    uninterpreted_value_ = interpreted_value_;
    return getInterpretedValueAsString();
  }
-\end{lstlisting}
+\end{verbatim}
 
 As this code shows in case of mapping values of interpreted and uninterpreted values are identical and represent the key of the underlying mapping.
 
@@ -240,7 +240,7 @@ As this code shows in case of mapping values of interpreted and uninterpreted va
 This value parsing is a bit comparator mapping of more than two bits. The from field specifies the bit positions and the set represents the 
 value it needs to equal to get the result string in question. PID 0x70 is an example of such a mapping.
 
-\begin{lstlisting}
+\begin{verbatim}
  <value interpretation="mapping">
   <bytes>1</bytes>
   <mapping type="bitcombination">
@@ -254,7 +254,7 @@ value it needs to equal to get the result string in question. PID 0x70 is an exa
    <entry from="23" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
     </mapping>    
  </value>
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Inner Workings}
 
@@ -263,7 +263,7 @@ combined as needed, so that multiple calculation values can be followed by any m
 definition’s bytes will then be expected when parsing the OBD commands answer, giving significance to the order of the sequence in which the 
 values are defined in the XML file.
 
-\begin{lstlisting}
+\begin{verbatim}
  <obdcommand>
   <pid>70</pid>
   <description>Ladedruckregelung</description>
@@ -303,7 +303,7 @@ values are defined in the XML file.
    </value>
   </values>
  </obdcommand>
-\end{lstlisting}
+\end{verbatim}
 
 Furthermore special OBD commands exist where the first byte defines which of the transmitted following bytes are valid values. These OBD 
 commands are mostly used for array sensor PIDs. The package offers therefore the optional definition of an automatic or manual validity mapping.
@@ -332,14 +332,14 @@ The difficulty of this part of the OBDBase package surfaced when inspecting the 
 an inconsistent way of defining additional values. In most cases they are referenced as “h” (hexadecimal value) but there are some values 
 referenced by “x”,” y” or “z” as well.
 
-\begin{lstlisting}
+\begin{verbatim}
  <command>
   <version>1.0</version>
   <elmcommand>"AL"</elmcommand>
   <description>"Allow Long (>7 byte) messages"</description> 
   <group>"OBD"</group>
  </command>
-\end{lstlisting}
+\end{verbatim}
 
 \section{Configuration}
 
@@ -374,7 +374,7 @@ The XMLWriter and XMLReader classes are initialized with an instance of the Defa
 existing XML file. Each function calls its internally defined DefaultHandler’s handleNode function while recursively iterating through DOM nodes. 
 A well formed structure of the underlying XML files is ensured by the required DTD files, shown beneath, defining the structure of the XML files.
 
-\begin{lstlisting}
+\begin{verbatim}
  <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE database SYSTEM "database.dtd">
 
@@ -384,15 +384,15 @@ A well formed structure of the underlying XML files is ensured by the required D
   <password></password>
   <dbname>OBD_TroubleCodes</dbname>
  </database>
-\end{lstlisting}
+\end{verbatim}
 
-\begin{lstlisting}
+\begin{verbatim}
  <!ELEMENT database (address, user, password, dbname)>
  <!ELEMENT address (#PCDATA)>
  <!ELEMENT user (#PCDATA)>
  <!ELEMENT password (#PCDATA)>
  <!ELEMENT dbname (#PCDATA)>
-\end{lstlisting}
+\end{verbatim}
 
 The difference between the two classes is that, whilst the XMLReader only iterates and lets the handler save the read data, the XMLWriter sets 
 the DefaultHandler into a mode, where he instead of parsing the node’s data sets it. After the iteration the XMLWriter writes to the same file 
