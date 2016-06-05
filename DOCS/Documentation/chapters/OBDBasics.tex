@@ -12,30 +12,40 @@ keeping track of the error memory by trouble codes is possible. Even the access 
 their attached entities is feasible, resulting in a not negligible security threat. 
 
 These characteristics are a result of introducing the concept of a central OBD interface at a time, 
-when almost every automotive manufacturer already implemented own communication protocol between the separate control units.\cite{SCHAFOBD1}
+when almost every automotive manufacturer already implemented own communication protocol between the separate control units.\footcite{SCHAFOBD1}
 As a result the OBD standard does not define a specific protocol used for the CAN bus but only the protocol used to communicate with the diagnostic 
 section of a control unit, where standardized trouble codes can be obtained. 
 
 If the protocol used for inter CU communication was known, it would be possible to send commands directly to any CU in the bus system, which bears a 
-great security issue. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, since this topic
-is ala
+great security issue. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, but due to the
+popularity of this topic at universities this thesis will not cover it.\footcite{Koscher2010}
 
 Generally there is a variety of already existing protocols and standards which define the communication via the OBD interface. The usage of the ELM327 
 emerged due to its availability and simplicity, as it is a popular programmed microcontroller for translating the OBD interface. ELM327 has the 
 advantage of establishing a connection between the OBD interface and a PC using different standards and protocols e.g. SAE J1850, ISO 14230-4 KWP, 
 ISO 15765-4 CAN. Basically the ELM327 serves as an interface communicating as a UART (universal asynchronous receiver/transmitter) device with the 
 PC it is attached to and K-Line to communicate with the CU. The hardware port variates depending on the intended usage and circumstances and can go 
-from USB over Bluetooth to Wi-Fi or even RS-232. 
+from USB over Bluetooth to Wi-Fi or even RS-232.\footcite[p. 46 ff.]{SCHAFOBD2}
 
 \setcounter{section}{0}
 \section{Busses}
-Busses are an essential part of every computer system. As this project covers the communication to external hardware, which in turn communicates to other external hardware, busses are an important point for the completion of this thesis. This chapter’s focus lies on the busses used by the ELM327 and more specific to the busses to which basic knowledge is recommended for this project.  
-The automotive industry applies KL-Line bus, MOST bus as well as CAN. As the busses used for diagnosis are abstracted due to the usage of the ELM327, this chapter will not cover the CAN, MOST and KL-Line bus but instead it will provide basics on USB which are fundamental for the emulation and the serial communication.
 
+Busses are an essential part of every computer system. As this project covers the communication to external hardware, which in turn communicates to other 
+external hardware, busses are an important point for the completion of this thesis. This chapter’s focus lies on the busses used by the ELM327 and more 
+specific to the busses to which basic knowledge is recommended for this project.
+
+The automotive industry applies KL-Line bus, MOST bus as well as CAN. As the busses used for diagnosis are abstracted due to the usage of the ELM327, 
+this chapter will not cover the CAN, MOST and KL-Line bus but instead it will provide basics on USB which are fundamental for \nameref{sec:emulation} 
+and \nameref{sec:serialComm}.
 
 \subsection{Universal Serial Bus (USB)}
-USB is used for a vast range of devices. Due to the project requirements for the selection and communication to as well as the emulation of an USB device, it seems appropriate to cover the relevant USB basics. Readers who already have experience with USB or knowledge about the general functionality of the protocol can skip this chapter.
+
+USB is used for a vast range of devices. Due to the project requirements for the selection and communication to as well as the emulation of an USB device,
+it seems appropriate to cover the relevant USB basics. Readers who already have experience with USB or knowledge about the general functionality of the 
+protocol can skip this chapter.
+
 USB is a shielded 4 wire, TTL voltage communications interface using NRZI (Non Return to Zero Inverted) encoding. Meaning that it is represented by 4 wires:
+
 \begin{itemize}
 \item High (5V reference Voltage)
 \item D-
@@ -43,15 +53,33 @@ USB is a shielded 4 wire, TTL voltage communications interface using NRZI (Non R
 \item Ground (reference Voltage)
 \end{itemize}
 
-\emph{D} is a twisted pair, differential signaling wire. Differential signaling is a method to reduce noise effects on data transmissions where a signal is transmitted over the wires, with the additional property that the signal carried by one wire is inverted to the signal carried by the other wire. The receiver uses the difference between the signals instead of the signal itself bracing it against overlaid noise. 
-It has a tiered star topology which means that although they are physically cascaded,e.g. by hubs, it is logically considered a star topology where the root hub (computer) can access a device over its logical address (port). 
-Since it is a host centric communication every transaction is initiated by the host. Each transaction has a header packet (token), an optional data packet and a handshake packet. The header packet defines targets (interface and endpoint) and the handshake represents the validity of the response, whereas the data packet is simply carrying the payload.
-Token packets can either be IN, OUT or SETUP. IN signals the USB device that the host is ready to read data from it, OUT that it is ready to write data to it and SETUP is used as an identifier for control transfers, which are instruction transfers to the device itself.
-Data packets define their states as DATA0, DATA1, DATA2 and MDATA, whereas the latter two are only available in high speed mode. Each can transfer a maximum of 1024 bytes of data depending on the speed mode.
-Finally the handshake packet can take the values ACK, NAK, STALL, which signals the host that the transaction was successful, unsuccessful or that the device is waiting for the host to initiate a transaction.
+\emph{D} is a twisted pair, differential signaling wire. Differential signaling is a method to reduce noise effects on data transmissions where a signal
+is transmitted over the wires, with the additional property that the signal carried by one wire is inverted to the signal carried by the other wire. The 
+receiver uses the difference between the signals instead of the signal itself bracing it against overlaid noise.\footcite{Massoud2001}
+
+It has a tiered star topology which means that although they are physically cascaded, e.g. by hubs, it is logically considered a star topology where the 
+root hub (computer) can access a device over its logical address (port).
+\begin{figure}
+
+\end{figure}
+
+Since it is a host centric communication every transaction is initiated by the host. Each transaction has a header packet (token), an optional data 
+packet and a handshake packet. The header packet defines targets (interface and endpoint) and the handshake represents the validity of the response, 
+whereas the data packet is simply carrying the payload.
+
+Token packets can either be IN, OUT or SETUP. IN signals the USB device that the host is ready to read data from it, OUT that it is ready to write data 
+to it and SETUP is used as an identifier for control transfers, which are instruction transfers to the device itself.
+
+Data packets define their states as DATA0, DATA1, DATA2 and MDATA, whereas the latter two are only available in high speed mode. Each can transfer a 
+maximum of 1024 bytes of data depending on the speed mode.
+
+Finally the handshake packet can take the values ACK, NAK, STALL, which signals the host that the transaction was successful, unsuccessful or that the 
+device is waiting for the host to initiate a transaction.\footcite[p. 199ff.]{USB}
 
 \subsubsection{4 Transfer Types}
+
 Although USB being a host centric communication the standard supplies 4 different types of transfers: 
+
 \begin{itemize}
  \item Control
  \item Interrupt
@@ -63,36 +91,45 @@ Generally they can be divided into two types of transfers: control and data. Con
 configuration of the device. Its functions include getting and setting selectable languages, setting up USB specific attributes, such as hub and port 
 addresses, and selecting configurations. Typically those kinds of transfers are small in size and amount. 
 The term data transfers sums up the latter three transfers in the above list. They are transfers transmitting data to the functionality 
-behind the interface. 
+behind the interface.\footcite[p. 36ff.]{USB}
 
 \paragraph{Control Transfers}
+
 Each control transfer can undergo three possible stages: 
+
 \begin{description}
- \item[Setup Stage]Different Settings/Data are requested
+ \item[Setup Stage] Different Settings/Data are requested
  \item[Data Stage] Requested data is sent
  \item[Status Stage] Handshake and confirmation of successful transmission takes place
 \end{description}
 
-As an example one can imagine a digital camera which can either be used as a webcam or as a storage device to get the data already 
+As an example one can imagine a digital camera, which can either be used as a webcam or as a storage device to get the data already 
 memorized on it. When attached, the host only knows that an USB device was attached. It has to request the different endpoints for the 
 different functionalities from the device. Control transfers will be initiated to request the configuration acquiring those settings 
-(setup stage). The transmission of the
-descriptor hierarchy (see Descriptors), which represents the different functionalities and the corresponding ports, will take place in 
-the data stage.
+(setup stage). The transmission of the descriptor hierarchy (see \nameref{sec:descriptors}), which represents the different functionalities and the 
+corresponding ports, will take place in the data stage.
 
 Successful transfers will be ensured by transmitting another set of packets with zero length to confirm its validity.
 
 \paragraph{Interrupt Transfers}
-As almost any hardware device, USB Devices have the capability to send Interrupts as well. As mentioned before USB is a host centric communication 
+
+As almost any hardware device, USB devices have the capability to send interrupts as well. As mentioned before USB is a host centric communication 
 meaning that, although being an interrupt transfer, it still needs to be polled by the host. 
+
 \paragraph{Isochronous Transfers}
-Isochronous transfers are specified for data which is streamable, like video or audio. It has the specialty of not requesting a resend of data if a packet is not transmitted correctly. The maximum data payload size, depending on the type of communication, is up to 1024 bytes and is defined in the endpoint descriptor (see Descriptors). It is common practice to define multiple interfaces for isochronous endpoints as in case of bandwidth restrictions alternatives can be provided.
+
+Isochronous transfers are specified for data which is streamable, like video or audio. It has the specialty of not requesting a resend of data if a 
+packet is not transmitted correctly. The maximum data payload size, depending on the type of communication, is up to 1024 bytes and is defined in 
+the endpoint descriptor (see \nameref{sec:descriptors}). It is common practice to define multiple interfaces for isochronous endpoints as in case of 
+bandwidth restrictions alternatives can be provided.
+
 \paragraph{Bulk Transfers}
 As the name suggests bulk transfers are meant to deal with bulky data, like files or images. It does not guarantee a latency or 
 bandwidth. Therefore it offers a secure way of transmitting data as retransmission is initiated on failed transfers. Unfortunately 
 only devices supporting full or high speed can use this type of transfer. 
 
 \subsubsection{Descriptors}
+\label{sec:descriptors}
 Due to the necessity of transmitting USB configurations to the host, different descriptors defining the devices functionality and its coupling to
 the endpoints exist. This subchapter shall give an overview of these descriptors in means of type and structure since it is an essential part of the 
 emulation. 
@@ -113,7 +150,7 @@ always at least one device, configuration, interface and endpoint descriptor.
 The device descriptor serves as general information about the device. It contains the vendor and product id identifying the exact type of device as 
 well as the binary coded decimal device code defined in the official USB standard. We used the feature of setting this device code to 255, which will 
 induce the behaviour of vendor specific driver loading. That being said, if a vendor should be a so called FTDI device, such as microchips, the 
-driver for serial communications are loaded. Relevant elements of the device descriptor are: 
+driver for serial communications are loaded. Relevant elements of the device descriptor are:\footcite[p. 260ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c| p{10cm}}
@@ -129,7 +166,7 @@ iManufacturer & ID of the string descriptor representing the manufacturer\\
 iProduct & ID of the string descriptor representing the product \\
 bNumConfigurations & amount of configurations \\ 
 \end{tabular}
-\caption{Device Descriptor Fields}
+\caption{Device Descriptor Fields\footcite[p. 262\-263]{USB}}
 \end{table}
 
 \begin{verbatim}
@@ -159,7 +196,7 @@ bNumConfigurations & amount of configurations \\
 A USB device can provide different configurations which depend on the power mode of the attached device. The configuration descriptor supplies mostly 
 power settings. Self powered mode indicates that an external power source is applied. It can be chosen by devices with a limited amount of power. On 
 the other hand bus powered settings will require more energy to be transmitted over the bus thus draining more energy of the host device. Additionally 
-configuration descriptors serve as a grouping of interfaces.
+configuration descriptors serve as a grouping of interfaces.\footcite[p. 264ff.]{USB}
 \begin{table}
 \begin{tabular}{c|p{10 cm}} 
 Field & Description \\ \hline
@@ -172,13 +209,13 @@ iConfiguration & ID of the string for the configuration name\\
 bmAttributes  power mode\\
 bMaxPower & the maximum power consumption (consumption = value * 2mA) \\
 \end{tabular}
- \caption{Configuration Descriptor Fields}
+ \caption{Configuration Descriptor Fields\footcite[p. 265\-266]{USB}}
 \end{table}
 
 
 \paragraph{Interface Descriptor}
 Interface descriptors have the purpose of representing a single functionality and grouping the needed endpoints together, thus making 
-it simpler for the host to select a specific functionality.
+it simpler for the host to select a specific functionality.\footcite[p. 267ff.]{USB}
 
 \begin{table}
 \begin{tabular}{c|p{10 cm}}
@@ -193,12 +230,13 @@ bInterfaceSubClass & standardized class id (in USB standard) describing the inte
 bInterfaceProtocol & standardized protocol id (in USB standard) describing the protocol type \\
 iInterface & ID of string for interface name (string descriptor request) \\
 \end{tabular}
- \caption{Interface Descriptor Fields}
+ \caption{Interface Descriptor Fields\footcite[p. 268\-269]{USB}}
 \end{table}
+
 \paragraph{Endpoint Descriptor} 
 
 Endpoints are the sinks and sources of data for the device. As mentioned above different types of transfers exist, hence different types of 
-endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.
+endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.\footcite[p. 269ff.]{USB}
 
 \begin{table}
 \begin{tabular}{c|p{10 cm}}
@@ -210,14 +248,14 @@ bmAttributes & type of endpoint (see transfer types)\\
 wMaxPacketSize & max receiving or sending endpoint size\\
 bInterval & for interrupt transfer type endpoints define polling rate in frames\\
 \end{tabular}
- \caption{Endpoint Descriptor Fields}
+ \caption{Endpoint Descriptor Fields\footcite[p. 269\-271]{USB}}
 \end{table}
 
 \paragraph{String  Descriptor}
 Since the descriptors need some string with variable length, instead of defining a maximum byte length for string fields in descriptors and thus 
 limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are 
 described by a, in the device context, unique ID and can be separately requested in  different languages. Therefore string descriptors 
-are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support.
+are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support.\footcite[p. 273ff.]{USB}
 
 \begin{table}
 \begin{tabular}{c|p{10 cm}}
@@ -225,7 +263,7 @@ Field & Description \\ \hline
 bLength & complete length of the packet (include the length itself) in bytes \\
 bDescriptorType & type of descriptor (device 0x03)
 \end{tabular}
- \caption{String Descriptor Main Fields}
+ \caption{String Descriptor Main Fields\footcite[p. 273\-274]{USB}}
 \end{table}
 
 In case of string descriptor ID 0 the selectable languages are returned as a list of standardized IDs
@@ -235,15 +273,15 @@ wLANGID[0] & first language id in form of (0xXXXX) \\
 wLANGID[1] & second language \\
 wLANGID[x] & n language 
 \end{tabular}
- \caption{String Descriptor Language Fields}
+ \caption{String Descriptor Language Fields\footcite[p. 273]{USB}}
 \end{table}
 
-In case of any other string descriptor ID the  message would end as follows:
+In case of any other string descriptor ID the message would end as following:
 \begin{table}
 \begin{tabular}{c|p{10 cm}}
 bString & unicode string where every single char is separated by a null byte
 \end{tabular}
- \caption{String Descriptor Fields}
+ \caption{String Descriptor Fields\footcite[p. 274]{USB}}
 \end{table}
 
 \begin{verbatim}
@@ -287,9 +325,10 @@ bString & unicode string where every single char is separated by a null byte
 \end{verbatim}
 
 \subsubsection{Requests}
+
 The previous sections introduce different types of transfers. One of them is the control transfer which serves as a way of controlling 
 the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically 
-the use of a request can be derived by its name. The existing requests are listed below.
+the use of a request can be derived by its name. The existing requests are listed below.\footcite[p. 267ff.]{USB}
 
 \paragraph{Device Requests}
 \begin{itemize}
@@ -322,6 +361,7 @@ the use of a request can be derived by its name. The existing requests are liste
 
 Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the 
 following structure:
+
 \begin{itemize}
  \item bmRequestType (1 byte)
  \item bRequest (1 byte)
@@ -331,16 +371,19 @@ following structure:
 \end{itemize}
 
 \subsection{Command Structure and Behaviour}
+
 At the beginning of automotive manufacturing almost all components were mechanical. As technology developed more and more electrical 
 components found their way into the automobile. At some point the requirement for a standardized interface emerged. Due to the fact 
 that different manufacturers had already applied different technologies, the problem of standardizing their systems would have 
 resulted in huge redevelopment costs. As no manufacturer could be expected to carry those costs, the OBD standard does not define the 
 utilization of any specific technology. Instead it defines the interface and format to which every automobile must be able to 
 communicate with standardized commands. 
+
 This diagnostic data must have a uniform format. This format is called diagnostic trouble code or simply fault code. Since every 
 vehicle has the same theoretical background, standardizing types of faults is feasible. This property also simplifies a categorization 
 of trouble codes, whereby different standards for diagnosing vehicles have been introduced by the International Organization for 
 Standardization (ISO) and Society of Automotive Engineers (SAE). 
+
 Due to the amount of integrated control units, their varying function set and size as well as their location a need for clustering is 
 displayed. However, they commonly can be classified into 4 categories depending on their functionality in the vehicle:
 \begin{itemize}
@@ -351,9 +394,11 @@ displayed. However, they commonly can be classified into 4 categories depending 
 \end{itemize}
 
 \section{Service Modes}
+
 The SAE J1979 and the ISO 15031-5 are two standards which define the available service modes needed to make a diagnostic analysis of cropped up fault codes. Currently there are ten prevalent operation modes, but there are still five reserved modes for eventual future modifications of the actual standard. Additionally manufacturers have the possibility to implement their own diagnoses by using higher service modes.
 Nine of the ten specified modes provide information of sensor measurements or triggered diagnostic trouble codes recorded in the error memory. The remaining mode is meant to clear the memory. Nowadays automobiles are not obligated to support every service  mode, de facto just a limited amount of information can be acquired via the OBD interface.
-Following the ten service modes as well as a short description of their respective function are listed: (SCHÄFFER)
+Following the ten service modes as well as a short description of their respective function are listed: \footcite{SCHAFOBD2}
+
 \begin{description}
  \item[Request current data] depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
  \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to flash while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
