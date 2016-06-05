@@ -6,13 +6,20 @@
 
 \chapter{On Board Diagnosis Basics}
 \label{sec:OBDBASICS}
-OBD was originally introduced as a way to monitor CO2 emissions for climatic reasons, but since its introduction its range of abilities 
+OBD's original purpose was to monitor CO2 emissions for climatic reasons, but since its introduction its range of abilities 
 extended. Rather than just monitoring CO2 emissions the surveillance of a majority of the sensors inside an automobile as well as 
 keeping track of the error memory by trouble codes is possible. Even the access of the bus gateway and therefore all its busses and 
-their attached entities is feasible, 
-resulting in a not negligible security threat. These characteristics are a result of introducing the concept of a central OBD interface at a time, 
-when almost every car manufacturer already had an own communication protocol between the separate control units.
-This is the reason why the OBD standard does not define a specific protocol used for the CAN bus but only the protocol used to communicate with the diagnostic section of a control unit, where standardized trouble codes can be obtained. If the protocol used for inter CU communication was known, it would be possible to send commands directly to any CU in the bus system, which bears a great security issue, which will be discussed in chapter …………………… .
+their attached entities is feasible, resulting in a not negligible security threat. 
+
+These characteristics are a result of introducing the concept of a central OBD interface at a time, 
+when almost every automotive manufacturer already implemented own communication protocol between the separate control units.\cite{SCHAFOBD1}
+As a result the OBD standard does not define a specific protocol used for the CAN bus but only the protocol used to communicate with the diagnostic 
+section of a control unit, where standardized trouble codes can be obtained. 
+
+If the protocol used for inter CU communication was known, it would be possible to send commands directly to any CU in the bus system, which bears a 
+great security issue. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, since this topic
+is ala
+
 Generally there is a variety of already existing protocols and standards which define the communication via the OBD interface. The usage of the ELM327 
 emerged due to its availability and simplicity, as it is a popular programmed microcontroller for translating the OBD interface. ELM327 has the 
 advantage of establishing a connection between the OBD interface and a PC using different standards and protocols e.g. SAE J1850, ISO 14230-4 KWP, 

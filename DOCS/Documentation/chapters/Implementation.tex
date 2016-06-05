@@ -4,14 +4,14 @@
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
 \chapter{Implementation}
-
+\label{sec:impl}
 The theory in the above described chapters was partially acquired during the research phase but mostly during the implementation of the packages. 
 The basics in these chapters are not adjusted to the particular use in this project and cover also parts, which are implicitly used. 
 Therefore this section focuses on the implementational details of the single packages and subpackages fitting the above described theory to the 
 implementational approach.
 
-\section{Serial Communication}
-
+\section{Communication}
+\label{sec:comm}
 One of the main functionalities needed by both tools is the communication to the device attached to the USB port. Although this does not relate 
 to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or  such which are 
 meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. For this concrete example of this sort of 
@@ -22,7 +22,7 @@ of a given USB ELM device to enable testing of OBD tools, leading to the impleme
 The implementation of this package is based on the knowledge acquired in the chapter Universal Serial Bus (USB) and Command Structure and Behaviour.
 
 \subsection{Serial Communication}
-
+\label{sec:serialComm}
 After acquiring an overview of the general OBD functionality and familiarizing with the ELM327 the next step was trying the terminal program 
 Screen on Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
 more concretely the diagnostic trouble code data. The screen starting command looks as follows
@@ -55,7 +55,7 @@ The usage of libftdi was momentarily discarded, due to no apparent benefit and t
 code. The needed functionality was already covered by combining the libusb package with TTY Linux driver and file descriptors.
 
 \subsection{Emulation}
-
+\label{sec:emulation}
 The first approach consisted of exploiting the USBIP API, which provides the functionality of sharing USB devices over a network. After 
 assessing its feasibility the decision was made to use the base library libusb-vhci.
 
@@ -91,7 +91,7 @@ as administrator.
 %TODO: PICTURE
 
 \section{Databases}
-
+\label{sec:database}
 Storing and managing data is bound to become an issue due to the enormous amount of data sets in in relation to OBD. Therefore a thoroughly 
 implemented database interface cannot be avoided. For reasons of simplicity the base query language for the database MySQL was chosen. The main 
 advantages leading to the choice of MySQL is the easy installation of MySQL server and client on all Linux distributions as well as the API 
@@ -122,7 +122,7 @@ The password field is left empty as the user obd has no password setup.
 %TODO: PICTURE
 
 \section{OBD Base}
-
+\label{sec:obdbase}
 The OBDBase package represents the OBD specific part of this thesis. It provides links between the OBD structures like hexadecimal responses 
 from the ELM to the database entries with their column definitions and IDs, as well as calculations, minimum and maximum values of single 
 sensors and ELM specific command representations.
@@ -134,7 +134,6 @@ interpretation of these received bytes is defined in the above mentioned ISO sta
 four different value types could be extracted.7
 
 \subsection{Calculation Values}
-
 Calculation values are responses or part of a response, where the received value represents the value of the specific PID’s underlying entity.
 As the name suggests there are additional calculations necessary. The standard defines the environment parameters of these values, which are 
 supplied by an XML file. PID 0x66 shows an example of a calculation value:
@@ -323,7 +322,7 @@ A simple factory pattern which creates OBDCommandValues from its XML representat
 the interpretation attribute of each value tags definition and returns an abstract object representing the value. 
 
 \subsection{ELM Commands}
-
+\label{sec:ELM}
 There is a set of ELM specific commands configurable for the communication to the control unit of the automobile. Generally the emulation has to 
 answer those requests and the OBD tool must configure the ELM specific settings. Therefore it seemed necessary to implement a parsing and object 
 representation of the ElmCommands for our middleware package.
@@ -342,7 +341,7 @@ referenced by “x”,” y” or “z” as well.
 \end{verbatim}
 
 \section{Configuration}
-
+\label{sec:configuration}
 The configuration subpackage is used to parse and write XML files. Currently there are following configuration files: 
 
 \begin{itemize}
