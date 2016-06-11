@@ -7,31 +7,32 @@
 \label{sec:impl}
 The theory in the previous chapters was partially acquired during the research phase but mostly during the implementation of the packages. 
 The basics in these chapters are not adjusted to the particular use in this project, furthermore they cover parts which are implicitly used. 
-Therefore this section focuses on the implementational details of the single packages and subpackages fitting the above described theory to the 
+Therefore this section focuses on the implementational details of the single packages and subpackages fitting the described theory to the 
 implementational approach.
 
 \section{Communication}
 \label{sec:comm}
-One of the main functionalities needed by both tools is the communication to the device attached to the USB port. Although this does not relate 
-to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or  such which are 
-meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. For this concrete example of this sort of 
-implementation the ELM327 v1.4/v1.5 \cite{ELM} was used as external hardware. The goal of this middleware package is to provide development tools for easy 
-communication with the ELM chip without specifics of port (USB, COM etc.). Another requirement which falls into this category is the emulation 
+One of the main functionalities needed by both tools is the communication between the device and the USB port it is attached to. Although this does not relate 
+to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or such which are 
+meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. This implementation uses the ELM327 v1.4/v1.5 \cite{ELM} 
+as external hardware. The goal of the communication middleware package (see \nameref{sec:tecspec}) is to provide development tools for simple access 
+to the ELM chip without consideration to specifics of the port (USB, COM etc.). Another requirement which falls into this category is the emulation 
 of a given USB ELM device to enable testing of OBD tools, leading to the implementation of a virtual USB FTDI device and controlling its behaviour.
 
-The implementation of this package is based on the knowledge acquired in the chapter Universal Serial Bus (USB) and Command Structure and Behaviour.
+The implementation of this package is based on the knowledge acquired in the chapter \nameref{sec:USB} and \nameref{sec:CSaB}.
 
 \subsection{Serial Communication}
 \label{sec:serialComm}
 After acquiring an overview of the general OBD functionality and familiarizing with the ELM327 the next step was trying the terminal program 
 Screen \cite{SCREEN} on GNU/Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
-more concretely the diagnostic trouble code data. The screen starting command looks as follows
+more concretely the diagnostic trouble code data. The screen starting command looks as follows:
 
 \begin{verbatim}
 sudo screen /dev/ttyUSB0 <baud rate> 
 \end{verbatim}
 
-The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description.
+The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description, shown in figure
+~\ref{fig:screen_response}
 
 \myfig{screen}%% filename w/o extension in the folder figures
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
