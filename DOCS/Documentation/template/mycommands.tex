@@ -84,6 +84,15 @@
 \nameref{#1} ~\ref{#1}
 }
 
+\newcommand{\mysidefig}[5]{
+\begin{sidewaysfigure}[h!]
+  \centering
+  \includegraphics[keepaspectratio,#2]{figures/#1}
+  \caption[Figure]{#3}
+  \label{#5} %% NOTE: always label *after* caption!
+\end{sidewaysfigure}
+}
+
 %doc% 
 %doc% \subsection{\texttt{myclone} --- repeat things!}
 %doc% 

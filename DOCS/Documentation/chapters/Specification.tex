@@ -3,7 +3,6 @@
 %% example text content
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
-
 \chapter{Specification}
 The previous chapters established that Linux based systems offer more possibilities and a lack of OBD software solutions making it the base platform 
 for this project. Another already discussed discovery is the division of the project into three major parts: The theoretical analysis of OBD, the 
@@ -16,23 +15,20 @@ commonly used OBD middleware part.
 The OBD middleware is located at the root of the project, which makes this package a perfect starting point. The 
 generally the middleware consists of:
 
+\vbox{
 \begin{description}
 \item[Device Communication]
-
 This entails the communication with the USB device as well as the emulation of the ELM for the OBD test tool. See \nameref{sec:comm}.
 \item[Configuration Management]
-
 To keep this project as flexible as possible it will use a lot of configuration files. Therefore an object representation of those configuration 
 classes will be necessary. See \nameref{sec:configuration}.
 \item[Database Management]
-
 The amount of currently existing diagnostic trouble codes (DTC’s) is vast, therefore a database responsible for their management is a reasonable 
 solution. See \nameref{sec:database}.
 \item[OBD Base Elements]
-
 The representation of the DTC and their responses are coupled in this package as well as the ELM command and the different types of OBD values. 
 See \nameref{sec:obdbase}.
-\end{description}
+\end{description}}
 
 \section{Non-Technical Specifications}
 Due to the increasing popularity of agile software development and consistency of using Automotive SPICE in automotive systems 

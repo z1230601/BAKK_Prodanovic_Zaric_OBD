@@ -14,7 +14,7 @@ implementational approach.
 \label{sec:comm}
 One of the main functionalities needed by both tools is the communication between the device and the USB port it is attached to. Although this does not relate 
 to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or such which are 
-meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. This implementation uses the ELM327 v1.4/v1.5 \cite{ELM} 
+meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. This implementation uses the ELM$327$ v$1.4$/v$1.5$ \cite{ELM} 
 as external hardware. The goal of the communication middleware package (see \nameref{sec:tecspec}) is to provide development tools for simple access 
 to the ELM chip without consideration to specifics of the port (USB, COM etc.). Another requirement which falls into this category is the emulation 
 of a given USB ELM device to enable testing of OBD tools, leading to the implementation of a virtual USB FTDI device and controlling its behaviour.
@@ -23,7 +23,7 @@ The implementation of this package is based on the knowledge acquired in the cha
 
 \subsection{Serial Communication}
 \label{sec:serialComm}
-After acquiring an overview of the general OBD functionality and familiarizing with the ELM327 the next step was trying the terminal program 
+After acquiring an overview of the general OBD functionality and familiarizing with the ELM$327$ the next step was trying the terminal program 
 Screen \cite{SCREEN} on GNU/Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
 more concretely the diagnostic trouble code data. The screen starting command looks as follows:
 
@@ -31,7 +31,7 @@ more concretely the diagnostic trouble code data. The screen starting command lo
 sudo screen /dev/ttyUSB0 <baud rate> 
 \end{verbatim}
 
-The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description, shown in \myfigref{fig:screen_response}.
+The ELMs communication baud rate is $38400$ bits per seconds. Sending the ELM command ATZ causes the device to respond with its description, shown in \myfigref{fig:screen_response}.
 %\nameref{fig:screen_response} ~\ref{fig:screen_response}
 
 \myfig{screen}%% filename w/o extension in the folder figures
@@ -58,8 +58,8 @@ Furthermore a simple algorithm searching the sysfs of Linux provides the associa
 operations of reading and writing are achieved by the simple file descriptor system calls read and write in combination with termios for 
 setting the baud rate of these operations. 
 
-USB normally does not offer the ability of defining baud rates. This issue originated from the need of FTDI devices for RS232 ports. Therefore most
-external hardware, like Arduino, based on such microcontrollers integrate a RS232 to USB converter requesting a communication baud rate. Additional 
+USB normally does not offer the ability of defining baud rates. This issue originated from the need of FTDI devices for RS-$232$ ports. Therefore most
+external hardware, like Arduino, based on such microcontrollers integrate a RS-$232$ to USB converter requesting a communication baud rate. Additional 
 research revealed the libftdi library, used exactly for these serial communication issues with USB. It combines functionalities of libusb with serial
 configurations like setting the baud rate. 
 
@@ -81,7 +81,7 @@ it is capable of freely emulating USB devices and using the full scope of USB fe
 
 The already existing example code of the project emulates a simple HID (Human Interface Device) which mostly covers the needs of the project. 
 Nevertheless, gradually refactoring the example code leads to an emulation of an FTDI device. The result is comprised of three classes 
-representing the emulation (visualized in \myfigref{fig:classdiagram_communication}):
+representing the emulation, visualized in \myfigref{fig:classdiagram_communication}:
 
 \begin{itemize}
  \item USBEmulationSupervisor
@@ -119,6 +119,11 @@ The general structure composes of a class responsible for dispatching the reques
 structure as well as an executor class defining the insertion and deletion commands, as shown in \myfigref{fig:classdiagram_database}. Keeping the philosophy 
 of test driven development (see \nameref{sec:XP}) in mind it seems wise to setup a test database as an SQL dump and supply a script reinitiating the database. 
 After the manipulation of the database by a unit test this script can be used to reset the test database to its initial state. 
+\myfig{classdiagram_database}%% filename w/o extension in the folder 
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Classdiagram showing the Database Package}%% caption
+ {Figure}%% optional (short) caption for list of figures
+ {fig:classdiagram_database}%% label
 
 The configuration parameters can either be entered hardcoded or by parsing an XML file containing the host address, user, password and database 
 name. The parsing structure is thoroughly explained in the \nameref{sec:configuration}. The XML looks as follows:
@@ -134,14 +139,7 @@ name. The parsing structure is thoroughly explained in the \nameref{sec:configur
  </database>
 \end{verbatim}
 
-The password field is left empty as the user obd has no password set up.  
-
-\myfig{classdiagram_database}%% filename w/o extension in the folder 
- {width=\textwidth}%% maximum width/height, aspect ratio will be kept
- {Classdiagram showing the Database Package}%% caption
- {Figure}%% optional (short) caption for list of figures
- {fig:classdiagram_database}%% label
-
+The password field is left empty as the user obd has no password set up.
 
 \section{OBD Base}
 \label{sec:obdbase}
@@ -149,9 +147,9 @@ The OBDBase package represents the OBD specific part of this thesis. It provides
 from the ELM to the database entries with their column definitions and IDs, as well as calculations, minimum and maximum values of single 
 sensors and ELM specific command representations.
 
-The OBD interface responds to PIDs of service mode I and II with a certain amount of bytes. This amount is defined in the ISO 15031 \cite{ISO15031} depending 
-on the sensor the PID represents. Every 32nd PID is a request to get the implementation status of the next 32 PIDs. Meaning 
-PID 0 (e.g. 01 00) returns four bytes where each bit is interpreted as a boolean value, stating the availability of the corresponding PID. The 
+The OBD interface responds to PIDs of service mode I and II with a certain amount of bytes. This amount is defined in the ISO $15031$ \cite{ISO15031} depending 
+on the sensor the PID represents. Every $32$nd PID is a request to get the implementation status of the next $32$ PIDs. Meaning 
+PID $0$ (e.g. $01$ $00$) returns four bytes where each bit is interpreted as a boolean value, stating the availability of the corresponding PID. The 
 interpretation of these received bytes is defined in the ISO standard as well. Analyzing the accessible PIDs a clustering into four different value types can be extracted.
 
 \subsection{Calculation Values}
@@ -184,7 +182,7 @@ Those formulas are reflected in the following listing:
    interpretCalculationValue(std::vector<uint8_t> input)
  {
    unsigned int compound_value = calculateCompoundValue(input);
-   double scale = (max_ - min_) / (pow(2.0, byte_amount_ * 8.0) - 1);
+   double scale = (max_-min_)/(pow(2.0, byte_amount_*8.0)-1);
    interpreted_value_ = compound_value * scale + min_;
    uninterpreted_value_ = compound_value;
  }
@@ -195,12 +193,13 @@ The conversion of interpreted values to raw values naturally deduces:
 \[ v_{raw} = \frac{(v_{interpreted} - min)}{c_s} \]
 
 \begin{verbatim}
- void OBDCalculationValue::interpretCalculationByteArray(double value)
+ void OBDCalculationValue::
+   interpretCalculationByteArray(double value)
  {
    interpreted_value_ = value;
    interpreted_value_ = std::min(interpreted_value_, max_);
    interpreted_value_ = std::max(interpreted_value_, min_);
-   double scale = (max_ - min_) / (pow(2.0, byte_amount_ * 8.0) - 1);
+   double scale = (max_-min_)/(pow(2.0, byte_amount_*8.0) - 1);
    uninterpreted_value_ = (interpreted_value_ - min_) / scale;
  }
 \end{verbatim}
@@ -226,21 +225,25 @@ value directly maps to a result string. The configuration of such a value requir
 As the name suggests the bit mapping type describes values where each bit has a different meaning. In this case the only information required from the ISO is 
 the mapping. In some cases a bit's true and false value signify different outputs for the same entity. An example of such a value is PID $0$ as well as PID $0x65$:
 
+\vbox{
 \begin{verbatim}
  <value interpretation="mapping">
   <bytes>1</bytes>
   <mapping type="bit">
    <entry from="0" set="false">Kraftaufnahme inaktiv</entry>
    <entry from="0" set="true">Kraftaufnahme aktiv</entry>
-   <entry from="1" set="false">Automatikgetriebe in Park-/Neutralstellung</entry>
-   <entry from="1" set="true">Vorwärts- oder Rückwärtsgang</entry>
-   <entry from="2" set="false">Manuelles Getriebe in … Kupplung getreten</entry>
+   <entry from="1" set="false">
+     Automatikgetriebe in Park-/Neutralstellung</entry>
+   <entry from="1" set="true">
+     Vorwärts- oder Rückwärtsgang</entry>
+   <entry from="2" set="false">
+     Manuelles Getriebe in … Kupplung getreten</entry>
    <entry from="2" set="true">Gang eingelegt</entry>
    <entry from="3" set="false">Vorglühlampe aus</entry>
    <entry from="3" set="true">Lampe ein</entry>
   </mapping>
  </value>
-\end{verbatim}
+\end{verbatim}}
 
 The ``from'' field specifies the bit position while the ``set'' is an optional attribute to assign a bit's value to a concrete output. In this 
 case it is supplied, meaning that depending on the bits status different strings are mapped. If the ``set'' attribute is not explicitly stated it 
@@ -268,13 +271,19 @@ value it needs to equal to get the result string in question. PID $0x70$ is an e
   <bytes>1</bytes>
   <mapping type="bitcombination">
    <validitybit from="01">2</validitybit>
-   <entry from="01" set="01">Offener Kreislauf, kein Fehler</entry>
-   <entry from="01" set="10">Geschlossener Kreislauf, kein Fehler</entry>
-   <entry from="01" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+   <entry from="01" set="01">
+     Offener Kreislauf, kein Fehler</entry>
+   <entry from="01" set="10">
+     Geschlossener Kreislauf, kein Fehler</entry>
+   <entry from="01" set="11">
+     Fehler vorhanden, Wert unzuverlässig</entry>
    <validitybit from="23">5</validitybit>
-   <entry from="23" set="01">Offener Kreislauf, kein Fehler</entry>
-   <entry from="23" set="10">Geschlossener Kreislauf, kein Fehler</entry>
-   <entry from="23" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+   <entry from="23" set="01">
+     Offener Kreislauf, kein Fehler</entry>
+   <entry from="23" set="10">
+     Geschlossener Kreislauf, kein Fehler</entry>
+   <entry from="23" set="11">
+     Fehler vorhanden, Wert unzuverlässig</entry>
     </mapping>    
  </value>
 \end{verbatim}
@@ -300,6 +309,7 @@ combination mapping. The need for a manually configurable validity mapping emerg
 modes (manual and auto). The amount of such values is limited to one or two occurrences. The manual mode requires definition of the validity bit position
 for each tag. The following listing supplies an example:
 
+\vbox{
 \begin{verbatim}
  <obdcommand>
   <pid>70</pid>
@@ -315,32 +325,31 @@ for each tag. The following listing supplies an example:
     <validitybit>0</validitybit>    
    </value>
    <value interpretation="calculation">
-    <name>Ist Ladedruck A</name>
-    <bytes>2</bytes>
-    <min>0</min>
-    <max>2047.96875</max>
-    <unit>kPa</unit>    
-    <validitybit>1</validitybit>            
+    ...          
    </value>
-    .
-    .
-    .
+   ...
    <value interpretation="mapping">
     <bytes>1</bytes>
     <mapping type="bitcombination">
      <validitybit from="01">2</validitybit>
-     <entry from="01" set="01">Offener Kreislauf, kein Fehler</entry>
-     <entry from="01" set="10">Geschlossener Kreislauf, kein Fehler</entry>
-     <entry from="01" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+     <entry from="01" set="01">
+       Offener Kreislauf, kein Fehler</entry>
+     <entry from="01" set="10">
+       Geschlossener Kreislauf, kein Fehler</entry>
+     <entry from="01" set="11">
+       Fehler vorhanden, Wert unzuverlässig</entry>
      <validitybit from="23">5</validitybit>
-     <entry from="23" set="01">Offener Kreislauf, kein Fehler</entry>
-     <entry from="23" set="10">Geschlossener Kreislauf, kein Fehler</entry>
-     <entry from="23" set="11">Fehler vorhanden, Wert unzuverlässig</entry>
+     <entry from="23" set="01">
+       Offener Kreislauf, kein Fehler</entry>
+     <entry from="23" set="10">
+       Geschlossener Kreislauf, kein Fehler</entry>
+     <entry from="23" set="11">
+       Fehler vorhanden, Wert unzuverlässig</entry>
     </mapping>        
    </value>
   </values>
  </obdcommand>
-\end{verbatim}
+\end{verbatim}}
 
 High abstraction is achieved with the abstract base class OBDCommandValues. It defines main utility functions like adding bytes to a compound value, storing the 
 raw and interpreted data and delegating the interpretation trough a pure virtual function to its derived classes. 
@@ -380,7 +389,7 @@ The configuration subpackage is used to parse and write XML files. Currently the
 \end{itemize}
 
 These contain configuration parameters for the software. The command configurations, elmcommandconfiguration.xml and odbcommand.xml, contain all 
-commands known by the ELM327 extracted from its datasheet and all OBD commands consisting of service ID with its corresponding PID and name. 
+commands known by the ELM$327$ extracted from its datasheet and all OBD commands consisting of service ID with its corresponding PID and name. 
 The project configurations, obdcuConfiguration.xml and obdtoolConfiguration.xml, are only path declarations to the other configurations enabling 
 factory resets.
 
@@ -392,7 +401,7 @@ Their purpose is to parse a DOM object into internal class representations, as s
 libxml++ library functions to creating a derived class of the DefaultXMLHandler. 
 
 \myfig{classdiagram_configuration}%% filename w/o extension in the folder figures
- {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {width=0.4\textwidth}%% maximum width/height, aspect ratio will be kept
  {Classdiagram of the Configuration Package}%% caption
  {Figure}%% optional (short) caption for list of figures
  {fig:configuration_classdiagram}%% label
