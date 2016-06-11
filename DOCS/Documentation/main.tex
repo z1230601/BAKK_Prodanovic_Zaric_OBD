@@ -172,7 +172,7 @@
 %% ========================================================================
 
 \usepackage{listings}
-
+\usepackage{lscape}
 
 
 
@@ -263,7 +263,8 @@
 
 \appendix                       %% closes main document, appendix follows until end; only available in book-classes
 \addpart*{Appendix}             %% adding Appendix to tableofcontents
-\label{sec:Appendix}
+
+\include{chapters/AppendixA}
 
 \printbibliography              %% remove, if using BibTeX instead of biblatex
 % \include{further_ressources}  %% this is a suggestion: you have to create this file on demand
