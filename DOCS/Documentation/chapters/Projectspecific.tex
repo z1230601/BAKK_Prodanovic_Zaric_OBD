@@ -11,39 +11,41 @@ The result is the OBDMiddleware package which is an API.
 Furthermore a concrete application has to be implemented to apply the designed features.
 The OBDCU, which stands for On Board Diagnosis Control Unit, represents the emulated diagnosis CU.
 It offers possibilities to emulate attached USB devices on Linux systems and is able to set and unset
-permanent and pending diagnostic trouble codes as well as deleting them. 
-The OBD tool was supposed to be its counterpart for reading trouble codes and its corresponding freeze frame data,
-but since our time contingent did not suffice the OBD tool as well as the OBDCU’s sensor capabilities were not implemented. 
+permanent and pending diagnostic trouble codes as well as deleting them.
+
+The OBD tool is supposed to be its counterpart for reading trouble codes and its corresponding freeze frame data,
+but since our time contingent did not suffice the OBD tool as well as the OBDCU’s sensor capabilities are not implemented. 
 Although it is safe to say that the general functionalities for requesting sensor data is included in the OBDMiddleware. 
 Even though the common mechanics are asserted by unit tests,
 the additional implementation and connection of the related sensor functions would easily overstep the efforts of this bachelor thesis.
 
-CMake ensures easy compilation and first and foremost dependencies to external packages
-in combination with the usage of self implemented packages. 
-A setup for development was provided by making paths to the subprojects configurable. 
-Packaging for installation was ensured by using CPack generators, especially for Debian systems.
+By using CMake simple compilation and dependency requirements can be ensured.
+The latter is particularly important, since dependencies on external and internal packages would be difficult to check otherwise.
+A setup for development is provided by making paths to the subprojects configurable. 
+Packaging for installation is realized by using CPack generators, especially for Debian systems.
 
-The Model-View-Controller architecture was chosen due to its clear specification of classes and their clustering into general divisions. The model being the middleware package itself.
+The Model-View-Controller architecture is chosen due to its clear specification of classes and their clustering into general divisions. 
+The model being represented by the middleware package itself.
 
 \section{OBDCU}
 
 The OBDCU application offers the user the possibility to emulate and partially configure an USB FTDI device with one configuration
 and one set of bulk endpoints. Furthermore diagnostic trouble codes are selectable from a database and settable to the emulated 
 fault memory either as a permanent or temporary trouble code. 
-Additionally it supplies a surface to configure responses to ELM commands (e.g. atz). 
-While the current version only supplies a beta version with several restrictions regarding the configurations, 
-since they are only saved over the runtime of the application. 
-However it is able to simulate at least three of ten service modes as well as all ELM commands. 
-As previously mentioned service modes one and two are prepared in the OBDMiddleware package but since the project has already 
-exceeded the time requirements for a bachelor thesis it seemed reasonable to omit those parts.
+Additionally it supplies a surface to configure responses to ELM commands (e.g. atz).
+
+The current beta version has several restrictions regarding the configurations. They are only saved over the runtime of the application. 
+However it is capable of simulating at least three of ten service modes as well as all ELM commands.
+As previously mentioned service modes one and two, which represent reading of sensor and freeze frame data, are prepared in the OBDMiddleware package
+but since the project has already exceeded the time requirements for a bachelor thesis it seemed reasonable to omit those parts.
 
 \section{Installation How-To}
 
 Several steps have to be taken before starting or building the project on a development environment.
-This project has a lot of dependencies, which are listed in the built package, and it requires kernel modules
+This project has a lot of dependencies, which are listed in the built package, and it requires kernel modules.
 This section elaborates on additional dependencies and building instructions depending on the purpose.
 
-This project uses different open source API to realize the desired functionalities.
+The project uses different open source APIs to realize the desired functionalities.
 The following packages are included in the official Ubuntu repositories and can be downloaded by any package management system:
 
 \begin{itemize}
@@ -61,13 +63,13 @@ The following packages are included in the official Ubuntu repositories and can 
 
 The only packages which require manual compilation are the libusb-vhci library and the vhci\_hcd package, 
 resulting in two kernel module files (.ko). Those files either have to be inserted manually using insmod 
-or they have to be installed with the help of make install. When installing and frequently accessing the 
+or they have to be installed with the help of ``make install''. When installing and frequently accessing the 
 kernel modules it is advisable to alter the modules system file, located under “/etc/modules”, by adding 
 them at the end of the file. This will result in the loading of the kernel modules at startup.
 
-To compile the libusb-vhci project the following steps have to be done:
+To compile the libusb-vhci project the following steps should be taken:
 
-\subsection{vhci\_hcd}
+\paragraph{vhci\_hcd}
 
 \begin{enumerate}
  \item download or use from repository
@@ -90,7 +92,7 @@ or:
  \item add kernel module names (without extension) to file and save
 \end{enumerate}
 
-\subsection{libusb\_vhci [userspace tools]}
+\paragraph{libusb\_vhci [userspace tools]}
 
 \begin{enumerate}
  \item download or use from repository
@@ -101,14 +103,14 @@ or:
 \end{enumerate}
 
 Depending on the Linux kernel version and the current vhci\_hcd and libusb\_vhci versions, 
-the compiling procedure may vary. These instructions are extracted from the single INSTALL 
-files from the repositories. The last step when installing is to tell the Linux ld path that 
+the compiling procedure may vary. These instructions are extracted from the INSTALL 
+files from the repositories. The last installation step is to tell the Linux ld path that 
 libusb-vhci has been added to the library path so that it can be included normally.
 
 \section{Building the Project}
 
 When building the OBD project it is essential that it is built in the right order. 
-The OBDMiddleware package  has to be built before the project specific projects. 
+The OBDMiddleware package has to be built before the project specific parts. 
 Each part of the OBDMiddleware package can be compiled separately, although it is not advisable, 
 since the packages have internal dependencies. 
 With the support of CMake building in any location is possible with the command:
@@ -121,7 +123,7 @@ Furthermore a package can be built using make package. This will result in a .de
 Executing the generated file leads to the installation of the files into the library path of the Linux system. 
 
 Like in most software projects it was deemed necessary, that the project can be built with just a compiled version 
-of the middleware in case some changes emerge. Thus the project specific projects can be built without parameters 
+of the middleware in case some changes emerge. Thus the project specific parts can be built without parameters 
 if the OBDMiddleware package is installed. When intending to use the compiled version it can be built by delivering 
 the CMake variable Middleware\_BASE\_PATH.
 

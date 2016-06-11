@@ -42,8 +42,8 @@ The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM comm
 
 As visible on the image above Screen still has issues with carriage returns.
 
-Naturally the next step was to try requesting trouble codes which was also successfully accomplished. An ignition coil failure simulation was 
-caused by simply removing the power of one of the ignition coils of the tested vehicle. The requested temporary DTCs mirrored the anticipated 
+Naturally the next step is to try requesting trouble codes which is simply accomplishable using Screen. An ignition coil failure can be
+caused by simply removing the ignition coil's power supply of the testvehicle. The response of the requested temporary DTC equals the anticipated 
 ignition coil failure code as hexadecimal value. 
 
 %TODO: PICTURE
@@ -53,32 +53,35 @@ ignition coil failure code as hexadecimal value.
 %  {Screen Terminal Screenshot}%% optional (short) caption for list of figures
 %  {fig:screen_response}%% label
 
-The different open source libraries, like libusb, brought the capability of getting all devices and their information like vendor and product ID.
-Furthermore a simple algorithm searching the sysfs of Linux provided the associated terminal file path (/dev/tty…). Last but not least the 
-operations of reading and writing were achieved by the simple file descriptor system calls read and write in combination with termios for 
-setting the baud rate of these operations. USB normally does not offer the ability of defining baud rates. This issue originated from the need 
-of FTDI devices for RS232 ports. Therefore most external hardware, like Arduino, based on such chips, integrate a RS232 to USB converter 
-requesting a communication baud rate. Additional research revealed the libftdi library, used exactly for these serial communication issues with 
-USB. It combines functionalities of libusb with serial configurations like setting the baud rate. 
+The different open source libraries, like libusb \cite{LIBUSB}, bring the capability of getting all devices and their information like vendor and product ID.
+Furthermore a simple algorithm searching the sysfs of Linux provides the associated terminal file path (/dev/tty…). Last but not least the 
+operations of reading and writing are achieved by the simple file descriptor system calls read and write in combination with termios for 
+setting the baud rate of these operations. 
 
-The usage of libftdi was momentarily discarded, due to no apparent benefit and the  additional disadvantage of refactoring the already existing 
-code. The needed functionality was already covered by combining the libusb package with TTY Linux driver and file descriptors.
+USB normally does not offer the ability of defining baud rates. This issue originated from the need of FTDI devices for RS232 ports. Therefore most
+external hardware, like Arduino, based on such microcontrollers integrate a RS232 to USB converter requesting a communication baud rate. Additional 
+research revealed the libftdi library, used exactly for these serial communication issues with USB. It combines functionalities of libusb with serial
+configurations like setting the baud rate. 
+
+The usage of libftdi was momentarily discarded, due to no apparent benefit and the additional disadvantage of refactoring the already existing 
+code. The needed functionality was already covered by combining the libusb package with TTY Linux driver and file descriptors as well as giving more
+flexibility for function development in future releases.
 
 \subsection{Emulation}
 \label{sec:emulation}
-The first approach consisted of exploiting the USBIP API, which provides the functionality of sharing USB devices over a network. After 
-assessing its feasibility the decision was made to use the base library libusb-vhci.
+The first approach consists of exploiting the USBIP API, which provides the functionality of sharing USB devices over a network. After 
+assessing its feasibility the option of using its base library libusb-vhci proves to be more effective.
 
-The VHCI project can be described as a driver. VHCI \cite{VHCI} (Virtual Host Controller Interface) is a kernel module with the capability of emulating a 
+The VHCI project can be described as a driver. VHCI \cite{VHCI} (Virtual Host Controller Interface) is a kernel module with the capability of emulating an 
 USB hardware device to the kernel. Kernel modules are code modules executed in the kernel space. They need to be compiled on each Linux kernel 
 independently to match its structure. Furthermore the functionalities defined by kernel modules have to be executed with root privileges.
 
 Although compiling the kernel module on each Linux distribution individually and executing the emulation as root can be rated as a disadvantage,
-it is capable of freely emulating USB devices and using the full scope of USB features defined in the USB standard. 
+it is capable of freely emulating USB devices and using the full scope of USB features defined in the \citetitle{USB} \cite{USB}. 
 
-The already existing example code of the project emulates a simple HID (Human Interface Device) which mostly covered the needs of the project. 
-Nevertheless, gradually refactoring the example code led to an emulation of an FTDI device. The result is comprised of three classes 
-representing the emulation:
+The already existing example code of the project emulates a simple HID (Human Interface Device) which mostly covers the needs of the project. 
+Nevertheless, gradually refactoring the example code leads to an emulation of an FTDI device. The result is comprised of three classes 
+representing the emulation (visualized in \myfigref{fig:classdiagram_communication}):
 
 \begin{itemize}
  \item USBEmulationSupervisor
@@ -95,7 +98,7 @@ standardised. The implementation covers only the most essential functionalities 
 
 The inconvenience of needing administrator rights discourages the utilization of the emulation. This issue is unavoidable, since libusb and 
 libusb\_vhci both use functionalities, like claiming a hardware device, which require administrator rights. The fully functional software is 
-intended to have its suid bit set once, therefore granting it administrator rights by default or at least ensuring that it has to be executed 
+intended to have its superuser\-id\-bit (suid) set once, therefore granting it administrator rights by default or at least ensuring that it has to be executed 
 as administrator.
 
 \myfig{classdiagram_communication}%% filename w/o extension in the folder figures
@@ -106,19 +109,19 @@ as administrator.
 
 \section{Databases}
 \label{sec:database}
-Storing and managing data is bound to become an issue due to the enormous amount of data sets in in relation to OBD. Therefore a thoroughly 
-implemented database interface cannot be avoided. For reasons of simplicity the base query language for the database MySQL was chosen. The main 
-advantages leading to the choice of MySQL is the easy installation of MySQL server and client on all Linux distributions as well as the API 
+Storing and managing data is bound to become an issue due to the enormous amount of data sets in relation to OBD. Therefore a thoroughly 
+implemented database interface cannot be avoided. For reasons of simplicity MySQL is chosen as base query language for the database. The main 
+advantages leading to the choice of MySQL are the easy installation of MySQL server and client on all Linux distributions as well as the API 
 availability. MySQLConnector++ \cite{MYSQL} is a C++ API for MySQL, which supplies the basic framework for executing and parsing responses of any database. 
-Since it is an external library  \nameref{sec:CleanCode} advises to wrap its API in a self defined interface, which is represented by this subpackage. 
+Since it is an external library \nameref{sec:CleanCode} advises to wrap its API in a self defined interface, which is represented by this subpackage. 
 
 The general structure composes of a class responsible for dispatching the requests, a class for parsing the data into a C++ conform class 
-structure as well as an executor class defining the insertion and deletion commands. Keeping the philosophy of TDD (Test Driven Development) 
-in mind it seemed wise to setup a test database as an SQL dump and supply a script reinitiating the database. After a testing function has 
-manipulated the database this script can be used to reset the test database to its initial state. 
+structure as well as an executor class defining the insertion and deletion commands, as shown in \myfigref{fig:classdiagram_database}. Keeping the philosophy 
+of test driven development (see \nameref{sec:XP}) in mind it seems wise to setup a test database as an SQL dump and supply a script reinitiating the database. 
+After the manipulation of the database by a unit test this script can be used to reset the test database to its initial state. 
 
 The configuration parameters can either be entered hardcoded or by parsing an XML file containing the host address, user, password and database 
-name. The parsing  structure is thoroughly explained in the Configuration section. The XML looks as follows:
+name. The parsing structure is thoroughly explained in the \nameref{sec:configuration}. The XML looks as follows:
 
 \begin{verbatim}
  <?xml version="1.0" encoding="UTF-8"?>
@@ -131,12 +134,12 @@ name. The parsing  structure is thoroughly explained in the Configuration sectio
  </database>
 \end{verbatim}
 
-The password field is left empty as the user obd has no password setup.  
+The password field is left empty as the user obd has no password set up.  
 
 \myfig{classdiagram_database}%% filename w/o extension in the folder 
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
  {Classdiagram showing the Database Package}%% caption
- {Classdiagram Database}%% optional (short) caption for list of figures
+ {Figure}%% optional (short) caption for list of figures
  {fig:classdiagram_database}%% label
 
 
@@ -146,16 +149,15 @@ The OBDBase package represents the OBD specific part of this thesis. It provides
 from the ELM to the database entries with their column definitions and IDs, as well as calculations, minimum and maximum values of single 
 sensors and ELM specific command representations.
 
-The OBD interface responds to PIDs of service mode I and II with a certain amount of bytes. This amount is defined in the ISO 15031 depending 
-on the sensor the PID represents. PIDs that are modulo 32 are requests to get a 32 bit value of implemented PIDs of the next 32 PIDs. Meaning 
+The OBD interface responds to PIDs of service mode I and II with a certain amount of bytes. This amount is defined in the ISO 15031 \cite{ISO15031} depending 
+on the sensor the PID represents. Every 32nd PID is a request to get the implementation status of the next 32 PIDs. Meaning 
 PID 0 (e.g. 01 00) returns four bytes where each bit is interpreted as a boolean value, stating the availability of the corresponding PID. The 
-interpretation of these received bytes is defined in the above mentioned ISO standard as well. Analyzing the accessible PIDs a grouping into 
-four different value types could be extracted.7
+interpretation of these received bytes is defined in the ISO standard as well. Analyzing the accessible PIDs a clustering into four different value types can be extracted.
 
 \subsection{Calculation Values}
-Calculation values are responses or part of a response, where the received value represents the value of the specific PID’s underlying entity.
-As the name suggests there are additional calculations necessary. The standard defines the environment parameters of these values, which are 
-supplied by an XML file. PID 0x66 shows an example of a calculation value:
+Calculation values are responses or part of a response, where the received value represents the quantity of the PID’s underlying entity. 
+As the name suggests there are additional calculations necessary. The standard defines the environment parameters of these value which are 
+supplied by an XML file. PID $0x66$ is an example of a calculation value:
 
 \begin{verbatim}
  <value interpretation="calculation">
@@ -167,16 +169,19 @@ supplied by an XML file. PID 0x66 shows an example of a calculation value:
  </value>
 \end{verbatim}
 
-These definitions describe the range of the received data, in this case from 0 - 2047.96875 g/s for 0 - 65535 decimal value of two bytes. 
-This means that a received byte value of 0 corresponds to 0 g/s and a decimal value of 65535 represents 2047.9687 g/s. When resolving these 
+These definitions describe the range of the received data, in this case from $0-2047.96875$ g/s for $0-65535$ decimal value of two bytes. 
+This means that a received byte value $0$ corresponds to $0$ g/s and a decimal value of $65535$ represents $2047.9687$ g/s. When resolving these 
 relations the following formula can be used for converting values: 
 
-\[ c_s = \frac{max - min}{2^{bits} - 1} \]
+\[ c_s = \frac{max - min}{2^{no. bits} - 1} \]
 
 \[ v_{interpreted} = v_{raw} * c_s + min \]
 
+Those formulas are reflected in the following listing:
+
 \begin{verbatim}
- void OBDCalculationValue::interpretCalculationValue(std::vector<uint8_t> input)
+ void OBDCalculationValue::
+   interpretCalculationValue(std::vector<uint8_t> input)
  {
    unsigned int compound_value = calculateCompoundValue(input);
    double scale = (max_ - min_) / (pow(2.0, byte_amount_ * 8.0) - 1);
@@ -185,7 +190,7 @@ relations the following formula can be used for converting values:
  }
 \end{verbatim}
 
-The conversion of interpreted values to raw values  naturally deduces:
+The conversion of interpreted values to raw values naturally deduces:
 
 \[ v_{raw} = \frac{(v_{interpreted} - min)}{c_s} \]
 
@@ -202,8 +207,8 @@ The conversion of interpreted values to raw values  naturally deduces:
 
 \subsection{Value Mapping Values}
 
-These are values whose raw values are used on a predefined mapping to get a string representation of this specific PID’s request. Meaning the 
-value directly maps to a result string. The configuration of such a value requires only the mapping itself, as illustrated by the PID 0x5f:
+This type describes raw values which are used on a predefined mapping to get a string representation of this corresponding PID's request. Meaning the 
+value directly maps to a result string. The configuration of such a value requires only the mapping itself, as illustrated by the PID $0x5F$:
 
 \begin{verbatim}
  <value interpretation="mapping">
@@ -218,9 +223,8 @@ value directly maps to a result string. The configuration of such a value requir
 
 \subsection{Bit Mapping Values}
 
-As the name suggests bit mapping values are values, where each bit has a different meaning. Information required from the ISO standard is only
-the mapping and significance of the single bits. In some cases a bits true and false value signify different outputs for the same entity. An 
-example of such a value is PID 0 as well as PID 0x65.
+As the name suggests the bit mapping type describes values where each bit has a different meaning. In this case the only information required from the ISO is 
+the mapping. In some cases a bit's true and false value signify different outputs for the same entity. An example of such a value is PID $0$ as well as PID $0x65$:
 
 \begin{verbatim}
  <value interpretation="mapping">
@@ -238,12 +242,13 @@ example of such a value is PID 0 as well as PID 0x65.
  </value>
 \end{verbatim}
 
-The from field specifies the bit position while the set attribute is an optional attribute to assign a bits value to a concrete output. In this 
-case it is supplied, meaning that depending  on the bits status different strings are mapped. If the set attribute is not explicitly stated it 
+The ``from'' field specifies the bit position while the ``set'' is an optional attribute to assign a bit's value to a concrete output. In this 
+case it is supplied, meaning that depending on the bits status different strings are mapped. If the ``set'' attribute is not explicitly stated it 
 is assumed true.
 
 \begin{verbatim}
- std::string OBDBitMappingValue::interpretToValue(std::vector<uint8_t> input)
+ std::string OBDBitMappingValue::
+   interpretToValue(std::vector<uint8_t> input)
  {
    interpreted_value_ = calculateCompoundValue(input);
    uninterpreted_value_ = interpreted_value_;
@@ -251,12 +256,12 @@ is assumed true.
  }
 \end{verbatim}
 
-As this code shows in case of mapping values of interpreted and uninterpreted values are identical and represent the key of the underlying mapping.
+As this code shows, in case of mapping values, the interpreted and uninterpreted values are identical and represent the key of the underlying mapping.
 
 \subsection{Bit Combination Value Mapping}
 
-This value parsing is a bit comparator mapping of more than two bits. The from field specifies the bit positions and the set represents the 
-value it needs to equal to get the result string in question. PID 0x70 is an example of such a mapping.
+This value parsing is a bit comparator mapping of more than two bits. The ``from'' field specifies the bit positions and the ``set'' represents the 
+value it needs to equal to get the result string in question. PID $0x70$ is an example of such a mapping.
 
 \begin{verbatim}
  <value interpretation="mapping">
@@ -274,12 +279,26 @@ value it needs to equal to get the result string in question. PID 0x70 is an exa
  </value>
 \end{verbatim}
 
+The first three entries correspond to the zeroth and first bit in combination. If they equal $1(0b01) \vee 2(0b10) \vee 3(0b11)$ the mapped string is selected.
+The same principle is applied for the entries regarding the second and third bit combination.
+
 \subsection{Inner Workings}
 
 Since most PIDs do not consist of only one value or type, values have to be defined in the order they are supposed to be received. They can be 
-combined as needed, so that multiple calculation values can be followed by any mapping value or vice versa. The total of the single value 
-definition’s bytes will then be expected when parsing the OBD commands answer, giving significance to the order of the sequence in which the 
+combined as needed, so that multiple calculation values can be followed by any mapping value or vice versa. The total byte amount, resulting from the
+addition of each value's byte length, is expected when parsing the OBD command's answer. This promotes significance to the order of the sequence in which the 
 values are defined in the XML file.
+
+Furthermore special OBD commands exist where the first byte defines which of the transmitted following bytes are valid values. These OBD 
+commands are mostly used for array sensor PIDs. The package offers the optional definition of an automatic or manual validity mapping.
+
+A validity mapping contains one or more bytes at the beginning of the response. The positioning of the bits correspond to the following bytes and 
+their value. Each bit indicates the validity of the associated value.
+
+There are no rules without exceptions. Certain values have a complex validity mapping structure especially in association with the bit 
+combination mapping. The need for a manually configurable validity mapping emerges which leads to a differentiation of validity mapping 
+modes (manual and auto). The amount of such values is limited to one or two occurrences. The manual mode requires definition of the validity bit position
+for each tag. The following listing supplies an example:
 
 \begin{verbatim}
  <obdcommand>
@@ -323,32 +342,21 @@ values are defined in the XML file.
  </obdcommand>
 \end{verbatim}
 
-Furthermore special OBD commands exist where the first byte defines which of the transmitted following bytes are valid values. These OBD 
-commands are mostly used for array sensor PIDs. The package offers therefore the optional definition of an automatic or manual validity mapping.
-
-A validity mapping contains one or more bytes beginning the response in which the position of the bits correspond to the following bytes and 
-their value. The value on a certain position in this mapping byte indicates if the transmitted value is valid or can be ignored.
-
-There are no rules without exceptions. Certain values have a complex validity mapping structure especially in association with the bit 
-combination mapping. Therefore the need for manually configurable validity mapping emerged which got implemented as the manual validity mapping 
-mode. The amount of such values is limited (one or two occurrences). In this mode the validity bit position has to be defined separately with a 
-tag in the all corresponding value definition. 
-
-High abstraction is achieved with an abstract base class. It defines main utility functions like adding bytes to a compound value, storing the 
+High abstraction is achieved with the abstract base class OBDCommandValues. It defines main utility functions like adding bytes to a compound value, storing the 
 raw and interpreted data and delegating the interpretation trough a pure virtual function to its derived classes. 
 
-A simple factory pattern which creates OBDCommandValues from its XML representation ensures easy usability. It creates the values depending on 
-the interpretation attribute of each value tags definition and returns an abstract object representing the value. 
+A simple factory pattern \cite{PATTERN}, which creates OBDCommandValues from its XML representation, ensures simple usability. It manufactures the values depending on 
+the ``interpretation'' attribute of each ``value'' tag's definition and returns an abstract object representing the value. 
 
 \subsection{ELM Commands}
 \label{sec:ELM}
 There is a set of ELM specific commands configurable for the communication to the control unit of the automobile. Generally the emulation has to 
-answer those requests and the OBD tool must configure the ELM specific settings. Therefore it seemed necessary to implement a parsing and object 
-representation of the ElmCommands \cite{ELMDATASHEET} for our middleware package.
+answer those requests and the OBD tool must configure the ELM specific settings. Therefore it seems necessary to implement a parsing and object 
+representation of the ElmCommands \cite{ELMDATASHEET} for our middleware package, see \nameref{sec:tecspec}.
 
-The difficulty of this part of the OBDBase package surfaced when inspecting the single commands more closely. The datasheet of the ELM offered 
-an inconsistent way of defining additional values. In most cases they are referenced as “h” (hexadecimal value) but there are some values 
-referenced by “x”,” y” or “z” as well.
+The difficulty of this part of the OBDBase package surfaced when inspecting the single commands more closely. The ELM datasheet offers 
+an inconsistent way of defining additional values. In most cases they are referenced as ``h'' (hexadecimal value) but there are some values 
+referenced by ``x'', ``y'' or ``z'' as well.
 
 \begin{verbatim}
  <command>
@@ -371,26 +379,32 @@ The configuration subpackage is used to parse and write XML files. Currently the
  \item dbconfiguration.xml
 \end{itemize}
 
-These contain configuration parameters for the software. The command configurations (elmcommandconfiguration.xml and odbcommand.xml) contain all 
-commands known by the ELM327 extracted from its datasheet or all OBD commands consisting of service ID with its corresponding PID and name. 
-The project configurations (obdcuConfiguration.xml and obdtoolConfiguration.xml) are only path declarations to the other configurations enabling 
+These contain configuration parameters for the software. The command configurations, elmcommandconfiguration.xml and odbcommand.xml, contain all 
+commands known by the ELM327 extracted from its datasheet and all OBD commands consisting of service ID with its corresponding PID and name. 
+The project configurations, obdcuConfiguration.xml and obdtoolConfiguration.xml, are only path declarations to the other configurations enabling 
 factory resets.
 
-This package uses the functionalities of the libxml++ \cite{XMLLIB} library. This library uses the DOM (Document Object Model) and supplies functionalities 
+This package uses the functionalities of the libxml++ \cite{XMLLIB} library. This library uses the Document Object Model (DOM) and supplies functionalities 
 for parsing an XML file into a DOM model as well as writing a DOM model to a file. 
 
-The base of the configuration package consists of the XMLWriter, XMLReader and DefaultHandler classes. Their purpose is to parse a DOM object 
-into internal class representations, as suggested in \nameref{sec:CleanCode}, therefore simplifying the usage of the libxml++ library functions to creating 
-a derived class of the DefaultXMLHandler. 
+The base of the configuration package consists of the XMLWriter, XMLReader and DefaultHandler classes as visualized in \myfigref{fig:configuration_classdiagram}. 
+Their purpose is to parse a DOM object into internal class representations, as suggested in \nameref{sec:CleanCode}, therefore simplifying the usage of the 
+libxml++ library functions to creating a derived class of the DefaultXMLHandler. 
+
+\myfig{classdiagram_configuration}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Classdiagram of the Configuration Package}%% caption
+ {Figure}%% optional (short) caption for list of figures
+ {fig:configuration_classdiagram}%% label
 
 This class has a pure virtual method handleNode which gets a xmlpp::Node* as parameter. A derived class instance can distinguish its execution 
 and parsing behavior by comparing e.g. the name of the xmlpp::Node. The DefaultXMLHandler supplies protected functions for parsing 
 xmlpp::TextNode* into C++ strings or setting xmlpp::TextNode* from C++ strings. 
 
-Handlers only define the handling of the nodes, more precisely setting  or parsing the underlying libxml++ DOM representation (xmlpp::Document). 
+Handlers only define the handling of the nodes, more precisely setting or parsing the underlying libxml++ DOM representation (xmlpp::Document). 
 The XMLWriter and XMLReader classes are initialized with an instance of the DefaultXMLHandler. Its parse or write function requires an already 
 existing XML file. Each function calls its internally defined DefaultHandler’s handleNode function while recursively iterating through DOM nodes. 
-A well formed structure of the underlying XML files is ensured by the required DTD files, shown beneath, defining the structure of the XML files.
+A well formed structure of the underlying XML files is ensured by the required DTD files defining the structure of the XML files, as shown in the following listing:
 
 \begin{verbatim}
  <?xml version="1.0" encoding="UTF-8"?>
@@ -415,12 +429,6 @@ A well formed structure of the underlying XML files is ensured by the required D
 The difference between the two classes is that, whilst the XMLReader only iterates and lets the handler save the read data, the XMLWriter sets 
 the DefaultHandler into a mode, where he instead of parsing the node’s data sets it. After the iteration the XMLWriter writes to the same file 
 it read from with the newly filled data.
-
-\myfig{classdiagram_configuration}%% filename w/o extension in the folder figures
- {width=\textwidth}%% maximum width/height, aspect ratio will be kept
- {Classdiagram of the Configuration Package}%% caption
- {Configuration classdiagram}%% optional (short) caption for list of figures
- {fig:configuration_classdiagram}%% label
 
 % \begin{figure}[h!]
 %  \includegraphics[width=\paperwidth]{figures/classdiagram_configuration}

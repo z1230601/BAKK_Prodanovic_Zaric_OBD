@@ -8,23 +8,24 @@
 
 When it comes to software engineering one of the most important questions is which software development process 
 is the best fit for the particular project requirements. There is a high variety of possible strategies, whereby 
-each strategy has its own strengths and weaknesses depending on their field of application. Therefore no universal 
-all in one solution exists which fits no matter the concerning circumstances. This means some preparation and 
-organizational work inside the software team has to be accomplished beforehand. The production of the right software 
-has to factor in the experience of the software developers, the team size as well as considering the needs and wishes 
-of other stakeholders. It is important to find the most appropriate methodology to satisfy all parties included.\footcite{???}
+each strategy has its own strengths and weaknesses depending on their field of application. There is no universal 
+solution which fits disregarding circumstances. This means some preparation and 
+organizational work inside the software team has to be accomplished beforehand. The right software 
+has to consider the experience of the software developers, the team size as well as factor in the needs and wishes 
+of other stakeholders. It is important to find the most appropriate methodology to satisfy all parties included \cite{BECK}.
 
 Basically software projects can be divided into phases, so called life cycles. The most common life cycles are 
 requirements analysis and definition, software design, implementation, verification and maintenance. Taking those 
 phases into account a division into two groups evolved: traditional and agile approaches.
 
 Traditional approaches typically execute the phases sequentially, meaning that one phase does not get processed if 
-its predecessor has not been completed. The waterfall model is considered to be a well-known representative for a traditional approach.\footcite{WATERFALL}
+its predecessor has not yet been completed. The waterfall model is considered to be a well-known representative for a traditional approach \cite{WATERFALL},
+the basic waterfall model is illustrated in \myfigref{fig:waterfall}.
 
 \myfig{waterfall}%% filename w/o extension in the folder figures
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
- {Classic Waterfall Development Process \protect{[\cite{WATERFALLIMAGE}]}}%% caption
- {Waterfall Development Process}%% optional (short) caption for list of figures
+ {Classic Waterfall Development Process \protect{\cite{WATERFALLIMAGE}}}%% caption
+ {Figure}%% optional (short) caption for list of figures
  {fig:waterfall}%% label
 
 On the contrary agile approaches are based on iterative and incremental development, which means that the life cycles 
@@ -33,28 +34,31 @@ encourage adaptations even late in the project’s development phase. Extreme pr
 of agile software development methodologies. Since key aspects of its definition are used in the implementation of the OBD 
 software its background as well as its approach are covered in this section. 
 
-The following sections layout the the reasons for choosing a particular software development technique instead of deciding 
-for another. In addition to that the basics will be explained in particular together with our approach and a final summarization 
-containing our experiences and knowledge we gathered by practicing those methodologies over the course of the bachelor thesis.
+The following sections layout the reasons for choosing a particular software development technique. 
+In addition to that the basics will be explained in particular together with our approach and a final summarization 
+containing experiences and knowledge gathered by practicing those methodologies over the course of the bachelor thesis.
+The theoretical background is acquired by studying \citeauthor{BECK}'s \citetitle{BECK}\cite{BECK}, \citeauthor{CLEANCODE}'s \citetitle{CLEANCODE}\cite{CLEANCODE} and
+\citeauthor{AUTOSPICE}'s \citetitle{AUTOSPICE}\cite{AUTOSPICE}.
 
 \section{Basics}
 
 The motivation to apply the extreme programming methodology is based on the already gathered know-how in this field by attending 
 and finishing the course “Softwareentwicklung und Wissensmanagement” in a prior semester. Additionally, taking into consideration 
-that the software is designed to be used in an automotive context, the Automotive SPICE\footcite{AUTOSPICE} standard, which is derived from the ISO 15504, 
-has to be combined with the test-driven development aspect of extreme programming.
+that the software is designed to be used in an automotive context, the Automotive SPICE\cite{AUTOSPICE} standard, which is derived from the ISO $15504$, 
+has to be combined with the test driven development aspect of extreme programming.
 
 Last but not least prioritizing a consistent coding style within the project to keep the source code itself as well as the overall 
 structure as clear as possible is intended. Thus simplifying future maintenance and refactoring for programmers who are not implicitly 
-the initial developers of the source code. Furthermore this goal is pursue this by basically agreeing to an internal coding standard 
-based on the book “Clean Code``\footcite{CLEANCODE}.
+the initial developers of the source code. Furthermore this goal is pursued by basically agreeing to an internal coding standard 
+based on the book \citetitle{CLEANCODE}\cite{CLEANCODE}.
 
 \subsection{Extreme Programming}
+\label{sec:XP}
 
-As mentioned in the previous chapter the extreme programming\footcite{BECK} attempt is a type of agile software development. Generally it is designed 
-to enable small teams to develop software whose requirements change frequently due to their ambiguous definition. Furthermore it is meant 
-to be a test-driven development approach. In other words a central point of extreme programming is to write unit tests before any “real” 
-code is written. Thus securing the passing of newly written tests as well as already implemented ones is very important. Rather than 
+As mentioned in the previous chapter the extreme programming\cite{BECK} technique falls into the category of agile software development. Generally it is designed 
+for small teams to develop software whose requirements change frequently due to their ambiguous definition. Furthermore it is meant 
+to be a test driven development approach. In other words a central point of extreme programming is to write unit tests before any ``real'' 
+code is written. This promotes the passing of newly written tests as well as already implemented ones. Rather than 
 focussing on testing each unit separately, extreme programming also requires to test the whole system, in the best case, several times a day.
 
 Best practice in extreme programming is to perform pair programming, whereas in other software development techniques each developer has an 
@@ -63,7 +67,7 @@ all required peripherals (screen, keyboard, mouse etc.). Moreover it is usual th
 and improved during the whole process for the purpose of keeping flexibility high and complexity low.
 
 Compared to other software development techniques there are some major differences: First and foremost there is no specialization of the 
-developers on a single task, meaning that an extreme programming programmer has to acquire knowledge and new ways of thinking in all parts 
+developers on a single task, meaning that an XP programmer has to acquire knowledge and new ways of thinking in all parts 
 which are related to software development. Starting with analysing requirements over designing the software architecture to programming, 
 testing and maintaining the product after each release.
 
@@ -72,36 +76,36 @@ up-front. Extreme programming takes the view that those steps are done when need
 as more qualified decisions, due to gathered experience while dealing with the project. Thus simplifying the estimate of which details 
 deserve more attention than others.
 
-Another advice by Kent Beck in Xtreme Programming\footcite{BECK} is to communicate face-to-face or through efficient tests and 
+Another advice by \citeauthor{BECK} in \citetitle{BECK}\cite{BECK} is to communicate face-to-face or through efficient tests and 
 clear code rather than focussing on writing implementation documentation and wasting time with maintaining those documents.
 
 \subsection{Automotive SPICE}
 
-Automotive SPICE\footcite{AUTOSPICE} is a standard used to assess development processes of control units in the automotive industry. It is derived from the 
-ISO/IEC 15504, which is the general SPICE standard, whose main goal is the assessment of processes in software development. SPICE is an 
+\citetitle{AUTOSPICE}\cite{AUTOSPICE} is a standard used to assess development processes of control units in the automotive industry. It is derived from the 
+ISO/IEC $15504$, which is the general SPICE standard, whose main goal is the assessment of processes in software development. SPICE is an 
 abbreviation for \textbf{S}oftware \textbf{P}rocess \textbf{I}mprovement and \textbf{C}apability d\textbf{E}termination, which already 
-clarifies the principal aims. Automotive SPICE was developed by  the AUTOSIG - the \textbf{Auto}motive \textbf{S}pecial \textbf{I}nterest 
+clarifies the principal aims. Automotive SPICE was developed by the AUTOSIG - the \textbf{Auto}motive \textbf{S}pecial \textbf{I}nterest 
 \textbf{G}roup, to whom many well known manufacturers belong to, such as Audi, BMW, Fiat, Jaguar and a few more.
 
-Generally the Automotive SPICE\footcite{AUTOSPICE} Process Assessment Model (PAM) can be described as a two-dimensional model consisting of a process dimension 
+Generally the \citetitle{AUTOSPICE}\cite{AUTOSPICE} Process Assessment Model (PAM) can be described as a two-dimensional model consisting of a process dimension 
 and a capability dimension. The process dimension defines several process categories, where processes are grouped depending on their type of 
 activity. The capability dimension is composed of capability levels, which contain sets of process attributes who provide the measurable 
 characteristics of process capability.
 
-The process dimension is described by the Automotive SPICE Process Reference Model (PRM). Thereby 3 process categories are defined: Primary life
-cycle processes, organizational life cycle processes and supporting life cycle processes. Each category is furthermore divided into process groups.
+The process dimension is described by the Automotive SPICE Process Reference Model (PRM). Thereby three process categories are defined: Primary life
+cycle processes, organizational life cycle processes and supporting life cycle processes. Each category is divided into process groups.
 
 The primary life cycle processes category entails an acquisition process group (ACQ), a supply process group (SPL) and an engineering process 
 group (ENG). Each group is then described by several processes in detail. ACQ processes are used by the customer as well as the supplier in 
 order to acquire a product or a service. SPL processes are meant for the supplier to actually supply a product or a service. ENG processes 
-cover the handling of customer’s requirements defined in the ACQ process as well as the specification, implementation and maintaining of the 
+cover the handling of customer requirements defined in the ACQ process as well as the specification, implementation and maintaining of the 
 software product and its relation to the system.
 
 The supporting life cycle processes category consists only of one support process group (SUP) whose processes can be employed by the other processes at any time.
 
 Lastly the organizational life cycle processes category includes a management process group (MAN), a process improvement process group (PIM) 
 and a reuse process group (REU). MAN processes describe practices to manage projects or processes. PIM processes deal with defining, deploying 
-and improving processes. REU processes systematically exploit reuse opportunities in organization’s reuse programs.
+and improving processes. REU processes systematically exploit opportunities in organization’s reuse programs.
 
 The capability dimension describes six capability levels as following:
 
@@ -138,93 +142,95 @@ The capability dimension describes six capability levels as following:
 \end{itemize}
 
 \subsection{Clean Code}
-\label{sec::CleanCode}
+\label{sec:CleanCode}
 
-Clean code cannot directly be considered as a software development technique by itself. It is rather a common guideline for the whole 
-software development process. According to this, a programmer, who is facing the task of developing new software, should prioritize on 
-producing clean code from the beginning rather than valuing speed and coding sloppily.
+Clean code cannot be considered as a software development technique by itself. It is rather a common guideline for the whole 
+software development process. According to this, a programmer who is facing the task of developing new software, should rather prioritize on 
+producing clean code from the beginning than valuing speed and coding sloppily.
 
-Referring to \cite{CLEANCODE} there is no unique definition of clean code. It is more likely that every programmer has his own point of 
+Referring to \citetitle{CLEANCODE}\cite{CLEANCODE} there is no unique definition of clean code. It is more likely that every programmer has an own point of 
 view when it comes to this question. Thus there are several definitions which overlap partly as well as other ones which diverge widely. 
 An appropriate definition of clean code is coherent code, which is characterized by making sense to a non familiar reader in a short period 
 of time. The reader should not be forced to put too much effort into trying to decrypt the intention behind the code. Clean code also offers 
-some advantages. Source code which is written clean is rather likely to be more stable. In addition to that maintaining clean code is basically 
+some advantages. Source code which is written clean is more likely to be more stable. In addition to that maintaining clean code is basically 
 much more efficient when it comes to expanding or debugging.
 
-Besides code conventions and design patterns which are depending on an agreement within a software developing team there is a set of rules
-which can be followed to enhance the readability of the code according to Robert C. Martin.
+In addition to code conventions and design patterns, which are depending on an agreement within a software developing team, there is a set of rules
+which can be followed to enhance code readability according to \citeauthor{CLEANCODE}.
 
 \myfig{mindmap_clean_code}%% filename w/o extension in the folder figures
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
  {Clean Code Mindmap}%% caption
- {Clean Code Mindmap}%% optional (short) caption for list of figures
+ {Figure}%% optional (short) caption for list of figures
  {fig:clean_code}%% label
 
-The image above visualizes the clean code concepts by Robert C. Martin based on “Clean Code - A Handbook of Agile Software Craftsmanship” 
-which is considered to be among the most important concerning this project. The shown mind map reveals a lot information about the basic 
-idea behind clean code according to Robert C. Martin. The following paragraphs are describing each clean code feature a little more detailed 
+\myfigref{fig:clean_code} visualizes the most important clean code concepts concerning this project. The mind map reveals the basic 
+idea behind clean code with high information density. The following paragraphs are describing each clean code feature a little more detailed
 including some examples to clarify its intention.
 
-Starting with meaningful names, intention-revealing names should have a high priority, as the name of a function, class or variable should 
-be self-explaining, thus descriptive comments are considered needless. The names should furthermore be changed, if a better one can be found, 
-e.g. a variable should rather be called timeSinceFirstExecution than just single letters or abbreviations as x, y, or tsfe. This also directly 
-covers the subitems avoid disinformation, meaningful distinctions, pronounceable and searchable names. An example for bad naming would be the 
-usage of uppercase “o” or lowercase “L” due to their similarity with “0” and “1”. Furthermore the author recommends class names consisting of 
-nouns and methods using verbs for naming.
+Intention-revealing names are recommended, as the name of a function, class or variable should 
+be self-explaining, diminishing the need for descriptive comments. Any chance of improving the naming should be taken. Calling a variable 
+timeSinceFirstExecution is more illuminating than single letter variables like x, y or abbreviations such as tsfe. This also directly 
+covers the subitems ``avoid disinformation'', ``meaningful distinctions'' and ``pronounceable and searchable names''. In practice the 
+usage of uppercase ``o'' or lowercase ``L'' is considered as bad naming due to their similarity with ``$0$'' and ``$1$''.
+It is recommended to use nouns for class names and verbs for method naming.
 
-It is advised to keep functions as small as possible, meaning that a function consists only of a few lines without being in need of complex 
-nested structures, making them more readable and understandable. In addition to that functions should only do one thing, but that they should 
-do well and not care for anything else. As highlighted in the earlier paragraph function names should describe the purpose of the function as 
-detailed as possible, in such a way that no questions remain open. If several lines of code are repeated over and over again throughout the 
-whole program it is better to encapsulate them into a separate function, whereby unnecessary  code duplication is avoided.
+Keeping functions as small as possible, meaning that a function consists only of a few lines without being in need of complex 
+nested structures, has the advantage of making them more readable and understandable. Therefore methods should exclusively implement a single functionality, 
+neglecting all other circumstances. As highlighted in the earlier paragraph function names should describe the intended purpose of the function as detailed as possible. 
+Unnecessary code duplication is avoided by encapsulating recurring code into separate functions.
 
-As phrased by Robert C. Martin in his book, clean code should preferably contain as few comments as possible because comments are mostly used 
-to describe parts which are complicated and unorganized. Further than that comments are considered as a sign for a programmer’s laziness, 
-rather placing a comment than investing some time in rethinking the naming of variables or functions. Nevertheless comments which are considered 
-good exist as well. Examples of such comments can be looked up in “Clean Code - A Handbook of Agile Software Craftsmanship” as well as examples 
-which kind of comments should be avoided.
+Due to the nature of comments, describing complicated and unorganized code, it is preferable to have as few comments as possible.
+Since comments are considered a sign for programmer laziness, it is better to invest some time into refactoring the naming of variables
+and functions rather than placing a comment. Nevertheless good comments exist as well like empty catch-blocks. Further examples can be looked up in 
+\citetitle{CLEANCODE}\cite{CLEANCODE}.
 
 Executing code formatting is also part of the clean code philosophy, thus enhancing the general readability of the code as well as simplifying 
 it for future maintenance. There are some recommendations for both vertical and horizontal formatting, as for instance splitting concepts in 
 such a way that closely associated code parts are vertically dense. Same goes for the horizontal formatting, where a certain spacing hints at 
 relations and separations. Furthermore indentations should be used to hierarchically separate different scopes.
 
-Due to our extreme programming approach, the chapter “Unit Tests” attracted our attention as the software developing is built upon unit testing 
-and test driven development. There is a set of three rules concerning test-driven development besides the already mentioned priority of writing 
-and executing tests before code is actually implemented. The first rule says : “You may not write production code until you have written a 
-failing unit test”. Rule number two is: “You may not write more of a unit test than is sufficient to fail, and not compiling is failing”. The 
-last rule amounts to: “You may not write more production code than is sufficient to pass the currently failing test.”. The author recommends to 
-pay attention to maintain the tests clean as well, just as the code which is written afterwards to pass the tests. Clean tests should be designed 
-in such a manner that they obey the “F.I.R.S.T.” principle, which is an acronym of five rules:
+The chapter ``Unit Tests'' highly influenced the software development as extreme programming is built upon unit testing 
+and test driven development. There is a set of three rules concerning test driven development besides the already mentioned priority of writing 
+and executing tests before code is actually implemented:
 
-First of all tests should be fast, meaning they run quickly so they get executed frequently. Moreover test shall be independent from other tests 
-as well as repeatable in any environment. Another characteristic is a boolean output, whether a test passes or fails, thus self-validation is 
-preferred over confusing log files or other means of output. Lastly tests should be timely, thus writing a test takes place just right before 
-writing the real code, due to the probability of developing untestable code otherwise.
+\begin{enumerate}
+ \item ``You may not write production code until you have written a failing unit test.''
+ \item ``You may not write more of a unit test than is sufficient to fail, and not compiling is failing.''
+ \item ``You may not write more production code than is sufficient to pass the currently failing test.''
+\end{enumerate}
 
-At long last classes are treated principally the same way as functions, therefore they also should be as small as possible. As opposed to 
-functions the shortness is not measured in lines of code, it is rather depending on the responsibilities of a class. This is covered in the so 
-called single responsibility principle. It purports that classes or modules should have only one reason to change. Additionally classes should 
-be organized in such a way that they have an obvious structure and is prepared in such a way that code changes do not crash the program or 
-induce complicated workarounds.
+It is important to maintain tests as well as the tested code clean. Clean tests should be designed in such a manner that they obey the “F.I.R.S.T.” principle, 
+which is an acronym of five rules:
 
-% ÜBERGANG?!
+\begin{description}
+ \item [F]ast - meaning tests run quickly so they get executed frequently.
+ \item [I]ndependent - tests do not influence each other
+ \item [R]epeatable - they conclude to the same result in any environment
+ \item [S]elf-validating - only by a boolean output whether a test passes or fails, no additional criteria (e.g. log files)
+ \item [T]imely - writing a test takes place just right before writing the real code to reduce the risk of untestable code
+\end{description}
+
+Concluding classes should be, as do functions, as small as possible. As opposed to functions the shortness is not measured in lines of code, but 
+rather in the amount of class responsibilities. This is leads to the so called single responsibility principle which purports that classes or modules 
+should have only one reason to change. Additionally they should be prepared for code changes and without obvious structure to avoid complicated workarounds
+or program crashes.
 
 \subsection{Realization}
 
 The scientific aspect of this bachelor thesis is focused on the combination of agile software development in the automotive context. The 
-foundation of this approach builds the Automotive SPICE PAM (PRM) model as well as elements from Kent Beck’s “Extreme Programming Explained”. 
-This chapter will describe the design of combining these software development processes, techniques and tools, which restrictions were made 
-and which compromises. The following chapter Conclusion is then a subjective summary of our experiences and insights.
+foundation of this approach builds the Automotive SPICE PAM (PRM) model as well as elements from \citeauthor{BECK} \citetitle{BECK}. 
+This chapter will describe the design of combining these software development processes, techniques and tools, which restrictions  
+and compromises are made. The following chapter \nameref{sec:conclusion} is then a subjective summary of experiences and insights.
 
-The chosen software is in the vicinity of automotive software development but still for users with little to no knowledge about the structure 
-and/or the automotive structure itself. Automotive software development falls into the category of safety-critical systems, which have high 
-security and low fault tolerance criteria as well as strict and complex testing of its software with severe consequences of failure. However 
-safety uncritical systems, like average software, have their focus on usability and visual representation as well as extendability and 
-effectiveness. Since this software belongs to two areas of software development,  the conclusion lies near that the development techniques 
-from both areas have valid ground for application. Therefore it was necessary to design the development process itself. Starting with the ACQ 
-processes from the SPICE development technique set, customer/system requirements were defined.
+The chosen software is in the vicinity of automotive software development but still for users with little to no automotive knowledge. 
+Automotive software development falls into the category of safety-critical systems, which have high 
+security and low fault tolerance criteria as well as strict and complex testing of its software with severe consequences of failure.
 
+However safety uncritical systems, like average software, have their focus on usability and visual representation as well as extendability and 
+effectiveness. Since this software belongs to two areas of software development, the conclusion lies near that the development techniques 
+from both areas have valid ground for application. Therefore it is necessary to design the development process itself. Starting with the ACQ 
+processes from the SPICE development technique set, customer/system requirements are defined.
 
 \begin{tabular}{| c | p{12cm} |}
  \hline
@@ -252,18 +258,16 @@ processes from the SPICE development technique set, customer/system requirements
   \hline
 \end{tabular}
 
-
 The next step according to SPICE is to parse those customer requirements to software and hardware requirements. The latter are simple, since 
-this project only requires an average ELM327. The software requirements, on the other hand, were designed quite thoroughly.
+this project only requires an average ELM327. The software requirements, on the other hand, are designed quite thoroughly.
 
 % LANDSCAPE FUNCTIONAL REQUIREMENTS
 
-The detailed design, which would be the next task, resulted in the first compromis. It seemed smart to move the detailed design of each package 
+The detailed design, which is the next task, results in the first compromis. It seems smart to move the detailed design of each package 
 to right before implementing it. This corresponds to agile software development requirement of doing the design of the task to implement as late 
 as possible.
 
-The implementation of the packages was done by using the following agile software development techniques:
-
+The implementation of the packages is done by using the following agile software development techniques:
 
 \begin{itemize}
  \item Test Driven Development
@@ -282,10 +286,9 @@ The implementation of the packages was done by using the following agile softwar
  \end{itemize}
 \end{itemize}
 
-
-Since the rough design and thus the order in which the single functionalities have to be implemented was already defined by the SPICE processes,
-agile software development for the single packages could easily be applied. Although this approach breaks the premise of agile software 
-development to have as little design overhead as possible, but instead doing the design when implementing, it seems to be valid compromise to 
+Since the rough design and thus the order in which the single functionalities have to be implemented is already defined by the SPICE processes,
+agile software development for the single packages can easily be applied. Although this approach breaks the premise of agile software 
+development to have as little design overhead as possible, but instead doing the design when implementing, it seems to be a valid compromise to 
 merge the SPICE PRM with the techniques of agile software development. 
 
 Summarized, the approach can be interpreted as the usable process definitions of the SPICE PRM with its advantages, combined with the freedom 
@@ -293,37 +296,8 @@ and scalability of agile software development. The difference to the classic SPI
 like detailed design. Furthermore the comparison to the requirements is not tested at the completion of the project, but rather defined before 
 even beginning programming, through the unit tests. Agile software development differs from its classical approach by taking some flexibility 
 through the division into packages at the ACQ phase of the SPICE models. All in all the approach seems valid especially for this kind of 
-software and was tested out by implementing code in that certain area as well. A further description of the gained insights can be found in the 
-next chapter. 
-
-\section{Conclusion}
-
-The combination of spontaneous agile software development with rigid Automotive SPICE is fusing two contradictory software development areas. 
-This results in numerous issues and gathered experience which will be shared in this chapter.
-
-Right after the SPICE PRM planning phase was finished, the actual work on the tools started. The first achievable goal was to establish a 
-running communication via the serial interface, more precisely connecting over the USB interface. Due to the early stage of development, more 
-accurately the lack of practical experience with the newly created methodology, the implementation took place without real unit tests. 
-Furthermore meaningful testing would have been complicated as well, due to the necessity of implementing mocking classes to successfully test 
-all parts of the serial communication.
-
-After completing the serial communication the development of the OBD related parts were planned. The longer the focussing on the realization of 
-the already planned processes and detailed requirements of the OBD control unit emulation software and the actual OBD tool lasted, many overlaps 
-arose. Thus leading to the decision of drifting off from the existing plan and encapsulating the overlapping details in a so called OBD 
-middleware. Its purpose was to provide classes and functions which are needed by both softwares.
-
-As time went by we adjusted to the characteristics of agile software development, meaning the writing of unit tests right before actual 
-production code was practiced constantly as well as regularly switching the roles as suggested for pair programming. While one wrote an unit 
-test which failed after its immediate execution the other one had to observe and point out possible issues. After the unit test was finished, 
-the developer of the unit test switched into the observer role and the other one implemented a solution to pass the unit test as well as going 
-for the next unit test, alternating the roles constantly.
-
-Over time the quality of the unit tests improved and furthermore the exertion of pair programming led to less debugging and refactoring than 
-we were used to compared to previous non agile projects.
-
-Besides the decision of developing a middleware for the OBD software the basic principle of structuring retained as planned from the beginning 
-on. Unfortunately cuts in the final softwares were made due to underestimating the time which was consumed by the general implementation and 
-refactoring.
+software and is tested out by implementing code in that certain area as well. A further description of the gained insights can be found in the 
+following chapter \nameref{sec:conclusion}.
 
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
