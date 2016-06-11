@@ -33,7 +33,11 @@ sudo screen /dev/ttyUSB0 <baud rate>
 
 The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description.
 
-%TODO: PICTURE
+\myfig{screen}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Screen showing the Response of ELM ATZ Command}%% caption
+ {Screen Terminal Screenshot}%% optional (short) caption for list of figures
+ {fig:screen_response}%% label
 
 As visible on the image above Screen still has issues with carriage returns.
 
@@ -42,6 +46,11 @@ caused by simply removing the power of one of the ignition coils of the tested v
 ignition coil failure code as hexadecimal value. 
 
 %TODO: PICTURE
+% \myfig{screen}%% filename w/o extension in the folder figures
+%  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+%  {Screen showing the Response of ELM ATZ Command}%% caption
+%  {Screen Terminal Screenshot}%% optional (short) caption for list of figures
+%  {fig:screen_response}%% label
 
 The different open source libraries, like libusb, brought the capability of getting all devices and their information like vendor and product ID.
 Furthermore a simple algorithm searching the sysfs of Linux provided the associated terminal file path (/dev/tty…). Last but not least the 
@@ -88,7 +97,11 @@ libusb\_vhci both use functionalities, like claiming a hardware device, which re
 intended to have its suid bit set once, therefore granting it administrator rights by default or at least ensuring that it has to be executed 
 as administrator.
 
-%TODO: PICTURE
+\myfig{classdiagram_communication}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Classdiagram oft the Communication Emulation}%% caption
+ {Cladddiagram Emulation}%% optional (short) caption for list of figures
+ {fig:classdiagram_communication}%% label
 
 \section{Databases}
 \label{sec:database}
@@ -119,7 +132,12 @@ name. The parsing  structure is thoroughly explained in the Configuration sectio
 
 The password field is left empty as the user obd has no password setup.  
 
-%TODO: PICTURE
+\myfig{classdiagram_database}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Classdiagram showing the Database Package}%% caption
+ {Classdiagram Database}%% optional (short) caption for list of figures
+ {fig:classdiagram_database}%% label
+
 
 \section{OBD Base}
 \label{sec:obdbase}
@@ -396,11 +414,17 @@ A well formed structure of the underlying XML files is ensured by the required D
 The difference between the two classes is that, whilst the XMLReader only iterates and lets the handler save the read data, the XMLWriter sets 
 the DefaultHandler into a mode, where he instead of parsing the node’s data sets it. After the iteration the XMLWriter writes to the same file 
 it read from with the newly filled data.
-% TODO: PICTURE
-\begin{figure}[h!]
- \includegraphics{figures/classdiagram_configuration}
- \caption{Classdiagram of the configuration package}
-\end{figure}
+
+\myfig{classdiagram_configuration}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {Classdiagram of the Configuration Package}%% caption
+ {Configuration classdiagram}%% optional (short) caption for list of figures
+ {fig:configuration_classdiagram}%% label
+
+% \begin{figure}[h!]
+%  \includegraphics[width=\paperwidth]{figures/classdiagram_configuration}
+%  \caption{Classdiagram of the configuration package}
+% \end{figure}
 
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
