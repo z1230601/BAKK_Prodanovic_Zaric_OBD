@@ -31,13 +31,13 @@ more concretely the diagnostic trouble code data. The screen starting command lo
 sudo screen /dev/ttyUSB0 <baud rate> 
 \end{verbatim}
 
-The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description, shown in figure
-~\ref{fig:screen_response}
+The ELMs communication baud rate is 38400 bits per seconds. Sending the ELM command ATZ causes the device to respond with its description, shown in \myfigref{fig:screen_response}.
+%\nameref{fig:screen_response} ~\ref{fig:screen_response}
 
 \myfig{screen}%% filename w/o extension in the folder figures
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
  {Screen showing the Response of ELM ATZ Command}%% caption
- {Screen Terminal Screenshot}%% optional (short) caption for list of figures
+ {Figure}%% optional (short) caption for list of figures
  {fig:screen_response}%% label
 
 As visible on the image above Screen still has issues with carriage returns.
@@ -133,7 +133,7 @@ name. The parsing  structure is thoroughly explained in the Configuration sectio
 
 The password field is left empty as the user obd has no password setup.  
 
-\myfig{classdiagram_database}%% filename w/o extension in the folder figures
+\myfig{classdiagram_database}%% filename w/o extension in the folder 
  {width=\textwidth}%% maximum width/height, aspect ratio will be kept
  {Classdiagram showing the Database Package}%% caption
  {Classdiagram Database}%% optional (short) caption for list of figures

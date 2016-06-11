@@ -74,6 +74,15 @@
 \end{figure}
 }
 
+\newcommand{\myfigref}[1]{
+%% example:
+% \myfig{}%% filename in figures folder
+%       {width=0.5\textwidth,height=0.5\textheight}%% maximum width/height, aspect ratio will be kept
+%       {}%% caption
+%       {}%% optional (short) caption for list of figures
+%       {}%% label
+\nameref{#1} ~\ref{#1}
+}
 
 %doc% 
 %doc% \subsection{\texttt{myclone} --- repeat things!}
