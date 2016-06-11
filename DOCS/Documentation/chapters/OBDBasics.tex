@@ -12,20 +12,20 @@ keeping track of the error memory by trouble codes is possible. Even the access 
 their attached entities is feasible, resulting in a not negligible security threat. 
 
 These characteristics are a result of introducing the concept of a central OBD interface at a time, 
-when almost every automotive manufacturer already implemented own communication protocol between the separate control units [\footcite{SCHAFOBD1}].
+when almost every automotive manufacturer already implemented own communication protocol between the separate control units \cite{SCHAFOBD1}.
 As a result the OBD standard does not define a specific protocol used for the CAN bus but only the protocol used to communicate with the diagnostic 
 section of a control unit, where standardized trouble codes can be obtained. 
 
 If the protocol used for inter CU communication was known, it would be possible to send commands directly to any CU in the bus system, which bears a 
 great security issue. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, but due to the
-popularity of this topic at universities this thesis will not cover it [\footcite{Koscher2010}].
+popularity of this topic at universities this thesis will not cover it \cite{Koscher2010}.
 
 Generally there is a variety of already existing protocols and standards which define the communication via the OBD interface. The usage of the ELM327 
 emerged due to its availability and simplicity, as it is a popular programmed microcontroller for translating the OBD interface. ELM327 has the 
 advantage of establishing a connection between the OBD interface and a PC using different standards and protocols e.g. SAE J1850, ISO 14230-4 KWP, 
 ISO 15765-4 CAN. Basically the ELM327 serves as an interface communicating as a UART (universal asynchronous receiver/transmitter) device with the 
 PC it is attached to and K-Line to communicate with the CU. The hardware port variates depending on the intended usage and circumstances and can go 
-from USB over Bluetooth to Wi-Fi or even RS-232 [\footcite[pp. 46 ff.]{SCHAFOBD2}].
+from USB over Bluetooth to Wi-Fi or even RS-232 [\footcite[pp. 46 ff.]{SCHAFOBD2}.
 
 \setcounter{section}{0}
 \section{Busses}
@@ -41,7 +41,7 @@ and \nameref{sec:serialComm}.
 \subsection{Universal Serial Bus (USB)}
 
 This chapter introduces the relevant USB basics regarding the project requirements gathered from \cite{USBNUT} which summarizes the official \citetitle{USB} 
-[\footcite[pp. 36ff., 199ff., 260-274]{USB}].
+[\footcite[pp. 36ff., 199ff., 260-274]{USB}.
 
 USB is used for a vast range of devices. As the project requirements for the selection and communication to as well as the emulation of an USB device,
 it seems appropriate to cover the relevant USB basics. Readers who already have experience with USB or knowledge about the general functionality of the 
@@ -58,7 +58,7 @@ USB is a shielded 4 wire, TTL voltage communications interface using NRZI (Non R
 
 \emph{D} is a twisted pair, differential signaling wire. Differential signaling is a method to reduce noise effects on data transmissions where a signal
 is transmitted over the wires, with the additional property that the signal carried by one wire is inverted to the signal carried by the other wire. The 
-receiver uses the difference between the signals instead of the signal itself bracing it against overlaid noise [\footcite{Massoud2001}].
+receiver uses the difference between the signals instead of the signal itself bracing it against overlaid noise \cite{Massoud2001}.
 
 It has a tiered star topology which means that although they are physically cascaded, e.g. by hubs, it is logically considered a star topology where the 
 root hub (computer) can access a device over its logical address (port).
@@ -388,7 +388,7 @@ components found their way into the automobile. At some point the requirement fo
 that different manufacturers had already applied different technologies, the problem of standardizing their systems would have 
 resulted in huge redevelopment costs. As no manufacturer could be expected to carry those costs, the OBD standard does not define the 
 utilization of any specific technology. Instead it defines the interface and format to which every automobile must be able to 
-communicate with standardized commands [\footcite{SCHAFOBD1}].
+communicate with standardized commands \cite{SCHAFOBD1}.
 
 This diagnostic data must have a uniform format. This format is called diagnostic trouble code or simply fault code. Since every 
 vehicle has the same theoretical background, standardizing types of faults is feasible. This property also simplifies a categorization 
@@ -408,7 +408,7 @@ displayed. However, they commonly can be classified into 4 categories depending 
 
 The SAE J1979 and the ISO 15031-5 are two standards which define the available service modes needed to make a diagnostic analysis of cropped up fault codes. Currently there are ten prevalent operation modes, but there are still five reserved modes for eventual future modifications of the actual standard. Additionally manufacturers have the possibility to implement their own diagnoses by using higher service modes.
 Nine of the ten specified modes provide information of sensor measurements or triggered diagnostic trouble codes recorded in the error memory. The remaining mode is meant to clear the memory. Nowadays automobiles are not obligated to support every service  mode, de facto just a limited amount of information can be acquired via the OBD interface.
-Following the ten service modes as well as a short description of their respective function are listed [\footcite{SCHAFOBD2}]:
+Following the ten service modes as well as a short description of their respective function are listed \cite{SCHAFOBD2}:
 
 \begin{description}
  \item[Request current data] depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
@@ -424,7 +424,7 @@ Following the ten service modes as well as a short description of their respecti
 \end{description}
 
 Furthermore so called OBD PIDs (Parameter Identifiers) are needed to be able to request data from a vehicle successfully. In the following section 
-we discuss the characteristics of PIDs [\footcite{SCHAFOBD1}].
+we discuss the characteristics of PIDs \cite{SCHAFOBD1}.
 
 \subsection{Parameter Identifier}
 Parameter identifier are used to specify the exact sub functionality or location of the selected service mode. A sub functionality can
