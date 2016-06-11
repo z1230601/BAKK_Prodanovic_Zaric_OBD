@@ -1,0 +1,45 @@
+%%%% Time-stamp: <2012-08-20 17:41:39 vk>
+
+%% example text content
+%% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
+%% scrbook starts with part (optional), chapter, section, ...
+
+\chapter{Conclusion}
+\label{sec:conclusion}
+
+The combination of the spontaneous agile software development with the rigid Automotive SPICE is fusing two contradictory software development areas. 
+This results in numerous issues and gathered experience which will be shared in this chapter.
+
+Right after the SPICE PRM planning phase was finished, the actual work on the tools started. The first achievable goal was to establish a 
+running communication via the serial interface, more precisely connecting over the USB interface. Due to the early stage of development, more 
+accurately the lack of practical experience with the newly created methodology, the implementation took place without real unit tests. 
+Furthermore meaningful testing would have been complicated as well, due to the necessity of implementing mock classes to successfully test 
+all parts of the serial communication.
+
+After completing the serial communication the development of the OBD related parts were planned. Whilst realizing this part and planning the next 
+huge overlaps emerged. In accordance to agile software development practices common functionalities of both, OBDCU and OBD tool, requirements were 
+encapsuled in an OBD middleware package. Its purpose is to provide classes and functions which are needed by both softwares. Therefore changing the 
+plan acquired in previous PRM processes, which is a good comparison between agile and rigid software development.
+
+As time went by adjustments to the characteristics of agile software development were made, meaning the writing of unit tests right before actual 
+production code was practiced constantly as well as regularly switching the roles as suggested for pair programming. While one wrote an unit 
+test which failed after its immediate execution the other one had to observe and point out possible issues. After the unit test was finished, 
+the developer of the unit test switched into the observer role and the other one implemented a solution to pass the unit test as well as going 
+for the next unit test, alternating the roles constantly.
+
+Over time the quality of the unit tests improved and furthermore the exertion of pair programming led to less debugging and refactoring compared 
+to previous non agile projects.
+
+Besides the decision of developing a middleware for the OBD software the basic principle of structuring retained as planned from the beginning 
+on. Unfortunately cuts in the final softwares were made due to underestimating the time which was consumed by the general implementation and 
+refactoring. This leaves space for continous
+
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
+%%% Local Variables: 
+%%% mode: latex
+%%% mode: auto-fill
+%%% mode: flyspell
+%%% eval: (ispell-change-dictionary "en_US")
+%%% TeX-master: "main"
+%%% End: 
