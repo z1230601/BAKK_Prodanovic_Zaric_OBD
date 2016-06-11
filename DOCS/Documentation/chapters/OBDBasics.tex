@@ -25,7 +25,7 @@ emerged due to its availability and simplicity, as it is a popular programmed mi
 advantage of establishing a connection between the OBD interface and a PC using different standards and protocols e.g. SAE J1850, ISO 14230-4 KWP, 
 ISO 15765-4 CAN. Basically the ELM327 serves as an interface communicating as a UART (universal asynchronous receiver/transmitter) device with the 
 PC it is attached to and K-Line to communicate with the CU. The hardware port variates depending on the intended usage and circumstances and can go 
-from USB over Bluetooth to Wi-Fi or even RS-232 [\footcite[pp. 46 ff.]{SCHAFOBD2}.
+from USB over Bluetooth to Wi-Fi or even RS-232 \cite[pp. 46 ff.]{SCHAFOBD2}.
 
 \setcounter{section}{0}
 \section{Busses}
@@ -40,12 +40,11 @@ and \nameref{sec:serialComm}.
 
 \subsection{Universal Serial Bus (USB)}
 
-This chapter introduces the relevant USB basics regarding the project requirements gathered from \cite{USBNUT} which summarizes the official \citetitle{USB} 
-[\footcite[pp. 36ff., 199ff., 260-274]{USB}.
+As USB is a widespread technology used on a vast range of devices, including the ELM327, it seems appropriate to cover the relevant USB basics.
+Therefore USB is included in the project requirements of selection and communication to as well as the emulation of an ELM device. This chapter 
+introduces those basics gathered from the website \citetitle{USBNUT}\cite{USBNUT}, which summarizes the official \citetitle{USB} 
+\cite[pp. 36ff., 199ff., 260-274]{USB}.
 
-USB is used for a vast range of devices. As the project requirements for the selection and communication to as well as the emulation of an USB device,
-it seems appropriate to cover the relevant USB basics. Readers who already have experience with USB or knowledge about the general functionality of the 
-protocol can skip this chapter.
 
 USB is a shielded 4 wire, TTL voltage communications interface using NRZI (Non Return to Zero Inverted) encoding. Meaning that it is represented by 4 wires:
 
@@ -62,10 +61,13 @@ receiver uses the difference between the signals instead of the signal itself br
 
 It has a tiered star topology which means that although they are physically cascaded, e.g. by hubs, it is logically considered a star topology where the 
 root hub (computer) can access a device over its logical address (port).
-\begin{figure}
 
-\end{figure}
-
+\myfig{usb_topology}%% filename w/o extension in the folder figures
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
+ {USB tiered Star Topology \cite{USBTOPOLOGY}}%% caption
+ {Waterfall Development Process}%% optional (short) caption for list of figures
+ {fig:waterfall}%% label
+ 
 Since it is a host centric communication every transaction is initiated by the host. Each transaction has a header packet (token), an optional data 
 packet and a handshake packet. The header packet defines targets (interface and endpoint) and the handshake represents the validity of the response, 
 whereas the data packet is simply carrying the payload.
