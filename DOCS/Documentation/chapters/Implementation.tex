@@ -15,7 +15,7 @@ implementational approach.
 One of the main functionalities needed by both tools is the communication to the device attached to the USB port. Although this does not relate 
 to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or  such which are 
 meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. For this concrete example of this sort of 
-implementation the ELM327 v1.4/v1.5 was used as external hardware. The goal of this middleware package is to provide development tools for easy 
+implementation the ELM327 v1.4/v1.5\footcite{ELM} was used as external hardware. The goal of this middleware package is to provide development tools for easy 
 communication with the ELM chip without specifics of port (USB, COM etc.). Another requirement which falls into this category is the emulation 
 of a given USB ELM device to enable testing of OBD tools, leading to the implementation of a virtual USB FTDI device and controlling its behaviour.
 
@@ -24,7 +24,7 @@ The implementation of this package is based on the knowledge acquired in the cha
 \subsection{Serial Communication}
 \label{sec:serialComm}
 After acquiring an overview of the general OBD functionality and familiarizing with the ELM327 the next step was trying the terminal program 
-Screen on Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
+Screen\footcite{SCREEN} on GNU/Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
 more concretely the diagnostic trouble code data. The screen starting command looks as follows
 
 \begin{verbatim}
@@ -59,7 +59,7 @@ code. The needed functionality was already covered by combining the libusb packa
 The first approach consisted of exploiting the USBIP API, which provides the functionality of sharing USB devices over a network. After 
 assessing its feasibility the decision was made to use the base library libusb-vhci.
 
-The VHCI project can be described as a driver. VHCI (Virtual Host Controller Interface) is a kernel module with the capability of emulating a 
+The VHCI project can be described as a driver. VHCI\footcite{VHCI} (Virtual Host Controller Interface) is a kernel module with the capability of emulating a 
 USB hardware device to the kernel. Kernel modules are code modules executed in the kernel space. They need to be compiled on each Linux kernel 
 independently to match its structure. Furthermore the functionalities defined by kernel modules have to be executed with root privileges.
 
@@ -95,8 +95,8 @@ as administrator.
 Storing and managing data is bound to become an issue due to the enormous amount of data sets in in relation to OBD. Therefore a thoroughly 
 implemented database interface cannot be avoided. For reasons of simplicity the base query language for the database MySQL was chosen. The main 
 advantages leading to the choice of MySQL is the easy installation of MySQL server and client on all Linux distributions as well as the API 
-availability. MySQLConnector++ is a C++ API for MySQL, which supplies the basic framework for executing and parsing responses of any database. 
-Since it is an external library  Clean Code advises to wrap its API in a self defined interface, which is represented by this subpackage. 
+availability. MySQLConnector++\footcite{MYSQL} is a C++ API for MySQL, which supplies the basic framework for executing and parsing responses of any database. 
+Since it is an external library  \nameref{sec:CleanCode} advises to wrap its API in a self defined interface, which is represented by this subpackage. 
 
 The general structure composes of a class responsible for dispatching the requests, a class for parsing the data into a C++ conform class 
 structure as well as an executor class defining the insertion and deletion commands. Keeping the philosophy of TDD (Test Driven Development) 
@@ -325,7 +325,7 @@ the interpretation attribute of each value tags definition and returns an abstra
 \label{sec:ELM}
 There is a set of ELM specific commands configurable for the communication to the control unit of the automobile. Generally the emulation has to 
 answer those requests and the OBD tool must configure the ELM specific settings. Therefore it seemed necessary to implement a parsing and object 
-representation of the ElmCommands for our middleware package.
+representation of the ElmCommands\footcite{ELMDATASHEET} for our middleware package.
 
 The difficulty of this part of the OBDBase package surfaced when inspecting the single commands more closely. The datasheet of the ELM offered 
 an inconsistent way of defining additional values. In most cases they are referenced as “h” (hexadecimal value) but there are some values 
@@ -357,11 +357,11 @@ commands known by the ELM327 extracted from its datasheet or all OBD commands co
 The project configurations (obdcuConfiguration.xml and obdtoolConfiguration.xml) are only path declarations to the other configurations enabling 
 factory resets.
 
-This package uses the functionalities of the libxml++ library. This library uses the DOM (Document Object Model) and supplies functionalities 
+This package uses the functionalities of the libxml++\footcite{XMLLIB} library. This library uses the DOM (Document Object Model) and supplies functionalities 
 for parsing an XML file into a DOM model as well as writing a DOM model to a file. 
 
 The base of the configuration package consists of the XMLWriter, XMLReader and DefaultHandler classes. Their purpose is to parse a DOM object 
-into internal class representations, as suggested in Clean Code, therefore simplifying the usage of the libxml++ library functions to creating 
+into internal class representations, as suggested in \nameref{sec:CleanCode}, therefore simplifying the usage of the libxml++ library functions to creating 
 a derived class of the DefaultXMLHandler. 
 
 This class has a pure virtual method handleNode which gets a xmlpp::Node* as parameter. A derived class instance can distinguish its execution 
@@ -397,6 +397,11 @@ The difference between the two classes is that, whilst the XMLReader only iterat
 the DefaultHandler into a mode, where he instead of parsing the node’s data sets it. After the iteration the XMLWriter writes to the same file 
 it read from with the newly filled data.
 % TODO: PICTURE
+\begin{figure}[h!]
+ \includegraphics{figures/classdiagram_configuration}
+ \caption{Classdiagram of the configuration package}
+\end{figure}
+
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
 %%% Local Variables: 

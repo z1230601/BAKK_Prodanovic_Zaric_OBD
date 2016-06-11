@@ -12,14 +12,14 @@ each strategy has its own strengths and weaknesses depending on their field of a
 all in one solution exists which fits no matter the concerning circumstances. This means some preparation and 
 organizational work inside the software team has to be accomplished beforehand. The production of the right software 
 has to factor in the experience of the software developers, the team size as well as considering the needs and wishes 
-of other stakeholders. It is important to find the most appropriate methodology to satisfy all parties included.
+of other stakeholders. It is important to find the most appropriate methodology to satisfy all parties included.\footcite{???}
 
 Basically software projects can be divided into phases, so called life cycles. The most common life cycles are 
 requirements analysis and definition, software design, implementation, verification and maintenance. Taking those 
 phases into account a division into two groups evolved: traditional and agile approaches.
 
 Traditional approaches typically execute the phases sequentially, meaning that one phase does not get processed if 
-its predecessor has not been completed. The waterfall model is considered to be a well-known representative for a traditional approach.
+its predecessor has not been completed. The waterfall model is considered to be a well-known representative for a traditional approach.\footcite{WATERFALL}
 
 % WATERFALL Image
 
@@ -37,17 +37,17 @@ containing our experiences and knowledge we gathered by practicing those methodo
 
 The motivation to apply the extreme programming methodology is based on the already gathered know-how in this field by attending 
 and finishing the course “Softwareentwicklung und Wissensmanagement” in a prior semester. Additionally, taking into consideration 
-that the software is designed to be used in an automotive context, the Automotive SPICE standard, which is derived from the ISO 15504, 
+that the software is designed to be used in an automotive context, the Automotive SPICE\footcite{AUTOSPICE} standard, which is derived from the ISO 15504, 
 has to be combined with the test-driven development aspect of extreme programming.
 
 Last but not least prioritizing a consistent coding style within the project to keep the source code itself as well as the overall 
 structure as clear as possible is intended. Thus simplifying future maintenance and refactoring for programmers who are not implicitly 
 the initial developers of the source code. Furthermore this goal is pursue this by basically agreeing to an internal coding standard 
-based on the book “Clean Code: A Handbook of Agile Software Craftsmanship 1st Edition” by Robert C. Martin.
+based on the book “Clean Code``\footcite{CLEANCODE}.
 
 \subsection{Extreme Programming}
 
-As mentioned in the previous chapter the extreme programming attempt is a type of agile software development. Generally it is designed 
+As mentioned in the previous chapter the extreme programming\footcite{BECK} attempt is a type of agile software development. Generally it is designed 
 to enable small teams to develop software whose requirements change frequently due to their ambiguous definition. Furthermore it is meant 
 to be a test-driven development approach. In other words a central point of extreme programming is to write unit tests before any “real” 
 code is written. Thus securing the passing of newly written tests as well as already implemented ones is very important. Rather than 
@@ -68,18 +68,18 @@ up-front. Extreme programming takes the view that those steps are done when need
 as more qualified decisions, due to gathered experience while dealing with the project. Thus simplifying the estimate of which details 
 deserve more attention than others.
 
-Another advice by Kent Beck in [http://dl.acm.org/citation.cfm?id=318762] is to communicate face-to-face or through efficient tests and 
+Another advice by Kent Beck in Xtreme Programming\footcite{BECK} is to communicate face-to-face or through efficient tests and 
 clear code rather than focussing on writing implementation documentation and wasting time with maintaining those documents.
 
 \subsection{Automotive SPICE}
 
-Automotive SPICE is a standard used to assess development processes of control units in the automotive industry. It is derived from the 
+Automotive SPICE\footcite{AUTOSPICE} is a standard used to assess development processes of control units in the automotive industry. It is derived from the 
 ISO/IEC 15504, which is the general SPICE standard, whose main goal is the assessment of processes in software development. SPICE is an 
 abbreviation for \textbf{S}oftware \textbf{P}rocess \textbf{I}mprovement and \textbf{C}apability d\textbf{E}termination, which already 
 clarifies the principal aims. Automotive SPICE was developed by  the AUTOSIG - the \textbf{Auto}motive \textbf{S}pecial \textbf{I}nterest 
 \textbf{G}roup, to whom many well known manufacturers belong to, such as Audi, BMW, Fiat, Jaguar and a few more.
 
-Generally the Automotive SPICE Process Assessment Model (PAM) can be described as a two-dimensional model consisting of a process dimension 
+Generally the Automotive SPICE\footcite{AUTOSPICE} Process Assessment Model (PAM) can be described as a two-dimensional model consisting of a process dimension 
 and a capability dimension. The process dimension defines several process categories, where processes are grouped depending on their type of 
 activity. The capability dimension is composed of capability levels, which contain sets of process attributes who provide the measurable 
 characteristics of process capability.
@@ -134,12 +134,13 @@ The capability dimension describes six capability levels as following:
 \end{itemize}
 
 \subsection{Clean Code}
+\label{sec::CleanCode}
 
 Clean code cannot directly be considered as a software development technique by itself. It is rather a common guideline for the whole 
 software development process. According to this, a programmer, who is facing the task of developing new software, should prioritize on 
 producing clean code from the beginning rather than valuing speed and coding sloppily.
 
-Referring to [CLEAN CODE BUCH] there is no unique definition of clean code. It is more likely that every programmer has his own point of 
+Referring to \cite{CLEANCODE} there is no unique definition of clean code. It is more likely that every programmer has his own point of 
 view when it comes to this question. Thus there are several definitions which overlap partly as well as other ones which diverge widely. 
 An appropriate definition of clean code is coherent code, which is characterized by making sense to a non familiar reader in a short period 
 of time. The reader should not be forced to put too much effort into trying to decrypt the intention behind the code. Clean code also offers 
