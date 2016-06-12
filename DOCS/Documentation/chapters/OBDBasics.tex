@@ -22,7 +22,7 @@ popularity of this topic at universities this thesis will not cover it \cite{Kos
 
 Generally there is a variety of already existing protocols and standards which define the communication via the OBD interface. The usage of the ELM$327$
 emerged due to its availability and simplicity, as it is a popular programmed microcontroller for translating the OBD interface. ELM$327$ has the 
-advantage of establishing a connection between the OBD interface and a PC using different standards and protocols e.g. SAE J$1850$, ISO $14230-4$ KWP, 
+advantage of establishing a connection between the OBD interface and a PC using different standards and protocols like SAE J$1850$, ISO $14230-4$ KWP, 
 ISO $15765-4$ CAN. Basically the ELM$327$ serves as an interface communicating as a UART (universal asynchronous receiver/transmitter) device with the 
 PC it is attached to and K-Line to communicate with the CU. The hardware port variates depending on the intended usage and circumstances and can go 
 from USB over Bluetooth to Wi-Fi or even RS-$232$ \cite[pp. 46 ff.]{SCHAFOBD2}.
@@ -58,7 +58,7 @@ USB is a shielded four-wired, TTL voltage communications interface using NRZI (N
 is transmitted over the wires, with the additional property that the signal carried by one wire is inverted to the signal carried by the other wire. The 
 receiver uses the difference between the signals instead of the signal itself bracing it against overlaid noise \cite{Massoud2001}.
 
-It has a tiered star topology which means that although they are physically cascaded, e.g. by hubs, it is logically considered a star topology where the 
+It has a tiered star topology which means that although they are physically cascaded, for example with the help of hubs, it is logically considered a star topology where the 
 root hub (computer) can access a device over its logical address (port). \myfigref{fig:topology} visualizes such a tiered star topology.
 
 \myfig{usb_topology}%% filename w/o extension in the folder figures
@@ -272,7 +272,7 @@ Field & Description \\
 bLength &  complete length of the packet (include the length itself) in bytes \\
 bDescriptorType &  type of descriptor (device $0x04$) \\
 bInterfaceNumber & index of interface \\
-bAlternateSetting & index of alternative interface if this should fail due to e.g. speed capabilities \\
+bAlternateSetting & index of alternative interface if this should fail, for instance speed capabilities occur \\
 bNumEndpoints & amount of endpoints \\
 bInterfaceClass & standardized class id (in USB standard) describing the interface type \\
 bInterfaceSubClass & standardized class id (in USB standard) describing the interface type \\
@@ -424,7 +424,7 @@ Following the ten service modes as well as a short description of their respecti
  \item[Request specific, non-continuous monitored systems] similar to service mode five the sixth service mode especially provides data of non-continuous monitored components. The range of considered components is  manufacturer dependent.
  \item[Request pending DTCs] this mode allows a comfortable way to read out reoccurring fault codes during a test drive after the vehicle got repaired and the DTCs got deleted. Especially fault codes which do not show up in service mode three can be emphasized with mode seven.
  \item[Control on-board systems/test/components]  this mode supplies external control of on-board systems, testing functions or other components by turning them temporarily or permanently  on or off.
- \item[Request vehicle information] the vehicle information contains e.g. the VIN (vehicle identification number) as well as several calibration values.
+ \item[Request vehicle information] the vehicle information contains the VIN (vehicle identification number) as well as several calibration values.
  \item[Permanent emission-based DTCs] this service mode is only available to CUs which communicate via the CAN protocol. DTCs stored in this part of the memory cannot be cleared by service mode four due to their severeness, instead only several road cycles will cause the CU to clear the fault if the problem does not reappear.
 \end{description}
 
