@@ -149,7 +149,7 @@ sensors and ELM specific command representations.
 
 The OBD interface responds to PIDs of service mode I and II with a certain amount of bytes. This amount is defined in the ISO $15031$ \cite{ISO15031} depending 
 on the sensor the PID represents. Every $32$nd PID is a request to get the implementation status of the next $32$ PIDs. Meaning 
-PID $0$ (e.g. $01$ $00$) returns four bytes where each bit is interpreted as a boolean value, stating the availability of the corresponding PID. The 
+PID $0$, which equals the OBD command $01$ $00$, returns four bytes where each bit is interpreted as a boolean value, stating the availability of the corresponding PID. The 
 interpretation of these received bytes is defined in the ISO standard as well. Analyzing the accessible PIDs a clustering into four different value types can be extracted.
 
 \subsection{Calculation Values}
@@ -340,10 +340,6 @@ for each tag. The following listing supplies an example:
      <validitybit from="23">5</validitybit>
      <entry from="23" set="01">
        Offener Kreislauf, kein Fehler</entry>
-     <entry from="23" set="10">
-       Geschlossener Kreislauf, kein Fehler</entry>
-     <entry from="23" set="11">
-       Fehler vorhanden, Wert unzuverlässig</entry>
     </mapping>        
    </value>
   </values>
@@ -406,7 +402,7 @@ libxml++ library functions to creating a derived class of the DefaultXMLHandler.
  {fig:configuration_classdiagram}%% label
 
 This class has a pure virtual method handleNode which gets a xmlpp::Node* as parameter. A derived class instance can distinguish its execution 
-and parsing behavior by comparing e.g. the name of the xmlpp::Node. The DefaultXMLHandler supplies protected functions for parsing 
+and parsing behavior by comparing the name of the xmlpp::Node. The DefaultXMLHandler supplies protected functions for parsing 
 xmlpp::TextNode* into C++ strings or setting xmlpp::TextNode* from C++ strings. 
 
 Handlers only define the handling of the nodes, more precisely setting or parsing the underlying libxml++ DOM representation (xmlpp::Document). 
