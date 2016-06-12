@@ -38,7 +38,7 @@ The automotive industry applies KL-Line bus, MOST bus as well as CAN. As the bus
 this chapter will not cover the CAN, MOST and KL-Line bus but instead it will provide basics on USB which are fundamental for \nameref{sec:emulation} 
 and \nameref{sec:serialComm}.
 
-\subsection{Universal Serial Bus (USB)}
+\subsection*{Universal Serial Bus (USB)}
 \label{sec:USB}
 As USB is a widespread technology used on a vast range of devices, including the ELM$327$, it seems appropriate to cover the relevant USB basics.
 Therefore USB is included in the project requirements of selection and communication to as well as the emulation of an ELM device. This chapter 
@@ -384,7 +384,7 @@ following structure:
  \item wLength ($2$ bytes)
 \end{itemize}
 
-\subsection{Command Structure and Behaviour}
+\section{Command Structure and Behaviour}
 \label{sec:CSaB}
 
 At the beginning of automotive manufacturing almost all components were mechanical. As technology developed more and more electrical 
@@ -431,7 +431,7 @@ Following the ten service modes as well as a short description of their respecti
 Furthermore so called OBD PIDs (Parameter Identifiers) are needed to be able to request data from a vehicle successfully. In the following section 
 the characteristics of PIDs are discussed \cite{SCHAFOBD1}.
 
-\subsection{Parameter Identifier}
+\subsection*{Parameter Identifier}
 Parameter identifier are used to specify the exact sub functionality or location of the selected service mode. A sub functionality can
 be a specific sensor or requested data like VIN. Every service mode contains an own set of available, valid PIDs to produce meaningful requests. Many PIDs are 
 already specified and included in the OBD-II standard SAE J$1979$. Due to the fact that each manufacturer can define vehicle specific PIDs it is not 

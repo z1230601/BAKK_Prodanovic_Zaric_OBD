@@ -4,12 +4,21 @@
 \chapter*{Abstract}
 \label{cha:abstract}
 
+Considering the increasing amount of control units in automotive environments an effective handling of these units seems inevitable. Due to the secrecy 
+of automotive manufacturers common service mechanics are no longer independently capable of maintaining all components of a vehicle. Furthermore wrong assumptions of the 
+maintanence personnel often lead to incorrect error identification and thus the costly replacement of fully functional parts. A solution is offered by 
+the ISO$15031$ defining a unique way of identifying faults with the on board diagnostics (OBD) interface.
 
-This is a placeholder for the abstract. It summarizes the whole thesis
-to give a very short overview. Usually, this the abstract is written
-when the whole thesis text is finished.
+This thesis analyses the capabilites of OBD in a Linux environment, to produce open source software, thus reducing dependencies on automotive manufacturers. 
+Therefore it offers relief to hobby mechanics due to its open source property. Furthermore this thesis supplies a base package including all essential 
+functionalities of OBD. As the development utilizes the ELM microcontroller, this software is compatible with this low cost hardware solution for OBD functionality. 
+In the development phase an analysis of the sourrounding development process is conducted, experiencing the combination of \citetitle{AUTOSPICE} with agile software 
+development. Furthermore the encountered issues and correlations of this newly created development process is portrayed.
 
-
+The motives behind this thesis are located in the chapter \nameref{sec:motivation} as well as an market analysis building a foundation for it. After establishing the 
+need for this kind of software the document continues with a theoretical basis layed out in the chapter \nameref{sec:OBDBASICS}. The realization of this theory can 
+be looked up in the chapters \nameref{sec:impl} and \nameref{sec:projectspecific}. The chapter \nameref{sec:SDT}, which inputs theory and 
+execution of development processes, along with the \nameref{sec:summary} chapter concludes this thesis and gives an perspective on future possibilities.
 
 %\glsresetall %% all glossary entries should be used in long form (again)
 %% vim:foldmethod=expr

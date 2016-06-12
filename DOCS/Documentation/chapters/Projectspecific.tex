@@ -5,6 +5,7 @@
 %% scrbook starts with part (optional), chapter, section, ...
 
 \chapter{Project Specific Implementation}
+\label{sec:projectspecific} 
 
 The preceding package implementation descriptions only focus on overlapping functionalities. 
 The result is the OBDMiddleware package which is an API.
@@ -48,6 +49,7 @@ This section elaborates on additional dependencies and building instructions dep
 The project uses different open source APIs to realize the desired functionalities.
 The following packages are included in the official Ubuntu repositories and can be downloaded by any package management system:
 
+\vbox{
 \begin{itemize}
  \item libmysqlcppconn-dev 
  \item mysql-server
@@ -60,6 +62,7 @@ The following packages are included in the official Ubuntu repositories and can 
  \item libcppunit-1.13-0 
  \item libboost-all-dev 
 \end{itemize}
+}
 
 The only packages which require manual compilation are the libusb-vhci library and the vhci\_hcd package, 
 resulting in two kernel module files (.ko). Those files either have to be inserted manually using insmod 
