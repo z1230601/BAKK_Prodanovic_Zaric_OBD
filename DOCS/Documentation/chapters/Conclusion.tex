@@ -4,11 +4,13 @@
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
 
-\chapter{Conclusion}
-\label{sec:conclusion}
-
+\chapter{Summary}
+\label{sec:summary}
 The combination of the spontaneous agile software development with the rigid Automotive SPICE is fusing two contradictory software development areas. 
 This results in numerous issues and gathered experience which will be shared in this chapter.
+
+\section{Conclusion}
+\label{sec:conclusion}
 
 Right after the SPICE PRM planning phase was finished, the actual work on the tools started. The first achievable goal was to establish a 
 running communication via the serial interface, more precisely connecting over the USB interface. Due to the early stage of development, more 
@@ -32,7 +34,31 @@ to previous non agile projects.
 
 Besides the decision of developing a middleware for the OBD software the basic principle of structuring retained as planned from the beginning 
 on. Unfortunately cuts in the final softwares were made due to underestimating the time which was consumed by the general implementation and 
-refactoring. This leaves space for continous
+refactoring. This leaves space for further functionality improvements.
+
+\section{Outlook}
+\label{sec:outlook}
+
+The thesis started with the intention of researching and implementing the OBD technology, as explained in \namere{sec:motivation}. After consulting 
+the thesis' advisor, Phd. Harald Sporer, the assumption that the workload does not suffice for a bacheloar thesis arose. In the following meetings 
+the concept of implementing a testing tool for OBD tools as well emerged, which was accepted by all parties. The actual workload was gravely 
+underestimated at that time.
+
+As described in \nameref{sec:conclusion} structural changes were made during the implementation phase. On top of that OBD capabilites 
+offer far more possibilities than exhausted by this thesis. Therefore this chapter describes the next feasible steps for further improvements.
+
+Accomplishing the full sensor capabilites of the OBDCU by implementing the lacking user interface is a recommendable starting point. 
+As described in \nameref{sec:obdbase} the back-end functionality already exists. Furthermore these sensor functions need to be integrated into the system, by
+loading the right configuration as well as potentially expanding the interaction with other parts like trouble codes. 
+
+The adaption of the OBDCU to the OBDTool is another potential task. This entails the refactoring of the graphical user interface to the OBD tool's specific 
+requirements, by using different parts of the OBDMiddleware package. That includes the usage of the serial communication instead of the emulation, the adaption of the sensor data 
+as well as the diagnostic trouble code feature from output to input. The database manipulation does not require any changes. 
+
+Finally, further opportunities can be found in the CAN communnication abilities of the ELM microcontroller. It can directly communicate to the diagnositc control unit and 
+in turn the bus gateway control unit, enabling CAN command broadcasts to any CAN node in the car. Since a majority of control signals use the CAN Bus interface it offers partially 
+security sensitive features. When considering the expansion of computer science in the automotive industry, like self driving cars, and secrecy concerning restricted IT background knowledge of 
+automotive manufacturers, it is safe to state that the importance of interfaces like OBD and moreover the need for software described in this thesis will increase in the near future.  
 
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='

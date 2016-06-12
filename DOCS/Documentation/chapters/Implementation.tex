@@ -318,14 +318,13 @@ for each tag. The following listing supplies an example:
   <values>
    <value interpretation="calculation">
     <name>Soll Ladedruck A</name>
-    <bytes>2</bytes>
-    <min>0</min>
-    <max>2047.96875</max>
-    <unit>kPa</unit>
+    ...
     <validitybit>0</validitybit>    
    </value>
    <value interpretation="calculation">
-    ...          
+    <name>Soll Ladedruck B</name>
+    ...
+    <validitybit>1</validitybit>    
    </value>
    ...
    <value interpretation="mapping">
@@ -401,7 +400,7 @@ Their purpose is to parse a DOM object into internal class representations, as s
 libxml++ library functions to creating a derived class of the DefaultXMLHandler. 
 
 \myfig{classdiagram_configuration}%% filename w/o extension in the folder figures
- {width=0.4\textwidth}%% maximum width/height, aspect ratio will be kept
+ {width=\textwidth}%% maximum width/height, aspect ratio will be kept
  {Classdiagram of the Configuration Package}%% caption
  {Figure}%% optional (short) caption for list of figures
  {fig:configuration_classdiagram}%% label
