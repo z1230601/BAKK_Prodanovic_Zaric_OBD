@@ -155,7 +155,7 @@ always at least one device, configuration, interface and endpoint descriptor.
 The device descriptor serves as general information about the device. It contains the vendor and product id identifying the exact type of device as 
 well as the binary coded decimal device code defined in the official USB standard. We used the feature of setting this device code to $255$, which will 
 induce the behaviour of vendor specific driver loading. That being said, if a vendor should be a so called FTDI device, such as microchips, the 
-driver for serial communications are loaded. Relevant elements of the device descriptor are:%\footcite[p. 260ff.]{USB}
+driver for serial communications are loaded. Relevant elements of the device descriptor can be seen in table \myfigref{tab:devicedescriptor}.%\footcite[p. 260ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c| p{9cm}}
@@ -171,7 +171,8 @@ iManufacturer & ID of the string descriptor representing the manufacturer\\
 iProduct & ID of the string descriptor representing the product \\
 bNumConfigurations & amount of configurations \\ 
 \end{tabular}
-\caption{Device Descriptor Fields}
+\caption[Table]{Device Descriptor Fields}
+\label{tab:devicedescriptor}
 %\footcite[p. 262\-263]{USB}
 \end{table}
 \begin{minipage}{\textwidth}
@@ -203,7 +204,7 @@ const uint8_t dev_desc[] = {
 A USB device can provide different configurations which depend on the power mode of the attached device. The configuration descriptor supplies mostly 
 power settings. Self powered mode indicates that an external power source is applied. It can be chosen by devices with a limited amount of power. On 
 the other hand bus powered settings will require more energy to be transmitted over the bus thus draining more energy of the host device. Additionally 
-configuration descriptors serve as a grouping of interfaces.%\footcite[p. 264ff.]{USB}
+configuration descriptors serve as a grouping of interfaces. See \myfigref{tab:configurationdescriptor}%\footcite[p. 264ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c|p{8cm}} 
@@ -217,7 +218,8 @@ iConfiguration & ID of the string for the configuration name\\
 bmAttributes  power mode\\
 bMaxPower & the maximum power consumption (consumption = value * $2$mA) \\
 \end{tabular}
- \caption{Configuration Descriptor Fields}
+ \caption[Table]{Configuration Descriptor Fields}
+ \label{tab:configurationdescriptor}
  %\footcite[p. 265\-266]{USB}}
 \end{table}
 \begin{minipage}{0.3\textwidth}
@@ -264,7 +266,7 @@ uint8_t conf_desc[] = {
 
 \paragraph{Interface Descriptor}
 Interface descriptors have the purpose of representing a single functionality and grouping the needed endpoints together, thus making 
-it simpler for the host to select a specific functionality.%\footcite[p. 267ff.]{USB}
+it simpler for the host to select a specific functionality. See \myfigref{tab:interfacedescriptor}.%\footcite[p. 267ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c|p{9cm}}
@@ -279,14 +281,15 @@ bInterfaceSubClass & standardized class id (in USB standard) describing the inte
 bInterfaceProtocol & standardized protocol id (in USB standard) describing the protocol type \\
 iInterface & ID of string for interface name (string descriptor request) \\
 \end{tabular}
- \caption{Interface Descriptor Fields}
+ \caption[Table]{Interface Descriptor Fields}
+ \label{tab:interfacedescriptor}
  %\footcite[p. 268\-269]{USB}}
 \end{table}
 
 \paragraph{Endpoint Descriptor} 
 
 Endpoints are the sinks and sources of data for the device. As mentioned above different types of transfers exist, hence different types of 
-endpoints can be defined. Endpoint descriptors are necessary to define those endpoints.%\footcite[p. 269ff.]{USB}
+endpoints can be defined. Endpoint descriptors are necessary to define those endpoints. See \myfigref{tab:endpointdescriptor}%\footcite[p. 269ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c|p{9cm}}
@@ -298,7 +301,8 @@ bmAttributes & type of endpoint (see transfer types)\\
 wMaxPacketSize & max receiving or sending endpoint size\\
 bInterval & for interrupt transfer type endpoints define polling rate in frames\\
 \end{tabular}
- \caption{Endpoint Descriptor Fields}
+ \caption[Table]{Endpoint Descriptor Fields}
+ \label{tab:endpointdescriptor}
  %\footcite[p. 269\-271]{USB}}
 \end{table}
 
@@ -306,7 +310,8 @@ bInterval & for interrupt transfer type endpoints define polling rate in frames\
 Since the descriptors need some string with variable length, instead of defining a maximum byte length for string fields in descriptors and thus 
 limiting the developers freedom by a specific char amount, the USB standard defines an additional descriptor type. Strings are 
 described by a, in the device context, unique ID and can be separately requested in different languages. Therefore string descriptors 
-are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support.%\footcite[p. 273ff.]{USB}
+are utile descriptors whose purpose is to enable free name definition and also offer multilanguage support. See \myfigref{tab:stringdescriptorMain}, \myfigref{tab:stringdescriptorLanguage}
+ and \myfigref{tab:stringdescriptorFields}%\footcite[p. 273ff.]{USB}
 
 \begin{table}[h!]
 \begin{tabular}{c|p{9cm}}
@@ -314,7 +319,8 @@ Field & Description \\ \hline
 bLength & complete length of the packet (include the length itself) in bytes \\
 bDescriptorType & type of descriptor (device $0x03$)
 \end{tabular}
- \caption{String Descriptor Main Fields}
+ \caption[Table]{String Descriptor Main Fields}
+ \label{tab:stringdescriptorMain}
  %\footcite[p. 273\-274]{USB}}
 \end{table}
 
@@ -325,7 +331,8 @@ wLANGID[$0$] & first language id in form of ($0xXXXX$) \\
 wLANGID[$1$] & second language \\
 wLANGID[x] & n language 
 \end{tabular}
- \caption{String Descriptor Language Fields}
+ \caption[Table]{String Descriptor Language Fields}
+ \label{tab:stringdescriptorLanguage}
  %\footcite[p. 273]{USB}}
 \end{table}
 
@@ -334,7 +341,8 @@ In case of any other string descriptor ID the message would end as following:
 \begin{tabular}{c|p{9cm}}
 bString & unicode string where every single char is separated by a null byte
 \end{tabular}
- \caption{String Descriptor Fields}
+ \caption[Table]{String Descriptor Fields}
+ \label{tab:stringdescriptorFields}
  %\footcite[p. 274]{USB}}
 \end{table}
 
@@ -344,6 +352,7 @@ The previous sections introduce different types of transfers. One of them is the
 the USB device. There are requests which each device is required to implement due to the specifications of the USB standard. Basically 
 the use of a request can be derived by its name. The existing requests are listed below.%\footcite[p. 267ff.]{USB}
 
+\vbox{
 \paragraph{Device Requests}
 \begin{itemize}
  \item GET\_STATUS
@@ -355,7 +364,9 @@ the use of a request can be derived by its name. The existing requests are liste
  \item GET\_CONFIGURATION
  \item SET\_CONFIGURATION
 \end{itemize}
+}
 
+\vbox{
 \paragraph{Interface Requests}
 \begin{itemize}
  \item GET\_STATUS
@@ -364,7 +375,9 @@ the use of a request can be derived by its name. The existing requests are liste
  \item GET\_INTERFACE
  \item SET\_INTERFACE
 \end{itemize}
+}
 
+\vbox{
 \paragraph{Endpoint Requests}
 \begin{itemize}
  \item GET\_STATUS
@@ -372,7 +385,7 @@ the use of a request can be derived by its name. The existing requests are liste
  \item SET\_FEATURE
  \item SYNC\_FRAME
 \end{itemize}
-
+}
 Each of these requests is identified by a combination of two ID fields called request type and request. Each request follows the 
 following structure:
 
