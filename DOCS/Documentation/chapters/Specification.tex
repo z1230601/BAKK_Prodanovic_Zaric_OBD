@@ -4,7 +4,7 @@
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
 \chapter{Specification}
-The previous chapters established that Linux based systems offer more possibilities and a lack of OBD software solutions making it the base platform 
+The previous chapter showed that Linux based systems offer more possibilities and a lack of OBD software solutions making it the base platform 
 for this project. Another already discussed discovery is the division of the project into three major parts: The theoretical analysis of OBD, the 
 OBD test tool, more precisely the ECU emulation and the OBD tool itself. Since this approach bears the danger of code duplication and decentralized 
 functionalities another optimization is required.  Extracting the similar functionalities of the latter two project parts leads to a 
@@ -12,22 +12,21 @@ commonly used OBD middleware part.
 
 \section{Technical Specification}
 \label{sec:tecspec}
-The OBD middleware is located at the root of the project, which makes this package a perfect starting point. The 
-generally the middleware consists of:
+The OBD middleware is located at the root of the project, which makes this package a perfect starting point. Generally, the middleware consists of:
 
 \vbox{
 \begin{description}
 \item[Device Communication]
-This entails the communication with the USB device as well as the emulation of the ELM for the OBD test tool. See \nameref{sec:comm}.
+This entails the communication with the USB device as well as the emulation of the ELM for the OBD test tool. Details can be found in \nameref{sec:comm}.
 \item[Configuration Management]
 To keep this project as flexible as possible it will use a lot of configuration files. Therefore an object representation of those configuration 
-classes will be necessary. See \nameref{sec:configuration}.
+classes will be necessary. Details can be found in \nameref{sec:configuration}.
 \item[Database Management]
 The amount of currently existing diagnostic trouble codes (DTC’s) is vast, therefore a database responsible for their management is a reasonable 
-solution. See \nameref{sec:database}.
+solution. Details can be found in \nameref{sec:database}.
 \item[OBD Base Elements]
 The representation of the DTC and their responses are coupled in this package as well as the ELM command and the different types of OBD values. 
-See \nameref{sec:obdbase}.
+Details can be found in \nameref{sec:obdbase}.
 \end{description}}
 
 \section{Non-Technical Specifications}

@@ -6,19 +6,18 @@
 \chapter{Motivation}
 \label{sec:motivation} 
 
-Since its inception control units are steadily increasing in complexity and amount of modern car systems. Nowadays it is not uncommon to 
+In the course of time control units are steadily increasing in complexity and amount in modern car systems. Nowadays it is very common to 
 integrate $80$ and more units in a single car. The resulting energy consumption for the electrical components in such a system sums up to $2.5$ kW.
 This substantiates the decision of the automotive industry to establish an energy management for all electrical components. Considering this an 
 effective handling of these units seems inevitable \cite{SCHAFOBD1}.
 
-Since the manufacturers do not share the knowledge about the fundamental 
-functionality of their control units, serious deficits surface regarding control units from the perspective 
+Since the manufacturers do not share the knowledge about the fundamental functionality of their control units, serious deficits surface regarding control units from the perspective 
 of a common service mechanic. Thus leading to a dependency on expensive information and/or tools provided by the manufacturer of the automobile.
 The car service shop is forced to rely on those tools. If suspicion of a fault in a control unit arises it is common practice to change the whole 
 unit rather than fixing the real cause of the actual error. Furthermore wrong assumptions of the maintanence personnel often lead to incorrect 
 error identification and thus the costly replacement of fully functional parts.
 
-Correspondingly manufacturer thrive by offering spare parts, including control units, and keep their income over development periods high. The 
+Correspondingly manufacturers keep their income over development periods high by offering spare parts, which includes control units as well. The 
 protocols needed to realize a diagnosis tool with the fullest possible extent of functionality are restricted. By protecting those, they seize the 
 opportunity to sell those protocols or a service for diagnosing implementing them. 
 
@@ -40,7 +39,7 @@ Therefore the basic testing strategy is to choose a distribution and try to exec
 %ENUMARTION
 \begin{enumerate}
  \item establish a connection to the OBD interface via an ELM$327$ microcontroller 
- \item read trouble codes produced by self-made errors
+ \item read trouble codes produced by injected errors
  \item reset trouble code memory
 \end{enumerate}
 
@@ -71,7 +70,7 @@ OBD $2007$ and EasyObdII Version $2.5$ did not connect to the control unit, maki
 Different attempts to solve this problem failed.
 
 Since only trial versions are available for free, the range of testable functions is limited to measuring the current engine RPM, the vehicle 
-speed or the load value. Due to the encountered problems, a satisfying analysis could not be executed thoroughly.
+speed or the engine load value. Due to the encountered problems, a satisfying analysis could not be executed thoroughly.
 
 \subsection{Ubuntu}
 Connecting to the control unit under Linux proved to be a problem as the ELM$327$ uses the USB port (ttyUSB) but most of the tested software only 
@@ -98,19 +97,14 @@ Firstly an analysis of the OBD system and standards has to be conducted, focusin
 like USB and software development techniques.The first three can be found in the chapter \nameref{sec:OBDBASICS}. The latter stands apart in the chapter 
 \nameref{sec:SDT}, where the theory and our experience and approaches are summarized.
 
-The seperation seems reasonable due to the nature of the content of chapter \nameref{sec:SDT} 
-, which describes the engineering process in more detail. Software development in the automotive context has different, more
-strict, approaches than software developed for non critical systems.
-At this point it is important to highlight that both processes suggest
-testing as an essential procedure. Taking this into
-consideration the main strategy is to provide an emulated ECU first,
-which will serve as a testing environment, and then implement the tool
-itself.
+The separation seems reasonable due to the nature of the content of chapter \nameref{sec:SDT}, which describes the engineering process in more detail.
+Software development in the automotive context has different, more strict, approaches than software which is developed for non critical systems.
+At this point it is important to highlight that both, the development of software for critical as well as non-critical systems, suggest
+testing as an essential procedure. Taking this into consideration the main strategy is to provide an emulated ECU first,
+which will serve as a testing environment, and then implement the tool itself.
 
-The capabilities of the ECU testing environment are derived from the
-OBD standard, in that case it should be possible to set different trouble codes,
-generic as well as manufacturer specific. The following enumeration is
-a rough outlining of the capabilities it should have:
+The capabilities of the ECU testing environment are derived from the OBD standard, in that case it should be possible to set different trouble codes,
+generic as well as manufacturer specific. The following enumeration is a rough outlining of the capabilities it should have:
 
 \vbox{
 \begin{description}

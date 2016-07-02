@@ -18,7 +18,7 @@ The OBD tool is supposed to be its counterpart for reading trouble codes and its
 but since our time contingent did not suffice the OBD tool as well as the OBDCU’s sensor capabilities are not implemented. 
 Although it is safe to say that the general functionalities for requesting sensor data is included in the OBDMiddleware. 
 Even though the common mechanics are asserted by unit tests,
-the additional implementation and connection of the related sensor functions would easily overstep the efforts of this bachelor thesis.
+the additional implementation and connection of the related sensor functions is beyond the scope of this bachelor thesis.
 
 By using CMake simple compilation and dependency requirements can be ensured.
 The latter is particularly important, since dependencies on external and internal packages would be difficult to check otherwise.
@@ -33,16 +33,16 @@ The model being represented by the middleware package itself.
 The OBDCU application offers the user the possibility to emulate and partially configure an USB FTDI device with one configuration
 and one set of bulk endpoints. Furthermore diagnostic trouble codes are selectable from a database and settable to the emulated 
 fault memory either as a permanent or temporary trouble code. 
-Additionally it supplies a surface to configure responses to ELM commands, where atz.
+Additionally it provides a surface to configure responses to ELM commands, where atz.
 
-The current beta version has several restrictions regarding the configurations. They are only saved over the runtime of the application. 
+The current beta version has several restrictions regarding the configurations. They are only kept in memory while the application is running. 
 However it is capable of simulating at least three of ten service modes as well as all ELM commands.
 As previously mentioned service modes one and two, which represent reading of sensor and freeze frame data, are prepared in the OBDMiddleware package
-but since the project has already exceeded the time requirements for a bachelor thesis it seemed reasonable to omit those parts.
+but since the project has already exceeded the projected time for this bachelor thesis the implementation was skipped.
 
 \section{Installation How-To}
 
-Several steps have to be taken before starting or building the project on a development environment.
+Several steps have to be carried out before starting or building the project on a development environment.
 This project has a lot of dependencies, which are listed in the built package, and it requires kernel modules.
 This section elaborates on additional dependencies and building instructions depending on the purpose.
 

@@ -7,13 +7,15 @@
 \label{sec:impl}
 The theory in the previous chapters was partially acquired during the research phase but mostly during the implementation of the packages. 
 The basics in these chapters are not adjusted to the particular use in this project, furthermore they cover parts which are implicitly used. 
-Therefore this section focuses on the implementational details of the single packages and subpackages fitting the described theory to the 
-implementational approach.
+Therefore this section focuses on the implementational details of the single packages and subpackages, applying the described theory to the 
+implementational part of the approach.
 
 \section{Communication}
 \label{sec:comm}
 One of the main functionalities needed by both tools is the communication between the device and the USB port it is attached to. Although this does not relate 
-to OBD in particular, it is a common requirement in software projects which are either distributed (distributed systems) or such which are 
+to OBD in particular, it is a 
+%TODO: ausbessern!!!
+common requirement in software projects which are either distributed (distributed systems) or such which are 
 meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. This implementation uses the ELM$327$ v$1.4$/v$1.5$ \cite{ELM} 
 as external hardware. The goal of the communication middleware package (see \nameref{sec:tecspec}) is to provide development tools for simple access 
 to the ELM chip without consideration to specifics of the port (USB, COM etc.). Another requirement which falls into this category is the emulation 
@@ -23,7 +25,7 @@ The implementation of this package is based on the knowledge acquired in the cha
 
 \subsection{Serial Communication}
 \label{sec:serialComm}
-After acquiring an overview of the general OBD functionality and familiarizing with the ELM$327$ the next step was trying the terminal program 
+After acquiring an overview of the general OBD functionality and familiarizing with the ELM$327$ the next step was evaluating the terminal program 
 Screen \cite{SCREEN} on GNU/Linux. It enables the user to send hexadecimal coded commands to any mounted device, in this case the ELM, and receives its responses, 
 more concretely the diagnostic trouble code data. The screen starting command looks as follows:
 
@@ -58,13 +60,13 @@ Furthermore a simple algorithm searching the sysfs of Linux provides the associa
 operations of reading and writing are achieved by the simple file descriptor system calls read and write in combination with termios for 
 setting the baud rate of these operations. 
 
-USB normally does not offer the ability of defining baud rates. This issue originated from the need of FTDI devices for RS-$232$ ports. Therefore most
+USB normally does not require the definition of baud rates. This issue originates from the need of FTDI devices for RS-$232$ ports. Therefore most
 external hardware, like Arduino, based on such microcontrollers integrate a RS-$232$ to USB converter requesting a communication baud rate. Additional 
 research revealed the libftdi library, used exactly for these serial communication issues with USB. It combines functionalities of libusb with serial
 configurations like setting the baud rate. 
 
-The usage of libftdi was momentarily discarded, due to no apparent benefit and the additional disadvantage of refactoring the already existing 
-code. The needed functionality was already covered by combining the libusb package with TTY Linux driver and file descriptors as well as giving more
+The usage of libftdi was discarded, due to not providing essential benefit and the disadvantage of required refactoring of the already existing 
+code. The needed functionality was already provided by combining the libusb package with TTY Linux driver and file descriptors as well as giving more
 flexibility for function development in future releases.
 
 \subsection{Emulation}
@@ -110,7 +112,7 @@ as administrator.
 \section{Databases}
 \label{sec:database}
 Storing and managing data is bound to become an issue due to the enormous amount of data sets in relation to OBD. Therefore a thoroughly 
-implemented database interface cannot be avoided. For reasons of simplicity MySQL is chosen as base query language for the database. The main 
+implemented database interface has been chosen. For reasons of simplicity MySQL is chosen as base query language for the database. The main 
 advantages leading to the choice of MySQL are the easy installation of MySQL server and client on all Linux distributions as well as the API 
 availability. MySQLConnector++ \cite{MYSQL} is a C++ API for MySQL, which supplies the basic framework for executing and parsing responses of any database. 
 Since it is an external library \nameref{sec:CleanCode} advises to wrap its API in a self defined interface, which is represented by this subpackage. 

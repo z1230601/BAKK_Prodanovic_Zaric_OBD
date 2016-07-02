@@ -63,8 +63,8 @@ focussing on testing each unit separately, extreme programming also requires to 
 
 Best practice in extreme programming is to perform pair programming, whereas in other software development techniques each developer has an 
 own task which needs to be merged in the end. Pair programming is done by two programmers sitting in front of one PC using just one set of 
-all required peripherals (screen, keyboard, mouse etc.). Moreover it is usual that the source code and design of the software gets refactored 
-and improved during the whole process for the purpose of keeping flexibility high and complexity low.
+all required peripherals (screen, keyboard, mouse etc.). Typically, the source code and design of the software gets refactored 
+and improved during the whole process for keeping flexibility high and complexity low.
 
 Compared to other software development techniques there are some major differences: First and foremost there is no specialization of the 
 developers on a single task, meaning that an XP programmer has to acquire knowledge and new ways of thinking in all parts 
@@ -81,7 +81,7 @@ clear code rather than focussing on writing implementation documentation and was
 
 \subsection{Automotive SPICE}
 
-\citetitle{AUTOSPICE}\cite{AUTOSPICE} is a standard used to assess development processes of control units in the automotive industry. It is derived from the 
+\citetitle{AUTOSPICE}\cite{AUTOSPICE} is a standard used to assess development processes of control unit's software related parts in the automotive industry. It is derived from the 
 ISO/IEC $15504$, which is the general SPICE standard, whose main goal is the assessment of processes in software development. SPICE is an 
 abbreviation for \textbf{S}oftware \textbf{P}rocess \textbf{I}mprovement and \textbf{C}apability d\textbf{E}termination, which already 
 clarifies the principal aims. Automotive SPICE was developed by the AUTOSIG - the \textbf{Auto}motive \textbf{S}pecial \textbf{I}nterest 
@@ -107,7 +107,7 @@ Lastly the organizational life cycle processes category includes a management pr
 and a reuse process group (REU). MAN processes describe practices to manage projects or processes. PIM processes deal with defining, deploying 
 and improving processes. REU processes systematically exploit opportunities in organization’s reuse programs.
 
-The capability dimension describes six capability levels as following:
+\citetitle{AUTOSPICE}\cite{AUTOSPICE} includes the capability dimension which describes six capability levels as following:
 
 \vbox{
 \begin{itemize}
@@ -212,8 +212,8 @@ which is an acronym of five rules:
  \item [T]imely - writing a test takes place just right before writing the real code to reduce the risk of untestable code
 \end{description}
 
-Concluding classes should be, as do functions, as small as possible. As opposed to functions the shortness is not measured in lines of code, but 
-rather in the amount of class responsibilities. This is leads to the so called single responsibility principle which purports that classes or modules 
+Concluding classes and functions should be as small as possible. As opposed to functions the shortness is not measured in lines of code, but 
+rather in the amount of class responsibilities. This leads to the so called single responsibility principle which purports that classes or modules 
 should have only one reason to change. Additionally they should be prepared for code changes and without obvious structure to avoid complicated workarounds
 or program crashes.
 
@@ -225,8 +225,8 @@ This chapter will describe the design of combining these software development pr
 and compromises are made. The following chapter \nameref{sec:conclusion} is then a subjective summary of experiences and insights.
 
 The chosen software is in the vicinity of automotive software development but still for users with little to no automotive knowledge. 
-Automotive software development falls into the category of safety-critical systems, which have high 
-security and low fault tolerance criteria as well as strict and complex testing of its software with severe consequences of failure.
+Automotive software development often falls into the category of safety-critical systems, which have high 
+security and low fault tolerance criteria as well as strict and complex testing requirements of its software with severe consequences of failure.
 
 However safety uncritical systems, like average software, have their focus on usability and visual representation as well as extendability and 
 effectiveness. Since this software belongs to two areas of software development, the conclusion lies near that the development techniques 
@@ -292,7 +292,7 @@ agile software development for the single packages can easily be applied. Althou
 development to have as little design overhead as possible, but instead doing the design when implementing, it seems to be a valid compromise to 
 merge the SPICE PRM with the techniques of agile software development. 
 
-Summarized, the approach can be interpreted as the usable process definitions of the SPICE PRM with its advantages, combined with the freedom 
+Summarized, the approach can be interpreted as a merge of the SPICE PRM advantages, and the freedom 
 and scalability of agile software development. The difference to the classic SPICE model is including the execution order of certain processes, 
 like detailed design. Furthermore the comparison to the requirements is not tested at the completion of the project, but rather defined before 
 even beginning programming, through the unit tests. Agile software development differs from its classical approach by taking some flexibility 

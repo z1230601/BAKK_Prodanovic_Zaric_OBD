@@ -4,25 +4,25 @@
 %% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
 %% scrbook starts with part (optional), chapter, section, ...
 \chapter{Motivation}
+\label{sec:motivation} 
 
-Since its inception control units are steadily increasing in complexity and amount of modern car systems. Nowadays it is not uncommon to 
-integrate 80 and more units in a single car. The resulting energy consumption for the electrical components in such a system sums up to 2,5 kW.
+In the course of time control units are steadily increasing in complexity and amount in modern car systems. Nowadays it is very common to 
+integrate $80$ and more units in a single car. The resulting energy consumption for the electrical components in such a system sums up to $2.5$ kW.
 This substantiates the decision of the automotive industry to establish an energy management for all electrical components. Considering this an 
-effective handling of these units seems inevitable.\footcite{SCHAFFOBD1} 
+effective handling of these units seems inevitable \cite{SCHAFOBD1}.
 
-Since the manufacturers do not share the knowledge about the fundamental 
-functionality of their control units, serious deficits surface regarding control units from the perspective 
+Since the manufacturers do not share the knowledge about the fundamental functionality of their control units, serious deficits surface regarding control units from the perspective 
 of a common service mechanic. Thus leading to a dependency on expensive information and/or tools provided by the manufacturer of the automobile.
 The car service shop is forced to rely on those tools. If suspicion of a fault in a control unit arises it is common practice to change the whole 
 unit rather than fixing the real cause of the actual error. Furthermore wrong assumptions of the maintanence personnel often lead to incorrect 
 error identification and thus the costly replacement of fully functional parts.
 
-Correspondingly manufacturer thrive by offering spare parts, including control units, and keep their income over development periods high. The 
+Correspondingly manufacturers keep their income over development periods high by offering spare parts, which includes control units as well. The 
 protocols needed to realize a diagnosis tool with the fullest possible extent of functionality are restricted. By protecting those, they seize the 
 opportunity to sell those protocols or a service for diagnosing implementing them. 
 
-The financial burden carried by common car holder motivated this thesis. Utilizing the publicly accessible standards\footcite{ISO15031} defining most of the diagnostic 
-trouble codes (DTCs) in combination with the available, low-priced hardware (ELM327) it is the goal of this thesis to supply a basis for development of 
+The financial burden carried by common car holder motivated this thesis. Utilizing the publicly accessible standards \cite{ISO15031} defining most of the diagnostic 
+trouble codes (DTCs) in combination with the available, low-priced hardware (ELM$327$) it is the goal of this thesis to supply a basis for development of 
 an open source software implementing those functionalities.
 
 \section{Market Analysis of Existing OBD Tools}
@@ -38,8 +38,8 @@ Therefore the basic testing strategy is to choose a distribution and try to exec
 
 %ENUMARTION
 \begin{enumerate}
- \item establish a connection to the OBD interface via an ELM327 microcontroller 
- \item read trouble codes produced by self-made errors
+ \item establish a connection to the OBD interface via an ELM$327$ microcontroller 
+ \item read trouble codes produced by injected errors
  \item reset trouble code memory
 \end{enumerate}
 
@@ -49,31 +49,31 @@ requiremets for OBD tools as well.
 By acquiring two common USB to OBD cables at least a certain degree of hardware independency can be established. 
 Additionally the conclusion, that the costs of the required hardware are low, can be drawn and thus leading to average consumers with low budgets 
 representing the target audience. Due to the requirement of hardware independency the focus of the project shifts to a pure software implementation. 
-Even though only the use of hardware based on the ELM327 chip is intended, compatibility for most ELM chips is the long term goal. 
+Even though only the use of hardware based on the ELM$327$ chip is intended, compatibility for most ELM chips is the long term goal. 
 
 Taking the variety of the target audience into account, as many different cars and systems as available served as testing environments to experience 
-the behaviour of the tested tools under different circumstances. Those cars consist of a Renault Trafic 2006 1.9 TDI, an Opel Vivaro 2009, 
-an Opel Zafira 2004 as well as a VW Sharan 2003 1.9 TDI. By using Windows and Ubuntu the majority of distributions are covered.
+the behaviour of the tested tools under different circumstances. Those cars consist of a Renault Trafic $2006$ $1.9$ TDI, an Opel Vivaro $2009$, 
+an Opel Zafira $2004$ as well as a VW Sharan $2003$ $1.9$ TDI. By using Windows and Ubuntu the majority of distributions are covered.
 
 \subsection{Windows}
-Four different OBD softwares on a Windows 7 OS are tested:
+Four different OBD softwares on a Windows $7$ OS are tested:
 %ENUMARTION
 
 \begin{itemize}
- \item EasyObdII Version 2.5
+ \item EasyObdII Version $2.5$
  \item OBD Auto Doctor
  \item ScanMaster-ELM DEMO
- \item OBD 2007
+ \item OBD $2007$
 \end{itemize}
 
-OBD 2007 and EasyObdII Version 2.5 did not connect to the control unit, making it difficult to conduct the tests. 
+OBD $2007$ and EasyObdII Version $2.5$ did not connect to the control unit, making it difficult to conduct the tests. 
 Different attempts to solve this problem failed.
 
 Since only trial versions are available for free, the range of testable functions is limited to measuring the current engine RPM, the vehicle 
-speed or the load value. Due to the encountered problems, a satisfying analysis could not be executed thoroughly.
+speed or the engine load value. Due to the encountered problems, a satisfying analysis could not be executed thoroughly.
 
 \subsection{Ubuntu}
-Connecting to the control unit under Linux proved to be a problem as the ELM327 uses the USB port (ttyUSB) but most of the tested software only 
+Connecting to the control unit under Linux proved to be a problem as the ELM$327$ uses the USB port (ttyUSB) but most of the tested software only 
 searches for COM ports (ttyS).
 Assuming intact hardware, no immediate solution appeared of how to mount the USB device onto the COM port nor how to configure the software such that 
 it connects to the USB port. However, using the low level standard software screen supplied by Linux seemed to be the best approach, as it enables 
@@ -82,7 +82,7 @@ additional information such as datasheets, computer knowledge as well as forums 
 
 \subsection{Analysis}
 Although spending much time in trying to enable the software’s functionality on both systems, the success is limited. Judging from the interface of 
-those freeware tools the usability is not satisfactory. Nevertheless, communicating with the ELM327 using the terminal based software succeeded. 
+those freeware tools the usability is not satisfactory. Nevertheless, communicating with the ELM$327$ using the terminal based software succeeded. 
 In conclusion it can be stated that the functionalities of the device itself seem intact, though appropriate open source software is hard to 
 find.
 
@@ -97,11 +97,8 @@ Firstly an analysis of the OBD system and standards has to be conducted, focusin
 like USB and software development techniques.The first three can be found in the chapter \nameref{sec:OBDBASICS}. The latter stands apart in the chapter 
 \nameref{sec:SDT}, where the theory and our experience and approaches are summarized.
 
-%As our research revealed the OBD interface has direct access to the diagnostic control unit and 
-%therefore to each bus used in the automobile. This issue was one of the most important disadvantages critics discussed since the introduction of OBD.
-
-As described in the chapter REF TO SOFTWAREDEVELOPMENT!!!!! the engineering process is discussed in more detail, as
-software development in the automotive context has different, more
+The seperation seems reasonable due to the nature of the content of chapter \nameref{sec:SDT} 
+, which describes the engineering process in more detail. Software development in the automotive context has different, more
 strict, approaches than software developed for non critical systems.
 At this point it is important to highlight that both processes suggest
 testing as an essential procedure. Taking this into
@@ -110,22 +107,22 @@ which will serve as a testing environment, and then implement the tool
 itself.
 
 The capabilities of the ECU testing environment are derived from the
-OBD standard, e.g. it should be possible to set different trouble codes,
+OBD standard, in that case it should be possible to set different trouble codes,
 generic as well as manufacturer specific. The following enumeration is
 a rough outlining of the capabilities it should have:
 
+\vbox{
 \begin{description}
-\item[MUST] set/unset trouble codes
-\item[MUST] define trouble codes
-\item[MUST] online capability
-\item[MUST] mount virtual OBD-Tool
-\item[CAN] server capabilities (not obligatory)
+\item[MUST]   set/unset trouble codes
+\item[MUST]   define trouble codes
+\item[MUST]   online capability
+\item[MUST]   mount virtual OBD-Tool
+\item[CAN]    server capabilities (not obligatory)
 \item[SHOULD] simulate sensor data in operating condition (given models;
   adjustable)
-\end{description}
+\end{description}}
 
-More detailed requirements can be found in the attached requirements
-document.
+A more detailed requirements documentation is attached in the \nameref{sec:Appendix}.
 
 Finally implementing an open source OBD tool with all its
 functionalities provided by the OBD standard is

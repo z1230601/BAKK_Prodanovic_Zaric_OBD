@@ -16,9 +16,9 @@ when almost every automotive manufacturer already implemented own communication 
 As a result the OBD standard does not define a specific protocol used for the CAN bus but only the protocol used to communicate with the diagnostic 
 section of a control unit, where standardized trouble codes can be obtained. 
 
-If the protocol used for inter CU communication was known, it would be possible to send commands directly to any CU in the bus system, which bears a 
-great security issue. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, but due to the
-popularity of this topic at universities this thesis will not cover it \cite{Koscher2010}.
+If the protocol used for inter CU communication is known, it would be possible to send commands directly to any CU in the bus system, which bears a 
+great security risk. This issue was one of the most important disadvantages critics discussed since the introduction of OBD, but since handling
+this topic goes beyond the scope of a single bachelor thesis, this issue will not be covered in this thesis\cite{Koscher2010}.
 
 Generally there is a variety of already existing protocols and standards which define the communication via the OBD interface. The usage of the ELM$327$
 emerged due to its availability and simplicity, as it is a popular programmed microcontroller for translating the OBD interface. ELM$327$ has the 
@@ -31,11 +31,10 @@ from USB over Bluetooth to Wi-Fi or even RS-$232$ \cite[pp. 46 ff.]{SCHAFOBD2}.
 \section{Busses}
 
 Busses are an essential part of every computer system. As this project covers the communication to external hardware, which in turn communicates to other 
-external hardware, busses are an important point for the completion of this thesis. This chapter’s focus lies on the busses used by the ELM$327$ and more 
-specific to the busses to which basic knowledge is recommended for this project.
+external hardware, busses are an important point for the completion of this thesis. This chapter’s focus lies on the busses used by the ELM$327$.
 
-The automotive industry applies KL-Line bus, MOST bus as well as CAN. As the busses used for diagnosis are abstracted due to the usage of the ELM$327$, 
-this chapter will not cover the CAN, MOST and KL-Line bus but instead it will provide basics on USB which are fundamental for \nameref{sec:emulation} 
+The automotive industry utilizes KL-Line bus, MOST bus as well as CAN bus. As the busses used for diagnosis are abstracted due to the usage of the ELM$327$, 
+this chapter will not cover the CAN, MOST and KL-Line bus. Instead it will provide basics on USB which are fundamental for \nameref{sec:emulation} 
 and \nameref{sec:serialComm}.
 
 \subsection*{Universal Serial Bus (USB)}
@@ -44,7 +43,7 @@ As USB is a widespread technology used on a vast range of devices, including the
 Therefore USB is included in the project requirements of selection and communication to as well as the emulation of an ELM device. This chapter 
 introduces those basics gathered from the website \citetitle{USBNUT} \cite{USBNUT}, which summarizes the official \citetitle{USB} \cite[pp. 36ff., 199ff., 260-274]{USB}.
 
-USB is a shielded four-wired, TTL voltage communications interface using NRZI (Non Return to Zero Inverted) encoding. Meaning that it is represented by four wires:
+USB is a shielded four-wired, TTL voltage communications interface using NRZI (Non Return to Zero Inverted) encoding and is represented by four wires:
 
 \vbox{
 \begin{itemize}
@@ -430,7 +429,7 @@ Following the ten service modes as well as a short description of their respecti
 
 \begin{description}
  \item[Request current data] depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
- \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to flash while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
+ \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to flash up while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
  \item[Request stored diagnostic trouble codes] this mode is used to read out emission based faults without deleting the fault codes from memory.
  \item[Delete stored diagnostic trouble codes] this service mode provides the capability of deleting all stored DTCs from the memory irreversibly. Furthermore the freeze frame data as well as the readiness code, which contains the data of the continuous and non-continuous monitoring of the car’s self-testing emission system, is reset. It is recommended to use this mode cautiously, as it also resets the MIL and all its related counters.
  \item[Request O$2$-Sensor values] this mode ascertains the measured values of the O$2$-sensor. The conversion of the requested values is depending on the manufacturer.
