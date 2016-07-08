@@ -1,4 +1,7 @@
-TestMain 4 0.000628471
-USBRequestHandlerTest 4 0.000980735
-UartDeviceTest 4 0.00110102
+TestMain 4 0
+USBRequestHandlerTest 4 0
+UartDeviceTest 4 0
 ---
+TestMain
+UartDeviceTest
+USBRequestHandlerTest

@@ -7,17 +7,18 @@
 \chapter{Project Specific Implementation}
 \label{sec:projectspecific} 
 
-The preceding package implementation descriptions only focus on overlapping functionalities. 
-The result is the OBDMiddleware package which is an API.
+The preceding implementation descriptions focus exclusively on the OBDMiddleware package and thus on functionalities shared
+by both, OBD Tool and OBDCU. The resulting OBDMiddleware package is an API.
 Furthermore a concrete application has to be implemented to apply the designed features.
 The OBDCU, which stands for On Board Diagnosis Control Unit, represents the emulated diagnosis CU.
 It offers possibilities to emulate attached USB devices on Linux systems and is able to set and unset
 permanent and pending diagnostic trouble codes as well as deleting them.
 
-The OBD tool is supposed to be its counterpart for reading trouble codes and its corresponding freeze frame data,
-but since our time contingent did not suffice the OBD tool as well as the OBDCU’s sensor capabilities are not implemented. 
+The OBD tool is supposed to be its counterpart for reading trouble codes and its corresponding freeze frame data.
+The OBDCU’s sensor capabilities as well as the OBD tool itself are not implemented due to underestimation of the needed time for unit test 
+implementation and research. 
 Although it is safe to say that the general functionalities for requesting sensor data is included in the OBDMiddleware. 
-Even though the common mechanics are asserted by unit tests,
+Even though the base function set is asserted by unit tests,
 the additional implementation and connection of the related sensor functions is beyond the scope of this bachelor thesis.
 
 By using CMake simple compilation and dependency requirements can be ensured.

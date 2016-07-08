@@ -12,11 +12,9 @@ implementational part of the approach.
 
 \section{Communication}
 \label{sec:comm}
-One of the main functionalities needed by both tools is the communication between the device and the USB port it is attached to. Although this does not relate 
-to OBD in particular, it is a 
-%TODO: ausbessern!!!
-common requirement in software projects which are either distributed (distributed systems) or such which are 
-meant for standardized distributions (Linux, Windows, Mac) in combination with external hardware. This implementation uses the ELM$327$ v$1.4$/v$1.5$ \cite{ELM} 
+One of the main functionalities needed by both tools is the communication between the device and the USB port it is attached to. Although 
+this does not relate to OBD in particular, it is a common requirement in software projects which use any kind of external hardware. 
+This implementation uses the ELM$327$ v$1.4$/v$1.5$ \cite{ELM} 
 as external hardware. The goal of the communication middleware package (see \nameref{sec:tecspec}) is to provide development tools for simple access 
 to the ELM chip without consideration to specifics of the port (USB, COM etc.). Another requirement which falls into this category is the emulation 
 of a given USB ELM device to enable testing of OBD tools, leading to the implementation of a virtual USB FTDI device and controlling its behaviour.

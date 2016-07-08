@@ -6,7 +6,7 @@
 
 \chapter{On Board Diagnosis Basics}
 \label{sec:OBDBASICS}
-OBD's original purpose was to monitor CO$2$ emissions for climatic reasons, but since its introduction its range of abilities 
+OBD's original purpose was to monitor CO$2$ emissions for climatic reasons, but since its introduction, its range of abilities 
 extended. Rather than just monitoring CO$2$ emissions the surveillance of a majority of the sensors inside an automobile as well as 
 keeping track of the error memory by trouble codes is possible. Even the access of the bus gateway and therefore all its busses and 
 their attached entities is feasible, resulting in a not negligible security threat. 
@@ -47,7 +47,7 @@ USB is a shielded four-wired, TTL voltage communications interface using NRZI (N
 
 \vbox{
 \begin{itemize}
-\item High ($5$V reference Voltage)
+\item Supply ($5$V reference Voltage)
 \item D-
 \item D+
 \item Ground (reference Voltage)
@@ -429,7 +429,7 @@ Following the ten service modes as well as a short description of their respecti
 
 \begin{description}
  \item[Request current data] depending on the sensor availability actual measurements can be requested as well as the latest recordings of diagnostic trouble codes.
- \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to flash up while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
+ \item[Request freeze frame data] faults, causing the malfunction indicator lamp (MIL) to illuminate while the vehicle is in motion, get recorded in a memory area which is the so called freeze frame. More precisely the diagnostic data, requestable by service mode one, at the moment of the fault occurrence is memorized. Enabling a more detailed read out and debugging of the error cause.
  \item[Request stored diagnostic trouble codes] this mode is used to read out emission based faults without deleting the fault codes from memory.
  \item[Delete stored diagnostic trouble codes] this service mode provides the capability of deleting all stored DTCs from the memory irreversibly. Furthermore the freeze frame data as well as the readiness code, which contains the data of the continuous and non-continuous monitoring of the car’s self-testing emission system, is reset. It is recommended to use this mode cautiously, as it also resets the MIL and all its related counters.
  \item[Request O$2$-Sensor values] this mode ascertains the measured values of the O$2$-sensor. The conversion of the requested values is depending on the manufacturer.
