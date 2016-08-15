@@ -435,6 +435,23 @@ The difference between the two classes is that, whilst the XMLReader only iterat
 the DefaultHandler into a mode, where he instead of parsing the node’s data sets it. After the iteration the XMLWriter writes to the same file 
 it read from with the newly filled data.
 
+\section{Unit Testing}
+
+To fulfill the requirements of both agile software development and Automotive SPICE, a testing mechanism was required. Since the most functionality
+is encapsuled in the middleware package most tests are implemented there. As a testing basis the CPPUNIT library was used. 
+
+Overall approximately 150 tests were implemented. Each subpackage had its specific challenge considering 
+its testing. Following the \nameref{sec:CleanCode} principles external library calls were used 
+in interface classes, for which test have been written to learn about the used frameworks pecularities 
+as well as assert the inteded functionality. An an example the configuration package can be considered. 
+The functionality is encapsuled in the XMLReader class as well as the abstract base class for 
+handling the read data, the XMLHandler class, which were seperately tested. Each confinguration 
+file handler, in case of containing special functionalities, is individually tested.
+
+For setting up tests the CPPUNITs helper macros were used, making it simple to set up tests. Some 
+packages were more thoroughly tested than others. This resulted from the inexprience at the 
+beginning of the project.
+
 % \begin{figure}[h!]
 %  \includegraphics[width=\paperwidth]{figures/classdiagram_configuration}
 %  \caption{Classdiagram of the configuration package}
